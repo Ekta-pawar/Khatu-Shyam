@@ -1,39 +1,43 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import './App.css';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Janmashtami from './pages/Janmashtami';
-import Membership from './pages/Membership';
-import MasikKirtan from './pages/MasikKirtan';
-import Gallery from './pages/Gallery';
-import Contact from './pages/Contact';
-import BecomeAMember from './pages/BecomeAMember';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
-  return null;
-}
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import TeamPage from "./pages/TeamPage";
+import TeamMemberPage from "./pages/TeamMemberPage";
+import GalleryPage from "./pages/GalleryPage";
+import EventsPage from "./pages/EventsPage";
+import ContactPage from "./pages/ContactPage";
+import BecomeMemberPage from "./pages/BecomeMemberPage";
 
-export default function App() {
+function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Navbar />
-      <main>
-        <Routes>
-          <Route path="/"               element={<Home />} />
-          <Route path="/janmashtami"    element={<Janmashtami />} />
-          <Route path="/membership"     element={<Membership />} />
-          <Route path="/masik-kirtan"   element={<MasikKirtan />} />
-          <Route path="/gallery"        element={<Gallery />} />
-          <Route path="/contact"        element={<Contact />} />
-          <Route path="/become-a-member" element={<BecomeAMember />} />
-        </Routes>
-      </main>
-      <Footer />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+
+        <Route path="/about" element={<AboutPage />} />
+
+        <Route path="/team" element={<TeamPage />} />
+
+        <Route
+          path="/team/:memberId"
+          element={<TeamMemberPage />}
+        />
+
+        <Route path="/gallery" element={<GalleryPage />} />
+
+        <Route path="/events" element={<EventsPage />} />
+
+        <Route path="/contact" element={<ContactPage />} />
+
+        <Route
+          path="/become-member"
+          element={<BecomeMemberPage />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
+
+export default App;
