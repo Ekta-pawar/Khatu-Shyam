@@ -1,0 +1,31 @@
+const jwt = require("jsonwebtoken");
+const env = require("../config/env");
+const { COOKIE_NAME } = require("../constants");
+
+const generateToken = (payload) => {
+  return jwt.sign(payload, env.jwt.secret, { expiresIn: env.jwt.expiresIn });
+};
+
+const cookieOptions = () => ({
+  httpOnly: true,
+  secure: env.cookie.secure,
+  sameSite: env.cookie.sameSite,
+  maxAge: env.jwt.cookieExpiresInDays * 24 * 60 * 60 * 1000,
+});
+
+const sendTokenResponse = (res, payload) => {
+  const token = generateToken(payload);
+  res.cookie(COOKIE_NAME, token, cookieOptions());
+  return token;
+};
+
+const clearTokenCookie = (res) => {
+  res.cookie(COOKIE_NAME, "", {
+    httpOnly: true,
+    secure: env.cookie.secure,
+    sameSite: env.cookie.sameSite,
+    expires: new Date(0),
+  });
+};
+
+module.exports = { generateToken, sendTokenResponse, clearTokenCookie, cookieOptions };

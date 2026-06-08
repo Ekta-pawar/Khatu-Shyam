@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+const mongoose = require("mongoose");
+const env = require("./env");
+const logger = require("./logger");
 
 const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI, {
-            serverSelectionTimeoutMS: 3000,
-            socketTimeoutMS: 5000
-        });
-        console.log("✓ MongoDB connected successfully");
-        return true;
-    } catch (error) {
-        console.log("⚠ MongoDB not available (development mode). Starting server without database.");
-        return false;
-    }
-}
+  try {
+    await mongoose.connect(env.database.uri, {
+      serverSelectionTimeoutMS: 5000,
+    });
+    logger.info("MongoDB connected successfully");
+    return true;
+  } catch (error) {
+    logger.error(`MongoDB connection failed: ${error.message}`);
+    return false;
+  }
+};
 
 module.exports = connectDB;
