@@ -6,58 +6,102 @@ import {
   Mail,
   MapPin,
   Phone,
-  ShieldCheck,
 } from "lucide-react";
 
-import { upcomingEvents } from "../data/events";
 function ContactPage() {
-  const [tab, setTab] = useState("contact");
-  const [submittedTab, setSubmittedTab] = useState(null);
-  const [verifyResult, setVerifyResult] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (which) => (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (which === "verify") {
-      const data = new FormData(e.currentTarget);
+    setSubmitted(true);
 
-      const name = String(
-        data.get("name") || ""
-      ).trim();
+    e.target.reset();
 
-      const number = String(
-        data.get("number") || ""
-      ).trim();
-
-      const ok =
-        name.length > 2 &&
-        /^[0-9]{4,}$/.test(number);
-
-      setVerifyResult({
-        ok,
-        msg: ok
-          ? `Verified ✓ — ${name} is a registered member (ID #${number})`
-          : "We could not verify these details.",
-      });
-    } else {
-      setSubmittedTab(which);
-
-      e.target.reset();
-
-      setTimeout(() => {
-        setSubmittedTab(null);
-      }, 5000);
-    }
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 5000);
   };
 
   return (
     <PageShell>
       <PageHeader
         eyebrow="Sampark"
-        title="Contact & Registration"
-        subtitle="Reach the samiti, verify a member, or register for an upcoming event."
+        title="Contact Us"
+        subtitle="Reach out to the samiti for any queries or support."
       />
-            <section className="mx-auto grid max-w-7xl gap-6 px-5 py-14 md:grid-cols-3">
+
+      {/* Contact Form */}
+      <section className="mx-auto max-w-4xl px-4 py-8">
+        <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
+
+          <div className="border-b px-5 py-4">
+            <h2 className="text-xl font-semibold">
+              Send Us a Message
+            </h2>
+
+            <p className="mt-1 text-sm text-gray-500">
+              We would love to hear from you.
+            </p>
+          </div>
+
+          <div className="p-5 md:p-6">
+
+            {submitted && (
+              <div className="mb-4 flex items-center gap-2 rounded-lg border border-green-300 bg-green-50 p-3 text-sm text-green-700">
+                <Check size={16} />
+
+                <span>
+                  Jai Shree Shyam! Message sent successfully.
+                </span>
+              </div>
+            )}
+
+            <form
+              onSubmit={handleSubmit}
+              className="grid gap-4 md:grid-cols-2"
+            >
+              <Field
+                label="Your Name"
+                name="name"
+                required
+              />
+
+              <Field
+                label="Mobile Number"
+                name="mobile"
+                required
+              />
+
+              <Field
+                label="Email Address"
+                name="email"
+                type="email"
+                required
+                className="md:col-span-2"
+              />
+
+              <div className="md:col-span-2">
+                <Label>Message</Label>
+
+                <textarea
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Write your message..."
+                  className="mt-1 w-full rounded-lg border p-3 text-sm outline-none transition focus:ring-2 focus:ring-yellow-500"
+                />
+              </div>
+
+              <SubmitButton label="Send Message" />
+            </form>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Cards */}
+      <section className="mx-auto grid max-w-6xl gap-4 px-4 pb-12 pt-0 md:grid-cols-3">
 
         <ContactCard
           icon={MapPin}
@@ -73,7 +117,7 @@ function ContactPage() {
           title="Call Us"
           lines={[
             "+91 98290 00000",
-            "Mon–Sat · 10am – 7pm",
+            "Mon – Sat · 10am – 7pm",
           ]}
         />
 
@@ -85,228 +129,43 @@ function ContactPage() {
             "info@shyamsabhasamiti.org",
           ]}
         />
+
       </section>
-            <section className="mx-auto max-w-4xl px-5 pb-24">
-        <div className="overflow-hidden rounded-3xl bg-card shadow-elegant">
-
-          <div className="grid grid-cols-3 border-b">
-
-            <button
-              onClick={() => setTab("contact")}
-              className={tab === "contact"
-                ? "bg-yellow-500 py-4"
-                : "py-4"}
-            >
-              Contact Us
-            </button>
-
-            <button
-              onClick={() => setTab("verify")}
-              className={tab === "verify"
-                ? "bg-yellow-500 py-4"
-                : "py-4"}
-            >
-              Verify Member
-            </button>
-
-            <button
-              onClick={() => setTab("register")}
-              className={tab === "register"
-                ? "bg-yellow-500 py-4"
-                : "py-4"}
-            >
-              Event Registration
-            </button>
-
-          </div>
-
-                     <div className="p-8 md:p-12">
-
-{submittedTab === tab &&
-              tab !== "verify" && (
-                <div className="mb-6 flex items-center gap-3 rounded-xl border p-4">
-                  <Check size={18} />
-                  Jai Shree Shyam! Your
-                  submission has been received.
-                </div>
-            )}
-                        {tab === "contact" && (
-              <form
-                onSubmit={handleSubmit("contact")}
-                className="grid gap-5 md:grid-cols-2"
-              >
-                <Field
-                  label="Your Name"
-                  name="name"
-                  required
-                />
-
-                <Field
-                  label="Mobile Number"
-                  name="mobile"
-                  required
-                />
-
-                <Field
-                  label="Email"
-                  name="email"
-                  type="email"
-                  required
-                  className="md:col-span-2"
-                />
-
-                <div className="md:col-span-2">
-                  <Label>Message</Label>
-
-                  <textarea
-                    name="message"
-                    rows="5"
-                    required
-                    className="mt-2 w-full rounded-lg border p-3"
-                  />
-                </div>
-
-                <SubmitButton label="Send Message" />
-              </form>
-            )}
-                        {tab === "verify" && (
-              <form
-                onSubmit={handleSubmit("verify")}
-                className="grid gap-5"
-              >
-                <p className="flex items-center gap-2 text-sm">
-                  <ShieldCheck size={16} />
-                  Verify member using ID.
-                </p>
-
-                <Field
-                  label="Member Name"
-                  name="name"
-                  required
-                />
-
-                <Field
-                  label="Member ID"
-                  name="number"
-                  required
-                />
-
-                {verifyResult && (
-                  <div className="rounded-xl border p-4">
-                    {verifyResult.msg}
-                  </div>
-                )}
-
-                <SubmitButton
-                  label="Verify Member"
-                />
-              </form>
-            )}
-                        {tab === "register" && (
-              <form
-                onSubmit={handleSubmit("register")}
-                className="grid gap-5 md:grid-cols-2"
-              >
-                <div className="md:col-span-2">
-
-                  <Label>Select Event</Label>
-
-                  <select
-                    name="event"
-                    required
-                    className="mt-2 w-full rounded-lg border p-3"
-                  >
-                    <option value="">
-                      Select Event
-                    </option>
-
-                    {upcomingEvents.map(
-                      (event) => (
-                        <option
-                          key={event.title}
-                          value={event.title}
-                        >
-                          {event.title}
-                        </option>
-                      )
-                    )}
-                  </select>
-
-                </div>
-
-                <Field
-                  label="Full Name"
-                  name="name"
-                  required
-                />
-
-                <Field
-                  label="Mobile"
-                  name="mobile"
-                  required
-                />
-
-                <Field
-                  label="Email"
-                  name="email"
-                  type="email"
-                  required
-                />
-
-                <Field
-                  label="Attendees"
-                  name="attendees"
-                  type="number"
-                  required
-                />
-
-                <div className="md:col-span-2">
-                  <Label>
-                    Special Requests
-                  </Label>
-
-                  <textarea
-                    rows="3"
-                    className="mt-2 w-full rounded-lg border p-3"
-                  />
-                </div>
-
-                <SubmitButton
-                  label="Register Event"
-                />
-              </form>
-            )}
-
-          </div>
-        </div>
-      </section>
-
     </PageShell>
   );
 }
+
 function ContactCard({
   icon: Icon,
   title,
   lines,
 }) {
   return (
-    <div className="rounded-2xl border p-6">
-      <Icon size={20} />
+    <div className="rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md">
 
-      <h3 className="mt-4 text-xl">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-100">
+        <Icon
+          size={18}
+          className="text-yellow-600"
+        />
+      </div>
+
+      <h3 className="mt-3 text-lg font-semibold">
         {title}
       </h3>
 
-      {lines.map((line) => (
-        <p key={line}>{line}</p>
-      ))}
+      <div className="mt-2 space-y-1 text-sm text-gray-600">
+        {lines.map((line) => (
+          <p key={line}>{line}</p>
+        ))}
+      </div>
     </div>
   );
 }
 
 function Label({ children }) {
   return (
-    <label className="text-sm font-medium">
+    <label className="text-sm font-medium text-gray-700">
       {children}
     </label>
   );
@@ -323,7 +182,7 @@ function Field({
 
       <input
         {...props}
-        className="mt-2 w-full rounded-lg border p-3"
+        className="mt-1 w-full rounded-lg border p-3 text-sm outline-none transition focus:ring-2 focus:ring-yellow-500"
       />
     </div>
   );
@@ -334,7 +193,7 @@ function SubmitButton({ label }) {
     <div className="md:col-span-2">
       <button
         type="submit"
-        className="w-full rounded-full bg-yellow-500 py-3 font-medium"
+        className="w-full rounded-full bg-yellow-500 py-2.5 text-sm font-medium text-black transition hover:bg-yellow-400"
       >
         {label}
       </button>

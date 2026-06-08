@@ -32,9 +32,9 @@ function HomePage() {
           </p>
 
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl">
-            Sri Sri Khattu Shyam
+           Shri Shri Khatushyam 
             <span className="block text-yellow-300">
-              Sabha Samiti
+              Sewa Samiti
             </span>
           </h1>
 

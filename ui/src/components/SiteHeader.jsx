@@ -6,9 +6,10 @@ const nav = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About Us" },
   { to: "/team", label: "Our Team" },
+  {to: "/mission-vision", label: "Mission Vision"},
   { to: "/gallery", label: "Gallery" },
-  { to: "/events", label: "Events" },
-  { to: "/become-member", label: "Become a Member" },
+  { to: "/events", label: "UpComming Events" },
+  { to: "/Sponsor", label: "Sponsor" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -29,11 +30,11 @@ function SiteHeader() {
 
           <span className="flex flex-col leading-tight">
             <span className="text-lg font-semibold text-maroon">
-              Sri Sri Khattu Shyam
+             Shri Shri Khatushyam 
             </span>
 
             <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
-              Sabha Samiti
+              Sewa Samiti
             </span>
           </span>
         </Link>

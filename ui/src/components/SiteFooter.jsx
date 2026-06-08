@@ -14,7 +14,8 @@ function SiteFooter() {
             </span>
 
             <span className="text-lg font-semibold">
-              Sri Sri Khattu Shyam Sabha Samiti
+              Sri Sri Khattu Shyam
+Seva Samiti
             </span>
           </div>
 

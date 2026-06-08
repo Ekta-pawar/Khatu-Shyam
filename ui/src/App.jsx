@@ -19,36 +19,47 @@ import AdminRoutes from "./admin/routes/AdminRoutes";
 function App() {
   return (
     <Provider store={store}>
-      <AuthInitializer>
-        <Toaster position="top-right" toastOptions={{ duration: 3500 }} />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
+      <BrowserRouter>
+        <Toaster
+          position="top-right"
+          toastOptions={{ duration: 3500 }}
+        />
 
-            <Route path="/about" element={<AboutPage />} />
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<HomePage />} />
 
-            <Route path="/team" element={<TeamPage />} />
+          <Route path="/about" element={<AboutPage />} />
 
-            <Route
-              path="/team/:memberId"
-              element={<TeamMemberPage />}
-            />
+          <Route path="/team" element={<TeamPage />} />
 
-            <Route path="/gallery" element={<GalleryPage />} />
+          <Route
+            path="/team/:memberId"
+            element={<TeamMemberPage />}
+          />
 
-            <Route path="/events" element={<EventsPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
 
-            <Route path="/contact" element={<ContactPage />} />
+          <Route path="/events" element={<EventsPage />} />
 
-            <Route
-              path="/become-member"
-              element={<BecomeMemberPage />}
-            />
+          <Route path="/contact" element={<ContactPage />} />
 
-            <Route path="/admin/*" element={<AdminRoutes />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthInitializer>
+          <Route
+            path="/become-member"
+            element={<BecomeMemberPage />}
+          />
+
+          {/* Admin Routes */}
+          <Route
+            path="/admin/*"
+            element={
+              <AuthInitializer>
+                <AdminRoutes />
+              </AuthInitializer>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </Provider>
   );
 }

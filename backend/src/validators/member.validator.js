@@ -1,11 +1,7 @@
 const { body } = require("express-validator");
 const { GENDERS, BLOOD_GROUPS } = require("../constants");
 
-/**
- * Multipart form-data sends nested objects/arrays as JSON strings
- * (e.g. specialDates="{...}"). This middleware parses those known
- * JSON fields onto req.body before validation/controller logic runs.
- */
+
 const parseJsonFields = (fields) => (req, res, next) => {
   fields.forEach((field) => {
     if (typeof req.body[field] === "string" && req.body[field].trim() !== "") {

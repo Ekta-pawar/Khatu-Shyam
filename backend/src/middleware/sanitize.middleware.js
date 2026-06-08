@@ -1,10 +1,3 @@
-/**
- * express-mongo-sanitize / xss-clean both reassign req.query, which Express 5
- * exposes as a getter-only property ("Cannot set property query of
- * #<IncomingMessage> which has only a getter"). This middleware achieves the
- * same protection — stripping Mongo operator keys and escaping HTML — by
- * mutating req.body / req.params / req.query in place instead of replacing them.
- */
 
 const isPlainObject = (value) => Object.prototype.toString.call(value) === "[object Object]";
 
