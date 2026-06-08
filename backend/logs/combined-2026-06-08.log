@@ -31,3 +31,7 @@
 {"level":"warn","message":"POST /api/v1/payments/online/order - Member not found","timestamp":"2026-06-08 13:44:57"}
 {"level":"info","message":"\u001b[0mPOST /api/v1/payments/online/order \u001b[33m404\u001b[0m 61.918 ms - 86\u001b[0m","timestamp":"2026-06-08 13:44:57"}
 {"level":"info","message":"\u001b[0mGET /api/v1/payments \u001b[32m200\u001b[0m 65.368 ms - 8562\u001b[0m","timestamp":"2026-06-08 13:44:57"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-08 13:54:50"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-08 13:54:50"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-08 13:55:41"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 11.586 ms - 150\u001b[0m","timestamp":"2026-06-08 13:55:41"}
