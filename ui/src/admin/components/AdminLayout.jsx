@@ -34,7 +34,7 @@ const AdminLayout = () => {
     } finally {
       dispatch(clearCredentials());
       toast.success("Logged out successfully");
-      navigate("/admin/login", { replace: true });
+      navigate("/", { replace: true });
     }
   };
 

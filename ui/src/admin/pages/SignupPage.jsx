@@ -74,12 +74,7 @@ const SignupPage = () => {
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-slate-500">
-          Already have an account?{" "}
-          <Link to="/admin/login" className="font-semibold text-orange-600 hover:underline">
-            Sign in
-          </Link>
-        </p>
+      
       </div>
     </div>
   );

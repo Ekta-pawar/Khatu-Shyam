@@ -66,12 +66,7 @@ const LoginPage = () => {
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-slate-500">
-          First time setting up?{" "}
-          <Link to="/admin/signup" className="font-semibold text-orange-600 hover:underline">
-            Create the super admin account
-          </Link>
-        </p>
+      
       </div>
     </div>
   );
