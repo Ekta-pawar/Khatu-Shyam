@@ -11,6 +11,8 @@ import GalleryPage from "./pages/GalleryPage";
 import EventsPage from "./pages/EventsPage";
 import ContactPage from "./pages/ContactPage";
 import BecomeMemberPage from "./pages/BecomeMemberPage";
+import MissionVisionPage from "./pages/MissionVisionPage";
+import SponsorPage from "./pages/SponsorPage";
 
 import { store } from "./admin/app/store";
 import AuthInitializer from "./admin/components/AuthInitializer";
@@ -48,6 +50,10 @@ function App() {
             path="/become-member"
             element={<BecomeMemberPage />}
           />
+
+          <Route path="/mission-vision" element={<MissionVisionPage />} />
+
+          <Route path="/Sponsor" element={<SponsorPage />} />
 
           {/* Admin Routes */}
           <Route

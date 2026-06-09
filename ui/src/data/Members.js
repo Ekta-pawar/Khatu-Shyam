@@ -90,7 +90,7 @@ export const members = [
     id: "manish-sharma",
     name:
       "Shri Manish Sharma",
-    tier: "silver",
+    tier: "Diamond",
     title:
       "General Secretary",
     photo: member2,
@@ -167,7 +167,7 @@ export const members = [
     name:
       "Shri Vikram Mittal",
 
-    tier: "bronze",
+    tier: "KaryaKarani",
 
     title:
       "Treasurer & Youth Wing Lead",
@@ -259,6 +259,6 @@ export const getMember = (id) => {
 
 export const tierLabel = {
   golden: "Golden Member",
-  silver: "Silver Member",
-  bronze: "Bronze Member",
+  Diamond: "Diamond Member",
+  KaryaKarani: "KaryaKarani Member",
 };

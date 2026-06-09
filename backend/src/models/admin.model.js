@@ -4,8 +4,8 @@ const { ADMIN_ROLES } = require("../constants");
 
 const adminSchema = new mongoose.Schema(
   {
-    firstName: { type: String, required: true, trim: true, minlength: 2, maxlength: 30 },
-    lastName: { type: String, required: true, trim: true, minlength: 2, maxlength: 30 },
+    fullName: { type: String, required: true, trim: true, minlength: 2, maxlength: 30 },
+   
     email: { type: String, required: true, trim: true, unique: true, lowercase: true },
     password: { type: String, required: true, minlength: 6, select: false },
     phoneNumber: { type: String, required: true, trim: true, unique: true, minlength: 10, maxlength: 15 },

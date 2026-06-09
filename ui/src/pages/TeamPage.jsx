@@ -9,8 +9,8 @@ import { ArrowRight } from "lucide-react";
 
 const tierOrder = [
   "golden",
-  "silver",
-  "bronze",
+  "Diamond",
+  "KaryaKarani",
 ];
 
 function TeamPage() {

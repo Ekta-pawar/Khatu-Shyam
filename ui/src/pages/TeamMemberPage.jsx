@@ -31,7 +31,8 @@ function TeamMemberPage() {
 
   return (
     <PageShell>      <section className="relative border-b border-border/60 bg-secondary/40">
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-[1fr_1.3fr] md:items-end">
+      
+        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-5 md:grid-cols-[1fr_1.3fr] md:items-end">
 
           <div>
             <img
@@ -42,13 +43,7 @@ function TeamMemberPage() {
           </div>
 
           <div>
-            <Link
-              to="/team"
-              className="mb-6 inline-flex items-center gap-2 text-saffron"
-            >
-              <ArrowLeft size={14} />
-              Back to Team
-            </Link>
+            
 
             <span
               className={`inline-block rounded-full px-3 py-1 text-xs ${
