@@ -20,13 +20,22 @@ app.set("trust proxy", 1);
 /* ------------------------------------------------------------------ */
 /* Security                                                             */
 /* ------------------------------------------------------------------ */
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" },
+  })
+);
 app.use(
   cors({
     origin: env.FRONTEND_URL,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept", "Cookie"],
+    exposedHeaders: ["Set-Cookie"],
   })
 );
+app.options(/.*/, cors());
 app.use(compression());
 
 /* ------------------------------------------------------------------ */

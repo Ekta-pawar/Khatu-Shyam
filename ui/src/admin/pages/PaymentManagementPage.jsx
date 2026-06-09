@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import {
   useGetPaymentsQuery,
   useRecordOfflinePaymentMutation,

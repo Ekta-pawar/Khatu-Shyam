@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Plus, Trash2, ArrowLeft } from "lucide-react";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import FormField from "../components/FormField";
 import Button from "../components/Button";
 import Loader from "../components/Loader";

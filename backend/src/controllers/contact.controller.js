@@ -24,6 +24,11 @@ const getContactMessages = asyncHandler(async (req, res) => {
   if (req.query.isRead !== undefined) filter.isRead = req.query.isRead === "true";
   if (req.query.isResolved !== undefined) filter.isResolved = req.query.isResolved === "true";
 
+  if (req.query.search) {
+    const regex = new RegExp(req.query.search.trim(), "i");
+    filter.$or = [{ name: regex }, { email: regex }, { phone: regex }, { subject: regex }];
+  }
+
   const [messages, total] = await Promise.all([
     Contact.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit),
     Contact.countDocuments(filter),
@@ -48,6 +53,20 @@ const getContactMessageById = asyncHandler(async (req, res) => {
   return ApiResponse.success(res, {
     statusCode: 200,
     message: "Contact message fetched successfully",
+    data: { contact },
+  });
+});
+
+const markContactAsRead = asyncHandler(async (req, res) => {
+  const contact = await Contact.findById(req.params.id);
+  if (!contact) throw new AppError("Contact message not found", 404);
+
+  contact.isRead = true;
+  await contact.save({ validateBeforeSave: false });
+
+  return ApiResponse.success(res, {
+    statusCode: 200,
+    message: "Contact message marked as read",
     data: { contact },
   });
 });
@@ -78,6 +97,7 @@ module.exports = {
   submitContactMessage,
   getContactMessages,
   getContactMessageById,
+  markContactAsRead,
   resolveContactMessage,
   deleteContactMessage,
 };

@@ -11,6 +11,10 @@ const buildQueryString = (params = {}) => {
 
 export const contactApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    submitContact: builder.mutation({
+      query: (body) => ({ url: "/contacts", method: "POST", body }),
+    }),
+
     getContactMessages: builder.query({
       query: (params) => `/contacts${buildQueryString(params)}`,
       transformResponse: (response) => response.data,
@@ -29,6 +33,11 @@ export const contactApi = apiSlice.injectEndpoints({
       providesTags: (result, error, id) => [{ type: "Contact", id }],
     }),
 
+    markContactAsRead: builder.mutation({
+      query: (id) => ({ url: `/contacts/${id}/read`, method: "PATCH" }),
+      invalidatesTags: (result, error, id) => [{ type: "Contact", id }, { type: "Contact", id: "LIST" }],
+    }),
+
     resolveContactMessage: builder.mutation({
       query: (id) => ({ url: `/contacts/${id}/resolve`, method: "PATCH" }),
       invalidatesTags: (result, error, id) => [{ type: "Contact", id }, { type: "Contact", id: "LIST" }],
@@ -42,8 +51,10 @@ export const contactApi = apiSlice.injectEndpoints({
 });
 
 export const {
+  useSubmitContactMutation,
   useGetContactMessagesQuery,
   useGetContactMessageByIdQuery,
+  useMarkContactAsReadMutation,
   useResolveContactMessageMutation,
   useDeleteContactMessageMutation,
 } = contactApi;

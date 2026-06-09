@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Plus, Search, Eye, Pencil, Trash2 } from "lucide-react";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import { useGetMembersQuery, useDeleteMemberMutation } from "../api/memberApi";
 import Loader from "../components/Loader";
 import EmptyState from "../components/EmptyState";

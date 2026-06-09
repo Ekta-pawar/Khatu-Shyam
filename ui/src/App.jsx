@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { Toaster } from "react-hot-toast";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
@@ -22,9 +23,14 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Toaster
+        <ToastContainer
           position="top-right"
-          toastOptions={{ duration: 3500 }}
+          autoClose={3500}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+          theme="light"
         />
 
         <Routes>

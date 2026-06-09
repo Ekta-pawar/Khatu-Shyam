@@ -13,6 +13,7 @@ router.post("/", contactLimiter, createContactValidator, validate, contactContro
 // Admin only
 router.get("/", isAuthenticated, contactController.getContactMessages);
 router.get("/:id", isAuthenticated, contactController.getContactMessageById);
+router.patch("/:id/read", isAuthenticated, contactController.markContactAsRead);
 router.patch("/:id/resolve", isAuthenticated, contactController.resolveContactMessage);
 router.delete("/:id", isAuthenticated, contactController.deleteContactMessage);
 

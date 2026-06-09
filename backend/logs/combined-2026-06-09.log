@@ -1,0 +1,63 @@
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-09 11:34:44"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-09 11:34:44"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:35:08"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 11.802 ms - 150\u001b[0m","timestamp":"2026-06-09 11:35:08"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 11:35:20"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 105.030 ms - 104\u001b[0m","timestamp":"2026-06-09 11:35:20"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:35:20"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.948 ms - 150\u001b[0m","timestamp":"2026-06-09 11:35:20"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 11:35:39"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 101.817 ms - 104\u001b[0m","timestamp":"2026-06-09 11:35:39"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:35:39"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 2.460 ms - 150\u001b[0m","timestamp":"2026-06-09 11:35:39"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:36:02"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.813 ms - 150\u001b[0m","timestamp":"2026-06-09 11:36:02"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 11:36:11"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 42.643 ms - 104\u001b[0m","timestamp":"2026-06-09 11:36:11"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:36:11"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.350 ms - 150\u001b[0m","timestamp":"2026-06-09 11:36:11"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-09 11:37:11"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-09 11:37:11"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 11:37:14"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 885.989 ms - 104\u001b[0m","timestamp":"2026-06-09 11:37:14"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:37:14"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 3.548 ms - 150\u001b[0m","timestamp":"2026-06-09 11:37:14"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:37:20"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.944 ms - 150\u001b[0m","timestamp":"2026-06-09 11:37:20"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:37:23"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 4.581 ms - 150\u001b[0m","timestamp":"2026-06-09 11:37:23"}
+{"level":"warn","message":"GET /favicon.ico - Route not found: /favicon.ico","timestamp":"2026-06-09 11:37:23"}
+{"level":"info","message":"\u001b[0mGET /favicon.ico \u001b[33m404\u001b[0m 1.308 ms - 112\u001b[0m","timestamp":"2026-06-09 11:37:23"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:37:29"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 2.624 ms - 150\u001b[0m","timestamp":"2026-06-09 11:37:29"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:37:31"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.048 ms - 150\u001b[0m","timestamp":"2026-06-09 11:37:31"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 11:37:48"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 904.318 ms - 104\u001b[0m","timestamp":"2026-06-09 11:37:48"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:37:48"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 0.954 ms - 150\u001b[0m","timestamp":"2026-06-09 11:37:48"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:38:34"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 2.240 ms - 150\u001b[0m","timestamp":"2026-06-09 11:38:34"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 11:38:39"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 781.775 ms - 104\u001b[0m","timestamp":"2026-06-09 11:38:39"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:38:39"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 2.560 ms - 150\u001b[0m","timestamp":"2026-06-09 11:38:39"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/contacts \u001b[32m201\u001b[0m 134.143 ms - 419\u001b[0m","timestamp":"2026-06-09 11:39:53"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 11:40:41"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 821.865 ms - 104\u001b[0m","timestamp":"2026-06-09 11:40:41"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:40:41"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.541 ms - 150\u001b[0m","timestamp":"2026-06-09 11:40:41"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-09 11:48:50"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-09 11:48:50"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-09 11:48:55"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-09 11:48:55"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:49:25"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 9.303 ms - 150\u001b[0m","timestamp":"2026-06-09 11:49:25"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:50:09"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 12.399 ms - 150\u001b[0m","timestamp":"2026-06-09 11:50:09"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 11:51:17"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 874.540 ms - 104\u001b[0m","timestamp":"2026-06-09 11:51:17"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:51:17"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.855 ms - 150\u001b[0m","timestamp":"2026-06-09 11:51:17"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:51:20"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 5.817 ms - 150\u001b[0m","timestamp":"2026-06-09 11:51:20"}

@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import {
   LayoutDashboard,
   Users,
