@@ -61,3 +61,40 @@
 {"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.855 ms - 150\u001b[0m","timestamp":"2026-06-09 11:51:17"}
 {"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:51:20"}
 {"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 5.817 ms - 150\u001b[0m","timestamp":"2026-06-09 11:51:20"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-09 11:59:35"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-09 11:59:35"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-09 11:59:41"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-09 11:59:41"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 11:59:50"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 908.922 ms - 104\u001b[0m","timestamp":"2026-06-09 11:59:50"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 11:59:50"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 4.381 ms - 150\u001b[0m","timestamp":"2026-06-09 11:59:50"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[32m200\u001b[0m 981.671 ms - 633\u001b[0m","timestamp":"2026-06-09 11:59:51"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 12:00:09"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 893.428 ms - 104\u001b[0m","timestamp":"2026-06-09 12:00:09"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 12:00:09"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.457 ms - 150\u001b[0m","timestamp":"2026-06-09 12:00:09"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[32m200\u001b[0m 990.026 ms - 633\u001b[0m","timestamp":"2026-06-09 12:01:13"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 39.050 ms - 435\u001b[0m","timestamp":"2026-06-09 12:01:13"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[32m200\u001b[0m 98.325 ms - 457\u001b[0m","timestamp":"2026-06-09 12:01:13"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[32m200\u001b[0m 144.106 ms - 152\u001b[0m","timestamp":"2026-06-09 12:01:13"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 498.659 ms - 447\u001b[0m","timestamp":"2026-06-09 12:01:14"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[32m200\u001b[0m 561.771 ms - 150\u001b[0m","timestamp":"2026-06-09 12:01:14"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=12 \u001b[32m200\u001b[0m 110.314 ms - 151\u001b[0m","timestamp":"2026-06-09 12:02:08"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=12 \u001b[32m200\u001b[0m 129.279 ms - 153\u001b[0m","timestamp":"2026-06-09 12:02:11"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=10 \u001b[32m200\u001b[0m 107.733 ms - 458\u001b[0m","timestamp":"2026-06-09 12:02:13"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/logout \u001b[32m200\u001b[0m 52.070 ms - 74\u001b[0m","timestamp":"2026-06-09 12:02:25"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 12:02:25"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.239 ms - 150\u001b[0m","timestamp":"2026-06-09 12:02:25"}
+{"level":"warn","message":"POST /api/v1/admins/login - Invalid email or password","timestamp":"2026-06-09 12:02:31"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[33m401\u001b[0m 824.224 ms - 104\u001b[0m","timestamp":"2026-06-09 12:02:31"}
+{"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-09 12:02:31"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 1.511 ms - 150\u001b[0m","timestamp":"2026-06-09 12:02:31"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[32m200\u001b[0m 909.220 ms - 633\u001b[0m","timestamp":"2026-06-09 12:02:46"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 45.289 ms - 435\u001b[0m","timestamp":"2026-06-09 12:02:46"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 130.462 ms - 447\u001b[0m","timestamp":"2026-06-09 12:02:46"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[36m304\u001b[0m 213.287 ms - -\u001b[0m","timestamp":"2026-06-09 12:03:04"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[36m304\u001b[0m 83.135 ms - -\u001b[0m","timestamp":"2026-06-09 12:03:04"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[36m304\u001b[0m 137.350 ms - -\u001b[0m","timestamp":"2026-06-09 12:03:04"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[36m304\u001b[0m 498.891 ms - -\u001b[0m","timestamp":"2026-06-09 12:03:05"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[36m304\u001b[0m 493.038 ms - -\u001b[0m","timestamp":"2026-06-09 12:03:05"}
