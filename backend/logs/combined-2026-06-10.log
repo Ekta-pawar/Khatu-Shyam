@@ -43,3 +43,35 @@
 {"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=10 \u001b[32m200\u001b[0m 186.384 ms - 474\u001b[0m","timestamp":"2026-06-10 14:14:59"}
 {"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-10 14:15:22"}
 {"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-10 14:15:22"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-10 14:15:52"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-10 14:15:52"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[36m304\u001b[0m 183.506 ms - -\u001b[0m","timestamp":"2026-06-10 14:20:39"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[36m304\u001b[0m 192.652 ms - -\u001b[0m","timestamp":"2026-06-10 14:20:39"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[32m200\u001b[0m 594.617 ms - 160\u001b[0m","timestamp":"2026-06-10 14:20:40"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[36m304\u001b[0m 1820.414 ms - -\u001b[0m","timestamp":"2026-06-10 14:20:41"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[36m304\u001b[0m 51.714 ms - -\u001b[0m","timestamp":"2026-06-10 14:20:48"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[36m304\u001b[0m 93.898 ms - -\u001b[0m","timestamp":"2026-06-10 14:20:48"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[36m304\u001b[0m 92.282 ms - -\u001b[0m","timestamp":"2026-06-10 14:20:48"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[36m304\u001b[0m 105.362 ms - -\u001b[0m","timestamp":"2026-06-10 14:20:48"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[36m304\u001b[0m 349.152 ms - -\u001b[0m","timestamp":"2026-06-10 14:20:48"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[36m304\u001b[0m 97.763 ms - -\u001b[0m","timestamp":"2026-06-10 14:23:57"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[36m304\u001b[0m 103.531 ms - -\u001b[0m","timestamp":"2026-06-10 14:23:57"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[36m304\u001b[0m 101.168 ms - -\u001b[0m","timestamp":"2026-06-10 14:23:57"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[36m304\u001b[0m 69.965 ms - -\u001b[0m","timestamp":"2026-06-10 14:47:25"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[0m-\u001b[0m - ms - -\u001b[0m","timestamp":"2026-06-10 14:47:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[0m-\u001b[0m - ms - -\u001b[0m","timestamp":"2026-06-10 14:47:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[0m-\u001b[0m - ms - -\u001b[0m","timestamp":"2026-06-10 14:47:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[0m-\u001b[0m - ms - -\u001b[0m","timestamp":"2026-06-10 14:47:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[36m304\u001b[0m 39.400 ms - -\u001b[0m","timestamp":"2026-06-10 14:47:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[32m200\u001b[0m 134.778 ms - 150\u001b[0m","timestamp":"2026-06-10 14:47:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[32m200\u001b[0m 135.473 ms - 152\u001b[0m","timestamp":"2026-06-10 14:47:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[32m200\u001b[0m 134.723 ms - 160\u001b[0m","timestamp":"2026-06-10 14:47:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 104.917 ms - -\u001b[0m","timestamp":"2026-06-10 14:47:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[36m304\u001b[0m 478.941 ms - -\u001b[0m","timestamp":"2026-06-10 15:39:59"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[36m304\u001b[0m 252.198 ms - -\u001b[0m","timestamp":"2026-06-10 15:39:59"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[36m304\u001b[0m 404.907 ms - -\u001b[0m","timestamp":"2026-06-10 15:39:59"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[36m304\u001b[0m 586.632 ms - -\u001b[0m","timestamp":"2026-06-10 15:39:59"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[36m304\u001b[0m 1462.748 ms - -\u001b[0m","timestamp":"2026-06-10 15:40:00"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=12 \u001b[36m304\u001b[0m 144.690 ms - -\u001b[0m","timestamp":"2026-06-10 15:40:07"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[0m-\u001b[0m - ms - -\u001b[0m","timestamp":"2026-06-10 16:07:07"}
+{"level":"error","message":"GET /api/v1/admins/me - getaddrinfo ENOTFOUND ac-uvh36qw-shard-00-00.qpvywp0.mongodb.net","stack":"MongoServerSelectionError: getaddrinfo ENOTFOUND ac-uvh36qw-shard-00-00.qpvywp0.mongodb.net\n    at Topology.selectServer (D:\\ssksss\\Khatu-Shyam-web\\backend\\node_modules\\mongodb\\lib\\sdam\\topology.js:348:38)\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processTimers (node:internal/timers:538:9)\n    at async executeOperationWithRetries (D:\\ssksss\\Khatu-Shyam-web\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:157:18)\n    at async executeOperation (D:\\ssksss\\Khatu-Shyam-web\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:83:16)\n    at async FindCursor._initialize (D:\\ssksss\\Khatu-Shyam-web\\backend\\node_modules\\mongodb\\lib\\cursor\\find_cursor.js:62:26)\n    at async FindCursor.cursorInit (D:\\ssksss\\Khatu-Shyam-web\\backend\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:620:27)\n    at async FindCursor.fetchBatch (D:\\ssksss\\Khatu-Shyam-web\\backend\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:654:13)\n    at async FindCursor.next (D:\\ssksss\\Khatu-Shyam-web\\backend\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:326:17)\n    at async Collection.findOne (D:\\ssksss\\Khatu-Shyam-web\\backend\\node_modules\\mongodb\\lib\\collection.js:313:24)","timestamp":"2026-06-10 16:07:07"}
