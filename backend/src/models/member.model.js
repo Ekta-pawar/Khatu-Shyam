@@ -9,8 +9,6 @@ const imageSchema = new mongoose.Schema(
   { _id: false }
 );
 
-/* ---------------------------------- Special dates (all optional) ---------------------------------- */
-
 const birthdaySchema = new mongoose.Schema(
   {
     personName: { type: String, required: true, trim: true },

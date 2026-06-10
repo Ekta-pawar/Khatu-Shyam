@@ -1,836 +1,20 @@
-// import React, { useState } from "react";
-// import { PageShell, PageHeader } from "../components/PageShell";
-// import { Check, Crown, Plus, X, Upload, User, Building2, Camera, CalendarHeart, Users } from "lucide-react";
-
-// const tiers = [
-//   {
-//     name: "Diamond Members",
-//     price: "₹2,100 / year",
-//     perks: [
-//       "Member ID & welcome kit",
-//       "Event invitations",
-//       "Monthly bhajan satsang",
-//     ],
-//   },
-//   {
-//     name: "Golden Members",
-//     price: "₹11,000 / year",
-//     featured: true,
-//     perks: [
-//       "All Bronze benefits",
-//       "Reserved seating at sandhyas",
-//       "Family listing in directory",
-//       "Yatra priority booking",
-//     ],
-//   },
-//   {
-//     name: "Karyakarani Members",
-//     price: "₹20,000 / Year",
-//     perks: [
-//       "All Silver benefits",
-//       "Patron recognition",
-//       "Bhandara sponsorship credit",
-//       "Trustee voting rights",
-//     ],
-//   },
-// ];
-
-// const GENDERS = ["Male", "Female", "Other"];
-// const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-
-// function BecomeMemberPage() {
-//   const [submitted, setSubmitted] = useState(false);
-//   const [formData, setFormData] = useState({
-//     // Personal Information
-//     fullName: "",
-//     fatherName: "",
-//     gender: "",
-//     phone: "",
-//     alternatePhone: "",
-//     email: "",
-//     occupation: "",
-//     bloodGroup: "",
-//     profileImage: null,
-    
-//     // Address
-//     address: "",
-//     city: "",
-//     state: "",
-//     country: "India",
-//     pincode: "",
-    
-//     // Membership
-//     tier: "",
-//     reason: "",
-    
-//     // Special Dates (Optional)
-//     birthdays: [],
-//     anniversaries: [],
-//     customDates: [],
-    
-//     // Family Details (Optional)
-//     familyMembers: [],
-//     familyImages: [],
-    
-//     // Business Info (Optional)
-//     businessName: "",
-//     businessType: "",
-//     businessAddress: "",
-//     businessPhone: "",
-//     businessEmail: "",
-//     businessWebsite: "",
-//     businessDescription: "",
-//     businessImages: [],
-//   });
-
-//   // New item states
-//   const [newBirthday, setNewBirthday] = useState({ personName: "", relation: "", birthDate: "", note: "" });
-//   const [newAnniversary, setNewAnniversary] = useState({ husbandName: "", wifeName: "", anniversaryDate: "", note: "" });
-//   const [newCustomDate, setNewCustomDate] = useState({ title: "", date: "", description: "" });
-//   const [newFamilyMember, setNewFamilyMember] = useState({ name: "", relation: "", age: "", occupation: "", phone: "" });
-
-//   // Show/Hide optional sections
-//   const [showBirthdays, setShowBirthdays] = useState(false);
-//   const [showAnniversaries, setShowAnniversaries] = useState(false);
-//   const [showCustomDates, setShowCustomDates] = useState(false);
-//   const [showFamilyMembers, setShowFamilyMembers] = useState(false);
-//   const [showBusinessInfo, setShowBusinessInfo] = useState(false);
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleImageUpload = (e, field) => {
-//     const file = e.target.files[0];
-//     if (file && field === 'profileImage') {
-//       setFormData({ ...formData, profileImage: file });
-//     }
-//   };
-
-//   const handleMultipleImages = (e, field) => {
-//     const files = Array.from(e.target.files);
-//     const currentImages = formData[field] || [];
-//     const maxImages = field === 'businessImages' ? 5 : 5;
-    
-//     if (currentImages.length + files.length <= maxImages) {
-//       setFormData({ ...formData, [field]: [...currentImages, ...files] });
-//     } else {
-//       alert(`Maximum ${maxImages} images allowed`);
-//     }
-//   };
-
-//   const removeImage = (field, index) => {
-//     const images = [...formData[field]];
-//     images.splice(index, 1);
-//     setFormData({ ...formData, [field]: images });
-//   };
-
-//   const addBirthday = () => {
-//     if (newBirthday.personName && newBirthday.birthDate) {
-//       setFormData({
-//         ...formData,
-//         birthdays: [...formData.birthdays, { ...newBirthday }],
-//       });
-//       setNewBirthday({ personName: "", relation: "", birthDate: "", note: "" });
-//     }
-//   };
-
-//   const addAnniversary = () => {
-//     if (newAnniversary.husbandName && newAnniversary.wifeName && newAnniversary.anniversaryDate) {
-//       setFormData({
-//         ...formData,
-//         anniversaries: [...formData.anniversaries, { ...newAnniversary }],
-//       });
-//       setNewAnniversary({ husbandName: "", wifeName: "", anniversaryDate: "", note: "" });
-//     }
-//   };
-
-//   const addCustomDate = () => {
-//     if (newCustomDate.title && newCustomDate.date) {
-//       setFormData({
-//         ...formData,
-//         customDates: [...formData.customDates, { ...newCustomDate }],
-//       });
-//       setNewCustomDate({ title: "", date: "", description: "" });
-//     }
-//   };
-
-//   const addFamilyMember = () => {
-//     if (newFamilyMember.name && newFamilyMember.relation) {
-//       setFormData({
-//         ...formData,
-//         familyMembers: [...formData.familyMembers, { ...newFamilyMember }],
-//       });
-//       setNewFamilyMember({ name: "", relation: "", age: "", occupation: "", phone: "" });
-//     }
-//   };
-
-//   const removeItem = (type, index) => {
-//     setFormData({
-//       ...formData,
-//       [type]: formData[type].filter((_, i) => i !== index),
-//     });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-    
-//     const submissionData = {
-//       ...formData,
-//       specialDates: {
-//         birthdays: formData.birthdays,
-//         anniversaries: formData.anniversaries,
-//         customDates: formData.customDates,
-//       },
-//       familyDetails: {
-//         members: formData.familyMembers,
-//         images: formData.familyImages,
-//       },
-//       businessInfo: showBusinessInfo ? {
-//         businessName: formData.businessName,
-//         businessType: formData.businessType,
-//         businessAddress: formData.businessAddress,
-//         businessPhone: formData.businessPhone,
-//         businessEmail: formData.businessEmail,
-//         businessWebsite: formData.businessWebsite,
-//         businessDescription: formData.businessDescription,
-//         businessImages: formData.businessImages,
-//       } : null,
-//     };
-    
-//     console.log("Submitting:", submissionData);
-//     setSubmitted(true);
-//     setTimeout(() => setSubmitted(false), 5000);
-//   };
-
-//   return (
-//     <PageShell>
-//       <PageHeader
-//         eyebrow="Sadasyata"
-//         title="Become a Member"
-//         subtitle="Choose a membership tier and join our growing devotional family."
-//       />
-
-//       {/* Membership Tiers */}
-//       <section className="mx-auto max-w-7xl px-5 py-16">
-//         <div className="grid gap-6 md:grid-cols-3">
-//           {tiers.map((tier) => (
-//             <div
-//               key={tier.name}
-//               className={`rounded-3xl p-8 shadow-lg transition-transform hover:scale-105 ${
-//                 tier.featured
-//                   ? "bg-gradient-to-br from-yellow-400 to-yellow-600 text-white shadow-yellow-200"
-//                   : "border bg-white shadow-gray-200"
-//               }`}
-//             >
-//               {tier.featured && (
-//                 <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-sm">
-//                   <Crown size={16} />
-//                   Most Popular
-//                 </div>
-//               )}
-//               <h3 className={`text-2xl font-bold ${tier.featured ? "text-white" : "text-gray-800"}`}>
-//                 {tier.name}
-//               </h3>
-//               <p className={`mt-2 text-3xl font-bold ${tier.featured ? "text-white" : "text-maroon"}`}>
-//                 {tier.price}
-//               </p>
-//               <ul className="mt-6 space-y-3">
-//                 {tier.perks.map((perk) => (
-//                   <li key={perk} className="flex items-start gap-2">
-//                     <Check size={16} className="mt-1 flex-shrink-0" />
-//                     <span className="text-sm">{perk}</span>
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* Application Form */}
-//       <section className="mx-auto max-w-4xl px-5 pb-24">
-//         <div className="rounded-3xl bg-white p-8 shadow-xl md:p-12">
-//           <div className="mb-8 border-b pb-6">
-//             <h2 className="text-3xl font-bold text-maroon">
-//               Membership Application
-//             </h2>
-//             <p className="mt-2 text-gray-500">
-//               Fill out the form below with all required details. Fields marked with * are mandatory.
-//             </p>
-//           </div>
-
-//           {submitted && (
-//             <div className="mb-8 flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-green-700 animate-fadeIn">
-//               <Check size={20} className="text-green-500" />
-//               <span className="font-medium">Jai Shree Shyam! Your application has been received. We will contact you soon.</span>
-//             </div>
-//           )}
-
-//           <form onSubmit={handleSubmit} className="space-y-10">
-//             {/* Personal Information */}
-//             <SectionCard icon={<User size={20} />} title="Personal Information">
-//               <div className="grid gap-5 md:grid-cols-2">
-//                 <div className="md:col-span-2">
-//                   <Label required>Profile Photo</Label>
-//                   <div className="mt-2 flex items-center gap-4">
-//                     <div className="relative">
-//                       {formData.profileImage ? (
-//                         <div className="relative h-24 w-24 overflow-hidden rounded-full">
-//                           <img
-//                             src={URL.createObjectURL(formData.profileImage)}
-//                             alt="Profile"
-//                             className="h-full w-full object-cover"
-//                           />
-//                           <button
-//                             type="button"
-//                             onClick={() => setFormData({ ...formData, profileImage: null })}
-//                             className="absolute -right-1 -top-1 rounded-full bg-red-500 p-1 text-white"
-//                           >
-//                             <X size={12} />
-//                           </button>
-//                         </div>
-//                       ) : (
-//                         <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-dashed border-gray-300 bg-gray-50">
-//                           <Camera size={24} className="text-gray-400" />
-//                         </div>
-//                       )}
-//                     </div>
-//                     <label className="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 text-sm hover:bg-gray-50">
-//                       <Upload size={16} />
-//                       Upload Photo
-//                       <input
-//                         type="file"
-//                         accept="image/*"
-//                         className="hidden"
-//                         onChange={(e) => handleImageUpload(e, 'profileImage')}
-//                       />
-//                     </label>
-//                   </div>
-//                 </div>
-
-//                 <Field label="Full Name *" name="fullName" value={formData.fullName} onChange={handleInputChange} required />
-//                 <Field label="Father's Name" name="fatherName" value={formData.fatherName} onChange={handleInputChange} />
-                
-//                 <div>
-//                   <Label required>Gender *</Label>
-//                   <select
-//                     name="gender"
-//                     value={formData.gender}
-//                     onChange={handleInputChange}
-//                     required
-//                     className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-//                   >
-//                     <option value="">Select Gender</option>
-//                     {GENDERS.map((g) => (
-//                       <option key={g} value={g}>{g}</option>
-//                     ))}
-//                   </select>
-//                 </div>
-
-//                 <div>
-//                   <Label>Blood Group</Label>
-//                   <select
-//                     name="bloodGroup"
-//                     value={formData.bloodGroup}
-//                     onChange={handleInputChange}
-//                     className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-//                   >
-//                     <option value="">Select Blood Group</option>
-//                     {BLOOD_GROUPS.map((bg) => (
-//                       <option key={bg} value={bg}>{bg}</option>
-//                     ))}
-//                   </select>
-//                 </div>
-
-//                 <Field label="Phone Number *" name="phone" type="tel" value={formData.phone} onChange={handleInputChange} required />
-//                 <Field label="Alternate Phone" name="alternatePhone" type="tel" value={formData.alternatePhone} onChange={handleInputChange} />
-//                 <Field label="Email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
-//                 <Field label="Occupation" name="occupation" value={formData.occupation} onChange={handleInputChange} />
-//               </div>
-//             </SectionCard>
-
-//             {/* Address */}
-//             <SectionCard icon={<Building2 size={20} />} title="Address Details">
-//               <div className="grid gap-5 md:grid-cols-2">
-//                 <div className="md:col-span-2">
-//                   <Label>Address</Label>
-//                   <textarea
-//                     name="address"
-//                     value={formData.address}
-//                     onChange={handleInputChange}
-//                     rows="3"
-//                     className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-//                     placeholder="Enter your full address"
-//                   />
-//                 </div>
-//                 <Field label="City *" name="city" value={formData.city} onChange={handleInputChange} required />
-//                 <Field label="State" name="state" value={formData.state} onChange={handleInputChange} />
-//                 <Field label="Country" name="country" value={formData.country} onChange={handleInputChange} />
-//                 <Field label="Pincode" name="pincode" value={formData.pincode} onChange={handleInputChange} />
-//               </div>
-//             </SectionCard>
-
-//             {/* Membership Selection */}
-//             <SectionCard icon={<Crown size={20} />} title="Membership Details">
-//               <div className="grid gap-5">
-//                 <div>
-//                   <Label required>Membership Tier *</Label>
-//                   <select
-//                     name="tier"
-//                     value={formData.tier}
-//                     onChange={handleInputChange}
-//                     required
-//                     className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-//                   >
-//                     <option value="">Select Tier</option>
-//                     <option value="bronze">Bronze Member (₹2,100/year)</option>
-//                     <option value="silver">Silver Member (₹11,000/year)</option>
-//                     <option value="golden">Golden Patron (₹1,11,000/lifetime)</option>
-//                   </select>
-//                 </div>
-//                 <div>
-//                   <Label required>Why do you want to join? *</Label>
-//                   <textarea
-//                     name="reason"
-//                     value={formData.reason}
-//                     onChange={handleInputChange}
-//                     required
-//                     rows="4"
-//                     className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-//                     placeholder="Share your thoughts and motivation for joining our devotional family..."
-//                   />
-//                 </div>
-//               </div>
-//             </SectionCard>
-
-//             {/* Special Dates - Birthdays (Optional) */}
-//             <OptionalSection
-//               icon={<CalendarHeart size={20} />}
-//               title="Family Birthdays"
-//               show={showBirthdays}
-//               onToggle={() => setShowBirthdays(!showBirthdays)}
-//             >
-//               <div className="grid gap-4 rounded-lg border p-4 md:grid-cols-2">
-//                 <Field
-//                   label="Person Name"
-//                   value={newBirthday.personName}
-//                   onChange={(e) => setNewBirthday({ ...newBirthday, personName: e.target.value })}
-//                 />
-//                 <Field
-//                   label="Relation"
-//                   value={newBirthday.relation}
-//                   onChange={(e) => setNewBirthday({ ...newBirthday, relation: e.target.value })}
-//                 />
-//                 <Field
-//                   label="Birth Date"
-//                   type="date"
-//                   value={newBirthday.birthDate}
-//                   onChange={(e) => setNewBirthday({ ...newBirthday, birthDate: e.target.value })}
-//                 />
-//                 <Field
-//                   label="Note"
-//                   value={newBirthday.note}
-//                   onChange={(e) => setNewBirthday({ ...newBirthday, note: e.target.value })}
-//                 />
-//                 <div className="md:col-span-2">
-//                   <button
-//                     type="button"
-//                     onClick={addBirthday}
-//                     className="flex items-center gap-2 rounded-lg bg-maroon px-4 py-2 text-sm text-white hover:bg-maroon/90"
-//                   >
-//                     <Plus size={16} /> Add Birthday
-//                   </button>
-//                 </div>
-//               </div>
-//               {formData.birthdays.length > 0 && (
-//                 <div className="mt-4 space-y-2">
-//                   {formData.birthdays.map((b, i) => (
-//                     <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-//                       <span className="text-sm">{b.personName} - {b.relation} - {b.birthDate}</span>
-//                       <button type="button" onClick={() => removeItem("birthdays", i)} className="text-red-500 hover:text-red-700">
-//                         <X size={16} />
-//                       </button>
-//                     </div>
-//                   ))}
-//                 </div>
-//               )}
-//             </OptionalSection>
-
-//             {/* Special Dates - Anniversaries (Optional) */}
-//             <OptionalSection
-//               icon={<CalendarHeart size={20} />}
-//               title="Wedding Anniversaries"
-//               show={showAnniversaries}
-//               onToggle={() => setShowAnniversaries(!showAnniversaries)}
-//             >
-//               <div className="grid gap-4 rounded-lg border p-4 md:grid-cols-2">
-//                 <Field
-//                   label="Husband Name"
-//                   value={newAnniversary.husbandName}
-//                   onChange={(e) => setNewAnniversary({ ...newAnniversary, husbandName: e.target.value })}
-//                 />
-//                 <Field
-//                   label="Wife Name"
-//                   value={newAnniversary.wifeName}
-//                   onChange={(e) => setNewAnniversary({ ...newAnniversary, wifeName: e.target.value })}
-//                 />
-//                 <Field
-//                   label="Anniversary Date"
-//                   type="date"
-//                   value={newAnniversary.anniversaryDate}
-//                   onChange={(e) => setNewAnniversary({ ...newAnniversary, anniversaryDate: e.target.value })}
-//                 />
-//                 <Field
-//                   label="Note"
-//                   value={newAnniversary.note}
-//                   onChange={(e) => setNewAnniversary({ ...newAnniversary, note: e.target.value })}
-//                 />
-//                 <div className="md:col-span-2">
-//                   <button
-//                     type="button"
-//                     onClick={addAnniversary}
-//                     className="flex items-center gap-2 rounded-lg bg-maroon px-4 py-2 text-sm text-white hover:bg-maroon/90"
-//                   >
-//                     <Plus size={16} /> Add Anniversary
-//                   </button>
-//                 </div>
-//               </div>
-//               {formData.anniversaries.length > 0 && (
-//                 <div className="mt-4 space-y-2">
-//                   {formData.anniversaries.map((a, i) => (
-//                     <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-//                       <span className="text-sm">{a.husbandName} & {a.wifeName} - {a.anniversaryDate}</span>
-//                       <button type="button" onClick={() => removeItem("anniversaries", i)} className="text-red-500 hover:text-red-700">
-//                         <X size={16} />
-//                       </button>
-//                     </div>
-//                   ))}
-//                 </div>
-//               )}
-//             </OptionalSection>
-
-//             {/* Special Dates - Custom (Optional) */}
-//             <OptionalSection
-//               icon={<CalendarHeart size={20} />}
-//               title="Other Special Dates"
-//               show={showCustomDates}
-//               onToggle={() => setShowCustomDates(!showCustomDates)}
-//             >
-//               <div className="grid gap-4 rounded-lg border p-4 md:grid-cols-2">
-//                 <Field
-//                   label="Title"
-//                   value={newCustomDate.title}
-//                   onChange={(e) => setNewCustomDate({ ...newCustomDate, title: e.target.value })}
-//                 />
-//                 <Field
-//                   label="Date"
-//                   type="date"
-//                   value={newCustomDate.date}
-//                   onChange={(e) => setNewCustomDate({ ...newCustomDate, date: e.target.value })}
-//                 />
-//                 <div className="md:col-span-2">
-//                   <Label>Description</Label>
-//                   <textarea
-//                     rows="3"
-//                     value={newCustomDate.description}
-//                     onChange={(e) => setNewCustomDate({ ...newCustomDate, description: e.target.value })}
-//                     className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-//                     placeholder="Add description for this special date..."
-//                   />
-//                 </div>
-//                 <div className="md:col-span-2">
-//                   <button
-//                     type="button"
-//                     onClick={addCustomDate}
-//                     className="flex items-center gap-2 rounded-lg bg-maroon px-4 py-2 text-sm text-white hover:bg-maroon/90"
-//                   >
-//                     <Plus size={16} /> Add Special Date
-//                   </button>
-//                 </div>
-//               </div>
-//               {formData.customDates.length > 0 && (
-//                 <div className="mt-4 space-y-2">
-//                   {formData.customDates.map((d, i) => (
-//                     <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-//                       <span className="text-sm">{d.title} - {d.date}</span>
-//                       <button type="button" onClick={() => removeItem("customDates", i)} className="text-red-500 hover:text-red-700">
-//                         <X size={16} />
-//                       </button>
-//                     </div>
-//                   ))}
-//                 </div>
-//               )}
-//             </OptionalSection>
-
-//             {/* Family Members (Optional) */}
-//             <OptionalSection
-//               icon={<Users size={20} />}
-//               title="Family Members"
-//               show={showFamilyMembers}
-//               onToggle={() => setShowFamilyMembers(!showFamilyMembers)}
-//             >
-//               <div className="space-y-4">
-//                 <div className="grid gap-4 rounded-lg border p-4 md:grid-cols-2">
-//                   <Field
-//                     label="Name *"
-//                     value={newFamilyMember.name}
-//                     onChange={(e) => setNewFamilyMember({ ...newFamilyMember, name: e.target.value })}
-//                   />
-//                   <Field
-//                     label="Relation *"
-//                     value={newFamilyMember.relation}
-//                     onChange={(e) => setNewFamilyMember({ ...newFamilyMember, relation: e.target.value })}
-//                   />
-//                   <Field
-//                     label="Age"
-//                     type="number"
-//                     value={newFamilyMember.age}
-//                     onChange={(e) => setNewFamilyMember({ ...newFamilyMember, age: e.target.value })}
-//                   />
-//                   <Field
-//                     label="Occupation"
-//                     value={newFamilyMember.occupation}
-//                     onChange={(e) => setNewFamilyMember({ ...newFamilyMember, occupation: e.target.value })}
-//                   />
-//                   <Field
-//                     label="Phone"
-//                     type="tel"
-//                     value={newFamilyMember.phone}
-//                     onChange={(e) => setNewFamilyMember({ ...newFamilyMember, phone: e.target.value })}
-//                   />
-//                   <div className="md:col-span-2">
-//                     <button
-//                       type="button"
-//                       onClick={addFamilyMember}
-//                       className="flex items-center gap-2 rounded-lg bg-maroon px-4 py-2 text-sm text-white hover:bg-maroon/90"
-//                     >
-//                       <Plus size={16} /> Add Family Member
-//                     </button>
-//                   </div>
-//                 </div>
-//                 {formData.familyMembers.length > 0 && (
-//                   <div className="space-y-2">
-//                     {formData.familyMembers.map((m, i) => (
-//                       <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-//                         <div>
-//                           <span className="font-medium text-sm">{m.name}</span>
-//                           <span className="text-sm text-gray-500"> - {m.relation}</span>
-//                           {m.age && <span className="text-sm text-gray-500"> ({m.age} yrs)</span>}
-//                         </div>
-//                         <button type="button" onClick={() => removeItem("familyMembers", i)} className="text-red-500 hover:text-red-700">
-//                           <X size={16} />
-//                         </button>
-//                       </div>
-//                     ))}
-//                   </div>
-//                 )}
-                
-//                 {/* Family Images Upload */}
-//                 <div className="rounded-lg border p-4">
-//                   <Label>Family Photos (Max 5)</Label>
-//                   <div className="mt-3">
-//                     <div className="flex flex-wrap gap-3 mb-3">
-//                       {formData.familyImages.map((file, index) => (
-//                         <div key={index} className="relative h-20 w-20 overflow-hidden rounded-lg">
-//                           <img
-//                             src={URL.createObjectURL(file)}
-//                             alt={`Family ${index + 1}`}
-//                             className="h-full w-full object-cover"
-//                           />
-//                           <button
-//                             type="button"
-//                             onClick={() => removeImage('familyImages', index)}
-//                             className="absolute -right-1 -top-1 rounded-full bg-red-500 p-1 text-white"
-//                           >
-//                             <X size={12} />
-//                           </button>
-//                         </div>
-//                       ))}
-//                       {formData.familyImages.length < 5 && (
-//                         <label className="flex h-20 w-20 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-gray-300 hover:border-maroon">
-//                           <Plus size={20} className="text-gray-400" />
-//                           <input
-//                             type="file"
-//                             accept="image/*"
-//                             className="hidden"
-//                             onChange={(e) => handleMultipleImages(e, 'familyImages')}
-//                           />
-//                         </label>
-//                       )}
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </OptionalSection>
-
-//             {/* Business Info (Optional) */}
-//             <OptionalSection
-//               icon={<Building2 size={20} />}
-//               title="Business Information"
-//               show={showBusinessInfo}
-//               onToggle={() => setShowBusinessInfo(!showBusinessInfo)}
-//             >
-//               <div className="space-y-5">
-//                 <div className="grid gap-4 md:grid-cols-2">
-//                   <Field label="Business Name" name="businessName" value={formData.businessName} onChange={handleInputChange} />
-//                   <Field label="Business Type" name="businessType" value={formData.businessType} onChange={handleInputChange} />
-//                   <Field label="Business Phone" name="businessPhone" type="tel" value={formData.businessPhone} onChange={handleInputChange} />
-//                   <Field label="Business Email" name="businessEmail" type="email" value={formData.businessEmail} onChange={handleInputChange} />
-//                   <Field label="Website" name="businessWebsite" type="url" value={formData.businessWebsite} onChange={handleInputChange} />
-//                   <div className="md:col-span-2">
-//                     <Label>Business Address</Label>
-//                     <textarea
-//                       name="businessAddress"
-//                       value={formData.businessAddress}
-//                       onChange={handleInputChange}
-//                       rows="2"
-//                       className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-//                       placeholder="Enter business address"
-//                     />
-//                   </div>
-//                   <div className="md:col-span-2">
-//                     <Label>Business Description</Label>
-//                     <textarea
-//                       name="businessDescription"
-//                       value={formData.businessDescription}
-//                       onChange={handleInputChange}
-//                       rows="3"
-//                       className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-//                       placeholder="Brief description about your business"
-//                     />
-//                   </div>
-//                 </div>
-                
-//                 {/* Business Images Upload */}
-//                 <div className="rounded-lg border p-4">
-//                   <Label>Business Photos (Max 5)</Label>
-//                   <p className="text-xs text-gray-500 mt-1">Upload images of your business, products, or services</p>
-//                   <div className="mt-3">
-//                     <div className="flex flex-wrap gap-3 mb-3">
-//                       {formData.businessImages.map((file, index) => (
-//                         <div key={index} className="relative h-24 w-24 overflow-hidden rounded-lg">
-//                           <img
-//                             src={URL.createObjectURL(file)}
-//                             alt={`Business ${index + 1}`}
-//                             className="h-full w-full object-cover"
-//                           />
-//                           <button
-//                             type="button"
-//                             onClick={() => removeImage('businessImages', index)}
-//                             className="absolute -right-1 -top-1 rounded-full bg-red-500 p-1 text-white"
-//                           >
-//                             <X size={12} />
-//                           </button>
-//                         </div>
-//                       ))}
-//                       {formData.businessImages.length < 5 && (
-//                         <label className="flex h-24 w-24 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-gray-300 hover:border-maroon">
-//                           <Plus size={20} className="text-gray-400" />
-//                           <span className="text-xs text-gray-400">Add Image</span>
-//                           <input
-//                             type="file"
-//                             accept="image/*"
-//                             className="hidden"
-//                             onChange={(e) => handleMultipleImages(e, 'businessImages')}
-//                           />
-//                         </label>
-//                       )}
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </OptionalSection>
-
-//             {/* Submit */}
-//             <div className="border-t pt-8">
-//               <button
-//                 type="submit"
-//                 className="w-full rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 py-4 text-lg font-semibold text-white shadow-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-[1.02]"
-//               >
-//                 Submit Application
-//               </button>
-//               <p className="mt-4 text-center text-sm text-gray-500">
-//                 By submitting, you agree to be contacted for membership verification and payment.
-//                 Your information will be kept confidential.
-//               </p>
-//             </div>
-//           </form>
-//         </div>
-//       </section>
-//     </PageShell>
-//   );
-// }
-
-// // Reusable Components
-// function SectionCard({ icon, title, children }) {
-//   return (
-//     <div className="rounded-2xl border bg-gray-50/50 p-6">
-//       <div className="mb-4 flex items-center gap-2">
-//         <span className="text-maroon">{icon}</span>
-//         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-//       </div>
-//       {children}
-//     </div>
-//   );
-// }
-
-// function OptionalSection({ icon, title, show, onToggle, children }) {
-//   return (
-//     <div className="rounded-2xl border bg-gray-50/50 p-6">
-//       <div className="flex items-center justify-between">
-//         <div className="flex items-center gap-2">
-//           <span className="text-maroon">{icon}</span>
-//           <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-//           <span className="rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-600">Optional</span>
-//         </div>
-//         <button
-//           type="button"
-//           onClick={onToggle}
-//           className="text-sm text-maroon hover:text-maroon/80 font-medium"
-//         >
-//           {show ? "Hide" : "Add"} Details
-//         </button>
-//       </div>
-//       {show && <div className="mt-4">{children}</div>}
-//     </div>
-//   );
-// }
-
-// function Label({ children, required }) {
-//   return (
-//     <label className="block text-sm font-medium text-gray-700">
-//       {children}
-//       {required && <span className="ml-1 text-red-500">*</span>}
-//     </label>
-//   );
-// }
-
-// function Field({ label, required, ...props }) {
-//   return (
-//     <div>
-//       <Label required={required}>{label}</Label>
-//       <input
-//         {...props}
-//         className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20 transition-colors"
-//       />
-//     </div>
-//   );
-// }
-
-// export default BecomeMemberPage;
-
 
 
 import React, { useState } from "react";
 import { PageShell, PageHeader } from "../components/PageShell";
-import { Check, Crown, Plus, X, Upload, User, Building2, Camera, CalendarHeart, Users, Briefcase, Gift } from "lucide-react";
+import {
+  Check, Crown, Plus, X, Upload, User, Building2,
+  Camera, CalendarHeart, Users, Briefcase, Gift,
+  Calendar, ChevronDown, ChevronUp,
+} from "lucide-react";
+
+// ─── CONSTANTS ───────────────────────────────────────────────────────────────
 
 const tiers = [
   {
     name: "Diamond Members",
     price: "₹20,100 / year",
+    buttonText: "Become Diamond Member",
     perks: [
       "Member ID & welcome kit",
       "Event invitations",
@@ -840,6 +24,7 @@ const tiers = [
   {
     name: "Golden Members",
     price: "₹11,000 / year",
+    buttonText: "Become Golden Member",
     featured: true,
     perks: [
       "All Diamond benefits",
@@ -851,6 +36,7 @@ const tiers = [
   {
     name: "Karyakarani Members",
     price: "₹2,000 / Year",
+    buttonText: "Become Karyakarani Member",
     perks: [
       "All Golden benefits",
       "Patron recognition",
@@ -860,211 +46,158 @@ const tiers = [
   },
 ];
 
-const GENDERS = ["Male", "Female", "Other"];
-const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-const JOB_TYPES = ["Salaried", "Business", "Self-Employed", "Professional", "Retired", "Student", "Homemaker", "Other"];
+const GENDERS         = ["Male", "Female", "Other"];
+const BLOOD_GROUPS    = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+const JOB_TYPES       = ["Private Job", "Government Job", "Other"];
+const FAMILY_RELATIONS = ["Son", "Daughter", "Father", "Mother", "Brother", "Sister", "Husband", "Wife", "Grandfather", "Grandmother", "Uncle", "Aunt", "Cousin", "Nephew", "Niece", "Other"];
+
+// ─── EMPTY TEMPLATES ─────────────────────────────────────────────────────────
+
+const emptyFamilyMember  = { name: "", relation: "", dob: "", age: "", occupation: "", phone: "" };
+const emptyAnniversary   = { husbandName: "", wifeName: "", anniversaryDate: "", note: "" };
+const emptyCustomDate    = { title: "", date: "", description: "" };
+
+// ─── HELPER: compute age from dob ────────────────────────────────────────────
+
+function calcAge(dob) {
+  if (!dob) return "";
+  const birth = new Date(dob);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+  return age >= 0 ? String(age) : "";
+}
+
+// ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 
 function BecomeMemberPage() {
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted,    setSubmitted]    = useState(false);
   const [selectedTier, setSelectedTier] = useState(null);
+
   const [formData, setFormData] = useState({
-    // Personal Information
-    fullName: "",
-    fatherName: "",
-    gender: "",
-    phone: "",
-    alternatePhone: "",
-    email: "",
-    occupation: "",
-    bloodGroup: "",
-    profileImage: null,
-    
-    // Address
-    address: "",
-    city: "",
-    state: "",
-    country: "India",
-    pincode: "",
-    
-    // Job/Business Selection
-    hasBusiness: false,
-    hasJob: false,
-    
-    // Job Details
-    jobDetails: {
-      jobType: "",
-      companyName: "",
-      designation: "",
-      jobLocation: "",
-      salary: "",
-      experience: "",
-    },
-    
-    // Business Details
-    businessDetails: {
-      businessName: "",
-      businessType: "",
-      businessAddress: "",
-      businessPhone: "",
-      businessEmail: "",
-      businessWebsite: "",
-      businessDescription: "",
-      businessImages: [],
-    },
-    
-    // Membership
+    fullName: "", fatherName: "", gender: "", phone: "", email: "",
+    birthday: "", occupation: "", bloodGroup: "", profileImage: null,
+    address: "", city: "", state: "", country: "India", pincode: "",
+    hasBusiness: false, hasJob: false,
+    jobDetails: { jobType: "", companyName: "", designation: "", jobLocation: "", salary: "", experience: "" },
+    businessDetails: { businessName: "", businessType: "", businessAddress: "", businessPhone: "", businessEmail: "", businessWebsite: "", businessDescription: "", businessImages: [] },
     tier: "",
-    
-    // Family Details (Always visible)
     familyMembers: [],
-    
-    // Special Dates (Always visible)
-    birthdays: [],
     anniversaries: [],
     customDates: [],
   });
 
-  // Form visibility states
-  const [activeForm, setActiveForm] = useState(null); // 'birthday', 'anniversary', 'custom', 'family'
-  
-  // New item states
-  const [newBirthday, setNewBirthday] = useState({ personName: "", relation: "", birthDate: "", note: "" });
-  const [newAnniversary, setNewAnniversary] = useState({ husbandName: "", wifeName: "", anniversaryDate: "", note: "" });
-  const [newCustomDate, setNewCustomDate] = useState({ title: "", date: "", description: "" });
-  const [newFamilyMember, setNewFamilyMember] = useState({ name: "", relation: "", age: "", occupation: "", phone: "" });
+  // ─── generic helpers ───────────────────────────────────────────────────────
 
-  const handleInputChange = (e) => {
+  const set = (key, val) => setFormData(f => ({ ...f, [key]: val }));
+
+  const handleInput = e => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData(f => ({ ...f, [name]: value }));
   };
 
-  const handleJobDetailsChange = (e) => {
+  const handleJobInput = e => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      jobDetails: { ...formData.jobDetails, [name]: value }
-    });
+    setFormData(f => ({ ...f, jobDetails: { ...f.jobDetails, [name]: value } }));
   };
 
-  const handleBusinessDetailsChange = (e) => {
+  const handleBizInput = e => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      businessDetails: { ...formData.businessDetails, [name]: value }
-    });
+    setFormData(f => ({ ...f, businessDetails: { ...f.businessDetails, [name]: value } }));
   };
 
   const handleImageUpload = (e, field) => {
     const file = e.target.files[0];
-    if (file) {
-      setFormData({ ...formData, [field]: file });
-    }
+    if (file) set(field, file);
   };
 
-  const handleBusinessImages = (e) => {
+  const handleBizImages = e => {
     const files = Array.from(e.target.files);
-    const currentImages = formData.businessDetails.businessImages || [];
-    const maxImages = 5;
-    
-    if (currentImages.length + files.length <= maxImages) {
-      setFormData({
-        ...formData,
-        businessDetails: {
-          ...formData.businessDetails,
-          businessImages: [...currentImages, ...files]
-        }
-      });
-    } else {
-      alert(`Maximum ${maxImages} images allowed`);
-    }
+    const cur = formData.businessDetails.businessImages;
+    if (cur.length + files.length > 5) { alert("Maximum 5 images allowed"); return; }
+    setFormData(f => ({ ...f, businessDetails: { ...f.businessDetails, businessImages: [...cur, ...files] } }));
   };
 
-  const removeBusinessImage = (index) => {
-    const images = [...formData.businessDetails.businessImages];
-    images.splice(index, 1);
-    setFormData({
-      ...formData,
-      businessDetails: { ...formData.businessDetails, businessImages: images }
+  const removeBizImage = idx => {
+    const imgs = formData.businessDetails.businessImages.filter((_, i) => i !== idx);
+    setFormData(f => ({ ...f, businessDetails: { ...f.businessDetails, businessImages: imgs } }));
+  };
+
+  // ─── FAMILY MEMBERS ────────────────────────────────────────────────────────
+
+  const addFamilyMember = () =>
+    setFormData(f => ({ ...f, familyMembers: [...f.familyMembers, { ...emptyFamilyMember }] }));
+
+  const updateFamilyMember = (idx, field, value) =>
+    setFormData(f => {
+      const list = [...f.familyMembers];
+      list[idx] = { ...list[idx], [field]: value };
+      return { ...f, familyMembers: list };
+    });
+
+  // dob → age sync: typing dob auto-computes age; typing age directly keeps dob unchanged
+  const handleFamilyDobChange = (idx, dob) => {
+    const age = calcAge(dob);
+    setFormData(f => {
+      const list = [...f.familyMembers];
+      list[idx] = { ...list[idx], dob, age };
+      return { ...f, familyMembers: list };
     });
   };
 
-  const addBirthday = () => {
-    if (newBirthday.personName && newBirthday.birthDate) {
-      setFormData({
-        ...formData,
-        birthdays: [...formData.birthdays, { ...newBirthday }],
-      });
-      setNewBirthday({ personName: "", relation: "", birthDate: "", note: "" });
-      setActiveForm(null);
-    }
-  };
+  const removeFamilyMember = idx =>
+    setFormData(f => ({ ...f, familyMembers: f.familyMembers.filter((_, i) => i !== idx) }));
 
-  const addAnniversary = () => {
-    if (newAnniversary.husbandName && newAnniversary.wifeName && newAnniversary.anniversaryDate) {
-      setFormData({
-        ...formData,
-        anniversaries: [...formData.anniversaries, { ...newAnniversary }],
-      });
-      setNewAnniversary({ husbandName: "", wifeName: "", anniversaryDate: "", note: "" });
-      setActiveForm(null);
-    }
-  };
+  // ─── ANNIVERSARIES ─────────────────────────────────────────────────────────
 
-  const addCustomDate = () => {
-    if (newCustomDate.title && newCustomDate.date) {
-      setFormData({
-        ...formData,
-        customDates: [...formData.customDates, { ...newCustomDate }],
-      });
-      setNewCustomDate({ title: "", date: "", description: "" });
-      setActiveForm(null);
-    }
-  };
+  const addAnniversary = () =>
+    setFormData(f => ({ ...f, anniversaries: [...f.anniversaries, { ...emptyAnniversary }] }));
 
-  const addFamilyMember = () => {
-    if (newFamilyMember.name && newFamilyMember.relation) {
-      setFormData({
-        ...formData,
-        familyMembers: [...formData.familyMembers, { ...newFamilyMember }],
-      });
-      setNewFamilyMember({ name: "", relation: "", age: "", occupation: "", phone: "" });
-      setActiveForm(null);
-    }
-  };
-
-  const removeItem = (type, index) => {
-    setFormData({
-      ...formData,
-      [type]: formData[type].filter((_, i) => i !== index),
+  const updateAnniversary = (idx, field, value) =>
+    setFormData(f => {
+      const list = [...f.anniversaries];
+      list[idx] = { ...list[idx], [field]: value };
+      return { ...f, anniversaries: list };
     });
-  };
 
-  const handleTierSelect = (tierName) => {
-    setSelectedTier(tierName);
-    setFormData({ ...formData, tier: tierName });
-  };
+  const removeAnniversary = idx =>
+    setFormData(f => ({ ...f, anniversaries: f.anniversaries.filter((_, i) => i !== idx) }));
 
-  const handleSubmit = (e) => {
+  // ─── CUSTOM DATES ──────────────────────────────────────────────────────────
+
+  const addCustomDate = () =>
+    setFormData(f => ({ ...f, customDates: [...f.customDates, { ...emptyCustomDate }] }));
+
+  const updateCustomDate = (idx, field, value) =>
+    setFormData(f => {
+      const list = [...f.customDates];
+      list[idx] = { ...list[idx], [field]: value };
+      return { ...f, customDates: list };
+    });
+
+  const removeCustomDate = idx =>
+    setFormData(f => ({ ...f, customDates: f.customDates.filter((_, i) => i !== idx) }));
+
+  // ─── SUBMIT ────────────────────────────────────────────────────────────────
+
+  const handleSubmit = e => {
     e.preventDefault();
-    
-    const submissionData = {
-      ...formData,
-      specialDates: {
-        birthdays: formData.birthdays,
-        anniversaries: formData.anniversaries,
-        customDates: formData.customDates,
-      },
-      familyDetails: {
-        members: formData.familyMembers,
-      },
-      businessDetails: formData.hasBusiness ? formData.businessDetails : null,
-      jobDetails: formData.hasJob ? formData.jobDetails : null,
-    };
-    
-    console.log("Submitting:", submissionData);
+    console.log("Submitting:", formData);
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 5000);
   };
+
+  const handleTierSelect = name => {
+    setSelectedTier(name);
+    setFormData(f => ({ ...f, tier: name }));
+    // scroll to form smoothly
+    setTimeout(() => {
+      document.getElementById("application-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
+
+  // ─── RENDER ────────────────────────────────────────────────────────────────
 
   return (
     <PageShell>
@@ -1074,279 +207,329 @@ function BecomeMemberPage() {
         subtitle="Choose a membership tier and join our growing devotional family."
       />
 
-      {/* Membership Tiers */}
+      {/* ── Membership Tiers ── */}
       <section className="mx-auto max-w-7xl px-5 py-16">
-        <div className="grid gap-6 md:grid-cols-3">
-          {tiers.map((tier) => (
+        {/*
+          All three cards sit in the SAME grid row.
+          The featured "Golden" card is taller because of the crown banner,
+          so we use items-stretch to make all cards fill equal height and put
+          the button at the very bottom with mt-auto.
+        */}
+        <div className="grid items-stretch gap-6 md:grid-cols-3">
+          {tiers.map(tier => (
             <div
               key={tier.name}
-              onClick={() => handleTierSelect(tier.name)}
-              className={`cursor-pointer rounded-3xl p-8 shadow-lg transition-all duration-300 hover:scale-105 ${
-                selectedTier === tier.name
-                  ? "ring-4 ring-maroon ring-offset-2"
-                  : ""
-              } ${
+              className={`flex flex-col rounded-3xl p-8 shadow-lg transition-all duration-300 ${
                 tier.featured
                   ? "bg-gradient-to-br from-yellow-400 to-yellow-600 text-white shadow-yellow-200"
                   : "border bg-white shadow-gray-200"
               }`}
             >
-              {tier.featured && (
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-sm">
-                  <Crown size={16} />
-                  Most Popular
+              {/* "Most Popular" banner — only for featured; non-featured get an invisible spacer so buttons align */}
+              {tier.featured ? (
+                <div className="mb-3 inline-flex items-center gap-2 self-start rounded-full bg-white/20 px-3 py-1 text-sm">
+                  <Crown size={16} /> Most Popular
                 </div>
+              ) : (
+                /* invisible spacer to keep name / price vertically aligned across cards */
+                <div className="mb-3 h-[28px]" aria-hidden />
               )}
+
               <h3 className={`text-2xl font-bold ${tier.featured ? "text-white" : "text-gray-800"}`}>
                 {tier.name}
               </h3>
               <p className={`mt-2 text-3xl font-bold ${tier.featured ? "text-white" : "text-maroon"}`}>
                 {tier.price}
               </p>
-              <ul className="mt-6 space-y-3">
-                {tier.perks.map((perk) => (
+
+              <ul className="mt-6 flex-1 space-y-3">
+                {tier.perks.map(perk => (
                   <li key={perk} className="flex items-start gap-2">
                     <Check size={16} className="mt-1 flex-shrink-0" />
                     <span className="text-sm">{perk}</span>
                   </li>
                 ))}
               </ul>
-              {selectedTier === tier.name && (
-                <div className="mt-4 flex items-center justify-center gap-2 text-sm">
-                  <Check size={16} />
-                  <span>Selected</span>
-                </div>
-              )}
+
+              {/* mt-auto pushes button to the bottom regardless of perk count */}
+              <button
+                onClick={() => handleTierSelect(tier.name)}
+                className={`mt-8 w-full rounded-full px-6 py-3 font-semibold transition-all duration-300 ${
+                  selectedTier === tier.name
+                    ? tier.featured
+                      ? "bg-white/90 text-yellow-700 ring-2 ring-white"
+                      : "bg-maroon text-white ring-2 ring-maroon/40"
+                    : tier.featured
+                    ? "bg-white text-yellow-600 hover:bg-gray-100"
+                    : "bg-maroon text-white hover:bg-red-800"
+                }`}
+              >
+                {selectedTier === tier.name ? "✓ Selected" : tier.buttonText}
+              </button>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Application Form - Only show if tier selected */}
+      {/* ── Application Form ── */}
       {selectedTier && (
-        <section className="mx-auto max-w-4xl px-5 pb-24">
+        <section id="application-form" className="mx-auto max-w-4xl px-5 pb-24">
           <div className="rounded-3xl bg-white p-8 shadow-xl md:p-12">
             <div className="mb-8 border-b pb-6">
               <h2 className="text-3xl font-bold text-maroon">
-                Membership Application - {selectedTier}
+                Membership Application — {selectedTier}
               </h2>
               <p className="mt-2 text-gray-500">
-                Fill out the form below with all required details. Fields marked with * are mandatory.
+                Fill out the form below. Fields marked <span className="text-red-500">*</span> are mandatory.
               </p>
             </div>
 
             {submitted && (
-              <div className="mb-8 flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-green-700 animate-fadeIn">
+              <div className="mb-8 flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-green-700">
                 <Check size={20} className="text-green-500" />
                 <span className="font-medium">Jai Shree Shyam! Your application has been received. We will contact you soon.</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-10">
-              {/* Personal Information */}
+
+              {/* ── Personal Information ── */}
               <SectionCard icon={<User size={20} />} title="Personal Information">
                 <div className="grid gap-5 md:grid-cols-2">
+                  {/* Profile photo */}
                   <div className="md:col-span-2">
-                    <Label required>Profile Photo</Label>
+                    <Label>Profile Photo</Label>
                     <div className="mt-2 flex items-center gap-4">
-                      <div className="relative">
-                        {formData.profileImage ? (
-                          <div className="relative h-24 w-24 overflow-hidden rounded-full">
-                            <img
-                              src={URL.createObjectURL(formData.profileImage)}
-                              alt="Profile"
-                              className="h-full w-full object-cover"
-                            />
-                            <button
-                              type="button"
-                              onClick={() => setFormData({ ...formData, profileImage: null })}
-                              className="absolute -right-1 -top-1 rounded-full bg-red-500 p-1 text-white"
-                            >
-                              <X size={12} />
-                            </button>
-                          </div>
-                        ) : (
-                          <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-dashed border-gray-300 bg-gray-50">
-                            <Camera size={24} className="text-gray-400" />
-                          </div>
-                        )}
-                      </div>
+                      {formData.profileImage ? (
+                        <div className="relative h-24 w-24 overflow-hidden rounded-full">
+                          <img src={URL.createObjectURL(formData.profileImage)} alt="Profile" className="h-full w-full object-cover" />
+                          <button type="button" onClick={() => set("profileImage", null)} className="absolute -right-1 -top-1 rounded-full bg-red-500 p-1 text-white">
+                            <X size={12} />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-dashed border-gray-300 bg-gray-50">
+                          <Camera size={24} className="text-gray-400" />
+                        </div>
+                      )}
                       <label className="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 text-sm hover:bg-gray-50">
-                        <Upload size={16} />
-                        Upload Photo
-                        <input
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) => handleImageUpload(e, 'profileImage')}
-                        />
+                        <Upload size={16} /> Upload Photo
+                        <input type="file" accept="image/*" className="hidden" onChange={e => handleImageUpload(e, "profileImage")} />
                       </label>
                     </div>
                   </div>
 
-                  <Field label="Full Name *" name="fullName" value={formData.fullName} onChange={handleInputChange} required />
-                  <Field label="Father's Name" name="fatherName" value={formData.fatherName} onChange={handleInputChange} />
-                  
-                  <div>
-                    <Label required>Gender *</Label>
-                    <select
-                      name="gender"
-                      value={formData.gender}
-                      onChange={handleInputChange}
-                      required
-                      className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-                    >
-                      <option value="">Select Gender</option>
-                      {GENDERS.map((g) => (
-                        <option key={g} value={g}>{g}</option>
-                      ))}
-                    </select>
-                  </div>
+                  <Field label="Full Name" name="fullName" value={formData.fullName} onChange={handleInput} required />
+                  <Field label="Father's Name" name="fatherName" value={formData.fatherName} onChange={handleInput} />
 
-                  <div>
-                    <Label>Blood Group</Label>
-                    <select
-                      name="bloodGroup"
-                      value={formData.bloodGroup}
-                      onChange={handleInputChange}
-                      className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-                    >
-                      <option value="">Select Blood Group</option>
-                      {BLOOD_GROUPS.map((bg) => (
-                        <option key={bg} value={bg}>{bg}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <Field label="Phone Number *" name="phone" type="tel" value={formData.phone} onChange={handleInputChange} required />
-                  <Field label="Alternate Phone" name="alternatePhone" type="tel" value={formData.alternatePhone} onChange={handleInputChange} />
-                  <Field label="Email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
+                  <SelectField label="Gender" name="gender" value={formData.gender} onChange={handleInput} required options={GENDERS} placeholder="Select Gender" />
+                  <Field label="Birthday" type="date" name="birthday" value={formData.birthday} onChange={handleInput} />
+                  <SelectField label="Blood Group" name="bloodGroup" value={formData.bloodGroup} onChange={handleInput} options={BLOOD_GROUPS} placeholder="Select Blood Group" />
+                  <Field label="Phone Number" name="phone" type="tel" value={formData.phone} onChange={handleInput} required />
+                  <Field label="Email" name="email" type="email" value={formData.email} onChange={handleInput} />
                 </div>
               </SectionCard>
 
-              {/* Address */}
+              {/* ── Address ── */}
               <SectionCard icon={<Building2 size={20} />} title="Address Details">
                 <div className="grid gap-5 md:grid-cols-2">
                   <div className="md:col-span-2">
                     <Label>Address</Label>
-                    <textarea
-                      name="address"
-                      value={formData.address}
-                      onChange={handleInputChange}
-                      rows="3"
+                    <textarea name="address" value={formData.address} onChange={handleInput} rows="3"
                       className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-                      placeholder="Enter your full address"
-                    />
+                      placeholder="Enter your full address" />
                   </div>
-                  <Field label="City *" name="city" value={formData.city} onChange={handleInputChange} required />
-                  <Field label="State" name="state" value={formData.state} onChange={handleInputChange} />
-                  <Field label="Country" name="country" value={formData.country} onChange={handleInputChange} />
-                  <Field label="Pincode" name="pincode" value={formData.pincode} onChange={handleInputChange} />
+                  <Field label="City" name="city" value={formData.city} onChange={handleInput} required />
+                  <Field label="State" name="state" value={formData.state} onChange={handleInput} />
+                  <Field label="Country" name="country" value={formData.country} onChange={handleInput} />
+                  <Field label="Pincode" name="pincode" value={formData.pincode} onChange={handleInput} />
                 </div>
               </SectionCard>
 
-              {/* Business/Job Selection Checkboxes */}
+              {/* ── Professional Information ── */}
               <SectionCard icon={<Briefcase size={20} />} title="Professional Information">
-                <div className="flex gap-6">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={formData.hasBusiness}
-                      onChange={(e) => setFormData({ ...formData, hasBusiness: e.target.checked })}
-                      className="w-4 h-4 text-maroon rounded"
-                    />
-                    <span>I have a Business</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={formData.hasJob}
-                      onChange={(e) => setFormData({ ...formData, hasJob: e.target.checked })}
-                      className="w-4 h-4 text-maroon rounded"
-                    />
-                    <span>I have a Job</span>
-                  </label>
+                <div className="flex flex-wrap gap-6">
+                  {[
+                    { label: "I have a Business", key: "business" },
+                    { label: "I have a Job",      key: "job"      },
+                   
+                  ].map(opt => (
+                    <label key={opt.key} className="flex cursor-pointer items-center gap-2">
+                      <input type="radio" name="profType" className="h-4 w-4 accent-maroon"
+                        checked={
+                          opt.key === "business" ? (formData.hasBusiness && !formData.hasJob) :
+                          opt.key === "job"      ? (formData.hasJob && !formData.hasBusiness) :
+                          (!formData.hasBusiness && !formData.hasJob)
+                        }
+                        onChange={() => setFormData(f => ({
+                          ...f,
+                          hasBusiness: opt.key === "business",
+                          hasJob:      opt.key === "job",
+                        }))}
+                      />
+                      <span className="text-sm">{opt.label}</span>
+                    </label>
+                  ))}
                 </div>
 
-                {/* Job Details Form */}
-                {formData.hasJob && (
-                  <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-6">
-                    <h4 className="mb-4 font-semibold text-blue-800 flex items-center gap-2">
-                      <Briefcase size={18} /> Job Details
-                    </h4>
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <div>
-                        <Label>Job Type</Label>
-                        <select
-                          name="jobType"
-                          value={formData.jobDetails.jobType}
-                          onChange={handleJobDetailsChange}
-                          className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-                        >
-                          <option value="">Select Job Type</option>
-                          {JOB_TYPES.map((jt) => (
-                            <option key={jt} value={jt}>{jt}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <Field label="Company Name" name="companyName" value={formData.jobDetails.companyName} onChange={handleJobDetailsChange} />
-                      <Field label="Designation" name="designation" value={formData.jobDetails.designation} onChange={handleJobDetailsChange} />
-                      <Field label="Job Location" name="jobLocation" value={formData.jobDetails.jobLocation} onChange={handleJobDetailsChange} />
-                      <Field label="Annual Salary (approx.)" name="salary" value={formData.jobDetails.salary} onChange={handleJobDetailsChange} />
-                      <Field label="Years of Experience" name="experience" value={formData.jobDetails.experience} onChange={handleJobDetailsChange} />
-                    </div>
-                  </div>
-                )}
+               {formData.hasJob && (
+  <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-6">
+    <h4 className="mb-4 flex items-center gap-2 font-semibold text-blue-800">
+      <Briefcase size={18} /> Job Details
+    </h4>
 
-                {/* Business Details Form */}
+    <div className="grid gap-4 md:grid-cols-2">
+
+      {/* Job Type */}
+      <SelectField
+        label="Job Type"
+        name="jobType"
+        value={formData.jobDetails.jobType}
+        onChange={handleJobInput}
+        required
+        options={JOB_TYPES}
+        placeholder="Select Job Type"
+      />
+
+      {/* ───────── PRIVATE JOB ───────── */}
+      {formData.jobDetails.jobType === "Private Job" && (
+        <>
+          <Field
+            label="Company / Organization"
+            name="companyName"
+            value={formData.jobDetails.companyName}
+            onChange={handleJobInput}
+            required
+          />
+
+          <Field
+            label="Designation"
+            name="designation"
+            value={formData.jobDetails.designation}
+            onChange={handleJobInput}
+            required
+          />
+
+          <Field
+            label="Department"
+            name="department"
+            value={formData.jobDetails.department || ""}
+            onChange={handleJobInput}
+          />
+
+          <Field
+            label="Job Location"
+            name="jobLocation"
+            value={formData.jobDetails.jobLocation}
+            onChange={handleJobInput}
+          />
+
+         
+        </>
+      )}
+
+      {/* ───────── GOVERNMENT JOB ───────── */}
+      {formData.jobDetails.jobType === "Government Job" && (
+        <>
+          <Field
+            label="Department Name"
+            name="governmentDepartment"
+            value={formData.jobDetails.governmentDepartment || ""}
+            onChange={handleJobInput}
+            required
+          />
+
+          <Field
+            label="Designation / Rank"
+            name="designation"
+            value={formData.jobDetails.designation}
+            onChange={handleJobInput}
+            required
+          />
+
+        
+
+         
+
+          
+
+          <Field
+            label="Office Address"
+            name="officeAddress"
+            value={formData.jobDetails.officeAddress || ""}
+            onChange={handleJobInput}
+          />
+        </>
+      )}
+
+      {/* ───────── OTHER ───────── */}
+      {formData.jobDetails.jobType === "Other" && (
+        <>
+          <Field
+            label="Profession"
+            name="designation"
+            value={formData.jobDetails.designation}
+            onChange={handleJobInput}
+            required
+          />
+
+          <Field
+            label="Work Place / Organization"
+            name="companyName"
+            value={formData.jobDetails.companyName}
+            onChange={handleJobInput}
+          />
+
+          <Field
+            label="Location"
+            name="jobLocation"
+            value={formData.jobDetails.jobLocation}
+            onChange={handleJobInput}
+          />
+
+          <Field
+            label="Details"
+            name="otherDetails"
+            value={formData.jobDetails.otherDetails || ""}
+            onChange={handleJobInput}
+          />
+        </>
+      )}
+
+    </div>
+  </div>
+)}
+
                 {formData.hasBusiness && (
                   <div className="mt-6 rounded-lg border border-green-200 bg-green-50 p-6">
-                    <h4 className="mb-4 font-semibold text-green-800 flex items-center gap-2">
+                    <h4 className="mb-4 flex items-center gap-2 font-semibold text-green-800">
                       <Building2 size={18} /> Business Details
                     </h4>
                     <div className="grid gap-4 md:grid-cols-2">
-                      <Field label="Business Name *" name="businessName" value={formData.businessDetails.businessName} onChange={handleBusinessDetailsChange} />
-                      <Field label="Business Type" name="businessType" value={formData.businessDetails.businessType} onChange={handleBusinessDetailsChange} />
-                      <Field label="Business Phone" name="businessPhone" type="tel" value={formData.businessDetails.businessPhone} onChange={handleBusinessDetailsChange} />
-                      <Field label="Business Email" name="businessEmail" type="email" value={formData.businessDetails.businessEmail} onChange={handleBusinessDetailsChange} />
-                      <Field label="Website" name="businessWebsite" type="url" value={formData.businessDetails.businessWebsite} onChange={handleBusinessDetailsChange} />
+                      <Field label="Business Name" name="businessName" value={formData.businessDetails.businessName} onChange={handleBizInput} required />
+                      <Field label="Business Type" name="businessType" value={formData.businessDetails.businessType} onChange={handleBizInput} />
+                      <Field label="Business Phone" name="businessPhone" type="tel" value={formData.businessDetails.businessPhone} onChange={handleBizInput} />
+                      <Field label="Business Email" name="businessEmail" type="email" value={formData.businessDetails.businessEmail} onChange={handleBizInput} />
+                      <Field label="Website" name="businessWebsite" type="url" value={formData.businessDetails.businessWebsite} onChange={handleBizInput} />
                       <div className="md:col-span-2">
                         <Label>Business Address</Label>
-                        <textarea
-                          name="businessAddress"
-                          value={formData.businessDetails.businessAddress}
-                          onChange={handleBusinessDetailsChange}
-                          rows="2"
+                        <textarea name="businessAddress" value={formData.businessDetails.businessAddress} onChange={handleBizInput} rows="2"
                           className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-                          placeholder="Enter business address"
-                        />
+                          placeholder="Enter business address" />
                       </div>
                       <div className="md:col-span-2">
                         <Label>Business Description</Label>
-                        <textarea
-                          name="businessDescription"
-                          value={formData.businessDetails.businessDescription}
-                          onChange={handleBusinessDetailsChange}
-                          rows="3"
+                        <textarea name="businessDescription" value={formData.businessDetails.businessDescription} onChange={handleBizInput} rows="3"
                           className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20"
-                          placeholder="Brief description about your business"
-                        />
+                          placeholder="Brief description about your business" />
                       </div>
                       <div className="md:col-span-2">
                         <Label>Business Photos (Max 5)</Label>
                         <div className="mt-3 flex flex-wrap gap-3">
-                          {formData.businessDetails.businessImages.map((file, index) => (
-                            <div key={index} className="relative h-24 w-24 overflow-hidden rounded-lg">
-                              <img
-                                src={URL.createObjectURL(file)}
-                                alt={`Business ${index + 1}`}
-                                className="h-full w-full object-cover"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => removeBusinessImage(index)}
-                                className="absolute -right-1 -top-1 rounded-full bg-red-500 p-1 text-white"
-                              >
+                          {formData.businessDetails.businessImages.map((file, idx) => (
+                            <div key={idx} className="relative h-24 w-24 overflow-hidden rounded-lg">
+                              <img src={URL.createObjectURL(file)} alt={`Biz ${idx + 1}`} className="h-full w-full object-cover" />
+                              <button type="button" onClick={() => removeBizImage(idx)} className="absolute -right-1 -top-1 rounded-full bg-red-500 p-1 text-white">
                                 <X size={12} />
                               </button>
                             </div>
@@ -1355,12 +538,7 @@ function BecomeMemberPage() {
                             <label className="flex h-24 w-24 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-gray-300 hover:border-maroon">
                               <Plus size={20} className="text-gray-400" />
                               <span className="text-xs text-gray-400">Add Image</span>
-                              <input
-                                type="file"
-                                accept="image/*"
-                                className="hidden"
-                                onChange={handleBusinessImages}
-                              />
+                              <input type="file" accept="image/*" className="hidden" onChange={handleBizImages} />
                             </label>
                           )}
                         </div>
@@ -1370,180 +548,143 @@ function BecomeMemberPage() {
                 )}
               </SectionCard>
 
-              {/* Family Members - Always Visible */}
+              {/* ── Family Members ── */}
               <SectionCard icon={<Users size={20} />} title="Family Members">
-                {activeForm === 'family' ? (
-                  <div className="rounded-lg border bg-white p-4">
-                    <h4 className="mb-4 font-semibold">Add Family Member</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <Field label="Name *" value={newFamilyMember.name} onChange={(e) => setNewFamilyMember({ ...newFamilyMember, name: e.target.value })} />
-                      <Field label="Relation *" value={newFamilyMember.relation} onChange={(e) => setNewFamilyMember({ ...newFamilyMember, relation: e.target.value })} />
-                      <Field label="Age" type="number" value={newFamilyMember.age} onChange={(e) => setNewFamilyMember({ ...newFamilyMember, age: e.target.value })} />
-                      <Field label="Occupation" value={newFamilyMember.occupation} onChange={(e) => setNewFamilyMember({ ...newFamilyMember, occupation: e.target.value })} />
-                      <Field label="Phone" type="tel" value={newFamilyMember.phone} onChange={(e) => setNewFamilyMember({ ...newFamilyMember, phone: e.target.value })} />
-                      <div className="md:col-span-2 flex gap-2">
-                        <button type="button" onClick={addFamilyMember} className="rounded-lg bg-maroon px-4 py-2 text-white">Save</button>
-                        <button type="button" onClick={() => setActiveForm(null)} className="rounded-lg border px-4 py-2">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setActiveForm('family')}
-                    className="flex items-center gap-2 rounded-lg border-2 border-dashed border-maroon px-4 py-3 text-maroon hover:bg-maroon/5"
-                  >
-                    <Plus size={18} /> Add Family Member
-                  </button>
-                )}
-                
+
+                {/* ── Repeatable family member forms ── */}
                 {formData.familyMembers.length > 0 && (
-                  <div className="mt-4 space-y-2">
+                  <div className="mb-4 space-y-4">
                     {formData.familyMembers.map((m, i) => (
-                      <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-                        <div>
-                          <span className="font-medium">{m.name}</span>
-                          <span className="text-gray-500"> - {m.relation}</span>
-                          {m.age && <span className="text-gray-500"> ({m.age} yrs)</span>}
+                      <div key={i} className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                        <div className="mb-4 flex items-center justify-between">
+                          <h4 className="font-semibold text-gray-800">Family Member {i + 1}</h4>
+                          <button type="button" onClick={() => removeFamilyMember(i)} title="Remove"
+                            className="rounded-md p-1 text-red-500 hover:bg-red-50">
+                            <X size={16} />
+                          </button>
                         </div>
-                        <button type="button" onClick={() => removeItem("familyMembers", i)} className="text-red-500">
-                          <X size={16} />
-                        </button>
+                        <div className="grid gap-4 md:grid-cols-2">
+                          <Field label="Name" value={m.name}
+                            onChange={e => updateFamilyMember(i, "name", e.target.value)} required />
+
+                          <SelectField label="Relation" value={m.relation}
+                            onChange={e => updateFamilyMember(i, "relation", e.target.value)}
+                            options={FAMILY_RELATIONS} placeholder="Select Relation" required />
+
+                          {/* DOB — typing here auto-computes age */}
+                          <div>
+                            <Label>Date of Birth</Label>
+                            <input type="date" value={m.dob} onChange={e => handleFamilyDobChange(i, e.target.value)}
+                              className={INPUT} />
+                            {m.dob && m.age &&
+                              <p className="mt-1 text-xs text-gray-500">Auto-computed age: {m.age} yrs</p>
+                            }
+                          </div>
+
+                          {/* Age — typing here keeps dob unchanged */}
+                          <div>
+                            <Label>Age (override)</Label>
+                            <input type="number" min="0" max="120" value={m.age}
+                              onChange={e => updateFamilyMember(i, "age", e.target.value)}
+                              placeholder="Type age manually"
+                              className={INPUT} />
+                          </div>
+
+                          <Field label="Occupation" value={m.occupation}
+                            onChange={e => updateFamilyMember(i, "occupation", e.target.value)} />
+                          <Field label="Phone" type="tel" value={m.phone}
+                            onChange={e => updateFamilyMember(i, "phone", e.target.value)} />
+                        </div>
                       </div>
                     ))}
                   </div>
                 )}
+
+                <button type="button" onClick={addFamilyMember}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-maroon/40 px-4 py-3 text-sm text-maroon hover:border-maroon hover:bg-maroon/5">
+                  <Plus size={18} /> Add Family Member
+                </button>
               </SectionCard>
 
-              {/* Birthdays - Always Visible */}
-              <SectionCard icon={<Gift size={20} />} title="Family Birthdays">
-                {activeForm === 'birthday' ? (
-                  <div className="rounded-lg border bg-white p-4">
-                    <h4 className="mb-4 font-semibold">Add Birthday</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <Field label="Person Name *" value={newBirthday.personName} onChange={(e) => setNewBirthday({ ...newBirthday, personName: e.target.value })} />
-                      <Field label="Relation" value={newBirthday.relation} onChange={(e) => setNewBirthday({ ...newBirthday, relation: e.target.value })} />
-                      <Field label="Birth Date *" type="date" value={newBirthday.birthDate} onChange={(e) => setNewBirthday({ ...newBirthday, birthDate: e.target.value })} />
-                      <Field label="Note" value={newBirthday.note} onChange={(e) => setNewBirthday({ ...newBirthday, note: e.target.value })} />
-                      <div className="md:col-span-2 flex gap-2">
-                        <button type="button" onClick={addBirthday} className="rounded-lg bg-maroon px-4 py-2 text-white">Save</button>
-                        <button type="button" onClick={() => setActiveForm(null)} className="rounded-lg border px-4 py-2">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setActiveForm('birthday')}
-                    className="flex items-center gap-2 rounded-lg border-2 border-dashed border-maroon px-4 py-3 text-maroon hover:bg-maroon/5"
-                  >
-                    <Plus size={18} /> Add Birthday
-                  </button>
-                )}
-                
-                {formData.birthdays.length > 0 && (
-                  <div className="mt-4 space-y-2">
-                    {formData.birthdays.map((b, i) => (
-                      <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-                        <span>{b.personName} - {b.relation} - {b.birthDate}</span>
-                        <button type="button" onClick={() => removeItem("birthdays", i)} className="text-red-500">
-                          <X size={16} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </SectionCard>
-
-              {/* Anniversaries - Always Visible */}
+              {/* ── Wedding Anniversaries ── */}
               <SectionCard icon={<CalendarHeart size={20} />} title="Wedding Anniversaries">
-                {activeForm === 'anniversary' ? (
-                  <div className="rounded-lg border bg-white p-4">
-                    <h4 className="mb-4 font-semibold">Add Anniversary</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <Field label="Husband Name *" value={newAnniversary.husbandName} onChange={(e) => setNewAnniversary({ ...newAnniversary, husbandName: e.target.value })} />
-                      <Field label="Wife Name *" value={newAnniversary.wifeName} onChange={(e) => setNewAnniversary({ ...newAnniversary, wifeName: e.target.value })} />
-                      <Field label="Anniversary Date *" type="date" value={newAnniversary.anniversaryDate} onChange={(e) => setNewAnniversary({ ...newAnniversary, anniversaryDate: e.target.value })} />
-                      <Field label="Note" value={newAnniversary.note} onChange={(e) => setNewAnniversary({ ...newAnniversary, note: e.target.value })} />
-                      <div className="md:col-span-2 flex gap-2">
-                        <button type="button" onClick={addAnniversary} className="rounded-lg bg-maroon px-4 py-2 text-white">Save</button>
-                        <button type="button" onClick={() => setActiveForm(null)} className="rounded-lg border px-4 py-2">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setActiveForm('anniversary')}
-                    className="flex items-center gap-2 rounded-lg border-2 border-dashed border-maroon px-4 py-3 text-maroon hover:bg-maroon/5"
-                  >
-                    <Plus size={18} /> Add Anniversary
-                  </button>
-                )}
-                
+
+                {/* ── Repeatable anniversary forms ── */}
                 {formData.anniversaries.length > 0 && (
-                  <div className="mt-4 space-y-2">
+                  <div className="mb-4 space-y-4">
                     {formData.anniversaries.map((a, i) => (
-                      <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-                        <span>{a.husbandName} & {a.wifeName} - {a.anniversaryDate}</span>
-                        <button type="button" onClick={() => removeItem("anniversaries", i)} className="text-red-500">
-                          <X size={16} />
-                        </button>
+                      <div key={i} className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                        <div className="mb-4 flex items-center justify-between">
+                          <h4 className="font-semibold text-gray-800">Anniversary {i + 1}</h4>
+                          <button type="button" onClick={() => removeAnniversary(i)} title="Remove"
+                            className="rounded-md p-1 text-red-500 hover:bg-red-50">
+                            <X size={16} />
+                          </button>
+                        </div>
+                        <div className="grid gap-4 md:grid-cols-2">
+                          <Field label="Husband's Name" value={a.husbandName}
+                            onChange={e => updateAnniversary(i, "husbandName", e.target.value)} required />
+                          <Field label="Wife's Name" value={a.wifeName}
+                            onChange={e => updateAnniversary(i, "wifeName", e.target.value)} required />
+                          <Field label="Anniversary Date" type="date" value={a.anniversaryDate}
+                            onChange={e => updateAnniversary(i, "anniversaryDate", e.target.value)} required />
+                          <Field label="Note (optional)" value={a.note}
+                            onChange={e => updateAnniversary(i, "note", e.target.value)} />
+                        </div>
                       </div>
                     ))}
                   </div>
                 )}
+
+                <button type="button" onClick={addAnniversary}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-maroon/40 px-4 py-3 text-sm text-maroon hover:border-maroon hover:bg-maroon/5">
+                  <Plus size={18} /> Add Anniversary Date
+                </button>
               </SectionCard>
 
-              {/* Custom Dates - Always Visible */}
-              <SectionCard icon={<CalendarHeart size={20} />} title="Other Special Dates">
-                {activeForm === 'custom' ? (
-                  <div className="rounded-lg border bg-white p-4">
-                    <h4 className="mb-4 font-semibold">Add Special Date</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <Field label="Title *" value={newCustomDate.title} onChange={(e) => setNewCustomDate({ ...newCustomDate, title: e.target.value })} />
-                      <Field label="Date *" type="date" value={newCustomDate.date} onChange={(e) => setNewCustomDate({ ...newCustomDate, date: e.target.value })} />
-                      <div className="md:col-span-2">
-                        <Label>Description</Label>
-                        <textarea rows="3" value={newCustomDate.description} onChange={(e) => setNewCustomDate({ ...newCustomDate, description: e.target.value })} className="mt-2 w-full rounded-lg border border-gray-300 p-3" />
-                      </div>
-                      <div className="md:col-span-2 flex gap-2">
-                        <button type="button" onClick={addCustomDate} className="rounded-lg bg-maroon px-4 py-2 text-white">Save</button>
-                        <button type="button" onClick={() => setActiveForm(null)} className="rounded-lg border px-4 py-2">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setActiveForm('custom')}
-                    className="flex items-center gap-2 rounded-lg border-2 border-dashed border-maroon px-4 py-3 text-maroon hover:bg-maroon/5"
-                  >
-                    <Plus size={18} /> Add Special Date
-                  </button>
-                )}
-                
+              {/* ── Other Special Dates ── */}
+              <SectionCard icon={<Calendar size={20} />} title="Other Special Dates">
+
+                {/* ── Repeatable special date forms ── */}
                 {formData.customDates.length > 0 && (
-                  <div className="mt-4 space-y-2">
+                  <div className="mb-4 space-y-4">
                     {formData.customDates.map((d, i) => (
-                      <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-                        <span>{d.title} - {d.date}</span>
-                        <button type="button" onClick={() => removeItem("customDates", i)} className="text-red-500">
-                          <X size={16} />
-                        </button>
+                      <div key={i} className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                        <div className="mb-4 flex items-center justify-between">
+                          <h4 className="font-semibold text-gray-800">Special Date {i + 1}</h4>
+                          <button type="button" onClick={() => removeCustomDate(i)} title="Remove"
+                            className="rounded-md p-1 text-red-500 hover:bg-red-50">
+                            <X size={16} />
+                          </button>
+                        </div>
+                        <div className="grid gap-4 md:grid-cols-2">
+                          <Field label="Title / Occasion" value={d.title}
+                            onChange={e => updateCustomDate(i, "title", e.target.value)} required />
+                          <Field label="Date" type="date" value={d.date}
+                            onChange={e => updateCustomDate(i, "date", e.target.value)} required />
+                          <div className="md:col-span-2">
+                            <Label>Description (optional)</Label>
+                            <textarea rows="2" value={d.description}
+                              onChange={e => updateCustomDate(i, "description", e.target.value)}
+                              className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20" />
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
                 )}
+
+                <button type="button" onClick={addCustomDate}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-maroon/40 px-4 py-3 text-sm text-maroon hover:border-maroon hover:bg-maroon/5">
+                  <Plus size={18} /> Add Special Date
+                </button>
               </SectionCard>
 
-              {/* Submit Button */}
+              {/* ── Submit ── */}
               <div className="border-t pt-8">
-                <button
-                  type="submit"
-                  className="w-full rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 py-4 text-lg font-semibold text-white shadow-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-[1.02]"
-                >
-                  Submit Application
+                <button type="submit"
+                  className="w-full rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-yellow-500 hover:to-yellow-700">
+                  Submit Application — {selectedTier}
                 </button>
                 <p className="mt-4 text-center text-sm text-gray-500">
                   By submitting, you agree to be contacted for membership verification and payment.
@@ -1558,11 +699,15 @@ function BecomeMemberPage() {
   );
 }
 
-// Reusable Components
+// ─── SHARED TAILWIND INPUT CLASS ─────────────────────────────────────────────
+const INPUT = "mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20 transition-colors";
+
+// ─── REUSABLE COMPONENTS ─────────────────────────────────────────────────────
+
 function SectionCard({ icon, title, children }) {
   return (
-    <div className="rounded-2xl border bg-gray-50/50 p-6">
-      <div className="mb-4 flex items-center gap-2">
+    <div className="rounded-2xl border bg-gray-50/60 p-6">
+      <div className="mb-5 flex items-center gap-2">
         <span className="text-maroon">{icon}</span>
         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
       </div>
@@ -1584,10 +729,19 @@ function Field({ label, required, ...props }) {
   return (
     <div>
       <Label required={required}>{label}</Label>
-      <input
-        {...props}
-        className="mt-2 w-full rounded-lg border border-gray-300 p-3 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20 transition-colors"
-      />
+      <input {...props} className={INPUT} />
+    </div>
+  );
+}
+
+function SelectField({ label, required, options, placeholder, ...props }) {
+  return (
+    <div>
+      <Label required={required}>{label}</Label>
+      <select {...props} className={INPUT}>
+        {placeholder && <option value="">{placeholder}</option>}
+        {options.map(o => <option key={o} value={o}>{o}</option>)}
+      </select>
     </div>
   );
 }

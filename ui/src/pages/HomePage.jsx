@@ -60,7 +60,7 @@ function HomePage() {
           </div>
         </div>
       </section>
-            <section className="mx-auto grid max-w-7xl gap-14 px-5 py-24 md:grid-cols-2 md:items-center">
+            {/* <section className="mx-auto grid max-w-7xl gap-14 px-5 py-24 md:grid-cols-2 md:items-center">
         <div>
           <img
             src={deity}
@@ -107,7 +107,58 @@ function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+
+<section className="mx-auto grid max-w-7xl gap-14 px-5 py-24 md:grid-cols-2 md:items-center">
+  <div className="flex items-center justify-center">
+    <img
+      src={deity}
+      alt="Shri Khatu Shyam Ji"
+      className="h-[560px] w-full rounded-3xl object-cover"
+    />
+  </div>
+
+  <div className="mb-28 flex flex-col ">
+    <p className="mb-4 text-xs uppercase tracking-[0.35em] text-orange-500">
+      हारे का सहारा
+    </p>
+
+    <h2 className="text-4xl md:text-5xl">
+      The shelter of those who feel they have
+      nothing left.
+    </h2>
+
+    <p className="mt-5 text-gray-600">
+      For over thirty years, our samiti has
+      gathered devotees to sing the names of
+      Shyam Baba and walk together on the path
+      of bhakti.
+    </p>
+
+    <div className="mt-8 grid grid-cols-3 gap-4">
+      {[
+        { n: "30+", l: "Years of Seva" },
+        { n: "5000+", l: "Families" },
+        { n: "120+", l: "Events" },
+      ].map((item) => (
+        <div
+          key={item.l}
+          className="rounded-2xl bg-gray-100 p-5 text-center"
+        >
+          <div className="text-3xl">
+            {item.n}
+          </div>
+
+          <div className="text-xs">
+            {item.l}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
             <section className="bg-gray-50 py-24">
         <div className="mx-auto max-w-7xl px-5">
           <h2 className="mb-14 text-center text-4xl">
@@ -115,7 +166,7 @@ function HomePage() {
           </h2>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {members.map((m) => (
+            {members.slice(0,3).map((m) => (
               <Link
                 key={m.id}
                 to={`/team/${m.id}`}
