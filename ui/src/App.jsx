@@ -9,6 +9,9 @@ import AboutPage from "./pages/AboutPage";
 import TeamPage from "./pages/TeamPage";
 import TeamMemberPage from "./pages/TeamMemberPage";
 import GalleryPage from "./pages/GalleryPage";
+import VideosPage from "./pages/VideosPage";
+import AlbumPage from "./pages/AlbumPage";
+import MembersPage from "./pages/MembersPage";
 import EventsPage from "./pages/EventsPage";
 import ContactPage from "./pages/ContactPage";
 import BecomeMemberPage from "./pages/BecomeMemberPage";
@@ -46,7 +49,10 @@ function App() {
             element={<TeamMemberPage />}
           />
 
+          <Route path="/members" element={<MembersPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/gallery/videos" element={<VideosPage />} />
+          <Route path="/gallery/Photos" element={<AlbumPage />} />
 
           <Route path="/events" element={<EventsPage />} />
 
