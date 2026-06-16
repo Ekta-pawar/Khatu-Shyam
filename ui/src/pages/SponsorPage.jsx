@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { PageShell, PageHeader } from "../components/PageShell";
+
 import {
   Check,
   Star,
@@ -13,7 +14,36 @@ import {
   IndianRupee,
   Upload,
   X,
+ 
+  
+  MapPin,
+  MessageSquare,
+ 
+  Send,
 } from "lucide-react";
+
+import axios from "axios";
+
+export const createEnquiry = (data) => {
+  return axios.post(
+    "http://localhost:5000/api/enquiry/create",
+   
+
+    data,
+                      
+  );
+};
+export const createSponsor = (data) => {
+  return axios.post(
+    "http://localhost:5000/api/sponsor/create",
+    data,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};
 
 const sponsorTiers = [
   {
@@ -27,6 +57,7 @@ const sponsorTiers = [
       "Prasad distribution credit",
       "Samiti newsletter mention",
     ],
+    button: "Become a Prasad Sponsor",
     color: "from-orange-400 to-amber-500",
   },
   {
@@ -42,6 +73,7 @@ const sponsorTiers = [
       "Social media feature post",
       "Samiti directory listing",
     ],
+   button: "Become a Bhandara Sponsor",
     color: "from-yellow-400 to-yellow-600",
   },
   {
@@ -57,6 +89,7 @@ const sponsorTiers = [
       "Annual report feature",
       "Website logo placement",
     ],
+      button: "Become a Mahotsav Sponsor",
     color: "from-maroon to-maroon/80",
   },
   {
@@ -72,6 +105,7 @@ const sponsorTiers = [
       "Trustee voting rights",
       "Dedicated puja seva slot",
     ],
+    button: "Become a Mandir Patron",
     color: "from-purple-700 to-purple-900",
   },
 ];
@@ -94,6 +128,7 @@ const EVENT_TYPES = [
 
 function SponsorPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [showSponsorForm, setShowSponsorForm] = useState(false);
   const [logoFile, setLogoFile] = useState(null);
   const [formData, setFormData] = useState({
     sponsorName: "",
@@ -147,8 +182,80 @@ function SponsorPage() {
     setLogoFile(null);
     setTimeout(() => setSubmitted(false), 6000);
   };
+const handleEnquirySubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await createEnquiry({
+      contactPerson: formData.contactPerson,
+      organisationName: formData.sponsorName,
+      phone: formData.phone,
+      email: formData.email,
+      amount: formData.customAmount,
+      address: formData.address,
+      message: formData.message,
+    });
+
+    console.log(response.data);
+    alert("Enquiry submitted successfully");
+  } catch (error) {
+    console.error(error);
+    alert("Error submitting enquiry");
+  }
+};
+const handleSponsorSubmit = async (e) => {
+  e.preventDefault();
+
+  const data = new FormData();
+
+  // Logo image
+  if (logoFile) {
+    data.append("logo", logoFile);
+  }
+
+  // All form fields
+  Object.keys(formData).forEach((key) => {
+    data.append(key, formData[key]);
+  });
+
+  try {
+    const response = await createSponsor(data);
+
+    console.log(response.data);
+
+    alert("Sponsor Request Submitted Successfully");
+
+    setSubmitted(true);
+
+    // Optional: reset form
+    setFormData({
+      sponsorName: "",
+      sponsorType: "",
+      contactPerson: "",
+      phone: "",
+      email: "",
+      address: "",
+      city: "",
+      state: "",
+      sponsorTier: "",
+      eventType: "",
+      customAmount: "",
+      message: "",
+      gstin: "",
+      website: "",
+      panCard: "",
+    });
+
+    setLogoFile(null);
+  } catch (error) {
+    console.error(error);
+
+    alert("Failed to submit sponsor request");
+  }
+};
 
   return (
+    
     <PageShell>
       <PageHeader
         eyebrow="Sahyog"
@@ -156,12 +263,14 @@ function SponsorPage() {
         subtitle="आपका सहयोग श्याम सेवा को और आगे ले जाएगा — बनें हमारे प्रायोजक"
       />
 
+
       {/* Sponsor Tiers */}
       <section className="mx-auto max-w-7xl px-5 py-16">
         <div className="mb-10 text-center">
           <p className="mb-3 text-xs uppercase tracking-widest text-saffron">प्रायोजन स्तर</p>
           <h2 className="font-display text-4xl text-maroon">Sponsorship Tiers</h2>
           <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-yellow-500 to-transparent" />
+         
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
@@ -173,6 +282,7 @@ function SponsorPage() {
                   ? `bg-gradient-to-br ${tier.color} text-white`
                   : "border bg-white"
               }`}
+
             >
               {tier.featured && (
                 <div className="mb-3 inline-flex items-center gap-1 rounded-full bg-white/20 px-3 py-1 text-xs">
@@ -215,6 +325,7 @@ function SponsorPage() {
               >
                 {tier.description}
               </p>
+    
               <ul className="mt-4 space-y-2">
                 {tier.perks.map((perk) => (
                   <li key={perk} className="flex items-start gap-2">
@@ -234,13 +345,30 @@ function SponsorPage() {
                   </li>
                 ))}
               </ul>
+                        <p><button
+  type="button"
+  onClick={() => setShowSponsorForm(true)}
+  className={`mt-6 w-full rounded-2xl py-3 px-4 font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+    tier.featured
+      ? "bg-white text-maroon hover:bg-gray-100"
+      : `bg-gradient-to-r ${tier.color} text-white`
+  }`}
+>
+  {tier.button}
+</button></p>
             </div>
           ))}
+          
         </div>
+        <div className="mt-auto pt-6">
+  
+    </div>
       </section>
 
       {/* Sponsorship Form */}
-      <section className="mx-auto max-w-4xl px-5 pb-24">
+  {showSponsorForm ? (
+ 
+    <section className="mx-auto max-w-4xl px-5 pb-24">
         <div className="rounded-3xl bg-white p-8 shadow-xl md:p-12">
           <div className="mb-8 border-b pb-6">
             <h2 className="font-display text-3xl text-maroon">Sponsor Application</h2>
@@ -258,7 +386,7 @@ function SponsorPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-8">
+         <form onSubmit={handleSponsorSubmit} className="space-y-8">
             {/* Sponsor Identity */}
             <SectionCard icon={<Building2 size={20} />} title="Sponsor Details">
               <div className="grid gap-5 md:grid-cols-2">
@@ -413,7 +541,7 @@ function SponsorPage() {
             </SectionCard>
 
             {/* Sponsorship Details */}
-            <SectionCard icon={<IndianRupee size={20} />} title="Sponsorship Details">
+            {/* <SectionCard icon={<IndianRupee size={20} />} title="Sponsorship Details">
               <div className="grid gap-5 md:grid-cols-2">
                 <div>
                   <Label required>Sponsorship Tier</Label>
@@ -466,42 +594,12 @@ function SponsorPage() {
                   </select>
                 </div>
               </div>
-            </SectionCard>
+            </SectionCard> */}
 
-            {/* Tax / Legal */}
-            <SectionCard icon={<FileText size={20} />} title="Tax & Legal Details (Optional)">
-              <div className="grid gap-5 md:grid-cols-2">
-                <div>
-                  <Label>PAN Card Number</Label>
-                  <input
-                    name="panCard"
-                    value={formData.panCard}
-                    onChange={handleChange}
-                    placeholder="ABCDE1234F"
-                    className={inputCls}
-                  />
-                </div>
-                <div>
-                  <Label>GSTIN</Label>
-                  <input
-                    name="gstin"
-                    value={formData.gstin}
-                    onChange={handleChange}
-                    placeholder="GST Number (if applicable)"
-                    className={inputCls}
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <p className="text-xs text-gray-400">
-                    Donations to registered samitis may be eligible for 80G tax exemption. Our
-                    team will share the relevant documents after verification.
-                  </p>
-                </div>
-              </div>
-            </SectionCard>
+          
 
             {/* Message */}
-            <SectionCard icon={<User size={20} />} title="Message / Special Request">
+            <SectionCard icon={<User size={20} />} title="Your Message">
               <div>
                 <Label>Your Message</Label>
                 <textarea
@@ -530,7 +628,154 @@ function SponsorPage() {
           </form>
         </div>
       </section>
+) : (
+  <section>
+   <div className="mx-auto max-w-3xl rounded-3xl bg-white p-8 shadow-xl">
+      <h2 className="mb-8 flex items-center gap-3 text-3xl font-bold text-slate-800">
+        <Send className="text-yellow-600" />
+        Enquiry Form
+      </h2>
 
+     <form onSubmit={handleEnquirySubmit} className="space-y-6">
+        {/* Contact Person */}
+        <div>
+          <label className="mb-2 block text-lg font-medium">
+            Contact Person Name <span className="text-yellow-600">*</span>
+          </label>
+
+          <div className="flex items-center rounded-3xl border px-5 py-4">
+            <User className="mr-3 text-gray-400" />
+            <input
+              type="text"
+              className="w-full outline-none"
+              placeholder="Enter name"
+            />
+          </div>
+        </div>
+
+        {/* Organization */}
+        <div>
+          <label className="mb-2 block text-lg font-medium">
+            Organisation Name <span className="text-yellow-600">*</span>
+          </label>
+
+          <div className="flex items-center rounded-3xl border px-5 py-4">
+            <Building2 className="mr-3 text-gray-400" />
+            <input
+              type="text"
+              className="w-full outline-none"
+              placeholder="Organisation name"
+            />
+          </div>
+        </div>
+
+        {/* Mobile */}
+        <div>
+          <label className="mb-2 block text-lg font-medium">
+            Phone Number <span className="text-yellow-600">*</span>
+          </label>
+
+          <div className="flex gap-4">
+            <div className="flex flex-1 items-center rounded-3xl border px-5 py-4">
+              <Phone className="mr-3 text-gray-400" />
+              <input
+                type="tel"
+                className="w-full outline-none"
+                placeholder="Enter 10-digit mobile number"
+              />
+            </div>
+
+            <button
+              type="button"
+              className="rounded-3xl bg-green-600 px-8 font-semibold text-white"
+            >
+              Get OTP
+            </button>
+          </div>
+
+          <p className="mt-2 text-sm text-gray-500">
+            Request an OTP to verify your mobile number before submission.
+          </p>
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="mb-2 block text-lg font-medium">
+            Email ID <span className="text-yellow-600">*</span>
+          </label>
+
+          <div className="flex items-center rounded-3xl border px-5 py-4">
+            <Mail className="mr-3 text-gray-400" />
+            <input
+              type="email"
+              className="w-full outline-none"
+              placeholder="Enter email"
+            />
+          </div>
+        </div>
+
+        {/* Amount */}
+        <div>
+          <label className="mb-2 block text-lg font-medium">
+            Sponsor Amount <span className="text-yellow-600">*</span>
+          </label>
+
+          <div className="flex items-center rounded-3xl border px-5 py-4">
+            <IndianRupee className="mr-3 text-gray-400" />
+            <input
+              type="number"
+              className="w-full outline-none"
+              placeholder="Enter amount"
+            />
+          </div>
+        </div>
+
+        {/* Address */}
+        <div>
+          <label className="mb-2 block text-lg font-medium">
+            Address <span className="text-yellow-600">*</span>
+          </label>
+
+          <div className="flex rounded-3xl border px-5 py-4">
+            <MapPin className="mr-3 mt-1 text-gray-400" />
+            <textarea
+              rows={4}
+              className="w-full resize-none outline-none"
+              placeholder="Enter address"
+            />
+          </div>
+        </div>
+
+        {/* Message */}
+        <div>
+          <label className="mb-2 block text-lg font-medium">
+            Message
+          </label>
+
+          <div className="flex rounded-3xl border px-5 py-4">
+            <MessageSquare className="mr-3 mt-1 text-gray-400" />
+            <textarea
+              rows={4}
+              className="w-full resize-none outline-none"
+              placeholder="Write your message"
+            />
+          </div>
+        </div>
+
+        {/* Submit */}
+  <button
+  type="submit"
+  className="flex w-full items-center justify-center gap-3 rounded-3xl bg-gradient-to-r from-yellow-400 to-yellow-600 py-5 text-xl font-semibold text-white"
+>
+  <Send size={22} />
+  Enquiry Send
+</button>
+      </form>
+    </div>
+  </section>
+)}
+  
+  
       {/* Why Sponsor */}
       <section className="border-t border-border/60 bg-gradient-to-b from-yellow-50 to-white py-20">
         <div className="mx-auto max-w-5xl px-5">
