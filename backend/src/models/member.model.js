@@ -57,8 +57,8 @@ const familyMemberSchema = new mongoose.Schema(
 const memberSchema = new mongoose.Schema(
   {
     // A. Personal information
-    firstName: { type: String, required: true, trim: true, maxlength: 50 },
-    lastName: { type: String, required: true, trim: true, maxlength: 50 },
+    firstName: { type: String,  trim: true, maxlength: 50 },
+    lastName: { type: String, trim: true, maxlength: 50 },
     fatherName: { type: String, trim: true, maxlength: 100 },
     motherName: { type: String, trim: true, maxlength: 100 },
     gender: { type: String, enum: GENDERS, required: true },
@@ -91,8 +91,8 @@ const memberSchema = new mongoose.Schema(
     },
 
     isActive: { type: Boolean, default: true },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "Admin", required: true },
-    updatedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Admin", default: null },
+    createdBy: { type: mongoose.Schema.Types.ObjectId},
+    updatedBy: { type: mongoose.Schema.Types.ObjectId},
   },
   { timestamps: true }
 );

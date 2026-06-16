@@ -15,4 +15,8 @@ router.use("/members", memberRoutes);
 router.use("/payments", paymentRoutes);
 router.use("/contacts", contactRoutes);
 
+
+
+
+
 module.exports = router;

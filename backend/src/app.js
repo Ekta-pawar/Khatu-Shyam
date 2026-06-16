@@ -14,8 +14,16 @@ const webhookRoutes = require("./routes/webhook.routes");
 const sanitizeRequest = require("./middleware/sanitize.middleware");
 const { notFound, globalErrorHandler } = require("./middleware/error.middleware");
 const { apiLimiter } = require("./middleware/rateLimiter.middleware");
+const memberRoutes = require("./routes/member.routes");
 
 const app = express();
+
+
+
+
+
+
+
 
 app.set("trust proxy", 1);
 require("dotenv").config();
@@ -86,6 +94,8 @@ app.use("/api/v1", routes);
 
 app.use("/api/sponsor", sponsorRoutes);
 app.use("/api/enquiry", enquiryRoutes);
+app.use("/api/members", memberRoutes);
+
 /* ------------------------------------------------------------------ */
 /* Error handling                                                      */
 /* ------------------------------------------------------------------ */
