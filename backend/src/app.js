@@ -4,7 +4,9 @@ const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const compression = require("compression");
 const morgan = require("morgan");
+const enquiryRoutes = require("./routes/enquiry.routes");
 
+const sponsorRoutes = require("./routes/sponsor.routes");
 const env = require("./config/env");
 const logger = require("./config/logger");
 const routes = require("./routes");
@@ -16,7 +18,7 @@ const { apiLimiter } = require("./middleware/rateLimiter.middleware");
 const app = express();
 
 app.set("trust proxy", 1);
-
+require("dotenv").config();
 /* ------------------------------------------------------------------ */
 /* Security                                                             */
 /* ------------------------------------------------------------------ */
@@ -77,6 +79,13 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1", routes);
 
+
+
+
+
+
+app.use("/api/sponsor", sponsorRoutes);
+app.use("/api/enquiry", enquiryRoutes);
 /* ------------------------------------------------------------------ */
 /* Error handling                                                      */
 /* ------------------------------------------------------------------ */

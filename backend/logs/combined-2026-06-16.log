@@ -1,0 +1,41 @@
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 10:38:25"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 10:38:25"}
+{"level":"warn","message":"POST /api/enquiry/create - Route not found: /api/enquiry/create","timestamp":"2026-06-16 12:45:22"}
+{"level":"info","message":"\u001b[0mPOST /api/enquiry/create \u001b[33m404\u001b[0m 27.838 ms - 126\u001b[0m","timestamp":"2026-06-16 12:45:22"}
+{"level":"warn","message":"POST /api/enquiry/create - Route not found: /api/enquiry/create","timestamp":"2026-06-16 12:50:43"}
+{"level":"info","message":"\u001b[0mPOST /api/enquiry/create \u001b[33m404\u001b[0m 7.887 ms - 126\u001b[0m","timestamp":"2026-06-16 12:50:43"}
+{"level":"warn","message":"POST /api/enquiry/create - Route not found: /api/enquiry/create","timestamp":"2026-06-16 12:51:45"}
+{"level":"info","message":"\u001b[0mPOST /api/enquiry/create \u001b[33m404\u001b[0m 33.495 ms - 126\u001b[0m","timestamp":"2026-06-16 12:51:45"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 12:58:10"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 12:58:10"}
+{"level":"info","message":"\u001b[0mPOST /api/enquiry/create \u001b[32m201\u001b[0m 94.366 ms - 290\u001b[0m","timestamp":"2026-06-16 13:01:24"}
+{"level":"info","message":"\u001b[0mPOST /api/enquiry/create \u001b[32m201\u001b[0m 52.329 ms - 290\u001b[0m","timestamp":"2026-06-16 13:04:39"}
+{"level":"info","message":"\u001b[0mPOST /api/enquiry/create \u001b[32m201\u001b[0m 39.477 ms - 290\u001b[0m","timestamp":"2026-06-16 13:05:32"}
+{"level":"info","message":"\u001b[0mPOST /api/enquiry/create \u001b[32m201\u001b[0m 56.863 ms - 290\u001b[0m","timestamp":"2026-06-16 13:05:39"}
+{"level":"warn","message":"POST /api/sponsor/create - Route not found: /api/sponsor/create","timestamp":"2026-06-16 13:24:45"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[33m404\u001b[0m 22.217 ms - 126\u001b[0m","timestamp":"2026-06-16 13:24:45"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 13:28:02"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 13:28:02"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 13:28:22"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 13:28:22"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[31m500\u001b[0m 4.657 ms - 62\u001b[0m","timestamp":"2026-06-16 13:30:06"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[31m500\u001b[0m 1.111 ms - 62\u001b[0m","timestamp":"2026-06-16 13:30:26"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 13:34:18"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 13:34:18"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[32m201\u001b[0m 69.112 ms - 590\u001b[0m","timestamp":"2026-06-16 13:35:03"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[32m201\u001b[0m 92.516 ms - 540\u001b[0m","timestamp":"2026-06-16 13:53:41"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 15:07:50"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 15:07:50"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 15:07:58"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 15:07:58"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[31m500\u001b[0m 1741.575 ms - 52\u001b[0m","timestamp":"2026-06-16 15:08:36"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[31m500\u001b[0m 2393.998 ms - 52\u001b[0m","timestamp":"2026-06-16 15:11:14"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[31m500\u001b[0m 599.366 ms - 52\u001b[0m","timestamp":"2026-06-16 15:11:19"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[31m500\u001b[0m 1913.505 ms - 52\u001b[0m","timestamp":"2026-06-16 15:11:52"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 15:13:39"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 15:13:39"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[31m500\u001b[0m 2314.690 ms - 52\u001b[0m","timestamp":"2026-06-16 15:14:23"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[31m500\u001b[0m 2676.477 ms - 52\u001b[0m","timestamp":"2026-06-16 15:14:23"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 15:27:31"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 15:27:31"}
+{"level":"info","message":"\u001b[0mPOST /api/sponsor/create \u001b[32m201\u001b[0m 3515.378 ms - 694\u001b[0m","timestamp":"2026-06-16 15:28:17"}
