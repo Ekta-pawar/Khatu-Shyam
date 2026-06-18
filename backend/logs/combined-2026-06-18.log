@@ -226,3 +226,5 @@
 {"level":"info","message":"\u001b[0mPOST /api/v1/admins/login \u001b[32m200\u001b[0m 1442.442 ms - 633\u001b[0m","timestamp":"2026-06-18 15:10:45"}
 {"level":"warn","message":"GET /api/v1/admins/me - You are not logged in. Please log in to continue","timestamp":"2026-06-18 15:10:45"}
 {"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[33m401\u001b[0m 18.734 ms - 150\u001b[0m","timestamp":"2026-06-18 15:10:45"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-18 15:12:23"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-18 15:12:23"}
