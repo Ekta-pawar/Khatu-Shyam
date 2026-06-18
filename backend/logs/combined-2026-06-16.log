@@ -121,3 +121,12 @@
 {"level":"info","message":"\u001b[0mPOST /api/members/create \u001b[31m500\u001b[0m 25.960 ms - 241\u001b[0m","timestamp":"2026-06-16 18:28:17"}
 {"level":"info","message":"\u001b[0mPOST /api/members/create \u001b[31m500\u001b[0m 12.203 ms - 241\u001b[0m","timestamp":"2026-06-16 18:29:03"}
 {"level":"info","message":"\u001b[0mPOST /api/members/create \u001b[31m500\u001b[0m 11.943 ms - 241\u001b[0m","timestamp":"2026-06-16 18:30:23"}
+{"level":"error","message":"MongoDB connection failed: read ECONNRESET","timestamp":"2026-06-16 22:20:36"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 22:20:36"}
+{"level":"error","message":"MongoDB connection failed: Server selection timed out after 5000 ms","timestamp":"2026-06-16 23:39:21"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 23:39:21"}
+{"level":"error","message":"MongoDB connection failed: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","timestamp":"2026-06-16 23:40:29"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 23:40:29"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-16 23:45:38"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-16 23:45:38"}
+{"level":"info","message":"\u001b[0mPOST /api/members/create \u001b[31m500\u001b[0m 149.205 ms - 213\u001b[0m","timestamp":"2026-06-16 23:47:32"}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PageShell, PageHeader } from "../components/PageShell";
-
+import { toast } from "react-toastify";
 import {
   Check,
   Star,
@@ -197,10 +197,10 @@ const handleEnquirySubmit = async (e) => {
     });
 
     console.log(response.data);
-    alert("Enquiry submitted successfully");
+   toast.success("Enquiry submitted successfully");
   } catch (error) {
     console.error(error);
-    alert("Error submitting enquiry");
+    toast.error("Please fill all required fields");
   }
 };
 const handleSponsorSubmit = async (e) => {
@@ -223,7 +223,7 @@ const handleSponsorSubmit = async (e) => {
 
     console.log(response.data);
 
-    alert("Sponsor Request Submitted Successfully");
+    toast.success("Sponsor request submitted successfully");
 
     setSubmitted(true);
 
@@ -250,7 +250,7 @@ const handleSponsorSubmit = async (e) => {
   } catch (error) {
     console.error(error);
 
-    alert("Failed to submit sponsor request");
+   toast.error("Please fill all required fields");
   }
 };
 
@@ -368,16 +368,44 @@ const handleSponsorSubmit = async (e) => {
       {/* Sponsorship Form */}
   {showSponsorForm ? (
  
-    <section className="mx-auto max-w-4xl px-5 pb-24">
-        <div className="rounded-3xl bg-white p-8 shadow-xl md:p-12">
-          <div className="mb-8 border-b pb-6">
-            <h2 className="font-display text-3xl text-maroon">Sponsor Application</h2>
-            <p className="mt-2 text-sm text-gray-500">
-              नीचे दिया गया फॉर्म भरें। हमारी टीम 24–48 घंटों में आपसे संपर्क करेगी।
-            </p>
-          </div>
+    
 
-          {submitted && (
+
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+      <div className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+
+        {/* Header */}
+        <div className="bg-gradient-to-r from-orange-500 to-yellow-500 px-8 py-6 text-white">
+          <button
+            onClick={() => setShowSponsorForm(false)}
+            className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/20"
+          >
+            <X size={20} />
+          </button>
+
+          <h2 className="text-4xl font-bold">
+            Become a Sponsor
+          </h2>
+
+          <p className="mt-2 text-sm text-white/90">
+            Complete OTP verification and payment to confirm sponsorship
+          </p>
+        </div>
+
+        {/* Scroll Area */}
+        <div className="max-h-[75vh] overflow-y-auto p-6 scrollbar-hide">
+
+          {/* PASTE YOUR COMPLETE SPONSOR FORM HERE */}
+          <section className="mx-auto max-w-4xl px-5 pb-24">
+         <div className="rounded-3xl bg-white p-8 shadow-xl md:p-12">
+           <div className="mb-8 border-b pb-6">
+             <h2 className="font-display text-3xl text-maroon">Sponsor Application</h2>
+             <p className="mt-2 text-sm text-gray-500">
+               नीचे दिया गया फॉर्म भरें। हमारी टीम 24–48 घंटों में आपसे संपर्क करेगी।
+            </p>
+        </div>
+
+         {submitted && (
             <div className="mb-8 flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-green-700">
               <Check size={20} className="text-green-500" />
               <span className="font-medium">
@@ -628,6 +656,17 @@ const handleSponsorSubmit = async (e) => {
           </form>
         </div>
       </section>
+          <section className="mx-auto">
+            <div className="bg-white">
+              {/* ALL YOUR CURRENT SPONSOR FORM CODE */}
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  
+
 ) : (
   <section>
    <div className="mx-auto max-w-3xl rounded-3xl bg-white p-8 shadow-xl">

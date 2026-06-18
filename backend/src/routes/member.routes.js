@@ -47,8 +47,12 @@
 const express = require("express");
 const router = express.Router();
 
-const memberController = require("../controllers/member.controller");
+const {
+  createMember,
+  getMembers,
+} = require("../controllers/member.controller");
 
-router.post("/create", memberController.createMember);
+router.post("/create", createMember);
+router.get("/", getMembers);
 
 module.exports = router;

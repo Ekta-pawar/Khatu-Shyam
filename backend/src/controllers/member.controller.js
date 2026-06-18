@@ -74,21 +74,42 @@ const Member = require("../models/member.model");
 
 exports.createMember = async (req, res) => {
   try {
-    console.log("Received Data:", req.body);
-
     const member = await Member.create(req.body);
 
-    return res.status(201).json({
+    res.status(201).json({
       success: true,
-      message: "Member registered successfully",
-      data: member,
+      member,
     });
   } catch (error) {
-    console.error("CREATE MEMBER ERROR:", error);
+  console.error("GET MEMBERS ERROR:");
+  console.error(error);
 
-    return res.status(500).json({
+  res.status(500).json({
+    success: false,
+    message: error.message,
+  });
+}
+
+  
+};
+
+exports.getMembers = async (req, res) => {
+  try {
+    console.log("Query Params:", req.query);
+
+    const members = await Member.find();
+
+    res.status(200).json({
+      success: true,
+      members,
+    });
+  } catch (error) {
+    console.error("GET MEMBERS ERROR:", error);
+
+    res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 };
+  
