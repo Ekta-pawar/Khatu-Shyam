@@ -181,12 +181,39 @@ function BecomeMemberPage() {
 
   // ─── SUBMIT ────────────────────────────────────────────────────────────────
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log("Submitting:", formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
-  };
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   console.log("Submitting:", formData);
+  //   setSubmitted(true);
+  //   setTimeout(() => setSubmitted(false), 5000);
+  // };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch(
+      "http://localhost:5000/api/members/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+      setSubmitted(true);
+
+      alert("Member Registered Successfully");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong");
+  }
+};
 
   const handleTierSelect = name => {
     setSelectedTier(name);

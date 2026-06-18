@@ -42,7 +42,7 @@ const env = {
 
   cookie: {
     secure: toBool(process.env.COOKIE_SECURE, isProduction),
-    sameSite: process.env.COOKIE_SAME_SITE || (isProduction ? "none" : "lax"),
+    sameSite: process.env.COOKIE_SAME_SITE || "none",
   },
 
   cloudinary: {

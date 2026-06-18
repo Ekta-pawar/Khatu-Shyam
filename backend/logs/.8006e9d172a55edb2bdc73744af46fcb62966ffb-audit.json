@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\.8006e9d172a55edb2bdc73744af46fcb62966ffb-audit.json",
+    "files": [
+        {
+            "date": 1781586448526,
+            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\error-2026-06-16.log",
+            "hash": "395c7965cb888708138c5f57a85d5eca8f84bb774996591e887e7e985ece1ab2"
+        },
+        {
+            "date": 1781634734864,
+            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\error-2026-06-17.log",
+            "hash": "03a9a99c06c50ab79e2b26356fdedf79484d5e80ecd920b3fd8d7572fcbe0652"
+        },
+        {
+            "date": 1781741368101,
+            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\error-2026-06-18.log",
+            "hash": "87e6efbd49581ff3f6e4bbb679811f275ef14e5a85d5300758388f6d37a27032"
+        }
+    ],
+    "hashType": "sha256"
+}

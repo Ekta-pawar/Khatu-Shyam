@@ -3,17 +3,28 @@ import { apiSlice } from "./apiSlice";
 export const adminApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     signup: builder.mutation({
-      query: (body) => ({ url: "/admins/signup", method: "POST", body }),
+      query: (body) => ({
+        url: "/admins/signup",
+        method: "POST",
+        body,
+      }),
       invalidatesTags: ["Admin"],
     }),
 
     login: builder.mutation({
-      query: (body) => ({ url: "/admins/login", method: "POST", body }),
+      query: (body) => ({
+        url: "/admins/login",
+        method: "POST",
+        body,
+      }),
       invalidatesTags: ["Admin"],
     }),
 
     logout: builder.mutation({
-      query: () => ({ url: "/admins/logout", method: "POST" }),
+      query: () => ({
+        url: "/admins/logout",
+        method: "POST",
+      }),
       invalidatesTags: ["Admin"],
     }),
 
@@ -23,12 +34,20 @@ export const adminApi = apiSlice.injectEndpoints({
     }),
 
     updateProfile: builder.mutation({
-      query: (formData) => ({ url: "/admins/me", method: "PATCH", body: formData }),
+      query: (formData) => ({
+        url: "/admins/me",
+        method: "PATCH",
+        body: formData,
+      }),
       invalidatesTags: ["Admin"],
     }),
 
     changePassword: builder.mutation({
-      query: (body) => ({ url: "/admins/change-password", method: "PATCH", body }),
+      query: (body) => ({
+        url: "/admins/change-password",
+        method: "PATCH",
+        body,
+      }),
     }),
 
     listAdmins: builder.query({
@@ -38,12 +57,19 @@ export const adminApi = apiSlice.injectEndpoints({
     }),
 
     createAdmin: builder.mutation({
-      query: (body) => ({ url: "/admins/create", method: "POST", body }),
+      query: (body) => ({
+        url: "/admins/create",
+        method: "POST",
+        body,
+      }),
       invalidatesTags: ["Admin"],
     }),
 
     toggleAdminStatus: builder.mutation({
-      query: (id) => ({ url: `/admins/${id}/toggle-status`, method: "PATCH" }),
+      query: (id) => ({
+        url: `/admins/${id}/toggle-status`,
+        method: "PATCH",
+      }),
       invalidatesTags: ["Admin"],
     }),
   }),
