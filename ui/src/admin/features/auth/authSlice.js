@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const STORAGE_KEY = "fmms_admin";
 
-const loadPersistedAdmin = () => {
+const loadPersistedAuth = () => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
@@ -11,17 +11,23 @@ const loadPersistedAdmin = () => {
   }
 };
 
-const persistAdmin = (admin) => {
+const persistAuth = (auth) => {
   try {
-    if (admin) localStorage.setItem(STORAGE_KEY, JSON.stringify(admin));
-    else localStorage.removeItem(STORAGE_KEY);
+    if (auth) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(auth));
+    } else {
+      localStorage.removeItem(STORAGE_KEY);
+    }
   } catch {
-    // ignore storage errors (e.g. private browsing)
+    // Ignore storage errors
   }
 };
 
+const persistedAuth = loadPersistedAuth();
+
 const initialState = {
-  admin: loadPersistedAdmin(),
+  admin: persistedAuth?.admin || null,
+  token: persistedAuth?.token || null,
   isAuthChecked: false,
 };
 
@@ -31,25 +37,44 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (state, action) => {
       state.admin = action.payload.admin;
+      state.token = action.payload.token ?? state.token;
       state.isAuthChecked = true;
-      persistAdmin(state.admin);
+
+      persistAuth({
+        admin: state.admin,
+        token: state.token,
+      });
     },
+
     clearCredentials: (state) => {
       state.admin = null;
+      state.token = null;
       state.isAuthChecked = true;
-      persistAdmin(null);
+
+      persistAuth(null);
     },
+
     setAuthChecked: (state) => {
       state.isAuthChecked = true;
     },
   },
 });
 
-export const { setCredentials, clearCredentials, setAuthChecked } = authSlice.actions;
+export const {
+  setCredentials,
+  clearCredentials,
+  setAuthChecked,
+} = authSlice.actions;
 
 export const selectCurrentAdmin = (state) => state.auth.admin;
-export const selectIsAuthChecked = (state) => state.auth.isAuthChecked;
-export const selectIsAuthenticated = (state) => Boolean(state.auth.admin);
-export const selectIsSuperAdmin = (state) => state.auth.admin?.role === "super_admin";
+
+export const selectIsAuthChecked = (state) =>
+  state.auth.isAuthChecked;
+
+export const selectIsAuthenticated = (state) =>
+  Boolean(state.auth.admin);
+
+export const selectIsSuperAdmin = (state) =>
+  state.auth.admin?.role === "super_admin";
 
 export default authSlice.reducer;

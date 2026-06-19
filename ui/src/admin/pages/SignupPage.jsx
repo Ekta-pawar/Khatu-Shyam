@@ -1,83 +1,88 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import FormField from "../components/FormField";
-import Button from "../components/Button";
-import { useSignupMutation } from "../api/adminApi";
-import { setCredentials } from "../features/auth/authSlice";
-import { getErrorMessage } from "../utils/errorMessage";
+import React from "react";
+import { Building2, Mail, Phone, User } from "lucide-react";
+import { useGetSponsorsQuery } from "../api/sponsorApi";
 
-const initialForm = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phoneNumber: "",
-  password: "",
-};
+const SponsorManagementPage = () => {
+  const { data: sponsors = [], isLoading } = useGetSponsorsQuery();
 
-/**
- * Signup is intentionally limited to bootstrapping the very first super admin —
- * the backend rejects this endpoint once any admin already exists. Subsequent
- * admins are created from the dashboard by an existing super admin.
- */
-const SignupPage = () => {
-  const [form, setForm] = useState(initialForm);
-  const [signup, { isLoading }] = useSignupMutation();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  if (isLoading) {
+    return <div>Loading sponsors...</div>;
+  }
+// const {
+//   data: sponsors,
+//   isLoading,
+//   error,
+// } = useGetSponsorsQuery();
 
-  const handleChange = (event) => {
-    setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await signup(form).unwrap();
-      dispatch(setCredentials({ admin: response.data.admin }));
-      toast.success("Super admin account created");
-      navigate("/admin/dashboard", { replace: true });
-    } catch (error) {
-      toast.error(getErrorMessage(error, "Signup failed. Please try again"));
-    }
-  };
-
+// console.log("Sponsors:", sponsors);
+// console.log("Error:", error);
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-orange-50 via-white to-slate-100 px-4 py-10">
-      <div className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-800">Create Super Admin</h1>
-        <p className="mt-1 text-sm text-slate-500">
-          This sets up the first administrator account. Once created, signup is closed and new admins can only be
-          added from the dashboard.
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold">Sponsors</h1>
+        <p className="text-slate-500">
+          All sponsor requests submitted from website.
         </p>
+      </div>
 
-        <form onSubmit={handleSubmit} className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <FormField label="First name" name="firstName" required value={form.firstName} onChange={handleChange} />
-          <FormField label="Last name" name="lastName" required value={form.lastName} onChange={handleChange} />
-          <FormField label="Email address" name="email" type="email" required value={form.email} onChange={handleChange} />
-          <FormField label="Phone number" name="phoneNumber" required value={form.phoneNumber} onChange={handleChange} />
-          <div className="sm:col-span-2">
-            <FormField
-              label="Password"
-              name="password"
-              type="password"
-              required
-              value={form.password}
-              onChange={handleChange}
-              placeholder="At least 6 characters"
-            />
+      <div className="grid gap-5">
+        {sponsors.map((sponsor) => (
+          <div
+            key={sponsor._id}
+            className="rounded-3xl border bg-white p-6 shadow-sm"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-bold text-slate-800">
+                  {sponsor.sponsorName}
+                </h2>
+
+                <p className="text-sm text-slate-500">
+                  {sponsor.sponsorType}
+                </p>
+              </div>
+
+              <span className="rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-700">
+                {sponsor.status || "Pending"}
+              </span>
+            </div>
+
+            <div className="mt-5 grid gap-4 md:grid-cols-2">
+              <div className="flex items-center gap-2">
+                <User size={16} />
+                {sponsor.contactPerson}
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Phone size={16} />
+                {sponsor.phone}
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Mail size={16} />
+                {sponsor.email}
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Building2 size={16} />
+                {sponsor.city}, {sponsor.state}
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-2xl bg-slate-50 p-4">
+              <p className="font-semibold">Address</p>
+              <p>{sponsor.address}</p>
+            </div>
+
+            <div className="mt-4 rounded-2xl bg-slate-50 p-4">
+              <p className="font-semibold">Message</p>
+              <p>{sponsor.message || "No message provided"}</p>
+            </div>
           </div>
-
-          <Button type="submit" isLoading={isLoading} className="sm:col-span-2">
-            Create account
-          </Button>
-        </form>
-
-      
+        ))}
       </div>
     </div>
   );
 };
 
-export default SignupPage;
+export default SponsorManagementPage;

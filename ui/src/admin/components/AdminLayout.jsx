@@ -6,8 +6,10 @@ import {
   Users,
   CreditCard,
   Mail,
+  Gift,
   LogOut,
   UserCog,
+  MessageSquare,
 } from "lucide-react";
 import { selectCurrentAdmin, clearCredentials } from "../features/auth/authSlice";
 import { useLogoutMutation } from "../api/adminApi";
@@ -17,6 +19,8 @@ const navItems = [
   { to: "/admin/members", label: "Members", icon: Users },
   { to: "/admin/payments", label: "Payments", icon: CreditCard },
   { to: "/admin/contacts", label: "Contact Messages", icon: Mail },
+  { to: "/admin/enquiries", label: "Enquiries", icon: MessageSquare },
+  { to: "/admin/sponsors", label: "Sponsors", icon: Gift },
   { to: "/admin/admins", label: "Admins", icon: UserCog, superAdminOnly: true },
 ];
 
@@ -39,14 +43,17 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
-      <aside className="hidden w-64 flex-col border-r border-slate-200 bg-white px-4 py-6 md:flex">
-        <div className="mb-8 px-2">
-          <p className="text-lg font-bold text-orange-600">Family Member System</p>
-          <p className="text-xs text-slate-400">Admin Panel</p>
+    <div className="flex min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(255,215,0,0.14),_transparent_32%),_linear-gradient(180deg,#fffdf7,_#f8f4ed)]">
+      <aside className="hidden w-72 flex-col border-r border-slate-200 bg-cream/95 px-5 py-6 shadow-elegant md:flex">
+        <div className="mb-8 overflow-hidden rounded-3xl bg-sun px-5 py-6 text-white shadow-gold">
+          <p className="text-xs uppercase tracking-[0.35em] text-white/80">Shyam Samiti</p>
+          <h2 className="mt-4 text-2xl font-display font-semibold">Admin Control</h2>
+          <p className="mt-3 text-sm leading-6 text-white/90">
+            Manage members, payments, and contact requests with ease.
+          </p>
         </div>
 
-        <nav className="flex flex-1 flex-col gap-1">
+        <nav className="flex flex-1 flex-col gap-2">
           {navItems
             .filter((item) => !item.superAdminOnly || admin?.role === "super_admin")
             .map(({ to, label, icon: Icon }) => (
@@ -54,8 +61,10 @@ const AdminLayout = () => {
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition ${
-                    isActive ? "bg-orange-50 text-orange-700" : "text-slate-600 hover:bg-slate-100"
+                  `flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${
+                    isActive
+                      ? "bg-orange-100/90 text-orange-800 shadow-sm"
+                      : "text-slate-700 hover:bg-slate-100"
                   }`
                 }
               >
@@ -68,7 +77,7 @@ const AdminLayout = () => {
         <button
           onClick={handleLogout}
           disabled={isLoading}
-          className="mt-4 flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 disabled:opacity-60"
+          className="mt-6 flex items-center gap-3 rounded-2xl bg-saffron/10 px-4 py-3 text-sm font-semibold text-orange-700 transition hover:bg-saffron/20 disabled:opacity-60"
         >
           <LogOut size={18} />
           Logout
@@ -76,14 +85,14 @@ const AdminLayout = () => {
       </aside>
 
       <div className="flex flex-1 flex-col">
-        <header className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4">
+        <header className="flex items-center justify-between border-b border-slate-200 bg-white/90 px-6 py-4 shadow-sm backdrop-blur-sm">
           <div>
-            <p className="text-sm text-slate-400">Welcome back,</p>
-            <p className="font-semibold text-slate-800">
+            <p className="text-sm text-slate-500">Welcome back,</p>
+            <p className="font-semibold text-slate-900">
               {admin?.firstName} {admin?.lastName}
             </p>
           </div>
-          <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-orange-700">
+          <span className="inline-flex items-center rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-orange-700">
             {admin?.role?.replace("_", " ")}
           </span>
         </header>

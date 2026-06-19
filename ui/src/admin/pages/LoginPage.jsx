@@ -25,10 +25,16 @@ const LoginPage = () => {
     event.preventDefault();
     try {
       const response = await login(form).unwrap();
-      dispatch(setCredentials({ admin: response.data.admin }));
+      console.log("Login successful. Response:", response);
+       console.log("Response:", response);
+    console.log("Redirecting to:", redirectTo);
+      dispatch(setCredentials({ admin: response.data.admin, token: response.data.token }));
       toast.success("Welcome back!");
       navigate(redirectTo, { replace: true });
+       console.log("Navigate called");
     } catch (error) {
+      console.log("Login Error:", error);
+
       toast.error(getErrorMessage(error, "Login failed. Check your credentials"));
     }
   };

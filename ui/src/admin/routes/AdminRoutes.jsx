@@ -8,10 +8,12 @@ import MemberDetailsPage from "../pages/MemberDetailsPage";
 import PaymentManagementPage from "../pages/PaymentManagementPage";
 import ContactMessagesPage from "../pages/ContactMessagesPage";
 import AdminManagementPage from "../pages/AdminManagementPage";
+import EnquiryManagementPage from "../pages/EnquiryManagementPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import AdminLayout from "../components/AdminLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import GuestRoute from "./GuestRoute";
+import SponsorManagementPage from "../pages/SponsorManagementPage";
 
 const AdminRoutes = () => (
   <Routes>
@@ -33,6 +35,8 @@ const AdminRoutes = () => (
 
         <Route path="payments" element={<PaymentManagementPage />} />
         <Route path="contacts" element={<ContactMessagesPage />} />
+        <Route path="enquiries" element={<EnquiryManagementPage />} />
+        <Route path="sponsors" element={<SponsorManagementPage />} />
 
         <Route element={<ProtectedRoute allowedRoles={["super_admin"]} />}>
           <Route path="admins" element={<AdminManagementPage />} />

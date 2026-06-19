@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLazyGetProfileQuery } from "../api/adminApi";
-import { setCredentials, clearCredentials } from "../features/auth/authSlice";
+import {
+  setCredentials,
+  clearCredentials,
+  setAuthChecked,
+} from "../features/auth/authSlice";
 
 /**
  * On first load, verifies the HttpOnly auth cookie against the backend so a
@@ -16,8 +20,19 @@ const AuthInitializer = ({ children }) => {
   useEffect(() => {
     fetchProfile()
       .unwrap()
-      .then((response) => dispatch(setCredentials({ admin: response.data.admin })))
-      .catch(() => dispatch(clearCredentials()));
+      .then((response) => {
+        if (response?.data?.admin) {
+          dispatch(setCredentials({ admin: response.data.admin }));
+        }
+      })
+      .catch((error) => {
+        if (error?.status === 401) {
+          dispatch(clearCredentials());
+        }
+      })
+      .finally(() => {
+        dispatch(setAuthChecked());
+      });
   }, [dispatch, fetchProfile]);
 
   return children;
