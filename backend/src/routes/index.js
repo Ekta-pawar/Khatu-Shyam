@@ -3,6 +3,7 @@ const adminRoutes = require("./admin.routes");
 const memberRoutes = require("./member.routes");
 const paymentRoutes = require("./payment.routes");
 const contactRoutes = require("./contact.routes");
+const enquiryRoutes = require("./enquiry.routes");
 
 const router = express.Router();
 

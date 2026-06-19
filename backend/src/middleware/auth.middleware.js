@@ -7,19 +7,12 @@ const { COOKIE_NAME } = require("../constants");
 
 const isAuthenticated = asyncHandler(async (req, res, next) => {
   
-//   const token =
-//     req.cookies?.token ||
-//     (req.headers.authorization?.startsWith("Bearer") && req.headers.authorization.split(" ")[1]);
-// console.log("Cookies:", req.cookies?.token);
-// console.log("Cookie Name:", COOKIE_NAME);
-// console.log("TOKEN:", token);
-
-
-
-  const {token} = req.cookies;
-  console.log("Cookies:", req.cookies);
-  console.log("Cookie Name:", COOKIE_NAME);
-  console.log("TOKEN:", token);
+  const token =
+    req.cookies?.[COOKIE_NAME] ||
+    (req.headers.authorization?.startsWith("Bearer") && req.headers.authorization.split(" ")[1]);
+console.log("Cookies:", req.cookies);
+console.log("Cookie Name:", COOKIE_NAME);
+console.log("TOKEN:", token);
   if (!token) {
     return next(new AppError("You are not logged in. Please log in to continue", 401));
   }

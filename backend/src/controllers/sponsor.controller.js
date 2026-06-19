@@ -1,7 +1,7 @@
 const Sponsor = require("../models/Sponsor");
 const cloudinary = require("../config/cloudinary");
 
-
+const Enquiry = require("../models/enquiry.models");
 exports.createSponsor = async (req, res) => {
   try {
     let logoUrl = "";
@@ -63,6 +63,24 @@ exports.createSponsor = async (req, res) => {
       success: false,
       message: error.message,
       error,
+    });
+  }
+};
+exports.getAllSponsors = async (req, res) => {
+  try {
+    const sponsors = await Sponsor.find().sort({
+      createdAt: -1,
+    });
+
+    res.status(200).json({
+      success: true,
+      data: sponsors,
+      total: sponsors.length,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
     });
   }
 };

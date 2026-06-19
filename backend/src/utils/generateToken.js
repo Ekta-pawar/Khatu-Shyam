@@ -12,6 +12,7 @@ const cookieOptions = () => ({
   httpOnly: true,
   secure: env.cookie.secure,
   sameSite: env.cookie.sameSite,
+  path: "/",
   maxAge: env.jwt.cookieExpiresInDays * 24 * 60 * 60 * 1000,
 });
 
@@ -27,7 +28,9 @@ const clearTokenCookie = (res) => {
     httpOnly: true,
     secure: env.cookie.secure,
     sameSite: env.cookie.sameSite,
+    path: "/",
     expires: new Date(0),
+    maxAge: 0,
   });
 };
 
