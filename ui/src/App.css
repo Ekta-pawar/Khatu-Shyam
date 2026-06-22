@@ -91,6 +91,7 @@
     color: var(--color-foreground);
     font-family: var(--font-body);
     font-feature-settings: "ss01", "liga";
+    overflow-x: hidden;
   }
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
@@ -138,4 +139,50 @@
 .scrollbar-hide {
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+.admin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.72 0.04 65) transparent;
+}
+
+.admin-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.admin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-scrollbar::-webkit-scrollbar-thumb {
+  background: oklch(0.72 0.04 65 / 0.6);
+  border-radius: 999px;
+}
+
+.admin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.62 0.05 60 / 0.8);
+}
+
+.admin-content table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-content thead th {
+  white-space: nowrap;
+}
+
+.admin-content tbody tr {
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.admin-content tbody tr:hover {
+  background-color: rgb(248 250 252 / 0.9);
+}
+
+.admin-content input,
+.admin-content select,
+.admin-content textarea {
+  min-height: 2.5rem;
 }

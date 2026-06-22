@@ -6,8 +6,10 @@ const Loader = ({ fullScreen = false, label = "Loading..." }) => {
   return (
     <div className={wrapperClass}>
       <div className="flex flex-col items-center gap-3">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-orange-500 border-t-transparent" />
-        <p className="text-sm text-slate-500">{label}</p>
+        <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white shadow-sm ring-1 ring-orange-100">
+          <div className="h-6 w-6 animate-spin rounded-full border-[3px] border-orange-500 border-t-transparent" />
+        </div>
+        <p className="text-sm font-medium text-slate-500">{label}</p>
       </div>
     </div>
   );

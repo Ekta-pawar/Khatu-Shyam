@@ -93,18 +93,65 @@ exports.createMember = async (req, res) => {
   
 };
 
+// exports.getMembers = async (req, res) => {
+//   try {
+//     console.log("Query Params:", req.query);
+
+//     const members = await Member.find();
+
+//     res.status(200).json({
+//       success: true,
+//       members,
+//     });
+//   } catch (error) {
+//     console.error("GET MEMBERS ERROR:", error);
+
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// };
 exports.getMembers = async (req, res) => {
   try {
-    console.log("Query Params:", req.query);
-
-    const members = await Member.find();
+    const members = await Member.find().sort({
+      createdAt: -1,
+    });
 
     res.status(200).json({
       success: true,
       members,
+      data: members,
     });
   } catch (error) {
     console.error("GET MEMBERS ERROR:", error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+exports.getMemberById = async (req, res) => {
+  try {
+    const member = await Member.findById(
+      req.params.id
+    );
+
+    if (!member) {
+      return res.status(404).json({
+        success: false,
+        message: "Member not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      member,
+      data: member,
+    });
+  } catch (error) {
+    console.error(error);
 
     res.status(500).json({
       success: false,

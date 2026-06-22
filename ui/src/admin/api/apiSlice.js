@@ -7,23 +7,40 @@ const rawBaseQuery = fetchBaseQuery({
   credentials: "include",
 });
 
-const baseQueryWithAuthHandling = async (args, api, extraOptions) => {
-  const stateToken = api.getState().auth?.token;
-  const persistedAuth = typeof window !== "undefined" ? localStorage.getItem("fmms_admin") : null;
-  const persistedToken = persistedAuth ? JSON.parse(persistedAuth)?.token : null;
+const baseQueryWithAuthHandling = async (
+  args,
+  api,
+  extraOptions
+) => {
+  const stateToken = api.getState()?.auth?.token;
+
+  const persistedAuth =
+    typeof window !== "undefined"
+      ? localStorage.getItem("fmms_admin")
+      : null;
+
+  const persistedToken = persistedAuth
+    ? JSON.parse(persistedAuth)?.token
+    : null;
+
   const token = stateToken || persistedToken;
 
   if (token) {
     if (typeof args === "string") {
       args = { url: args };
     }
+
     args.headers = {
       ...(args.headers || {}),
       Authorization: `Bearer ${token}`,
     };
   }
 
-  const result = await rawBaseQuery(args, api, extraOptions);
+  const result = await rawBaseQuery(
+    args,
+    api,
+    extraOptions
+  );
 
   if (result.error?.status === 401) {
     api.dispatch(clearCredentials());
@@ -34,7 +51,17 @@ const baseQueryWithAuthHandling = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
   reducerPath: "api",
+
   baseQuery: baseQueryWithAuthHandling,
-  tagTypes: ["Admin", "Member", "Payment", "Contact", "Enquiry"],
+
+  tagTypes: [
+    "Admin",
+    "Member",
+    "Payment",
+    "Contact",
+    "Enquiry",
+    "Events",
+  ],
+
   endpoints: () => ({}),
 });

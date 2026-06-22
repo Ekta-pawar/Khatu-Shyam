@@ -14,7 +14,7 @@ import AdminLayout from "../components/AdminLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import GuestRoute from "./GuestRoute";
 import SponsorManagementPage from "../pages/SponsorManagementPage";
-
+import EventsDataPage from "../pages/EventsDataPage";
 const AdminRoutes = () => (
   <Routes>
     <Route index element={<Navigate to="dashboard" replace />} />
@@ -32,12 +32,15 @@ const AdminRoutes = () => (
         <Route path="members/new" element={<MemberFormPage />} />
         <Route path="members/:id" element={<MemberDetailsPage />} />
         <Route path="members/:id/edit" element={<MemberFormPage />} />
-
+<Route path="events" element={<EventsDataPage />} />
         <Route path="payments" element={<PaymentManagementPage />} />
         <Route path="contacts" element={<ContactMessagesPage />} />
         <Route path="enquiries" element={<EnquiryManagementPage />} />
         <Route path="sponsors" element={<SponsorManagementPage />} />
-
+<Route
+  path="/admin/eventsdata"
+  element={<EventsDataPage />}
+/>
         <Route element={<ProtectedRoute allowedRoles={["super_admin"]} />}>
           <Route path="admins" element={<AdminManagementPage />} />
         </Route>

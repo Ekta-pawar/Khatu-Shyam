@@ -7,6 +7,7 @@ const morgan = require("morgan");
 // const enquiryRoutes = require("./routes/enquiry.routes");
 const sponsorRoutes = require("./routes/sponsor.routes");
 
+const eventRoutes = require("./routes/event.routes");
 
 const env = require("./config/env");
 const logger = require("./config/logger");
@@ -27,6 +28,8 @@ const app = express();
 
 
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 app.set("trust proxy", 1);
@@ -103,6 +106,7 @@ app.use("/api/v1", routes);
 
 
 
+app.use("/api/v1/events", eventRoutes);
 app.use("/api/v1/enquiry", enquiryRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/v1/sponsor", sponsorRoutes);

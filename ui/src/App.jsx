@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -21,6 +20,8 @@ import SponsorPage from "./pages/SponsorPage";
 import { store } from "./admin/app/store";
 import AuthInitializer from "./admin/components/AuthInitializer";
 import AdminRoutes from "./admin/routes/AdminRoutes";
+import MemberDetailsPage from "./pages/TeamMemberPage";
+
 
 function App() {
   return (
@@ -48,7 +49,7 @@ function App() {
             path="/team/:memberId"
             element={<TeamMemberPage />}
           />
-
+<Route path="/team/:id" element={<MemberDetailsPage />} />
           <Route path="/members" element={<MembersPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/gallery/videos" element={<VideosPage />} />

@@ -161,50 +161,69 @@ const MemberListPage = () => {
 
   return (
     <div className="space-y-6">
-      {/* ---------- header ---------- */}
-      <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr]">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight text-slate-900">Members</h1>
-              <p className="mt-1 text-sm text-slate-500">
-                Manage family member records, track status, and act on records in one place.
-              </p>
-            </div>
-            <Link to="/admin/members/new" className="shrink-0">
-              <Button className="w-full justify-center gap-2 sm:w-auto">
-                <Plus size={16} /> Add member
-              </Button>
-            </Link>
-          </div>
-
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {summaryCards.map((card) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={card.label}
-                  className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-shadow hover:shadow-md"
-                >
-                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${card.accent}`}>
-                    <Icon size={18} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-slate-400">{card.label}</p>
-                    <p className="text-2xl font-bold leading-tight text-slate-900 tabular-nums">{card.value}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+      {/* ---------- title + add button ---------- */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Members</h1>
+          <p className="mt-1 text-sm text-slate-500">
+            Manage family member records, track status, and act on records in one place.
+          </p>
         </div>
+        <Link to="/admin/members/new" className="shrink-0">
+          <Button className="w-full justify-center gap-2 sm:w-auto">
+            <Plus size={16} /> Add member
+          </Button>
+        </Link>
+      </div>
 
-        <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-base font-semibold text-slate-900">Search members</h2>
-              <p className="text-sm text-slate-500">By name, phone, email, or city.</p>
+      {/* ---------- stats row (full width) ---------- */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        {summaryCards.map((card) => {
+          const Icon = card.icon;
+          return (
+            <div
+              key={card.label}
+              className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+            >
+              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${card.accent}`}>
+                <Icon size={18} />
+              </div>
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-400">{card.label}</p>
+                <p className="text-2xl font-bold leading-tight text-slate-900 tabular-nums">{card.value}</p>
+              </div>
             </div>
+          );
+        })}
+      </div>
+
+      {/* ---------- search row (full width) ---------- */}
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <form onSubmit={handleSearchSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="relative flex-1">
+            <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <FormField
+              name="search"
+              placeholder="Search members by name, phone, email, or city…"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              className="pl-9 pr-9"
+            />
+            {search && (
+              <button
+                type="button"
+                onClick={clearSearch}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition-colors hover:text-slate-600"
+                aria-label="Clear search"
+              >
+                <X size={15} />
+              </button>
+            )}
+          </div>
+          <div className="flex shrink-0 gap-2">
+            <Button type="submit" variant="primary" className="flex-1 justify-center gap-2 sm:flex-none">
+              <Search size={16} /> Search
+            </Button>
             <button
               type="button"
               className="hidden items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 sm:inline-flex"
@@ -212,41 +231,15 @@ const MemberListPage = () => {
               <Download size={14} /> Export
             </button>
           </div>
-
-          <form onSubmit={handleSearchSubmit} className="mt-5 flex flex-1 flex-col justify-center gap-3">
-            <div className="relative">
-              <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-              <FormField
-                name="search"
-                placeholder="Search members…"
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                className="pl-9 pr-9"
-              />
-              {search && (
-                <button
-                  type="button"
-                  onClick={clearSearch}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition-colors hover:text-slate-600"
-                  aria-label="Clear search"
-                >
-                  <X size={15} />
-                </button>
-              )}
-            </div>
-            <Button type="submit" variant="primary" className="w-full justify-center gap-2">
-              <Search size={16} /> Search
-            </Button>
-            {appliedSearch && (
-              <p className="text-xs text-slate-500">
-                Showing results for <span className="font-medium text-slate-700">"{appliedSearch}"</span> ·{" "}
-                <button type="button" onClick={clearSearch} className="text-indigo-600 hover:underline">
-                  clear
-                </button>
-              </p>
-            )}
-          </form>
-        </div>
+        </form>
+        {appliedSearch && (
+          <p className="mt-3 text-xs text-slate-500">
+            Showing results for <span className="font-medium text-slate-700">"{appliedSearch}"</span> ·{" "}
+            <button type="button" onClick={clearSearch} className="text-indigo-600 hover:underline">
+              clear
+            </button>
+          </p>
+        )}
       </div>
 
       {/* ---------- states ---------- */}
@@ -272,9 +265,9 @@ const MemberListPage = () => {
 
       {/* ---------- table ---------- */}
       {!isFetching && pageCount > 0 && (
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="admin-scrollbar overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
           <div className="hidden md:block">
-            <table className="min-w-full divide-y divide-slate-200 text-sm">
+            <table className="w-full min-w-[960px] divide-y divide-slate-200 text-sm">
               <thead className="bg-slate-50/80">
                 <tr>
                   <th className="px-5 py-3.5 text-left">

@@ -1,20 +1,68 @@
-import React from "react";
+import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { PageShell } from "../components/PageShell";
 
 import heroTemple from "../assets/hero-temple.jpg";
 import deity from "../assets/shyam-deity.jpg";
 import event1 from "../assets/event-1.jpg";
 
-import { upcomingEvents } from "../data/events";
-import { members, tierLabel } from "../data/members";
-
 import {
   ArrowRight,
   CalendarDays,
   MapPin,
 } from "lucide-react";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
+
+const formatDate = (value) => {
+  if (!value) return "-";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "-";
+
+  return date.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+};
+
+const formatTierLabel = (tier) => {
+  if (!tier) return "Member";
+
+  return tier
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+};
+
 function HomePage() {
+  const [homeMembers, setHomeMembers] = useState([]);
+  const [homeEvents, setHomeEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchHomeData = async () => {
+      try {
+        const [membersRes, eventsRes] = await Promise.all([
+          axios.get(`${API_BASE}/members`),
+          axios.get(`${API_BASE}/events/upcoming`),
+        ]);
+
+        const members = membersRes.data.members || membersRes.data.data || [];
+        const goldenMembers = members.filter((member) =>
+          String(member.tier || "").toLowerCase().includes("gold")
+        );
+
+        setHomeMembers((goldenMembers.length ? goldenMembers : members).slice(0, 3));
+        setHomeEvents((eventsRes.data.data || []).slice(0, 3));
+      } catch (error) {
+        console.error("Error loading home page data:", error);
+      }
+    };
+
+    fetchHomeData();
+  }, []);
+
   return (
     <PageShell>
             <section className="relative min-h-[92vh] overflow-hidden">
@@ -34,7 +82,7 @@ function HomePage() {
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl">
            Shri Shri Khatushyam 
             <span className="block text-yellow-300">
-              Sewa Samiti
+              Seva Samiti
             </span>
           </h1>
 
@@ -166,36 +214,41 @@ function HomePage() {
           </h2>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {members.slice(0,3).map((m) => (
+            {homeMembers.map((m) => (
               <Link
-                key={m.id}
-                to={`/team/${m.id}`}
+                key={m._id}
+                to={`/team/${m._id}`}
                 className="group overflow-hidden rounded-3xl bg-white shadow"
               >
                 <img
-                  src={m.photo}
-                  alt={m.name}
+                  src={m.profileImage || deity}
+                  alt={m.fullName}
                   className="aspect-[4/5] w-full object-cover"
                 />
 
                 <div className="p-6">
                   <span>
-                    {tierLabel[m.tier]}
+                    {formatTierLabel(m.tier)}
                   </span>
 
                   <h3 className="mt-2 text-2xl">
-                    {m.name}
+                    {m.fullName}
                   </h3>
 
-                  <p>{m.title}</p>
+                  <p>{m.occupation || m.businessDetails?.businessType || "Golden Member"}</p>
 
-                  <p className="mt-4 text-orange-500">
-                    View Profile →
+                  <p className="mt-4 inline-flex items-center gap-1 text-orange-500">
+                    View Profile <ArrowRight size={14} />
                   </p>
                 </div>
               </Link>
             ))}
           </div>
+          {homeMembers.length === 0 && (
+            <p className="text-center text-muted-foreground">
+              Golden members will appear here soon.
+            </p>
+          )}
         </div>
       </section>
             <section className="mx-auto max-w-7xl px-5 py-24">
@@ -204,13 +257,13 @@ function HomePage() {
         </h2>
 
         <div className="grid gap-8 md:grid-cols-3">
-          {upcomingEvents.map((e) => (
+          {homeEvents.map((e) => (
             <article
-              key={e.title}
+              key={e._id}
               className="overflow-hidden rounded-2xl bg-white shadow"
             >
               <img
-                src={e.image}
+                src={e.image || event1}
                 alt={e.title}
                 className="aspect-[4/3] w-full object-cover"
               />
@@ -222,7 +275,7 @@ function HomePage() {
 
                 <p className="mt-3 flex items-center gap-2">
                   <CalendarDays size={14} />
-                  {e.date}
+                  {formatDate(e.eventDate)}
                 </p>
 
                 <p className="mt-2 flex items-center gap-2">
@@ -233,6 +286,11 @@ function HomePage() {
             </article>
           ))}
         </div>
+        {homeEvents.length === 0 && (
+          <p className="mt-6 text-muted-foreground">
+            Upcoming events will appear here soon.
+          </p>
+        )}
       </section>
       
    

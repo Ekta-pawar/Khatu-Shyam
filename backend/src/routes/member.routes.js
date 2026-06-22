@@ -50,9 +50,13 @@ const router = express.Router();
 const {
   createMember,
   getMembers,
+
+  getMemberById,
 } = require("../controllers/member.controller");
 
 router.post("/create", createMember);
+
 router.get("/", getMembers);
 
+router.get("/:id", getMemberById);
 module.exports = router;

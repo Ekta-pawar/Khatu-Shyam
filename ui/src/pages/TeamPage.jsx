@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { PageShell, PageHeader } from "../components/PageShell";
-import {
-  members,
-  tierLabel,
-} from "../data/members";
-import { ArrowRight, Users, Star, Crown, Filter } from "lucide-react";
+import { tierLabel } from "../data/members";
+import { ArrowRight, Users, Star, Crown } from "lucide-react";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const tierOrder = [
   { id: "all", label: "All Members", icon: Users },
@@ -14,177 +14,53 @@ const tierOrder = [
   { id: "KaryaKarani", label: "Karyakarani Members", icon: Users },
 ];
 
-// Additional dummy data for more members
-const dummyMembers = [
-  {
-    id: "dummy-1",
-    name: "Shri Rajesh Khanna",
-    tier: "golden",
-    title: "Senior Patron & Education Seva",
-    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop",
-    birthday: "15 January 1965",
-    joinedYear: 2005,
-    city: "Jaipur, Rajasthan",
-    contribution: "Education Scholarship Program",
-    bio: "Shri Rajesh Ji has been sponsoring education for underprivileged children for the past 15 years and actively participates in all samiti events.",
-    business: {
-      company: "Khanna Educational Trust",
-      position: "Chairman",
-      experience: "30+ years in education sector",
-      industry: "Education",
-    },
-    family: [
-      { name: "Smt. Anita Khanna", relation: "Wife", birthday: "20 March 1968", occupation: "Teacher" },
-      { name: "Shri Abhishek Khanna", relation: "Son", birthday: "10 June 1995", occupation: "Doctor" },
-    ],
-  },
-  {
-    id: "dummy-2",
-    name: "Smt. Priyanka Mehta",
-    tier: "golden",
-    title: "Women's Wing President",
-    photo: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=500&fit=crop",
-    birthday: "5 May 1975",
-    joinedYear: 2010,
-    city: "Delhi NCR",
-    contribution: "Mahila Mandal Coordinator",
-    bio: "Smt. Priyanka Ji leads the women's wing and organizes monthly bhajan sessions, cooking competitions, and charitable activities for women devotees.",
-    business: {
-      company: "Mehta Interior Designs",
-      position: "Founder",
-      experience: "20+ years in interior design",
-      industry: "Interior Design",
-    },
-    family: [
-      { name: "Shri Amit Mehta", relation: "Husband", birthday: "12 August 1973", occupation: "Architect" },
-      { name: "Ku. Riya Mehta", relation: "Daughter", birthday: "25 December 2005", occupation: "Student" },
-    ],
-  },
-  {
-    id: "dummy-3",
-    name: "Shri Vijay Singh",
-    tier: "Diamond",
-    title: "Medical Camp Coordinator",
-    photo: "https://images.unsplash.com/photo-1580894732931-5f6e9a8b7b3c?w=400&h=500&fit=crop",
-    birthday: "8 August 1980",
-    joinedYear: 2015,
-    city: "Gurugram, Haryana",
-    contribution: "Free Health Checkup Camps",
-    bio: "Shri Vijay Ji organizes free medical camps during festivals and coordinates with doctors to provide healthcare services to needy devotees.",
-    business: {
-      company: "Singh Healthcare Solutions",
-      position: "CEO",
-      experience: "15+ years in healthcare",
-      industry: "Healthcare",
-    },
-    family: [
-      { name: "Smt. Neha Singh", relation: "Wife", birthday: "15 November 1982", occupation: "Doctor" },
-      { name: "Master Arjun Singh", relation: "Son", birthday: "3 March 2012", occupation: "Student" },
-    ],
-  },
-  {
-    id: "dummy-4",
-    name: "Shri Alok Sharma",
-    tier: "Diamond",
-    title: "Cultural Program Director",
-    photo: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=500&fit=crop",
-    birthday: "28 February 1985",
-    joinedYear: 2016,
-    city: "Noida, UP",
-    contribution: "Janmashtami Cultural Events",
-    bio: "Shri Alok Ji directs all cultural programs during Janmashtami Mahotsav, coordinating with artists and managing stage performances.",
-    business: {
-      company: "Sharma Events & Entertainment",
-      position: "Director",
-      experience: "18+ years in event management",
-      industry: "Events & Entertainment",
-    },
-    family: [
-      { name: "Smt. Pooja Sharma", relation: "Wife", birthday: "10 July 1987", occupation: "Dancer" },
-      { name: "Ku. Ishita Sharma", relation: "Daughter", birthday: "22 August 2015", occupation: "Student" },
-    ],
-  },
-  {
-    id: "dummy-5",
-    name: "Shri Mukesh Agarwal",
-    tier: "KaryaKarani",
-    title: "Transport Coordinator",
-    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop",
-    birthday: "12 December 1992",
-    joinedYear: 2019,
-    city: "Faridabad, Haryana",
-    contribution: "Bus Yatra Management",
-    bio: "Shri Mukesh Ji manages all transportation for monthly yatras to Khatu Shyam Ji and Salasar Balaji, ensuring safe and comfortable journeys.",
-    business: {
-      company: "Agarwal Travels",
-      position: "Owner",
-      experience: "10+ years in transport",
-      industry: "Transport & Logistics",
-    },
-    family: [
-      { name: "Smt. Kavita Agarwal", relation: "Wife", birthday: "5 February 1994", occupation: "Homemaker" },
-      { name: "Master Laksh Agarwal", relation: "Son", birthday: "15 July 2019" },
-    ],
-  },
-  {
-    id: "dummy-6",
-    name: "Shri Ravi Shankar",
-    tier: "KaryaKarani",
-    title: "Prasad Distribution Head",
-    photo: "https://images.unsplash.com/photo-1580894732931-5f6e9a8b7b3c?w=400&h=500&fit=crop",
-    birthday: "3 March 1990",
-    joinedYear: 2018,
-    city: "Ghaziabad, UP",
-    contribution: "Annapurna Bhandara",
-    bio: "Shri Ravi Ji coordinates the Annapurna Bhandara during festivals, managing food preparation and distribution to thousands of devotees.",
-    business: {
-      company: "Shankar Sweets & Catering",
-      position: "Proprietor",
-      experience: "12+ years in catering",
-      industry: "Food & Catering",
-    },
-    family: [
-      { name: "Smt. Sunita Shankar", relation: "Wife", birthday: "18 August 1992", occupation: "Homemaker" },
-      { name: "Master Krish Shankar", relation: "Son", birthday: "25 December 2018" },
-    ],
-  },
-  {
-    id: "dummy-7",
-    name: "Shri Pankaj Mittal",
-    tier: "KaryaKarani",
-    title: "Decoration Committee Head",
-    photo: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=500&fit=crop",
-    birthday: "20 July 1995",
-    joinedYear: 2020,
-    city: "Delhi NCR",
-    contribution: "Festival Decoration & Lighting",
-    bio: "Shri Pankaj Ji leads the decoration team, creating beautiful mandap setups and lighting arrangements for all samiti events.",
-    business: {
-      company: "Mittal Events & Decor",
-      position: "Founder",
-      experience: "8+ years in event decoration",
-      industry: "Event Decoration",
-    },
-    family: [
-      { name: "Smt. Ritu Mittal", relation: "Wife", birthday: "10 October 1996", occupation: "Fashion Designer" },
-    ],
-  },
-];
-
-// Merge original members with dummy data
-const allMembers = [...members, ...dummyMembers];
-
 function TeamPage() {
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [activeTier, setActiveTier] = useState("all");
 
-  const getFilteredMembers = () => {
-    if (activeTier === "all") {
-      return allMembers;
-    }
-    return allMembers.filter((m) => m.tier === activeTier);
-  };
+  useEffect(() => {
+    const fetchMembers = async () => {
+      setLoading(true);
+      setError(false);
+      try {
+        const response = await axios.get(`${API_BASE}/members`);
+        setMembers(response.data.data || []);
+      } catch (err) {
+        console.error("Error fetching members:", err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const filteredMembers = getFilteredMembers();
+    fetchMembers();
+  }, []);
+
+  const filteredMembers =
+    activeTier === "all" ? members : members.filter((m) => m.tier === activeTier);
+
+  if (loading) {
+    return (
+      <PageShell>
+        <div className="py-20 text-center">
+          <h2 className="text-2xl font-semibold">Loading Team...</h2>
+        </div>
+      </PageShell>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageShell>
+        <div className="py-20 text-center">
+          <h3 className="text-2xl font-semibold text-maroon">Could not load team members</h3>
+          <p className="mt-2 text-muted-foreground">Please refresh the page or try again shortly.</p>
+        </div>
+      </PageShell>
+    );
+  }
 
   return (
     <PageShell>
@@ -230,8 +106,8 @@ function TeamPage() {
         <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
           {filteredMembers.map((member) => (
             <Link
-              key={member.id}
-              to={`/team/${member.id}`}
+              key={member._id}
+              to={`/team/${member._id}`}
               className="group grid gap-6 rounded-3xl bg-card p-6 shadow-elegant transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl sm:grid-cols-[140px_1fr]"
             >
               <div className="overflow-hidden rounded-2xl">

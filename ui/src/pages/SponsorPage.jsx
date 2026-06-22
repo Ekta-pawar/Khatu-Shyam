@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { PageShell, PageHeader } from "../components/PageShell";
 import { toast } from "react-toastify";
 import {
@@ -300,14 +300,14 @@ function SponsorPage() {
 
       {/* ── Sponsor Form Modal ── */}
       {showSponsorForm ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm ">
           <div className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl">
 
             {/* Header */}
-            <div className="bg-gradient-to-r from-orange-500 to-yellow-500 px-8 py-6 text-white">
+            <div className="bg-gradient-to-r from-orange-500 to-yellow-500 px-4 py-6 text-white">
               <button
                 onClick={() => setShowSponsorForm(false)}
-                className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/20"
+                className="absolute right-5 top-5 flex h-10 w-12 items-center justify-center rounded-full bg-white/20"
               >
                 <X size={20} />
               </button>
@@ -525,7 +525,7 @@ function SponsorPage() {
       ) : (
         /* ── Enquiry Form ── */
         <section>
-          <div className="mx-auto max-w-3xl rounded-3xl bg-white p-8 shadow-xl">
+          <div className="mx-auto max-w-3xl rounded-3xl bg-white p-6 shadow-xl">
             <h2 className="mb-8 flex items-center gap-3 text-3xl font-bold text-slate-800">
               <Send className="text-yellow-600" />
               Enquiry Form

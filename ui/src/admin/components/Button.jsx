@@ -1,15 +1,15 @@
 const variants = {
-  primary: "bg-orange-600 text-white hover:bg-orange-700 disabled:bg-orange-300",
+  primary: "bg-orange-600 text-white shadow-sm shadow-orange-200 hover:bg-orange-700 hover:shadow-md disabled:bg-orange-300",
   secondary: "bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:text-slate-400",
-  danger: "bg-red-600 text-white hover:bg-red-700 disabled:bg-red-300",
-  outline: "border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:text-slate-400",
+  danger: "bg-red-600 text-white shadow-sm shadow-red-200 hover:bg-red-700 disabled:bg-red-300",
+  outline: "border border-slate-300 bg-white text-slate-700 hover:border-orange-200 hover:bg-orange-50 hover:text-orange-700 disabled:text-slate-400",
 };
 
 const Button = ({ children, variant = "primary", isLoading = false, className = "", type = "button", ...rest }) => {
   return (
     <button
       type={type}
-      className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition disabled:cursor-not-allowed ${variants[variant]} ${className}`}
+      className={`inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-200 focus:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:shadow-none ${variants[variant]} ${className}`}
       disabled={isLoading || rest.disabled}
       {...rest}
     >

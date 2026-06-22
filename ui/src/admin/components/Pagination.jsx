@@ -4,7 +4,7 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
   if (!totalPages || totalPages <= 1) return null;
 
   return (
-    <div className="mt-4 flex items-center justify-between">
+    <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <p className="text-xs text-slate-500">
         Page {page} of {totalPages}
       </p>
