@@ -1,10 +1,10 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border/60 bg-[oklch(0.22_0.04_40)] text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-4">
+      <div className="mx-auto grid max-w-8xl gap-10 px-5 py-14 md:grid-cols-4 pr-20">
 
         {/* Logo & About */}
         <div>
@@ -14,8 +14,8 @@ function SiteFooter() {
             </span>
 
             <span className="text-lg font-semibold">
-              Sri Sri Khattu Shyam
-Seva Samiti
+             Shri Shri Khatu Shyam
+Seva Samiti (Reg.)
             </span>
           </div>
 

@@ -80,9 +80,9 @@ function HomePage() {
           </p>
 
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl">
-           Shri Shri Khatushyam 
+           Shri Shri Khatu Shyam 
             <span className="block text-yellow-300">
-              Seva Samiti
+              Seva Samiti (Reg.)
             </span>
           </h1>
 
@@ -162,12 +162,12 @@ function HomePage() {
     <img
       src={deity}
       alt="Shri Khatu Shyam Ji"
-      className="h-[560px] w-full rounded-3xl object-cover"
+      className="h-[460px] w-full rounded-3xl object-cover"
     />
   </div>
 
   <div className="mb-28 flex flex-col ">
-    <p className="mb-4 text-xs uppercase tracking-[0.35em] text-orange-500">
+    <p className="mb-5 text-xs uppercase tracking-[0.35em] text-orange-500">
       हारे का सहारा
     </p>
 
@@ -176,14 +176,14 @@ function HomePage() {
       nothing left.
     </h2>
 
-    <p className="mt-5 text-gray-600">
+    <p className="mt-5 text-gray-600 pt-0 pb-5 ">
       For over thirty years, our samiti has
       gathered devotees to sing the names of
       Shyam Baba and walk together on the path
       of bhakti.
     </p>
 
-    <div className="mt-8 grid grid-cols-3 gap-4">
+    <div className="mt-9 grid grid-cols-3 gap-4">
       {[
         { n: "30+", l: "Years of Seva" },
         { n: "5000+", l: "Families" },
@@ -213,8 +213,9 @@ function HomePage() {
             Pillars of the Samiti
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {homeMembers.map((m) => (
+<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">    
+  
+          {homeMembers.map((m) => (
               <Link
                 key={m._id}
                 to={`/team/${m._id}`}

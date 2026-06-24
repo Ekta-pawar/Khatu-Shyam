@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./backend
+    container_name: khatu-backend
+    ports:
+      - "5001:5000"
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    build: ./ui
+    container_name: khatu-frontend
+    ports:
+    
+    - "5174:5173"
+    env_file:
+      - ./ui/.env
+    depends_on:
+      - backend

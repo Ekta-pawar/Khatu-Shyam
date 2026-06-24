@@ -127,11 +127,11 @@ function SiteHeader() {
 
           <span className="flex flex-col leading-tight">
             <span className="text-lg font-semibold text-maroon">
-             Shri Shri Khatushyam
+             Shri Shri Khatu Shyam
             </span>
 
             <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
-              Sewa Samiti
+              Sewa Samiti (Reg.)
             </span>
           </span>
         </Link>

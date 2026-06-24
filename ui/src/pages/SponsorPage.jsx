@@ -26,7 +26,7 @@ export const createEnquiry = (data) => {
 };
 
 export const createSponsor = (data) => {
-  return axios.post("http://localhost:5000/api/sponsor/create", data, {
+  return axios.post("http://localhost:5000/api/v1/sponsor/create", data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 };

@@ -13,7 +13,7 @@ import {
 const tiers = [
   {
     name: "Diamond Members",
-    price: "₹20,100 / year",
+    price: "₹11,00,000 / year",
     buttonText: "Become Diamond Member",
     perks: [
       "Member ID & welcome kit",
@@ -23,7 +23,7 @@ const tiers = [
   },
   {
     name: "Golden Members",
-    price: "₹11,000 / year",
+    price: "₹5,00,000 / year",
     buttonText: "Become Golden Member",
     featured: true,
     perks: [
@@ -35,7 +35,7 @@ const tiers = [
   },
   {
     name: "Karyakarani Members",
-    price: "₹2,000 / Year",
+    price: "₹3,00,000 / Year",
     buttonText: "Become Karyakarani Member",
     perks: [
       "All Golden benefits",
@@ -44,6 +44,39 @@ const tiers = [
       "Trustee voting rights",
     ],
   },
+  {
+  name: "Even Member",
+  price: "₹51,000 / Year",
+  buttonText: "Become Even Member",
+  perks: [
+    "Member ID & welcome kit",
+    "Event invitations",
+    "Monthly satsang participation",
+    "Community networking access",
+  ],
+},
+{
+  name: "Prernasrot",
+  price: "₹21,000 / Year",
+  buttonText: "Join Prerna Sutra",
+  perks: [
+    "Special recognition certificate",
+    "Priority event registration",
+    "Bhajan & spiritual workshops",
+    "Community service participation",
+  ],
+},
+{
+  name: "Shrakshak",
+  price: "₹16,000-51,000 / Year",
+  buttonText: "Become Shrakshak",
+  perks: [
+    "Member ID card",
+    "Regular event updates",
+    "Access to satsang gatherings",
+    "Volunteer opportunities",
+  ],
+},
 ];
 
 const GENDERS         = ["Male", "Female", "Other"];
