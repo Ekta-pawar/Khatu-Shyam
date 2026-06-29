@@ -190,13 +190,13 @@ const DashboardPage = () => {
               Keep members, events, payments, messages, enquiries, sponsors, and admin access organized from one polished control center.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link
+              {/* <Link
                 to="/admin/members/new"
                 className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-orange-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:bg-orange-700"
               >
                 Add Member
                 <ArrowRight size={15} />
-              </Link>
+              </Link> */}
               <Link
                 to="/admin/events"
                 className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-700"

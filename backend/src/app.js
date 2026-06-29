@@ -111,7 +111,7 @@ app.use("/api/v1/enquiry", enquiryRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/v1/sponsor", sponsorRoutes);
 // app.use("/api/enquiry", enquiryRoutes);
-app.use("/api/members", memberRoutes);
+app.use("/api/v1/members", memberRoutes);
 
 /* ------------------------------------------------------------------ */
 /* Error handling                                                      */

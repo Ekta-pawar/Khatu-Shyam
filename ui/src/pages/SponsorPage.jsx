@@ -525,170 +525,147 @@ function SponsorPage() {
       ) : (
         /* ── Enquiry Form ── */
         <section>
-          <div className="mx-auto max-w-3xl rounded-3xl bg-white p-6 shadow-xl">
-            <h2 className="mb-8 flex items-center gap-3 text-3xl font-bold text-slate-800">
-              <Send className="text-yellow-600" />
+          <div className="mx-auto max-w-2xl rounded-3xl bg-white p-6 shadow-xl">
+            <h2 className="mb-5 flex items-center gap-2 text-2xl font-bold text-slate-800">
+              <Send size={20} className="text-yellow-600" />
               Enquiry Form
             </h2>
 
-            {/* ✅ form uses handleEnquirySubmit */}
-            <form onSubmit={handleEnquirySubmit} className="space-y-6">
+            <form onSubmit={handleEnquirySubmit} className="space-y-4">
 
-              {/* Contact Person */}
-              <div>
-                <label className="mb-2 block text-lg font-medium">
-                  Contact Person Name <span className="text-yellow-600">*</span>
-                </label>
-                <div className="flex items-center rounded-3xl border px-5 py-4">
-                  <User className="mr-3 text-gray-400" />
-                  {/* ✅ bound to enquiryData */}
-                  <input
-                    type="text"
-                    name="contactPerson"
-                    value={enquiryData.contactPerson}
-                    onChange={handleEnquiryChange}
-                    required
-                    className="w-full outline-none"
-                    placeholder="Enter name"
-                  />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1 block text-sm font-medium">
+                    Contact Person <span className="text-yellow-600">*</span>
+                  </label>
+                  <div className="flex items-center rounded-xl border px-3 py-2.5">
+                    <User size={16} className="mr-2 text-gray-400" />
+                    <input
+                      type="text"
+                      name="contactPerson"
+                      value={enquiryData.contactPerson}
+                      onChange={handleEnquiryChange}
+                      required
+                      className="w-full text-sm outline-none"
+                      placeholder="Enter name"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-sm font-medium">
+                    Organisation <span className="text-yellow-600">*</span>
+                  </label>
+                  <div className="flex items-center rounded-xl border px-3 py-2.5">
+                    <Building2 size={16} className="mr-2 text-gray-400" />
+                    <input
+                      type="text"
+                      name="organisationName"
+                      value={enquiryData.organisationName}
+                      onChange={handleEnquiryChange}
+                      required
+                      className="w-full text-sm outline-none"
+                      placeholder="Organisation name"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Organisation */}
-              <div>
-                <label className="mb-2 block text-lg font-medium">
-                  Organisation Name <span className="text-yellow-600">*</span>
-                </label>
-                <div className="flex items-center rounded-3xl border px-5 py-4">
-                  <Building2 className="mr-3 text-gray-400" />
-                  {/* ✅ bound to enquiryData */}
-                  <input
-                    type="text"
-                    name="organisationName"
-                    value={enquiryData.organisationName}
-                    onChange={handleEnquiryChange}
-                    required
-                    className="w-full outline-none"
-                    placeholder="Organisation name"
-                  />
-                </div>
-              </div>
-
-              {/* Phone */}
-              <div>
-                <label className="mb-2 block text-lg font-medium">
-                  Phone Number <span className="text-yellow-600">*</span>
-                </label>
-                <div className="flex gap-4">
-                  <div className="flex flex-1 items-center rounded-3xl border px-5 py-4">
-                    <Phone className="mr-3 text-gray-400" />
-                    {/* ✅ bound to enquiryData */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1 block text-sm font-medium">
+                    Phone <span className="text-yellow-600">*</span>
+                  </label>
+                  <div className="flex items-center rounded-xl border px-3 py-2.5">
+                    <Phone size={16} className="mr-2 text-gray-400" />
                     <input
                       type="tel"
                       name="phone"
                       value={enquiryData.phone}
                       onChange={handleEnquiryChange}
                       required
-                      className="w-full outline-none"
-                      placeholder="Enter 10-digit mobile number"
+                      className="w-full text-sm outline-none"
+                      placeholder="+91 00000 00000"
                     />
                   </div>
-                  <button
-                    type="button"
-                    className="rounded-3xl bg-green-600 px-8 font-semibold text-white"
-                  >
-                    Get OTP
-                  </button>
                 </div>
-                <p className="mt-2 text-sm text-gray-500">
-                  Request an OTP to verify your mobile number before submission.
-                </p>
-              </div>
 
-              {/* Email */}
-              <div>
-                <label className="mb-2 block text-lg font-medium">
-                  Email ID <span className="text-yellow-600">*</span>
-                </label>
-                <div className="flex items-center rounded-3xl border px-5 py-4">
-                  <Mail className="mr-3 text-gray-400" />
-                  {/* ✅ bound to enquiryData */}
-                  <input
-                    type="email"
-                    name="email"
-                    value={enquiryData.email}
-                    onChange={handleEnquiryChange}
-                    required
-                    className="w-full outline-none"
-                    placeholder="Enter email"
-                  />
+                <div>
+                  <label className="mb-1 block text-sm font-medium">
+                    Email <span className="text-yellow-600">*</span>
+                  </label>
+                  <div className="flex items-center rounded-xl border px-3 py-2.5">
+                    <Mail size={16} className="mr-2 text-gray-400" />
+                    <input
+                      type="email"
+                      name="email"
+                      value={enquiryData.email}
+                      onChange={handleEnquiryChange}
+                      required
+                      className="w-full text-sm outline-none"
+                      placeholder="your@email.com"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Amount */}
               <div>
-                <label className="mb-2 block text-lg font-medium">
+                <label className="mb-1 block text-sm font-medium">
                   Sponsor Amount <span className="text-yellow-600">*</span>
                 </label>
-                <div className="flex items-center rounded-3xl border px-5 py-4">
-                  <IndianRupee className="mr-3 text-gray-400" />
-                  {/* ✅ bound to enquiryData */}
+                <div className="flex items-center rounded-xl border px-3 py-2.5">
+                  <IndianRupee size={16} className="mr-2 text-gray-400" />
                   <input
                     type="number"
                     name="amount"
                     value={enquiryData.amount}
                     onChange={handleEnquiryChange}
                     required
-                    className="w-full outline-none"
+                    className="w-full text-sm outline-none"
                     placeholder="Enter amount"
                   />
                 </div>
               </div>
 
-              {/* Address */}
               <div>
-                <label className="mb-2 block text-lg font-medium">
+                <label className="mb-1 block text-sm font-medium">
                   Address <span className="text-yellow-600">*</span>
                 </label>
-                <div className="flex rounded-3xl border px-5 py-4">
-                  <MapPin className="mr-3 mt-1 text-gray-400" />
-                  {/* ✅ bound to enquiryData */}
+                <div className="flex rounded-xl border px-3 py-2.5">
+                  <MapPin size={16} className="mr-2 mt-0.5 text-gray-400" />
                   <textarea
-                    rows={4}
+                    rows={2}
                     name="address"
                     value={enquiryData.address}
                     onChange={handleEnquiryChange}
                     required
-                    className="w-full resize-none outline-none"
+                    className="w-full resize-none text-sm outline-none"
                     placeholder="Enter address"
                   />
                 </div>
               </div>
 
-              {/* Message */}
               <div>
-                <label className="mb-2 block text-lg font-medium">Message</label>
-                <div className="flex rounded-3xl border px-5 py-4">
-                  <MessageSquare className="mr-3 mt-1 text-gray-400" />
-                  {/* ✅ bound to enquiryData */}
+                <label className="mb-1 block text-sm font-medium">Message</label>
+                <div className="flex rounded-xl border px-3 py-2.5">
+                  <MessageSquare size={16} className="mr-2 mt-0.5 text-gray-400" />
                   <textarea
-                    rows={4}
+                    rows={2}
                     name="message"
                     value={enquiryData.message}
                     onChange={handleEnquiryChange}
-                    className="w-full resize-none outline-none"
+                    className="w-full resize-none text-sm outline-none"
                     placeholder="Write your message"
                   />
                 </div>
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-3 rounded-3xl bg-gradient-to-r from-yellow-400 to-yellow-600 py-5 text-xl font-semibold text-white"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-600 py-3 text-sm font-semibold text-white"
               >
-                <Send size={22} />
-                Enquiry Send
+                <Send size={16} />
+                Submit Enquiry
               </button>
             </form>
           </div>

@@ -245,8 +245,8 @@ const MemberFormPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!personalInfo.firstName || !personalInfo.lastName || !personalInfo.gender || !personalInfo.phone) {
-      toast.error("Please fill in all required personal information fields");
+    if (!personalInfo.firstName || !personalInfo.phone) {
+      toast.error("First name and phone number are required");
       return;
     }
 

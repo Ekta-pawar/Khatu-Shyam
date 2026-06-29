@@ -71,26 +71,76 @@
 
 // module.exports = { createMember, getMembers, getMemberById, updateMember, deleteMember };
 const Member = require("../models/member.model");
+const cloudinary = require("../config/cloudinary");
+
+const JSON_FIELDS = [
+  "jobDetails",
+  "businessDetails",
+  "familyMembers",
+  "anniversaries",
+  "customDates",
+  "specialDates",
+  "familyDetails",
+];
 
 exports.createMember = async (req, res) => {
   try {
-    const member = await Member.create(req.body);
+    const data = { ...req.body };
+
+    for (const field of JSON_FIELDS) {
+      if (typeof data[field] === "string" && data[field]) {
+        data[field] = JSON.parse(data[field]);
+      }
+    }
+
+    if (typeof data.hasBusiness === "string") data.hasBusiness = data.hasBusiness === "true";
+    if (typeof data.hasJob === "string") data.hasJob = data.hasJob === "true";
+
+    if (!data.fullName && (data.firstName || data.lastName)) {
+      data.fullName = `${data.firstName || ""} ${data.lastName || ""}`.trim();
+    }
+
+    if (data.specialDates) {
+      if (data.specialDates.anniversaries?.length) data.anniversaries = data.specialDates.anniversaries;
+      if (data.specialDates.customDates?.length) data.customDates = data.specialDates.customDates;
+      delete data.specialDates;
+    }
+
+    if (data.familyDetails?.members?.length) {
+      data.familyMembers = data.familyDetails.members;
+      delete data.familyDetails;
+    }
+
+    const existing = await Member.findOne({ phone: data.phone });
+    if (existing) {
+      return res.status(400).json({
+        success: false,
+        message: "Member with this phone number already exists",
+      });
+    }
+
+    if (req.file) {
+      const b64 = Buffer.from(req.file.buffer).toString("base64");
+      const dataURI = `data:${req.file.mimetype};base64,${b64}`;
+      const result = await cloudinary.uploader.upload(dataURI, {
+        folder: "khatu-shyam/members",
+      });
+      data.profileImage = result.secure_url;
+    }
+
+    const member = await Member.create(data);
 
     res.status(201).json({
       success: true,
       member,
     });
   } catch (error) {
-  console.error("GET MEMBERS ERROR:");
-  console.error(error);
-
-  res.status(500).json({
-    success: false,
-    message: error.message,
-  });
-}
-
-  
+    console.error("CREATE MEMBER ERROR:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 // exports.getMembers = async (req, res) => {
@@ -159,4 +209,43 @@ exports.getMemberById = async (req, res) => {
     });
   }
 };
-  
+
+exports.getPillarMembers = async (req, res) => {
+  try {
+    const members = await Member.find({ tier: "Samiti Pillar" })
+      .sort({ createdAt: -1 })
+      .limit(12);
+
+    res.status(200).json({
+      success: true,
+      data: members,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+exports.deleteMember = async (req, res) => {
+  try {
+    const member = await Member.findByIdAndDelete(req.params.id);
+
+    if (!member) {
+      return res.status(404).json({
+        success: false,
+        message: "Member not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Member deleted successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+

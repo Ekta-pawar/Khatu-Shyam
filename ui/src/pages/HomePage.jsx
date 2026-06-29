@@ -44,16 +44,12 @@ function HomePage() {
     const fetchHomeData = async () => {
       try {
         const [membersRes, eventsRes] = await Promise.all([
-          axios.get(`${API_BASE}/members`),
-          axios.get(`${API_BASE}/events/upcoming`),
+          axios.get(`${API_BASE}/members/pillars`),
+          axios.get(`${API_BASE}/events`),
         ]);
 
-        const members = membersRes.data.members || membersRes.data.data || [];
-        const goldenMembers = members.filter((member) =>
-          String(member.tier || "").toLowerCase().includes("gold")
-        );
-
-        setHomeMembers((goldenMembers.length ? goldenMembers : members).slice(0, 3));
+        const members = membersRes.data.data || [];
+        setHomeMembers(members.slice(0, 12));
         setHomeEvents((eventsRes.data.data || []).slice(0, 3));
       } catch (error) {
         console.error("Error loading home page data:", error);
@@ -213,32 +209,33 @@ function HomePage() {
             Pillars of the Samiti
           </h2>
 
-<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">    
-  
+<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {homeMembers.map((m) => (
               <Link
                 key={m._id}
                 to={`/team/${m._id}`}
-                className="group overflow-hidden rounded-3xl bg-white shadow"
+                className="group overflow-hidden rounded-3xl bg-white shadow transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
-                <img
-                  src={m.profileImage || deity}
-                  alt={m.fullName}
-                  className="aspect-[4/5] w-full object-cover"
-                />
+                <div className="relative h-64 w-full overflow-hidden">
+                  <img
+                    src={m.profileImage || deity}
+                    alt={m.fullName}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
 
-                <div className="p-6">
-                  <span>
+                <div className="p-5">
+                  <span className="inline-block rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-semibold text-yellow-800">
                     {formatTierLabel(m.tier)}
                   </span>
 
-                  <h3 className="mt-2 text-2xl">
+                  <h3 className="mt-2 text-lg font-semibold">
                     {m.fullName}
                   </h3>
 
-                  <p>{m.occupation || m.businessDetails?.businessType || "Golden Member"}</p>
+                  <p className="text-sm text-gray-500">{m.occupation || m.businessDetails?.businessType || "Samiti Pillar"}</p>
 
-                  <p className="mt-4 inline-flex items-center gap-1 text-orange-500">
+                  <p className="mt-3 inline-flex items-center gap-1 text-sm text-orange-500">
                     View Profile <ArrowRight size={14} />
                   </p>
                 </div>
@@ -247,7 +244,7 @@ function HomePage() {
           </div>
           {homeMembers.length === 0 && (
             <p className="text-center text-muted-foreground">
-              Golden members will appear here soon.
+              Samiti Pillars will appear here soon.
             </p>
           )}
         </div>

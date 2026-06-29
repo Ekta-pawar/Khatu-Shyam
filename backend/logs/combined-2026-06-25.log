@@ -1,0 +1,38 @@
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-25 10:44:35"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-25 10:44:35"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-25 12:24:42"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-25 12:24:42"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-25 12:41:35"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-25 12:41:35"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-25 12:56:32"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-25 12:56:32"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-25 13:03:54"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-25 13:03:54"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-25 14:02:25"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-25 14:02:25"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-25 14:07:39"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-25 14:07:39"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-25 09:00:27"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-25 09:00:27"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 126.370 ms - 434\u001b[0m","timestamp":"2026-06-25 09:00:34"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 75.927 ms - 434\u001b[0m","timestamp":"2026-06-25 09:00:35"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 83.384 ms - 435\u001b[0m","timestamp":"2026-06-25 09:00:40"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 119.251 ms - -\u001b[0m","timestamp":"2026-06-25 09:00:40"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/events/create \u001b[32m201\u001b[0m 3436.428 ms - 524\u001b[0m","timestamp":"2026-06-25 09:01:21"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 92.347 ms - -\u001b[0m","timestamp":"2026-06-25 09:01:21"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 39.813 ms - 434\u001b[0m","timestamp":"2026-06-25 09:01:33"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 53.228 ms - 434\u001b[0m","timestamp":"2026-06-25 09:01:33"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 66.174 ms - 434\u001b[0m","timestamp":"2026-06-25 09:01:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 69.384 ms - -\u001b[0m","timestamp":"2026-06-25 09:01:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 101.289 ms - 434\u001b[0m","timestamp":"2026-06-25 09:01:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 148.260 ms - -\u001b[0m","timestamp":"2026-06-25 09:01:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 39.117 ms - 434\u001b[0m","timestamp":"2026-06-25 09:03:07"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 72.443 ms - 434\u001b[0m","timestamp":"2026-06-25 09:03:07"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 105.252 ms - 434\u001b[0m","timestamp":"2026-06-25 09:20:57"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 64.158 ms - 434\u001b[0m","timestamp":"2026-06-25 09:20:57"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 1108.746 ms - 435\u001b[0m","timestamp":"2026-06-25 09:21:06"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 147.816 ms - -\u001b[0m","timestamp":"2026-06-25 09:21:06"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/events/create \u001b[32m201\u001b[0m 3816.648 ms - 507\u001b[0m","timestamp":"2026-06-25 09:22:08"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 92.935 ms - -\u001b[0m","timestamp":"2026-06-25 09:22:08"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 91.904 ms - 434\u001b[0m","timestamp":"2026-06-25 09:22:14"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 119.682 ms - 434\u001b[0m","timestamp":"2026-06-25 09:22:14"}

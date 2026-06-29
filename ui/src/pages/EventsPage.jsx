@@ -1,13 +1,9 @@
-import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 import { PageShell, PageHeader } from "../components/PageShell";
+import { useGetEventsQuery } from "../admin/api/eventApi";
 
-import { CalendarDays, Clock, MapPin, ImageOff } from "lucide-react";
-
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-console.log("API Base URL:", API_BASE);
+import { CalendarDays, Clock, MapPin, ImageOff, Loader2 } from "lucide-react";
 
 function formatTime(time) {
   if (!time) return null;
@@ -20,39 +16,21 @@ function formatTime(time) {
 }
 
 function EventsPage() {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const { data, isLoading, isError } = useGetEventsQuery();
+  const events = data?.data || [];
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      setLoading(true);
-      setError(false);
-      try {
-        const response = await axios.get(`${API_BASE}/events/upcoming`);
-        setEvents(response.data.data || []);
-      } catch (err) {
-        console.error("Error fetching events:", err);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvents();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <PageShell>
-        <div className="py-20 text-center">
+        <div className="flex items-center justify-center gap-2 py-20">
+          <Loader2 className="animate-spin text-muted-foreground" size={24} />
           <h2 className="text-2xl font-semibold">Loading Events...</h2>
         </div>
       </PageShell>
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <PageShell>
         <div className="py-20 text-center">
@@ -149,7 +127,7 @@ function EventsPage() {
           ))
         ) : (
           <div className="py-20 text-center">
-            <h3 className="text-2xl font-semibold">No Upcoming Events Found</h3>
+            <h3 className="text-2xl font-semibold">No Events Found</h3>
           </div>
         )}
       </section>

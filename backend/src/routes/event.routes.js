@@ -1,6 +1,8 @@
-const express = require("express");
 
+const express = require("express");
 const router = express.Router();
+
+const upload = require("../middleware/upload.middleware");
 
 const {
   createEvent,
@@ -12,18 +14,33 @@ const {
   deleteEvent,
 } = require("../controllers/event.controller");
 
-router.post("/create", createEvent);
+// ================= CREATE EVENT =================
+router.post(
+  "/create",
+  upload.single("image"),
+  createEvent
+);
 
+// ================= GET ALL EVENTS =================
 router.get("/", getAllEvents);
 
+// ================= UPCOMING EVENTS =================
 router.get("/upcoming", getUpcomingEvents);
 
+// ================= PAST EVENTS =================
 router.get("/past", getPastEvents);
 
+// ================= GET SINGLE EVENT =================
 router.get("/:id", getSingleEvent);
 
-router.put("/:id", updateEvent);
+// ================= UPDATE EVENT =================
+router.put(
+  "/:id",
+  upload.single("image"),
+  updateEvent
+);
 
+// ================= DELETE EVENT =================
 router.delete("/:id", deleteEvent);
 
 module.exports = router;

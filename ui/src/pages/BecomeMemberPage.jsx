@@ -58,7 +58,7 @@ const tiers = [
 {
   name: "Prernasrot",
   price: "₹21,000 / Year",
-  buttonText: "Join Prerna Sutra",
+  buttonText: "Join Prernasrot",
   perks: [
     "Special recognition certificate",
     "Priority event registration",
@@ -75,6 +75,17 @@ const tiers = [
     "Regular event updates",
     "Access to satsang gatherings",
     "Volunteer opportunities",
+  ],
+},
+{
+  name: "Samiti Pillar",
+  price: "By Invitation",
+  buttonText: "Become Samiti Pillar",
+  perks: [
+    "Featured on home page",
+    "Lifetime patron recognition",
+    "VIP event seating",
+    "Samiti leadership acknowledgement",
   ],
 },
 ];
@@ -224,23 +235,51 @@ function BecomeMemberPage() {
   e.preventDefault();
 
   try {
-    const response = await fetch(
-      "http://localhost:5000/api/members/create",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    );
+    const fd = new FormData();
+
+    fd.append("fullName", formData.fullName);
+    fd.append("fatherName", formData.fatherName);
+    fd.append("gender", formData.gender);
+    fd.append("phone", formData.phone);
+    fd.append("email", formData.email);
+    fd.append("birthday", formData.birthday);
+    fd.append("occupation", formData.occupation);
+    fd.append("bloodGroup", formData.bloodGroup);
+    fd.append("address", formData.address);
+    fd.append("city", formData.city);
+    fd.append("state", formData.state);
+    fd.append("country", formData.country);
+    fd.append("pincode", formData.pincode);
+    fd.append("tier", formData.tier);
+    fd.append("hasBusiness", formData.hasBusiness);
+    fd.append("hasJob", formData.hasJob);
+
+    fd.append("jobDetails", JSON.stringify(formData.jobDetails));
+    fd.append("businessDetails", JSON.stringify({
+      ...formData.businessDetails,
+      businessImages: [],
+    }));
+    fd.append("familyMembers", JSON.stringify(formData.familyMembers));
+    fd.append("anniversaries", JSON.stringify(formData.anniversaries));
+    fd.append("customDates", JSON.stringify(formData.customDates));
+
+    if (formData.profileImage) {
+      fd.append("profileImage", formData.profileImage);
+    }
+
+    const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
+    const response = await fetch(`${API_BASE}/members/create`, {
+      method: "POST",
+      body: fd,
+    });
 
     const data = await response.json();
 
     if (data.success) {
       setSubmitted(true);
-
       alert("Member Registered Successfully");
+    } else {
+      alert(data.message || "Registration failed");
     }
   } catch (error) {
     console.error(error);

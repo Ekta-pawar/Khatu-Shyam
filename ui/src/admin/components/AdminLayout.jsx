@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+
 import {
   LayoutDashboard,
   Users,
@@ -49,12 +50,19 @@ const AdminLayout = () => {
     <div className="h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(255,215,0,0.14),_transparent_32%),_linear-gradient(180deg,#fffdf7,_#f8f4ed)] text-slate-900">
       <div className="flex h-full min-w-0">
         <aside className="hidden h-screen w-72 shrink-0 flex-col border-r border-slate-200/80 bg-white/88 px-5 py-5 shadow-[8px_0_30px_rgba(15,23,42,0.06)] backdrop-blur-xl md:flex">
-        <div className="mb-6 overflow-hidden rounded-2xl bg-sun px-5 py-5 text-white shadow-gold">
-          <p className="text-xs uppercase tracking-[0.32em] text-white/80">Shyam Samiti</p>
-          <h2 className="mt-4 text-2xl font-display font-semibold leading-tight">Admin Control</h2>
-          <p className="mt-3 text-sm leading-6 text-white/90">
-            Manage members, payments, and contact requests with ease.
-          </p>
+        <div className="mb-10 flex items-center gap-3">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-yellow-500 text-black text-xl font-bold shadow-lg">
+            ॐ
+          </span>
+
+          <span className="flex flex-col leading-tight">
+            <span className="text-lg font-semibold text-maroon">
+              Shri Shri Khatu Shyam
+            </span>
+            <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+              Sewa Samiti (Reg.)
+            </span>
+          </span>
         </div>
 
         <nav className="admin-scrollbar flex flex-1 flex-col gap-1.5 overflow-y-auto pr-1">

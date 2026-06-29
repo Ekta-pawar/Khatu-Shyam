@@ -104,6 +104,39 @@ const MemberListPage = () => {
   const { data, isFetching, isError, error } = useGetMembersQuery({ page, limit: 12, search: appliedSearch });
   const [deleteMember, { isLoading: isDeleting }] = useDeleteMemberMutation();
 
+  const handleExport = () => {
+    const members = data?.members ?? data?.data ?? [];
+    if (!members.length) {
+      toast.error("No members to export");
+      return;
+    }
+
+    const headers = ["Name", "Phone", "Email", "Gender", "City", "State", "Tier", "Occupation"];
+    const rows = members.map((m) => [
+      m.fullName || `${m.firstName || ""} ${m.lastName || ""}`.trim(),
+      m.phone || "",
+      m.email || "",
+      m.gender || "",
+      m.city || "",
+      m.state || "",
+      m.tier || "",
+      m.occupation || "",
+    ]);
+
+    const csvContent = [headers, ...rows]
+      .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))
+      .join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `members-${new Date().toISOString().slice(0, 10)}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+    toast.success("Members exported successfully");
+  };
+
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     setPage(1);
@@ -169,11 +202,11 @@ const MemberListPage = () => {
             Manage family member records, track status, and act on records in one place.
           </p>
         </div>
-        <Link to="/admin/members/new" className="shrink-0">
+        {/* <Link to="/admin/members/new" className="shrink-0">
           <Button className="w-full justify-center gap-2 sm:w-auto">
             <Plus size={16} /> Add member
           </Button>
-        </Link>
+        </Link> */}
       </div>
 
       {/* ---------- stats row (full width) ---------- */}
@@ -226,6 +259,7 @@ const MemberListPage = () => {
             </Button>
             <button
               type="button"
+              onClick={handleExport}
               className="hidden items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 sm:inline-flex"
             >
               <Download size={14} /> Export

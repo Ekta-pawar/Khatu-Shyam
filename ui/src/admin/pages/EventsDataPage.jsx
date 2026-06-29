@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import {
   CalendarDays,
   MapPin,
@@ -22,7 +22,8 @@ const EMPTY_FORM = {
   title: "",
   shortDescription: "",
   fullDescription: "",
-  image: "",
+  image: null,
+  imagePreview: "",
   eventDate: "",
   startTime: "",
   endTime: "",
@@ -113,31 +114,47 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
   const [activeStep, setActiveStep] = useState("basics");
   const stepIndex = STEPS.findIndex((s) => s.key === activeStep);
 
- useEffect(() => {
-  console.log("📍 Active Step Changed:", activeStep);
-}, [activeStep]);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- const handleSubmit = async (e) => {
-  console.log("🚀 handleSubmit called");
-  e.preventDefault();
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
 
-  console.log("📦 Form Data:", formData);
+    if (!file) return;
 
-  try {
-    const response = await createEvent(formData).unwrap();
+    setFormData((prev) => ({
+      ...prev,
+      image: file,
+      imagePreview: URL.createObjectURL(file),
+    }));
+  };
 
-    console.log("✅ API Success:", response);
+  const handleSubmit = async () => {
+    try {
+      const data = new FormData();
 
-    onCreated();
-  } catch (error) {
-    console.error("❌ API Error:", error);
-    alert("Failed to create event");
-  }
-};
+      data.append("title", formData.title);
+      data.append("shortDescription", formData.shortDescription);
+      data.append("fullDescription", formData.fullDescription);
+      data.append("eventDate", formData.eventDate);
+      data.append("startTime", formData.startTime);
+      data.append("endTime", formData.endTime);
+      data.append("location", formData.location);
+      data.append("category", formData.category);
+
+      if (formData.image) {
+        data.append("image", formData.image);
+      }
+
+      await createEvent(data).unwrap();
+
+      onCreated();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to create event");
+    }
+  };
 
   return (
     <div
@@ -160,7 +177,7 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-1 flex-col overflow-hidden">
+        <div className="flex flex-1 flex-col overflow-hidden">
           <div className="flex flex-1 gap-6 overflow-y-auto px-6 py-6">
             <StepRail steps={STEPS} activeKey={activeStep} completedUpTo={stepIndex} />
 
@@ -280,32 +297,29 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
               {activeStep === "media" && (
                 <div className="space-y-4">
                   <Field
-                    label="Image URL"
-                    hint="Paste a direct link to an image — a preview will appear below."
+                    label="Event Image"
+                    hint="Upload an image for this event"
                   >
                     <input
-                      type="text"
-                      name="image"
-                      placeholder="https://…"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
                       className={inputClass}
-                      value={formData.image}
-                      onChange={handleChange}
                     />
                   </Field>
 
-                  {formData.image ? (
+                  {formData.imagePreview ? (
                     <div className="relative overflow-hidden rounded-xl border border-slate-200">
                       <img
-                        src={formData.image}
+                        src={formData.imagePreview}
                         alt="Event preview"
                         className="h-44 w-full object-cover"
-                        onError={(e) => {
-                          e.target.style.display = "none";
-                        }}
                       />
                       <button
                         type="button"
-                        onClick={() => setFormData({ ...formData, image: "" })}
+                        onClick={() =>
+                          setFormData({ ...formData, image: null, imagePreview: "" })
+                        }
                         className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-slate-600 shadow-sm transition-colors hover:bg-white hover:text-slate-900"
                         title="Remove image"
                       >
@@ -353,7 +367,8 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
                 </button>
               ) : (
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={handleSubmit}
                   disabled={isLoading}
                   className="flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
                 >
@@ -370,7 +385,7 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
               )}
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
@@ -384,7 +399,7 @@ const EventsDataPage = () => {
   const [deletingId, setDeletingId] = useState(null);
   const [statusFilter, setStatusFilter] = useState("all");
 
-  const { data, refetch, isFetching } = useGetEventsQuery();
+  const { data, isFetching } = useGetEventsQuery();
   const [createEvent, { isLoading }] = useCreateEventMutation();
   const [deleteEvent] = useDeleteEventMutation();
 
@@ -400,7 +415,6 @@ const EventsDataPage = () => {
 
   const handleCreated = () => {
     setIsModalOpen(false);
-    refetch();
   };
 
   const handleDelete = async (id) => {
@@ -408,7 +422,6 @@ const EventsDataPage = () => {
     setConfirmingId(null);
     try {
       await deleteEvent(id).unwrap();
-      refetch();
     } catch (error) {
       console.error(error);
       alert("Delete failed");

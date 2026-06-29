@@ -100,13 +100,15 @@ function TeamMemberPage() {
     <PageShell>
       <section className="relative overflow-hidden border-b border-border/60 bg-secondary/40">
         <div className="absolute inset-0 bg-glow opacity-60" aria-hidden />
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-10 md:grid-cols-[0.9fr_1.25fr] md:items-end lg:py-14">
-          <div className="overflow-hidden rounded-3xl border border-white/70 bg-card shadow-elegant">
-            <img
-              src={memberImage}
-              alt={member.fullName}
-              className="aspect-[4/5] w-full object-cover"
-            />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-10 md:grid-cols-[0.9fr_1.25fr] md:items-center lg:py-14">
+          <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-white/70 bg-card shadow-elegant md:max-w-none">
+            <div className="relative h-[420px] w-full sm:h-[480px] lg:h-[520px]">
+              <img
+                src={memberImage}
+                alt={member.fullName}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
           </div>
 
           <div className="pb-2">

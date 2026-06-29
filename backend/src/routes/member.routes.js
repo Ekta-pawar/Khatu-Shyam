@@ -46,17 +46,23 @@
 // module.exports = router;
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/upload.middleware");
 
 const {
   createMember,
   getMembers,
-
   getMemberById,
+  getPillarMembers,
+  deleteMember,
 } = require("../controllers/member.controller");
 
-router.post("/create", createMember);
+router.post("/create", upload.single("profileImage"), createMember);
 
 router.get("/", getMembers);
 
+router.get("/pillars", getPillarMembers);
+
 router.get("/:id", getMemberById);
+
+router.delete("/:id", deleteMember);
 module.exports = router;
