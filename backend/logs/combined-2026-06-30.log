@@ -1,0 +1,92 @@
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-30 10:51:45"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-30 10:51:45"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-30 05:21:56"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-30 05:21:56"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 196.925 ms - -\u001b[0m","timestamp":"2026-06-30 05:22:04"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 160.487 ms - -\u001b[0m","timestamp":"2026-06-30 05:22:04"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 160.584 ms - -\u001b[0m","timestamp":"2026-06-30 05:22:04"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 214.744 ms - -\u001b[0m","timestamp":"2026-06-30 05:22:04"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 196.948 ms - -\u001b[0m","timestamp":"2026-06-30 05:22:43"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 102.940 ms - -\u001b[0m","timestamp":"2026-06-30 05:22:43"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 66.184 ms - -\u001b[0m","timestamp":"2026-06-30 05:22:43"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 87.559 ms - -\u001b[0m","timestamp":"2026-06-30 05:22:43"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 128.995 ms - -\u001b[0m","timestamp":"2026-06-30 05:23:14"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 106.071 ms - -\u001b[0m","timestamp":"2026-06-30 05:23:14"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 83.250 ms - -\u001b[0m","timestamp":"2026-06-30 05:23:27"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 87.087 ms - -\u001b[0m","timestamp":"2026-06-30 05:23:36"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 232.943 ms - -\u001b[0m","timestamp":"2026-06-30 05:23:36"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 107.319 ms - -\u001b[0m","timestamp":"2026-06-30 05:36:02"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 86.097 ms - -\u001b[0m","timestamp":"2026-06-30 05:36:33"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 136.011 ms - -\u001b[0m","timestamp":"2026-06-30 05:36:33"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 250.648 ms - -\u001b[0m","timestamp":"2026-06-30 05:36:33"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 280.019 ms - -\u001b[0m","timestamp":"2026-06-30 05:36:33"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 479.117 ms - 435\u001b[0m","timestamp":"2026-06-30 05:36:43"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[32m200\u001b[0m 54.841 ms - -\u001b[0m","timestamp":"2026-06-30 05:36:43"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[32m200\u001b[0m 164.039 ms - 152\u001b[0m","timestamp":"2026-06-30 05:36:43"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[32m200\u001b[0m 164.603 ms - 455\u001b[0m","timestamp":"2026-06-30 05:36:43"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 120.551 ms - 797\u001b[0m","timestamp":"2026-06-30 05:36:43"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=12 \u001b[32m200\u001b[0m 82.019 ms - -\u001b[0m","timestamp":"2026-06-30 05:36:51"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 207.276 ms - -\u001b[0m","timestamp":"2026-06-30 05:37:00"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=12 \u001b[32m200\u001b[0m 83.681 ms - 153\u001b[0m","timestamp":"2026-06-30 05:37:04"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=10 \u001b[32m200\u001b[0m 175.277 ms - 765\u001b[0m","timestamp":"2026-06-30 05:37:24"}
+{"level":"info","message":"\u001b[0mGET /api/v1/enquiry?page=1&limit=12 \u001b[32m200\u001b[0m 53.131 ms - -\u001b[0m","timestamp":"2026-06-30 05:37:26"}
+{"level":"info","message":"\u001b[0mGET /api/v1/sponsor \u001b[32m200\u001b[0m 66.910 ms - -\u001b[0m","timestamp":"2026-06-30 05:37:27"}
+{"level":"warn","message":"POST /api/v1/admins/create - Validation failed","timestamp":"2026-06-30 05:37:45"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/create \u001b[33m422\u001b[0m 113.392 ms - 140\u001b[0m","timestamp":"2026-06-30 05:37:45"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 35.060 ms - 435\u001b[0m","timestamp":"2026-06-30 05:37:45"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 76.426 ms - 797\u001b[0m","timestamp":"2026-06-30 05:37:45"}
+{"level":"warn","message":"POST /api/v1/admins/create - An admin with this email or phone number already exists","timestamp":"2026-06-30 05:37:52"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/create \u001b[33m409\u001b[0m 79.508 ms - 164\u001b[0m","timestamp":"2026-06-30 05:37:52"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 65.084 ms - 435\u001b[0m","timestamp":"2026-06-30 05:37:52"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 90.922 ms - 797\u001b[0m","timestamp":"2026-06-30 05:37:52"}
+{"level":"warn","message":"POST /api/v1/admins/create - An admin with this email or phone number already exists","timestamp":"2026-06-30 05:38:03"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/create \u001b[33m409\u001b[0m 68.460 ms - 164\u001b[0m","timestamp":"2026-06-30 05:38:03"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 35.204 ms - 435\u001b[0m","timestamp":"2026-06-30 05:38:03"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 73.398 ms - 797\u001b[0m","timestamp":"2026-06-30 05:38:03"}
+{"level":"info","message":"\u001b[0mPOST /api/v1/admins/create \u001b[32m201\u001b[0m 541.261 ms - 430\u001b[0m","timestamp":"2026-06-30 05:38:12"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 45.335 ms - 435\u001b[0m","timestamp":"2026-06-30 05:38:12"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 76.671 ms - -\u001b[0m","timestamp":"2026-06-30 05:38:12"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[32m200\u001b[0m 52.826 ms - -\u001b[0m","timestamp":"2026-06-30 05:38:23"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[32m200\u001b[0m 90.159 ms - 152\u001b[0m","timestamp":"2026-06-30 05:38:24"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[32m200\u001b[0m 107.060 ms - 455\u001b[0m","timestamp":"2026-06-30 05:38:24"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 44.455 ms - -\u001b[0m","timestamp":"2026-06-30 05:38:36"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 47.439 ms - -\u001b[0m","timestamp":"2026-06-30 05:38:36"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 228.833 ms - -\u001b[0m","timestamp":"2026-06-30 05:38:36"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 95.156 ms - -\u001b[0m","timestamp":"2026-06-30 05:38:36"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 65.222 ms - -\u001b[0m","timestamp":"2026-06-30 05:38:59"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 43.347 ms - -\u001b[0m","timestamp":"2026-06-30 05:39:03"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 49.568 ms - -\u001b[0m","timestamp":"2026-06-30 05:39:03"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 58.060 ms - -\u001b[0m","timestamp":"2026-06-30 05:39:03"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 78.997 ms - -\u001b[0m","timestamp":"2026-06-30 05:39:03"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 673.407 ms - 435\u001b[0m","timestamp":"2026-06-30 06:42:09"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[32m200\u001b[0m 76.641 ms - -\u001b[0m","timestamp":"2026-06-30 06:42:11"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[32m200\u001b[0m 106.662 ms - 152\u001b[0m","timestamp":"2026-06-30 06:42:11"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[32m200\u001b[0m 99.408 ms - 455\u001b[0m","timestamp":"2026-06-30 06:42:11"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 98.369 ms - -\u001b[0m","timestamp":"2026-06-30 06:42:11"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 42.023 ms - -\u001b[0m","timestamp":"2026-06-30 06:42:17"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 41.684 ms - -\u001b[0m","timestamp":"2026-06-30 06:42:17"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 55.123 ms - -\u001b[0m","timestamp":"2026-06-30 06:42:17"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 47.717 ms - -\u001b[0m","timestamp":"2026-06-30 06:42:17"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins/me \u001b[32m200\u001b[0m 141.866 ms - 435\u001b[0m","timestamp":"2026-06-30 06:43:46"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 38.164 ms - -\u001b[0m","timestamp":"2026-06-30 06:43:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 48.546 ms - -\u001b[0m","timestamp":"2026-06-30 06:43:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members?page=1&limit=1 \u001b[32m200\u001b[0m 88.476 ms - -\u001b[0m","timestamp":"2026-06-30 06:43:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 73.988 ms - -\u001b[0m","timestamp":"2026-06-30 06:43:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/payments?page=1&limit=1 \u001b[32m200\u001b[0m 215.490 ms - 152\u001b[0m","timestamp":"2026-06-30 06:43:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 114.137 ms - -\u001b[0m","timestamp":"2026-06-30 06:43:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/admins \u001b[32m200\u001b[0m 152.215 ms - -\u001b[0m","timestamp":"2026-06-30 06:43:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/contacts?page=1&limit=1&isResolved=false \u001b[32m200\u001b[0m 704.860 ms - 455\u001b[0m","timestamp":"2026-06-30 06:43:47"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 979.462 ms - -\u001b[0m","timestamp":"2026-06-30 07:31:48"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 1171.313 ms - -\u001b[0m","timestamp":"2026-06-30 07:31:48"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 33.948 ms - -\u001b[0m","timestamp":"2026-06-30 07:31:48"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 41.772 ms - -\u001b[0m","timestamp":"2026-06-30 07:31:48"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-30 17:44:27"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-30 17:44:27"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 666.606 ms - -\u001b[0m","timestamp":"2026-06-30 12:14:29"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 70.095 ms - -\u001b[0m","timestamp":"2026-06-30 12:14:29"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 1975.430 ms - -\u001b[0m","timestamp":"2026-06-30 12:14:29"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 128.106 ms - -\u001b[0m","timestamp":"2026-06-30 12:14:30"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 117.386 ms - -\u001b[0m","timestamp":"2026-06-30 12:14:35"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 140.599 ms - -\u001b[0m","timestamp":"2026-06-30 12:14:35"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members/pillars \u001b[32m200\u001b[0m 121.357 ms - -\u001b[0m","timestamp":"2026-06-30 12:14:35"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 128.257 ms - -\u001b[0m","timestamp":"2026-06-30 12:14:35"}

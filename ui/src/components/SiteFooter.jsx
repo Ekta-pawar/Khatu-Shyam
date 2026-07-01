@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border/60 bg-[oklch(0.22_0.04_40)] text-white">
-      <div className="mx-auto grid max-w-8xl gap-10 px-5 py-14 md:grid-cols-4 pr-20">
+      <div className="mx-auto grid max-w-8xl gap-10 px-16 py-14 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
 
         {/* Logo & About */}
         <div>
