@@ -146,7 +146,15 @@ const updateEvent = async (req, res) => {
 
     const event = await Event.findByIdAndUpdate(req.params.id, updateData, {
       new: true,
+      runValidators: true,
     });
+
+    if (!event) {
+      return res.status(404).json({
+        success: false,
+        message: "Event not found",
+      });
+    }
 
     res.status(200).json({
       success: true,
@@ -165,7 +173,14 @@ const updateEvent = async (req, res) => {
 
 const deleteEvent = async (req, res) => {
   try {
-    await Event.findByIdAndDelete(req.params.id);
+    const event = await Event.findByIdAndDelete(req.params.id);
+
+    if (!event) {
+      return res.status(404).json({
+        success: false,
+        message: "Event not found",
+      });
+    }
 
     res.status(200).json({
       success: true,

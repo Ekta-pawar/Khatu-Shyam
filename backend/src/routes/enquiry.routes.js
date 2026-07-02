@@ -2,14 +2,15 @@ const express = require("express");
 const router = express.Router();
 
 const enquiryController = require("../controllers/enquiry.controller");
+const { isAuthenticated } = require("../middleware/auth.middleware");
+const validate = require("../middleware/validate.middleware");
+const { createEnquiryValidator } = require("../validators/enquiry.validator");
 
-// Create enquiry
-router.post("/create", enquiryController.createEnquiry);
+// Public — submitted from the website's enquiry/sponsor form
+router.post("/create", createEnquiryValidator, validate, enquiryController.createEnquiry);
 
-// Get all enquiries
-router.get("/", enquiryController.getEnquiries);
-
-// Update status
-router.patch("/:id/status", enquiryController.updateEnquiryStatus);
+// Admin only
+router.get("/", isAuthenticated, enquiryController.getEnquiries);
+router.patch("/:id/status", isAuthenticated, enquiryController.updateEnquiryStatus);
 
 module.exports = router;

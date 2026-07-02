@@ -1,68 +1,56 @@
-// const express = require("express");
-// const memberController = require("../controllers/member.controller");
-// const upload = require("../middleware/upload.middleware");
-// const validate = require("../middleware/validate.middleware");
-// const { isAuthenticated } = require("../middleware/auth.middleware");
-// const {
-//   parseJsonFields,
-//   memberJsonFields,
-//   createMemberValidator,
-//   updateMemberValidator,
-// } = require("../validators/member.validator");
-
-// const router = express.Router();
-
-// router.use(isAuthenticated);
-
-// const memberFileFields = upload.fields([
-//   { name: "profileImage", maxCount: 1 },
-//   { name: "additionalImages", maxCount: 10 },
-//   { name: "familyImages", maxCount: 5 },
-// ]);
-
-// router.post(
-//   "/",
-//   memberFileFields,
-//   parseJsonFields(memberJsonFields),
-//   createMemberValidator,
-//   validate,
-//   memberController.createMember
-// );
-
-// router.get("/", memberController.getMembers);
-// router.get("/:id", memberController.getMemberById);
-
-// router.patch(
-//   "/:id",
-//   memberFileFields,
-//   parseJsonFields(memberJsonFields),
-//   updateMemberValidator,
-//   validate,
-//   memberController.updateMember
-// );
-
-// router.delete("/:id", memberController.deleteMember);
-
-// module.exports = router;
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/upload.middleware");
+const validate = require("../middleware/validate.middleware");
+const { isAuthenticated, attachAdminIfPresent } = require("../middleware/auth.middleware");
+const {
+  parseJsonFields,
+  memberJsonFields,
+  createMemberValidator,
+  updateMemberValidator,
+} = require("../validators/member.validator");
 
 const {
   createMember,
+  updateMember,
   getMembers,
   getMemberById,
   getPillarMembers,
   deleteMember,
 } = require("../controllers/member.controller");
 
-router.post("/create", upload.single("profileImage"), createMember);
+// Public — used by the public website to display members/team.
+// attachAdminIfPresent lets a logged-in admin (e.g. the admin panel calling
+// these same endpoints) still get full member data; anonymous requests get
+// the restricted public field set (see PUBLIC_MEMBER_FIELDS in the controller).
+router.get("/", attachAdminIfPresent, getMembers);
+router.get("/pillars", attachAdminIfPresent, getPillarMembers);
+router.get("/:id", attachAdminIfPresent, getMemberById);
 
-router.get("/", getMembers);
+// Admin only
+const memberFileFields = upload.fields([
+  { name: "profileImage", maxCount: 1 },
+  { name: "additionalImages", maxCount: 10 },
+  { name: "familyImages", maxCount: 5 },
+]);
 
-router.get("/pillars", getPillarMembers);
-
-router.get("/:id", getMemberById);
-
-router.delete("/:id", deleteMember);
+router.post(
+  "/create",
+  isAuthenticated,
+  memberFileFields,
+  parseJsonFields(memberJsonFields),
+  createMemberValidator,
+  validate,
+  createMember
+);
+router.patch(
+  "/:id",
+  isAuthenticated,
+  memberFileFields,
+  parseJsonFields(memberJsonFields),
+  updateMemberValidator,
+  validate,
+  updateMember
+);
+router.delete("/:id", isAuthenticated, deleteMember);
 module.exports = router;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
-import { Briefcase, Cake, Gift, Mail, MapPin, Phone, Users } from "lucide-react";
+import { Briefcase, Gift, MapPin } from "lucide-react";
 
 import { PageShell } from "../components/PageShell";
 
@@ -88,7 +88,6 @@ function TeamMemberPage() {
   const location = [member.city, member.state].filter(Boolean).join(", ");
   const business = member.businessDetails || {};
   const job = member.jobDetails || {};
-  const familyMembers = member.familyMembers || [];
   const memberImage = member.profileImage || FALLBACK_IMAGE;
   const tier = formatTierLabel(member.tier);
   const professionTitle =
@@ -140,103 +139,60 @@ function TeamMemberPage() {
             </p>
 
             <div className="mt-8 grid grid-cols-2 gap-4">
-              <Stat icon={Cake} label="Birthday" value={formatDate(member.birthday)} />
               <Stat icon={MapPin} label="Based In" value={location || "-"} />
               <Stat icon={Gift} label="Joined" value={formatDate(member.createdAt)} />
-              <Stat icon={Users} label="Blood Group" value={member.bloodGroup} />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20">
-        <div className="mb-3 flex items-center gap-3">
-          <Briefcase className="text-saffron" size={20} />
-          <p className="text-xs uppercase tracking-widest text-saffron">
-            Profession
-          </p>
-        </div>
-
-        <h2 className="text-4xl text-maroon">{professionTitle}</h2>
-
-        {professionSubtitle && (
-          <p className="mt-2 text-lg text-muted-foreground">
-            {professionSubtitle}
-          </p>
-        )}
-
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          <InfoCard label="Business Address" value={business.businessAddress || job.officeAddress || job.jobLocation} />
-          <InfoCard label="Phone" value={business.businessPhone || member.phone} icon={Phone} />
-          <InfoCard label="Email" value={business.businessEmail || member.email} icon={Mail} />
-        </div>
-
-        {(business.businessDescription || job.otherDetails) && (
-          <div className="mt-8 rounded-3xl border bg-card p-8">
-            <h3 className="text-xl text-maroon">About The Profession</h3>
-            <p className="mt-3 text-muted-foreground">
-              {business.businessDescription || job.otherDetails}
-            </p>
-          </div>
-        )}
-
-        {business.businessWebsite && (
-          <a
-            href={business.businessWebsite}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-6 inline-flex rounded-full bg-maroon px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-maroon/90"
-          >
-            Visit Website
-          </a>
-        )}
-      </section>
-
-      <section className="border-t border-border/60 bg-secondary/40 py-20">
-        <div className="mx-auto max-w-7xl px-5">
+      {(professionTitle !== "Professional details" || professionSubtitle || business.businessAddress || job.officeAddress) && (
+        <section className="mx-auto max-w-7xl px-5 py-20">
           <div className="mb-3 flex items-center gap-3">
-            <Users className="text-saffron" size={20} />
+            <Briefcase className="text-saffron" size={20} />
             <p className="text-xs uppercase tracking-widest text-saffron">
-              Family
+              Profession
             </p>
           </div>
 
-          <h2 className="text-4xl text-maroon">Family Members</h2>
+          <h2 className="text-4xl text-maroon">{professionTitle}</h2>
 
-          {familyMembers.length > 0 ? (
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {familyMembers.map((person) => (
-                <div
-                  key={`${person.name}-${person.relation}`}
-                  className="rounded-2xl bg-card p-6 shadow"
-                >
-                  <p className="text-xs text-saffron">{person.relation}</p>
-
-                  <h3 className="mt-1 text-xl text-maroon">{person.name}</h3>
-
-                  {person.dob && (
-                    <p className="mt-3 flex items-center gap-2 text-sm">
-                      <Cake size={14} />
-                      {formatDate(person.dob)}
-                    </p>
-                  )}
-
-                  {person.occupation && (
-                    <p className="mt-2 flex items-center gap-2 text-sm">
-                      <Briefcase size={14} />
-                      {person.occupation}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="mt-6 text-muted-foreground">
-              No family members added yet.
+          {professionSubtitle && (
+            <p className="mt-2 text-lg text-muted-foreground">
+              {professionSubtitle}
             </p>
           )}
-        </div>
-      </section>
+
+          {(business.businessAddress || job.officeAddress || job.jobLocation) && (
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              <InfoCard
+                label="Business Address"
+                value={business.businessAddress || job.officeAddress || job.jobLocation}
+              />
+            </div>
+          )}
+
+          {(business.businessDescription || job.otherDetails) && (
+            <div className="mt-8 rounded-3xl border bg-card p-8">
+              <h3 className="text-xl text-maroon">About The Profession</h3>
+              <p className="mt-3 text-muted-foreground">
+                {business.businessDescription || job.otherDetails}
+              </p>
+            </div>
+          )}
+
+          {business.businessWebsite && (
+            <a
+              href={business.businessWebsite}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex rounded-full bg-maroon px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-maroon/90"
+            >
+              Visit Website
+            </a>
+          )}
+        </section>
+      )}
     </PageShell>
   );
 }

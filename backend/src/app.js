@@ -16,7 +16,6 @@ const webhookRoutes = require("./routes/webhook.routes");
 const sanitizeRequest = require("./middleware/sanitize.middleware");
 const { notFound, globalErrorHandler } = require("./middleware/error.middleware");
 const { apiLimiter } = require("./middleware/rateLimiter.middleware");
-const memberRoutes = require("./routes/member.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const enquiryRoutes = require("./routes/enquiry.routes");
 
@@ -26,10 +25,6 @@ const app = express();
 
 
 
-
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 
 app.set("trust proxy", 1);
@@ -103,15 +98,10 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1", routes);
 
-
-
-
 app.use("/api/v1/events", eventRoutes);
 app.use("/api/v1/enquiry", enquiryRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/v1/sponsor", sponsorRoutes);
-// app.use("/api/enquiry", enquiryRoutes);
-app.use("/api/v1/members", memberRoutes);
 
 /* ------------------------------------------------------------------ */
 /* Error handling                                                      */

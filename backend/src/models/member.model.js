@@ -148,6 +148,16 @@ const customDateSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const birthdaySchema = new mongoose.Schema(
+  {
+    personName: String,
+    relation: String,
+    birthDate: Date,
+    note: String,
+  },
+  { _id: false }
+);
+
 const memberSchema = new mongoose.Schema(
   {
     // Membership
@@ -161,6 +171,7 @@ const memberSchema = new mongoose.Schema(
     },
 
     fatherName: String,
+    motherName: String,
 
     gender: String,
 
@@ -170,6 +181,8 @@ const memberSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+
+    alternatePhone: String,
 
     email: {
       type: String,
@@ -184,6 +197,14 @@ const memberSchema = new mongoose.Schema(
     bloodGroup: String,
 
     profileImage: String,
+    additionalImages: {
+      type: [String],
+      default: [],
+    },
+    familyImages: {
+      type: [String],
+      default: [],
+    },
 
     // Address
     address: String,
@@ -233,6 +254,8 @@ const memberSchema = new mongoose.Schema(
     anniversaries: [anniversarySchema],
 
     customDates: [customDateSchema],
+
+    birthdays: [birthdaySchema],
   },
   {
     timestamps: true,

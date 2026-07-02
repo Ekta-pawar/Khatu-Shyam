@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const upload = require("../middleware/upload.middleware");
+const { isAuthenticated } = require("../middleware/auth.middleware");
 
 const {
   createEvent,
@@ -17,6 +18,7 @@ const {
 // ================= CREATE EVENT =================
 router.post(
   "/create",
+  isAuthenticated,
   upload.single("image"),
   createEvent
 );
@@ -36,11 +38,12 @@ router.get("/:id", getSingleEvent);
 // ================= UPDATE EVENT =================
 router.put(
   "/:id",
+  isAuthenticated,
   upload.single("image"),
   updateEvent
 );
 
 // ================= DELETE EVENT =================
-router.delete("/:id", deleteEvent);
+router.delete("/:id", isAuthenticated, deleteEvent);
 
 module.exports = router;

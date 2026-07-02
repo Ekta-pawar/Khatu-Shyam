@@ -19,14 +19,16 @@ import {
 } from "lucide-react";
 import axios from "axios";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
+
 // ─── API helpers ────────────────────────────────────────────────────────────
 
 export const createEnquiry = (data) => {
-  return axios.post("http://localhost:5000/api/v1/enquiry/create", data);
+  return axios.post(`${API_BASE}/enquiry/create`, data);
 };
 
 export const createSponsor = (data) => {
-  return axios.post("http://localhost:5000/api/v1/sponsor/create", data, {
+  return axios.post(`${API_BASE}/sponsor/create`, data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 };
@@ -169,8 +171,7 @@ function SponsorPage() {
   const handleEnquirySubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await createEnquiry(enquiryData);
-      console.log(response.data);
+      await createEnquiry(enquiryData);
       toast.success("Enquiry submitted successfully");
       setEnquiryData(initialEnquiryData);
     } catch (error) {
@@ -187,8 +188,7 @@ function SponsorPage() {
     Object.keys(formData).forEach((key) => data.append(key, formData[key]));
 
     try {
-      const response = await createSponsor(data);
-      console.log(response.data);
+      await createSponsor(data);
       toast.success("Sponsor request submitted successfully");
       setSubmitted(true);
       setFormData(initialSponsorData);

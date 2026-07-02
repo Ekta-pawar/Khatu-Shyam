@@ -52,14 +52,12 @@ const createAdmin = asyncHandler(async (req, res) => {
 
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  console.log("Login Request Body:", req.body);
 
   const admin = await adminService.validateCredentials(email, password);
   admin.lastLoginAt = new Date();
   await admin.save({ validateBeforeSave: false });
 
   const token = sendTokenResponse(res, { id: admin._id, role: admin.role });
-  console.log("Login Successful. Token sent in cookie:", token);
 
   return ApiResponse.success(res, {
     statusCode: 200,

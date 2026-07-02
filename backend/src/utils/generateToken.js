@@ -18,7 +18,6 @@ const cookieOptions = () => ({
 
 const sendTokenResponse = (res, payload) => {
   const token = generateToken(payload);
-  console.log("Generated Token:", token);
   res.cookie(COOKIE_NAME, token, cookieOptions());
   return token;
 };

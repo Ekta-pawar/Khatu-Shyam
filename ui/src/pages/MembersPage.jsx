@@ -62,8 +62,6 @@ function MembersPage() {
 
         const response = await axios.get(`${API_BASE}/members`);
 
-        console.log("Members API Response:", response.data);
-
         setMembers(response.data.members || []);
       } catch (err) {
         console.error("Error fetching members:", err);

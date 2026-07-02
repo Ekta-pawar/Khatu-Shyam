@@ -9,7 +9,11 @@ process.on("uncaughtException", (err) => {
 });
 
 const start = async () => {
-  await connectDB();
+  const isConnected = await connectDB();
+  if (!isConnected) {
+    logger.error("Exiting: could not establish a MongoDB connection");
+    process.exit(1);
+  }
 
   const server = app.listen(env.PORT, () => {
     logger.info(`Server running in ${env.NODE_ENV} mode on port ${env.PORT}`);

@@ -1,13 +1,13 @@
-const Joi = require("joi");
+const { body } = require("express-validator");
 
-const enquirySchema = Joi.object({
-  contactPerson: Joi.string().required(),
-  organisationName: Joi.string().required(),
-  phone: Joi.string().required(),
-  email: Joi.string().email().required(),
-  amount: Joi.number().required(),
-  address: Joi.string().required(),
-  message: Joi.string().allow(""),
-});
+const createEnquiryValidator = [
+  body("contactPerson").trim().notEmpty().withMessage("Contact person is required").isLength({ max: 100 }),
+  body("organisationName").trim().notEmpty().withMessage("Organisation name is required").isLength({ max: 150 }),
+  body("phone").trim().notEmpty().withMessage("Phone number is required").isLength({ min: 10, max: 15 }),
+  body("email").trim().notEmpty().withMessage("Email is required").isEmail().withMessage("Provide a valid email"),
+  body("amount").notEmpty().withMessage("Amount is required").isFloat({ min: 0 }).withMessage("Amount must be a valid number"),
+  body("address").trim().notEmpty().withMessage("Address is required").isLength({ max: 250 }),
+  body("message").optional({ checkFalsy: true }).trim().isLength({ max: 2000 }),
+];
 
-module.exports = enquirySchema;
+module.exports = { createEnquiryValidator };

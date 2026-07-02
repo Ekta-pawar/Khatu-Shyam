@@ -224,68 +224,106 @@ function BecomeMemberPage() {
     setFormData(f => ({ ...f, customDates: f.customDates.filter((_, i) => i !== idx) }));
 
   // ─── SUBMIT ────────────────────────────────────────────────────────────────
+  // New members are no longer created directly from the public site — this
+  // submits a membership application as an Enquiry for an admin to review and
+  // create the real member record from. The Enquiry schema only has a handful
+  // of simple fields, so everything beyond contact info is folded into a
+  // readable summary in `message` so admins have full context.
 
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   console.log("Submitting:", formData);
-  //   setSubmitted(true);
-  //   setTimeout(() => setSubmitted(false), 5000);
-  // };
+  const buildApplicationSummary = () => {
+    const lines = [`Membership application — ${selectedTier}`, ""];
+
+    lines.push(`Father's name: ${formData.fatherName || "-"}`);
+    lines.push(`Gender: ${formData.gender || "-"}`);
+    lines.push(`Birthday: ${formData.birthday || "-"}`);
+    lines.push(`Occupation: ${formData.occupation || "-"}`);
+    lines.push(`Blood group: ${formData.bloodGroup || "-"}`);
+    lines.push(`Location: ${[formData.city, formData.state, formData.country, formData.pincode].filter(Boolean).join(", ") || "-"}`);
+
+    if (formData.hasJob) {
+      const j = formData.jobDetails;
+      lines.push("", "Job details:");
+      lines.push(`  Type: ${j.jobType || "-"}`);
+      if (j.companyName) lines.push(`  Company/Org: ${j.companyName}`);
+      if (j.governmentDepartment) lines.push(`  Department: ${j.governmentDepartment}`);
+      if (j.designation) lines.push(`  Designation: ${j.designation}`);
+      if (j.jobLocation) lines.push(`  Location: ${j.jobLocation}`);
+      if (j.officeAddress) lines.push(`  Office address: ${j.officeAddress}`);
+      if (j.otherDetails) lines.push(`  Details: ${j.otherDetails}`);
+    }
+
+    if (formData.hasBusiness) {
+      const b = formData.businessDetails;
+      lines.push("", "Business details:");
+      if (b.businessName) lines.push(`  Name: ${b.businessName}`);
+      if (b.businessType) lines.push(`  Type: ${b.businessType}`);
+      if (b.businessPhone) lines.push(`  Phone: ${b.businessPhone}`);
+      if (b.businessEmail) lines.push(`  Email: ${b.businessEmail}`);
+      if (b.businessWebsite) lines.push(`  Website: ${b.businessWebsite}`);
+      if (b.businessAddress) lines.push(`  Address: ${b.businessAddress}`);
+      if (b.businessDescription) lines.push(`  Description: ${b.businessDescription}`);
+    }
+
+    if (formData.familyMembers.length) {
+      lines.push("", "Family members:");
+      formData.familyMembers.forEach((m) => {
+        lines.push(`  - ${m.name} (${m.relation}), age ${m.age || "-"}, ${m.occupation || "-"}, ${m.phone || "-"}`);
+      });
+    }
+
+    if (formData.anniversaries.length) {
+      lines.push("", "Anniversaries:");
+      formData.anniversaries.forEach((a) => {
+        lines.push(`  - ${a.husbandName} & ${a.wifeName} — ${a.anniversaryDate}${a.note ? ` (${a.note})` : ""}`);
+      });
+    }
+
+    if (formData.customDates.length) {
+      lines.push("", "Other special dates:");
+      formData.customDates.forEach((d) => {
+        lines.push(`  - ${d.title} — ${d.date}${d.description ? ` (${d.description})` : ""}`);
+      });
+    }
+
+    lines.push("", "Note: profile/business photos were not attached — collect these during verification.");
+
+    return lines.join("\n");
+  };
+
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const fd = new FormData();
+    try {
+      const payload = {
+        contactPerson: formData.fullName,
+        organisationName: `${selectedTier} Membership Application`,
+        phone: formData.phone,
+        email: formData.email,
+        amount: 0,
+        address: formData.address || "-",
+        message: buildApplicationSummary(),
+      };
 
-    fd.append("fullName", formData.fullName);
-    fd.append("fatherName", formData.fatherName);
-    fd.append("gender", formData.gender);
-    fd.append("phone", formData.phone);
-    fd.append("email", formData.email);
-    fd.append("birthday", formData.birthday);
-    fd.append("occupation", formData.occupation);
-    fd.append("bloodGroup", formData.bloodGroup);
-    fd.append("address", formData.address);
-    fd.append("city", formData.city);
-    fd.append("state", formData.state);
-    fd.append("country", formData.country);
-    fd.append("pincode", formData.pincode);
-    fd.append("tier", formData.tier);
-    fd.append("hasBusiness", formData.hasBusiness);
-    fd.append("hasJob", formData.hasJob);
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
+      const response = await fetch(`${API_BASE}/enquiry/create`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    fd.append("jobDetails", JSON.stringify(formData.jobDetails));
-    fd.append("businessDetails", JSON.stringify({
-      ...formData.businessDetails,
-      businessImages: [],
-    }));
-    fd.append("familyMembers", JSON.stringify(formData.familyMembers));
-    fd.append("anniversaries", JSON.stringify(formData.anniversaries));
-    fd.append("customDates", JSON.stringify(formData.customDates));
+      const data = await response.json();
 
-    if (formData.profileImage) {
-      fd.append("profileImage", formData.profileImage);
+      if (data.success) {
+        setSubmitted(true);
+        alert("Application received! Our team will review it and contact you soon.");
+      } else {
+        alert(data.message || "Submission failed");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
     }
-
-    const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
-    const response = await fetch(`${API_BASE}/members/create`, {
-      method: "POST",
-      body: fd,
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      setSubmitted(true);
-      alert("Member Registered Successfully");
-    } else {
-      alert(data.message || "Registration failed");
-    }
-  } catch (error) {
-    console.error(error);
-    alert("Something went wrong");
-  }
-};
+  };
 
   const handleTierSelect = name => {
     setSelectedTier(name);
