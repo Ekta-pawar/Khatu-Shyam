@@ -5,11 +5,12 @@ const variants = {
   outline: "border border-slate-300 bg-white text-slate-700 hover:border-orange-200 hover:bg-orange-50 hover:text-orange-700 disabled:text-slate-400",
 };
 
-const Button = ({ children, variant = "primary", isLoading = false, className = "", type = "button", ...rest }) => {
+const Button = ({ children, variant = "primary", isLoading = false, className = "", type = "button", bgColor = "", hoverColor = "", textColor = "", ...rest }) => {
+  const colorOverride = [bgColor, hoverColor, textColor].filter(Boolean).join(" ");
   return (
     <button
       type={type}
-      className={`inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-200 focus:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:shadow-none ${variants[variant]} ${className}`}
+      className={`inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-200 focus:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:shadow-none ${colorOverride || variants[variant]} ${className}`}
       disabled={isLoading || rest.disabled}
       {...rest}
     >

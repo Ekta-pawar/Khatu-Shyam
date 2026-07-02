@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import FormField from "../components/FormField";
@@ -67,7 +67,7 @@ const LoginPage = () => {
             autoComplete="current-password"
           />
 
-          <Button type="submit" isLoading={isLoading} className="mt-2 w-full">
+          <Button type="submit" isLoading={isLoading} className="mt-2 w-full" bgColor="bg-yellow-500" hoverColor="hover:bg-yellow-600" textColor="text-white">
             Sign in
           </Button>
         </form>

@@ -324,9 +324,9 @@ const MemberListPage = () => {
                     <td className="relative px-5 py-3.5">
                       <span className={`absolute left-0 top-1/2 h-7 w-1 -translate-y-1/2 rounded-r-full ${railColor(member)}`} />
                       <div className="flex items-center gap-3">
-                        {member.profileImage?.url ? (
+                        {member.profileImage ? (
                           <img
-                            src={member.profileImage.url}
+                            src={member.profileImage}
                             alt={member.fullName}
                             className="h-10 w-10 rounded-full object-cover ring-1 ring-slate-200"
                           />

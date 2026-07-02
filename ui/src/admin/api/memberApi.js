@@ -32,6 +32,7 @@ export const memberApi = apiSlice.injectEndpoints({
 
     getMemberById: builder.query({
       query: (id) => `/members/${id}`,
+      transformResponse: (response) => response.member,
       providesTags: (result, error, id) => [{ type: "Member", id }],
     }),
 

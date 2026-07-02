@@ -21,8 +21,6 @@ const InfoRow = ({ label, value }) => (
   </div>
 );
 
-const formatDate = (date) => (date ? new Date(date).toLocaleDateString() : "-");
-
 const MemberDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -33,7 +31,7 @@ const MemberDetailsPage = () => {
     return <EmptyState title="Member not found" description={getErrorMessage(error, "This member may have been removed")} />;
   }
 
-  const { specialDates, familyDetails } = member;
+  const { familyDetails = {} } = member;
 
   return (
     <div className="space-y-6">
@@ -55,12 +53,12 @@ const MemberDetailsPage = () => {
         </Link>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="grid gap-6">
         <div className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex flex-col items-start gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-4">
               <img
-                src={member.profileImage?.url || "https://placehold.co/96x96?text=👤"}
+                src={member.profileImage || "https://placehold.co/96x96?text=👤"}
                 alt={member.fullName}
                 className="h-28 w-28 rounded-full object-cover"
               />
@@ -105,90 +103,39 @@ const MemberDetailsPage = () => {
           </Section>
         </div>
 
-        <div className="space-y-6">
-          <Section title="Special dates">
-            <div className="grid gap-4">
-              {specialDates.birthdays?.length > 0 && (
-                <div>
-                  <p className="mb-3 text-sm font-semibold text-slate-600">Birthdays</p>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {specialDates.birthdays.map((b, idx) => (
-                      <div key={idx} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                        <p className="text-sm font-semibold text-slate-900">{b.personName} {b.relation && `(${b.relation})`}</p>
-                        <p className="mt-1 text-sm text-slate-500">{formatDate(b.birthDate)}</p>
-                        {b.note && <p className="mt-2 text-xs text-slate-400">{b.note}</p>}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {specialDates.anniversaries?.length > 0 && (
-                <div>
-                  <p className="mb-3 text-sm font-semibold text-slate-600">Anniversaries</p>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {specialDates.anniversaries.map((a, idx) => (
-                      <div key={idx} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                        <p className="text-sm font-semibold text-slate-900">{a.husbandName} & {a.wifeName}</p>
-                        <p className="mt-1 text-sm text-slate-500">{formatDate(a.anniversaryDate)}</p>
-                        {a.note && <p className="mt-2 text-xs text-slate-400">{a.note}</p>}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {specialDates.customDates?.length > 0 && (
-                <div>
-                  <p className="mb-3 text-sm font-semibold text-slate-600">Custom special dates</p>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {specialDates.customDates.map((c, idx) => (
-                      <div key={idx} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                        <p className="text-sm font-semibold text-slate-900">{c.title}</p>
-                        <p className="mt-1 text-sm text-slate-500">{formatDate(c.date)}</p>
-                        {c.description && <p className="mt-2 text-xs text-slate-400">{c.description}</p>}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </Section>
-
-          {(familyDetails?.members?.length > 0 || familyDetails?.images?.length > 0) && (
-            <Section title="Family details">
-              {familyDetails.members?.length > 0 && (
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {familyDetails.members.map((fm) => (
-                    <div key={fm._id} className="flex items-center gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                      <img
-                        src={fm.image?.url || "https://placehold.co/48x48?text=👤"}
-                        alt={fm.name}
-                        className="h-14 w-14 rounded-full object-cover"
-                      />
-                      <div>
-                        <p className="font-medium text-slate-800">{fm.name}</p>
-                        <p className="text-sm text-slate-500">{fm.relation} {fm.age ? `• ${fm.age} yrs` : ""}</p>
-                        {fm.occupation && <p className="text-xs text-slate-400">{fm.occupation}</p>}
-                      </div>
+        {(familyDetails?.members?.length > 0 || familyDetails?.images?.length > 0) && (
+          <Section title="Family details">
+            {familyDetails.members?.length > 0 && (
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {familyDetails.members.map((fm) => (
+                  <div key={fm._id} className="flex items-center gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4">
+                    <img
+                      src={fm.image?.url || "https://placehold.co/48x48?text=👤"}
+                      alt={fm.name}
+                      className="h-14 w-14 rounded-full object-cover"
+                    />
+                    <div>
+                      <p className="font-medium text-slate-800">{fm.name}</p>
+                      <p className="text-sm text-slate-500">{fm.relation} {fm.age ? `• ${fm.age} yrs` : ""}</p>
+                      {fm.occupation && <p className="text-xs text-slate-400">{fm.occupation}</p>}
                     </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {familyDetails.images?.length > 0 && (
+              <div className="mt-4">
+                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Family images</p>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {familyDetails.images.map((img) => (
+                    <img key={img.publicId} src={img.url} alt="Family" className="h-28 w-full rounded-3xl object-cover" />
                   ))}
                 </div>
-              )}
-
-              {familyDetails.images?.length > 0 && (
-                <div className="mt-4">
-                  <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Family images</p>
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {familyDetails.images.map((img) => (
-                      <img key={img.publicId} src={img.url} alt="Family" className="h-28 w-full rounded-3xl object-cover" />
-                    ))}
-                  </div>
-                </div>
-              )}
-            </Section>
-          )}
-        </div>
+              </div>
+            )}
+          </Section>
+        )}
       </div>
     </div>
   );
