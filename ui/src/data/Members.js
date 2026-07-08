@@ -1,6 +1,6 @@
-import member1 from "../assets/member-1.jpg";
-import member2 from "../assets/member-2.jpg";
-import member3 from "../assets/member-3.jpg";
+import member1 from "../assets/shyam-deity.jpg";
+import member2 from "../assets/side.jpeg";
+import member3 from "../assets/hero-temple.jpg";
 
 export const members = [
   // ───── Golden Members ─────

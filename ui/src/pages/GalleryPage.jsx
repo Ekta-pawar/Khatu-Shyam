@@ -1,9 +1,39 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { PageShell, PageHeader } from "../components/PageShell";
-import { galleryItems } from "../data/events";
+import { galleryItems as fallbackGalleryItems } from "../data/events";
+import { getGalleryItems } from "../api/gallery";
 import { Play } from "lucide-react";
 
 function GalleryPage() {
+  const [galleryItems, setGalleryItems] = useState(fallbackGalleryItems);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getGalleryItems("photo")
+      .then((res) => {
+        const items = res.data?.data || [];
+        if (isMounted && items.length > 0) {
+          setGalleryItems(
+            items.map((item) => ({
+              src: item.mediaUrl,
+              title: item.title,
+              year: item.eventDate
+                ? new Date(item.eventDate).getFullYear()
+                : new Date(item.createdAt).getFullYear(),
+            }))
+          );
+        }
+      })
+      .catch(() => {
+        // keep the fallback static items if the request fails
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <PageShell>
       <PageHeader
@@ -25,11 +55,11 @@ function GalleryPage() {
                 src={item.src}
                 alt={item.title}
                 className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-                  i % 5 === 0 ? "h-[560px]" : "h-72"
+                  i % 5 === 0 ? "h-140" : "h-72"
                 }`}
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
 
               {i % 3 === 0 && (
                 <div className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-yellow-500 text-black shadow-lg">

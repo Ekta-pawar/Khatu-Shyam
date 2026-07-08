@@ -17,21 +17,7 @@ import {
   X,
   Send,
 } from "lucide-react";
-import axios from "axios";
-
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
-
-// ─── API helpers ────────────────────────────────────────────────────────────
-
-export const createEnquiry = (data) => {
-  return axios.post(`${API_BASE}/enquiry/create`, data);
-};
-
-export const createSponsor = (data) => {
-  return axios.post(`${API_BASE}/sponsor/create`, data, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
-};
+import { createEnquiry, createSponsor } from "../api/sponsor";
 
 // ─── Static data ─────────────────────────────────────────────────────────────
 
@@ -213,7 +199,7 @@ function SponsorPage() {
         <div className="mb-10 text-center">
           <p className="mb-3 text-xs uppercase tracking-widest text-saffron">प्रायोजन स्तर</p>
           <h2 className="font-display text-4xl text-maroon">Sponsorship Tiers</h2>
-          <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-yellow-500 to-transparent" />
+          <div className="mx-auto mt-4 h-px w-24 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
@@ -222,7 +208,7 @@ function SponsorPage() {
               key={tier.name}
               className={`relative rounded-3xl p-6 shadow-lg transition-transform hover:scale-[1.02] ${
                 tier.featured
-                  ? `bg-gradient-to-br ${tier.color} text-white`
+                  ? `bg-linear-to-br ${tier.color} text-white`
                   : "border bg-white"
               }`}
             >
@@ -234,7 +220,7 @@ function SponsorPage() {
               )}
               <div
                 className={`mb-1 flex h-10 w-10 items-center justify-center rounded-xl ${
-                  tier.featured ? "bg-white/20" : `bg-gradient-to-br ${tier.color}`
+                  tier.featured ? "bg-white/20" : `bg-linear-to-br ${tier.color}`
                 }`}
               >
                 <Star size={18} className="text-white" />
@@ -268,7 +254,7 @@ function SponsorPage() {
                   <li key={perk} className="flex items-start gap-2">
                     <Check
                       size={14}
-                      className={`mt-0.5 flex-shrink-0 ${
+                      className={`mt-0.5 shrink-0 ${
                         tier.featured ? "text-white" : "text-yellow-600"
                       }`}
                     />
@@ -288,7 +274,7 @@ function SponsorPage() {
                 className={`mt-6 w-full rounded-2xl py-3 px-4 font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg ${
                   tier.featured
                     ? "bg-white text-maroon hover:bg-gray-100"
-                    : `bg-gradient-to-r ${tier.color} text-white`
+                    : `bg-linear-to-r ${tier.color} text-white`
                 }`}
               >
                 {tier.button}
@@ -304,7 +290,7 @@ function SponsorPage() {
           <div className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl">
 
             {/* Header */}
-            <div className="bg-gradient-to-r from-orange-500 to-yellow-500 px-4 py-6 text-white">
+            <div className="bg-linear-to-r from-orange-500 to-yellow-500 px-4 py-6 text-white">
               <button
                 onClick={() => setShowSponsorForm(false)}
                 className="absolute right-5 top-5 flex h-10 w-12 items-center justify-center rounded-full bg-white/20"
@@ -508,7 +494,7 @@ function SponsorPage() {
                     <div className="border-t pt-8">
                       <button
                         type="submit"
-                        className="w-full rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-yellow-500 hover:to-yellow-700"
+                        className="w-full rounded-full bg-linear-to-r from-yellow-400 to-yellow-600 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-yellow-500 hover:to-yellow-700"
                       >
                         Submit Sponsorship Request
                       </button>
@@ -662,7 +648,7 @@ function SponsorPage() {
 
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-600 py-3 text-sm font-semibold text-white"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-yellow-400 to-yellow-600 py-3 text-sm font-semibold text-white"
               >
                 <Send size={16} />
                 Submit Enquiry
@@ -673,12 +659,12 @@ function SponsorPage() {
       )}
 
       {/* ── Why Sponsor ── */}
-      <section className="border-t border-border/60 bg-gradient-to-b from-yellow-50 to-white py-20">
+      <section className="border-t border-border/60 bg-linear-to-b from-yellow-50 to-white py-20">
         <div className="mx-auto max-w-5xl px-5">
           <div className="mb-12 text-center">
             <p className="mb-3 text-xs uppercase tracking-widest text-saffron">क्यों सहयोग करें</p>
             <h2 className="font-display text-4xl text-maroon">Why Sponsor?</h2>
-            <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-yellow-500 to-transparent" />
+            <div className="mx-auto mt-4 h-px w-24 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {[

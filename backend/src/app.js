@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const sponsorRoutes = require("./routes/sponsor.routes");
 
 const eventRoutes = require("./routes/event.routes");
+const galleryRoutes = require("./routes/gallery.routes");
 
 const env = require("./config/env");
 const logger = require("./config/logger");
@@ -102,6 +103,7 @@ app.use("/api/v1/events", eventRoutes);
 app.use("/api/v1/enquiry", enquiryRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/v1/sponsor", sponsorRoutes);
+app.use("/api/v1/gallery", galleryRoutes);
 
 /* ------------------------------------------------------------------ */
 /* Error handling                                                      */
@@ -110,3 +112,6 @@ app.use(notFound);
 app.use(globalErrorHandler);
 
 module.exports = app;
+
+
+ 

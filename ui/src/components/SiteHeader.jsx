@@ -17,6 +17,7 @@ const nav = [
     dropdown: [
       { to: "/gallery/videos", label: "Videos" },
       { to: "/gallery/Photos", label: "Photos" },
+      { to: "/gallery/guests", label: "Samiti Guest" },
     ],
   },
   

@@ -80,12 +80,12 @@ function TeamPage() {
               className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                 activeTier === id
                   ? id === "golden"
-                    ? "bg-gradient-to-r from-yellow-400 to-amber-500 text-black shadow-lg shadow-yellow-200"
+                    ? "bg-linear-to-r from-yellow-400 to-amber-500 text-black shadow-lg shadow-yellow-200"
                     : id === "Diamond"
-                    ? "bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-blue-200"
+                    ? "bg-linear-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-blue-200"
                     : id === "KaryaKarani"
-                    ? "bg-gradient-to-r from-orange-400 to-red-500 text-white shadow-lg shadow-orange-200"
-                    : "bg-gradient-to-r from-maroon to-maroon/80 text-white shadow-lg"
+                    ? "bg-linear-to-r from-orange-400 to-red-500 text-white shadow-lg shadow-orange-200"
+                    : "bg-linear-to-r from-maroon to-maroon/80 text-white shadow-lg"
                   : "border-2 border-gray-300 bg-white text-gray-600 hover:border-maroon hover:text-maroon"
               }`}
             >
@@ -124,10 +124,10 @@ function TeamPage() {
                   <span
                     className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${
                       member.tier === "golden"
-                        ? "bg-gradient-to-r from-yellow-400 to-amber-500 text-black"
+                        ? "bg-linear-to-r from-yellow-400 to-amber-500 text-black"
                         : member.tier === "Diamond"
-                        ? "bg-gradient-to-r from-sky-500 to-blue-600 text-white"
-                        : "bg-gradient-to-r from-orange-400 to-red-500 text-white"
+                        ? "bg-linear-to-r from-sky-500 to-blue-600 text-white"
+                        : "bg-linear-to-r from-orange-400 to-red-500 text-white"
                     }`}
                   >
                     {tierLabel[member.tier]}

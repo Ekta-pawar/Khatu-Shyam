@@ -6,26 +6,6 @@
     "auditLog": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\.040324b1509f85e4245d1ee82fb4e57bf833c282-audit.json",
     "files": [
         {
-            "date": 1781807815822,
-            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\combined-2026-06-19.log",
-            "hash": "07a9fb71e7211d8a19a81b80de1e3a6ed06f562f8a23a98b0e1c87cd7ee6a1a6"
-        },
-        {
-            "date": 1781930954552,
-            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\combined-2026-06-20.log",
-            "hash": "2e9f49a72100aeaf94783a7d0397c7f0a55922672153180cb2425811b7a1a110"
-        },
-        {
-            "date": 1782104888182,
-            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\combined-2026-06-22.log",
-            "hash": "7a2b86b92c0f4505e9711119df3246111f772d41590f4eb95a46fa2b785574aa"
-        },
-        {
-            "date": 1782191264441,
-            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\combined-2026-06-23.log",
-            "hash": "a94cee9c55eb5081f66d79adb9da990752dad801bac448f1407344b34cc636c2"
-        },
-        {
             "date": 1782295012107,
             "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\combined-2026-06-24.log",
             "hash": "65890bb7cfa21b23d60adbde83dd3a465b7ea12a8b93846d986c62d2ae55f0bc"
@@ -54,6 +34,21 @@
             "date": 1782967772974,
             "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\combined-2026-07-02.log",
             "hash": "6036476379ba30d7812c98ef4334cc31e2ee341073de715507bda4fc897d364d"
+        },
+        {
+            "date": 1783325453320,
+            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\combined-2026-07-06.log",
+            "hash": "ef8c319f2e055ec955f498f9bac903af3cd96f9f6ae7be376c956a74d69c2258"
+        },
+        {
+            "date": 1783400717029,
+            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\combined-2026-07-07.log",
+            "hash": "f5a918a146ebd11d3c82b6e89dd1925829fefa8967630398a3e300bb7fe11a7f"
+        },
+        {
+            "date": 1783486451345,
+            "name": "C:\\Users\\ekta3\\OneDrive\\Desktop\\New folder\\Khatu-Shyam-web\\backend\\logs\\combined-2026-07-08.log",
+            "hash": "2f230cd2af2a5aea71ac1f979862d0a34531f0bec4eb0f6d86b28383ce9958b1"
         }
     ],
     "hashType": "sha256"

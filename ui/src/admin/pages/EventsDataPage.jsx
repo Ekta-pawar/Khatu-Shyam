@@ -131,6 +131,21 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
   };
 
   const handleSubmit = async () => {
+    const requiredFields = [
+      ["title", "Event title"],
+      ["shortDescription", "Short description"],
+      ["fullDescription", "Full description"],
+      ["eventDate", "Event date"],
+      ["startTime", "Start time"],
+      ["endTime", "End time"],
+      ["location", "Location"],
+    ];
+    const missing = requiredFields.find(([key]) => !formData[key]?.trim?.() && !formData[key]);
+    if (missing) {
+      alert(`${missing[1]} is required.`);
+      return;
+    }
+
     try {
       const data = new FormData();
 
@@ -152,7 +167,7 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
       onCreated();
     } catch (error) {
       console.error(error);
-      alert("Failed to create event");
+      alert(error?.data?.message || "Failed to create event");
     }
   };
 
@@ -201,7 +216,7 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
                     </p>
                   </Field>
 
-                  <Field label="Short description">
+                  <Field label="Short description" required>
                     <textarea
                       rows="2"
                       name="shortDescription"
@@ -209,10 +224,11 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
                       className={`${inputClass} resize-none`}
                       value={formData.shortDescription}
                       onChange={handleChange}
+                      required
                     />
                   </Field>
 
-                  <Field label="Full description">
+                  <Field label="Full description" required>
                     <textarea
                       rows="5"
                       name="fullDescription"
@@ -220,6 +236,7 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
                       className={`${inputClass} resize-none`}
                       value={formData.fullDescription}
                       onChange={handleChange}
+                      required
                     />
                   </Field>
                 </div>
@@ -252,22 +269,24 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
                   </div>
 
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <Field label="Start time">
+                    <Field label="Start time" required>
                       <input
                         type="time"
                         name="startTime"
                         className={inputClass}
                         value={formData.startTime}
                         onChange={handleChange}
+                        required
                       />
                     </Field>
-                    <Field label="End time">
+                    <Field label="End time" required>
                       <input
                         type="time"
                         name="endTime"
                         className={inputClass}
                         value={formData.endTime}
                         onChange={handleChange}
+                        required
                       />
                     </Field>
                   </div>
@@ -281,7 +300,7 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
                       </p>
                     )}
 
-                  <Field label="Location">
+                  <Field label="Location" required>
                     <input
                       type="text"
                       name="location"
@@ -289,6 +308,7 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
                       className={inputClass}
                       value={formData.location}
                       onChange={handleChange}
+                      required
                     />
                   </Field>
                 </div>

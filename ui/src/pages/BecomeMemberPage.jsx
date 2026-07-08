@@ -1,11 +1,11 @@
 
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { PageShell, PageHeader } from "../components/PageShell";
 import {
   Check, Crown, Plus, X, Upload, User, Building2,
-  Camera, CalendarHeart, Users, Briefcase, Gift,
-  Calendar, ChevronDown, ChevronUp,
+  Camera, CalendarHeart, Users, Briefcase,
+  Calendar,
 } from "lucide-react";
 
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
@@ -34,9 +34,9 @@ const tiers = [
     ],
   },
   {
-    name: "Karyakarani Members",
+    name: "Silver Members",
     price: "₹3,00,000 / Year",
-    buttonText: "Become Karyakarani Member",
+    buttonText: "Become Silver Member",
     perks: [
       "All Golden benefits",
       "Patron recognition",
@@ -45,9 +45,9 @@ const tiers = [
     ],
   },
   {
-  name: "Even Member",
-  price: "₹51,000 / Year",
-  buttonText: "Become Even Member",
+  name: "Karyakarani Members",
+  price: "₹1,00,000 / Year",
+  buttonText: "Become Karyakarani Member",
   perks: [
     "Member ID & welcome kit",
     "Event invitations",
@@ -56,8 +56,8 @@ const tiers = [
   ],
 },
 {
-  name: "Prernasrot",
-  price: "₹21,000 / Year",
+  name: "Shrakshak",
+  price: "₹51,000 / Year",
   buttonText: "Join Prernasrot",
   perks: [
     "Special recognition certificate",
@@ -67,9 +67,9 @@ const tiers = [
   ],
 },
 {
-  name: "Shrakshak",
-  price: "₹16,000-51,000 / Year",
-  buttonText: "Become Shrakshak",
+  name: "Mambers",
+  price: "₹21,000 / Year",
+  buttonText: "Become Member",
   perks: [
     "Member ID card",
     "Regular event updates",
@@ -77,17 +77,7 @@ const tiers = [
     "Volunteer opportunities",
   ],
 },
-{
-  name: "Samiti Pillar",
-  price: "By Invitation",
-  buttonText: "Become Samiti Pillar",
-  perks: [
-    "Featured on home page",
-    "Lifetime patron recognition",
-    "VIP event seating",
-    "Samiti leadership acknowledgement",
-  ],
-},
+
 ];
 
 const GENDERS         = ["Male", "Female", "Other"];
@@ -337,7 +327,7 @@ function BecomeMemberPage() {
   // ─── RENDER ────────────────────────────────────────────────────────────────
 
   return (
-    <PageShell>
+  <PageShell>
       <PageHeader
         eyebrow="सदस्यता"
         title="Become a Member"
@@ -358,7 +348,7 @@ function BecomeMemberPage() {
               key={tier.name}
               className={`flex flex-col rounded-3xl p-8 shadow-lg transition-all duration-300 ${
                 tier.featured
-                  ? "bg-gradient-to-br from-yellow-400 to-yellow-600 text-white shadow-yellow-200"
+                  ? "bg-linear-to-br from-yellow-400 to-yellow-600 text-white shadow-yellow-200"
                   : "border bg-white shadow-gray-200"
               }`}
             >
@@ -382,7 +372,7 @@ function BecomeMemberPage() {
               <ul className="mt-6 flex-1 space-y-3">
                 {tier.perks.map(perk => (
                   <li key={perk} className="flex items-start gap-2">
-                    <Check size={16} className="mt-1 flex-shrink-0" />
+                    <Check size={16} className="mt-1 shrink-0" />
                     <span className="text-sm">{perk}</span>
                   </li>
                 ))}
@@ -820,7 +810,7 @@ function BecomeMemberPage() {
               {/* ── Submit ── */}
               <div className="border-t pt-8">
                 <button type="submit"
-                  className="w-full rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-yellow-500 hover:to-yellow-700">
+                  className="w-full rounded-full bg-linear-to-r from-yellow-400 to-yellow-600 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-yellow-500 hover:to-yellow-700">
                   Submit Application — {selectedTier}
                 </button>
                 <p className="mt-4 text-center text-sm text-gray-500">

@@ -1,4 +1,3 @@
-import React from "react";
 import { PageShell, PageHeader } from "../components/PageShell";
 import { Target, Eye, Heart, Star, Sparkles, Flag, Users, Calendar } from "lucide-react";
 
@@ -37,7 +36,7 @@ const milestones = [
     year: 2020,
     title: "Digital Seva Initiative",
     description:
-      "डिजिटल माध्यमों से श्याम भक्तों को जोड़ने की पहल। ऑनलाइन भजन संकीर्तन एवं सेवा समन्वय शुरू किया गया।",
+      "कोविड-19 महामारी के दौरान जब सामूहिक आयोजन संभव नहीं थे, समिति ने डिजिटल माध्यमों से भक्तों को जोड़ने की पहल की। ऑनलाइन भजन संकीर्तन, लाइव आरती एवं जरूरतमंद परिवारों तक राशन व सेवा समन्वय पहुँचाया गया।",
     icon: Heart,
   },
   {
@@ -87,7 +86,7 @@ function MissionVisionPage() {
       <section className="mx-auto max-w-7xl px-5 py-16">
         <div className="grid gap-8 md:grid-cols-2">
           {/* Mission */}
-          <div className="rounded-3xl bg-gradient-to-br from-yellow-400 to-orange-500 p-8 text-white shadow-lg">
+          <div className="rounded-3xl bg-linear-to-br from-yellow-400 to-orange-500 p-8 text-white shadow-lg">
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20">
               <Target size={32} className="text-white" />
             </div>
@@ -100,7 +99,7 @@ function MissionVisionPage() {
             <ul className="space-y-3">
               {missionPoints.map((point, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-white/30 text-xs font-bold">
+                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/30 text-xs font-bold">
                     {i + 1}
                   </span>
                   <span className="text-sm leading-relaxed text-white/90">{point}</span>
@@ -110,7 +109,7 @@ function MissionVisionPage() {
           </div>
 
           {/* Vision */}
-          <div className="rounded-3xl bg-gradient-to-br from-maroon to-maroon/80 p-8 text-white shadow-lg">
+          <div className="rounded-3xl bg-linear-to-br from-maroon to-maroon/80 p-8 text-white shadow-lg">
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20">
               <Eye size={32} className="text-white" />
             </div>
@@ -123,7 +122,7 @@ function MissionVisionPage() {
             <ul className="space-y-4">
               {visionPoints.map((point, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <Star size={16} className="mt-1 flex-shrink-0 text-yellow-400" />
+                  <Star size={16} className="mt-1 shrink-0 text-yellow-400" />
                   <span className="text-sm leading-relaxed text-white/90">{point}</span>
                 </li>
               ))}
@@ -138,7 +137,7 @@ function MissionVisionPage() {
           <div className="mb-12 text-center">
             <p className="mb-3 text-xs uppercase tracking-widest text-saffron">हमारे मूल्य</p>
             <h2 className="font-display text-4xl text-maroon">Core Values</h2>
-            <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-yellow-500 to-transparent" />
+            <div className="mx-auto mt-4 h-px w-24 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -166,14 +165,14 @@ function MissionVisionPage() {
           <p className="mb-3 text-xs uppercase tracking-widest text-saffron">2011 से अब तक</p>
           <h2 className="font-display text-4xl text-maroon">Our Journey</h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            एक छोटे से भजन संकीर्तन से शुरू होकर, आज हम हजारों परिवारों की आस्था के केंद्र बन चुके हैं।
+            "श्री श्री समिति" द्वारा वर्ष 2011 से लगातार आयोजित किए जा रहे निशुल्क मासिक कीर्तन
           </p>
-          <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-yellow-500 to-transparent" />
+          <div className="mx-auto mt-4 h-px w-24 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
         </div>
 
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-8 top-0 h-full w-0.5 bg-gradient-to-b from-yellow-400 via-orange-400 to-maroon md:left-1/2 md:-translate-x-0.5" />
+          <div className="absolute left-8 top-0 h-full w-0.5 bg-linear-to-b from-yellow-400 via-orange-400 to-maroon md:left-1/2 md:-translate-x-0.5" />
 
           <div className="space-y-10">
             {milestones.map((milestone, index) => {
@@ -187,11 +186,11 @@ function MissionVisionPage() {
                   }`}
                 >
                   {/* Icon bubble — mobile: left col, desktop: center */}
-                  <div className="relative z-10 flex-shrink-0 md:absolute md:left-1/2 md:-translate-x-1/2">
+                  <div className="relative z-10 shrink-0 md:absolute md:left-1/2 md:-translate-x-1/2">
                     <div
                       className={`flex h-16 w-16 items-center justify-center rounded-full border-4 border-white shadow-md ${
                         milestone.highlight
-                          ? "bg-gradient-to-br from-yellow-400 to-orange-500"
+                          ? "bg-linear-to-br from-yellow-400 to-orange-500"
                           : "bg-white"
                       }`}
                     >
@@ -238,7 +237,7 @@ function MissionVisionPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="border-t border-border/60 bg-gradient-to-b from-yellow-50 to-white py-20">
+      <section className="border-t border-border/60 bg-linear-to-b from-yellow-50 to-white py-20">
         <div className="mx-auto max-w-3xl px-5 text-center">
           <Star size={32} className="mx-auto mb-6 text-yellow-500" />
           <h2 className="font-display text-3xl text-maroon md:text-4xl">

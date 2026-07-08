@@ -12,6 +12,7 @@ import {
   LogOut,
   UserCog,
   MessageSquare,
+  Images,
   Menu,
 } from "lucide-react";
 import { selectCurrentAdmin, clearCredentials } from "../features/auth/authSlice";
@@ -25,6 +26,7 @@ const navItems = [
   { to: "/admin/contacts", label: "Contact Messages", icon: Mail },
   { to: "/admin/enquiries", label: "Enquiries", icon: MessageSquare },
   { to: "/admin/sponsors", label: "Sponsors", icon: Gift },
+  { to: "/admin/gallery", label: "Gallery", icon: Images },
   { to: "/admin/admins", label: "Admins", icon: UserCog, superAdminOnly: true },
 ];
 

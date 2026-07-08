@@ -36,6 +36,42 @@
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --font-deva: var(--font-deva);
+
+  /* Repoint Tailwind's built-in yellow/orange/amber scales at the brand color
+     so every existing yellow-, orange-, and amber- utility across the site
+     renders as a shade of #e36612 instead of the default Tailwind hues. */
+  --color-yellow-50: var(--brand-50);
+  --color-yellow-100: var(--brand-100);
+  --color-yellow-200: var(--brand-200);
+  --color-yellow-300: var(--brand-300);
+  --color-yellow-400: var(--brand-400);
+  --color-yellow-500: var(--brand-500);
+  --color-yellow-600: var(--brand-600);
+  --color-yellow-700: var(--brand-700);
+  --color-yellow-800: var(--brand-800);
+  --color-yellow-900: var(--brand-900);
+
+  --color-orange-50: var(--brand-50);
+  --color-orange-100: var(--brand-100);
+  --color-orange-200: var(--brand-200);
+  --color-orange-300: var(--brand-300);
+  --color-orange-400: var(--brand-400);
+  --color-orange-500: var(--brand-500);
+  --color-orange-600: var(--brand-600);
+  --color-orange-700: var(--brand-700);
+  --color-orange-800: var(--brand-800);
+  --color-orange-900: var(--brand-900);
+
+  --color-amber-50: var(--brand-50);
+  --color-amber-100: var(--brand-100);
+  --color-amber-200: var(--brand-200);
+  --color-amber-300: var(--brand-300);
+  --color-amber-400: var(--brand-400);
+  --color-amber-500: var(--brand-500);
+  --color-amber-600: var(--brand-600);
+  --color-amber-700: var(--brand-700);
+  --color-amber-800: var(--brand-800);
+  --color-amber-900: var(--brand-900);
 }
 
 :root {
@@ -43,9 +79,23 @@
 
   /* Devotional palette — saffron, gold, maroon on cream */
   --cream: oklch(0.985 0.018 80);
-  --saffron: oklch(0.76 0.17 60);
-  --gold: oklch(0.78 0.14 80);
-  --gold-deep: oklch(0.62 0.13 75);
+
+  /* Brand color scale, generated from #e36612 */
+  --brand: #e36612;
+  --brand-50: color-mix(in oklch, var(--brand) 6%, white);
+  --brand-100: color-mix(in oklch, var(--brand) 12%, white);
+  --brand-200: color-mix(in oklch, var(--brand) 28%, white);
+  --brand-300: color-mix(in oklch, var(--brand) 45%, white);
+  --brand-400: color-mix(in oklch, var(--brand) 72%, white);
+  --brand-500: var(--brand);
+  --brand-600: color-mix(in oklch, var(--brand) 88%, black);
+  --brand-700: color-mix(in oklch, var(--brand) 74%, black);
+  --brand-800: color-mix(in oklch, var(--brand) 60%, black);
+  --brand-900: color-mix(in oklch, var(--brand) 48%, black);
+
+  --saffron: var(--brand);
+  --gold: var(--brand-400);
+  --gold-deep: var(--brand-700);
   --maroon: oklch(0.42 0.16 25);
   --ink: oklch(0.22 0.04 40);
 
@@ -184,5 +234,5 @@
 .admin-content input,
 .admin-content select,
 .admin-content textarea {
-  min-height: 2.5rem;
+  min-height: 2.;
 }

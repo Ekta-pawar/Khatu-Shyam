@@ -46,7 +46,7 @@ function TeamMemberPage() {
       try {
         const res = await axios.get(`${API_BASE}/members/${activeMemberId}`);
         setMember(res.data.member || res.data.data || null);
-      } catch (err) {
+      } catch {
         try {
           const listRes = await axios.get(`${API_BASE}/members`);
           const members = listRes.data.members || listRes.data.data || [];
@@ -101,7 +101,7 @@ function TeamMemberPage() {
         <div className="absolute inset-0 bg-glow opacity-60" aria-hidden />
         <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-10 md:grid-cols-[0.9fr_1.25fr] md:items-center lg:py-14">
           <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-white/70 bg-card shadow-elegant md:max-w-none">
-            <div className="relative h-[420px] w-full sm:h-[480px] lg:h-[520px]">
+            <div className="relative h-105 w-full sm:h-120 lg:h-130">
               <img
                 src={memberImage}
                 alt={member.fullName}

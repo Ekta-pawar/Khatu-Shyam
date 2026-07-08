@@ -1,7 +1,7 @@
 import event1 from "../assets/event-1.jpg";
-import event2 from "../assets/event-2.jpg";
-import event3 from "../assets/event-3.jpg";
-import event4 from "../assets/event-4.jpg";
+import event2 from "../assets/Shyam1.png";
+import event3 from "../assets/cofounder 1.jpg";
+import event4 from "../assets/hero-temple.jpg";
 
 export const galleryImages = [
   // ── Highlights ──
@@ -70,6 +70,17 @@ export const galleryItems = [
     title: "Mandir Pratishtha Diwas",
     year: "2022",
   },
+];
+
+export const galleryGuests = [
+  { src: event1, label: "विशिष्ट अतिथि", event: "Phalgun Mela Highlights 2024", year: "2024" },
+  { src: event2, label: "विशिष्ट अतिथि", event: "Phalgun Mela Highlights 2024", year: "2024" },
+  { src: event3, label: "सम्मानित अतिथि", event: "Annapurna Bhandara — Jaipur 2024", year: "2024" },
+  { src: event4, label: "सम्मानित अतिथि", event: "Annapurna Bhandara — Jaipur 2024", year: "2024" },
+  { src: event1, label: "मुख्य अतिथि", event: "Grand Bhajan Sandhya 2024", year: "2024" },
+  { src: event2, label: "विशिष्ट अतिथि", event: "Khatu Nishan Yatra 2024", year: "2024" },
+  { src: event3, label: "सम्मानित अतिथि", event: "Maha Bhajan Ratri 2023", year: "2023" },
+  { src: event4, label: "मुख्य अतिथि", event: "Samiti Foundation Day 2022", year: "2022" },
 ];
 
 export const upcomingEvents = [

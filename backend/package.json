@@ -7,10 +7,8 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "seed:admin": "node src/scripts/seedSuperAdmin.js",
-    "reset:admin": "node src/scripts/resetAdminPassword.js"
-   
- 
-
+    "reset:admin": "node src/scripts/resetAdminPassword.js",
+    "setup:gallery-preset": "node src/scripts/setupGalleryUploadPreset.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

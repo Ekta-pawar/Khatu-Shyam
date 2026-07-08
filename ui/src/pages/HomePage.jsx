@@ -2,13 +2,23 @@ import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { PageShell } from "../components/PageShell";
+import { ImageWithFallback } from "../components/ImageWithFallback";
 
-import heroTemple from "../assets/hero-temple.jpg";
-import deity from "../assets/shyam-deity.jpg";
+import heroTemple from "../assets/KHATU.jpeg";
+import deity from "../assets/midd Shyam.png";
 import event1 from "../assets/event-1.jpg";
+import bowEmblem from "../assets/bow-emblem.png";
+import bowEmblem1 from "../assets/bow-emblem.png";
+
+import cofounder1 from "../assets/hari sarma.JPG";
+import cofounder2 from "../assets/cofounder2.jpg";
+import cofounder3 from "../assets/cofounder3.JPG";
+import cofounder4 from "../assets/cofounder4.JPG";
+import member1 from "../assets/shyam-deity.jpg";
+import member2 from "../assets/side.jpeg";
+import member3 from "../assets/hero-temple.jpg";
 
 import {
-  ArrowRight,
   CalendarDays,
   MapPin,
 } from "lucide-react";
@@ -27,29 +37,30 @@ const formatDate = (value) => {
   });
 };
 
-const formatTierLabel = (tier) => {
-  if (!tier) return "Member";
+const committeeMembers = [
+  { image: cofounder1, role: "जय किशन बंसल" },
+   { image: member2, role: "संजय कुमार गुप्ता" },
+     { image: cofounder3, role: "राजेश जैन" },
+  { image: cofounder2, role: "हरी शर्मा" },
+    { image: member3, role: "संजय मित्तल" },
 
-  return tier
-    .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
-};
+  { image: cofounder1, role: "अमित गोयल" },
+    { image: member1, role: "अरविंद गोयल" },
+        { image: cofounder4, role: " नतेश गोयल" },
+            { image: cofounder4, role: "अमित गुप्ता" }
+
+
+
+
+];
 
 function HomePage() {
-  const [homeMembers, setHomeMembers] = useState([]);
   const [homeEvents, setHomeEvents] = useState([]);
 
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        const [membersRes, eventsRes] = await Promise.all([
-          axios.get(`${API_BASE}/members/pillars`),
-          axios.get(`${API_BASE}/events`),
-        ]);
-
-        const members = membersRes.data.data || [];
-        setHomeMembers(members.slice(0, 12));
+        const eventsRes = await axios.get(`${API_BASE}/events`);
         setHomeEvents((eventsRes.data.data || []).slice(0, 3));
       } catch (error) {
         console.error("Error loading home page data:", error);
@@ -62,29 +73,61 @@ function HomePage() {
   return (
     <PageShell>
             <section className="relative min-h-[92vh] overflow-hidden">
-        <img
+        <ImageWithFallback
           src={heroTemple}
           alt="Khatu Shyam Ji temple"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover "
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/80" />
 
-        <div className="relative mx-auto flex min-h-[92vh] max-w-7xl flex-col items-center justify-center px-5 py-20 text-center text-white">
-          <p className="mb-5 text-2xl text-yellow-300">
-            ॥ श्री श्याम शरणं मम ॥
+        <div className="relative mx-auto flex min-h-[100vh] max-w-9xl flex-col items-center justify-center px-5 py-20 pt-0 text-center text-white mt-6">
+          <div className="mb-3 mt-0 flex w-full items-start justify-between text-lg text-wight-300 md:text-base font-display text-2xl md:text-3xl lg:text-1xl">
+            <p>॥ श्री श्याम देवाय नमः ॥</p>
+                    <span className="">|| श्री श्याम शरणम् ममः ||</span>
+
+            <p>॥ श्री श्याम देवाय नमः ॥</p>
+          </div>
+
+          <div className="mb-5 flex flex-wrap items-center justify-center gap-6 md:gap-12">
+            <ImageWithFallback
+              src={bowEmblem}
+              alt="हारे का सहारा बाबा श्याम हमारा"
+              className="h-25 w-auto md:h-35 -scale-x-100"
+            />
+
+            <ImageWithFallback
+              src={deity}
+              alt="Shyam Baba"
+              className="h-40 w-40 rounded-full border-2 border-yellow-300 object-cover md:h-65 md:w-65"
+            />
+
+            <ImageWithFallback
+              src={bowEmblem1}
+              alt="हारे का सहारा बाबा श्याम हमारा"
+              className="h-25 w-auto -scale-x-100 md:h-35"
+            />
+          </div>
+
+          <p className="mb-4 text-lg text-wight-500 md:text-xl">
+            हारे का सहारा · बाबा श्याम हमारा
           </p>
 
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl">
-           Shri Shri Khatu Shyam 
-            <span className="block text-yellow-300">
-              Seva Samiti (Reg.)
-            </span>
+          <h1 className="font-display text-6xl md:text-8xl lg:text-5xl">
+            श्री श्री खाटू श्याम सभा समिति (Reg.)
+            {/* <span className="block text-yellow-300">
+              सभा समिति (रजी)
+            </span> */}
           </h1>
 
-          <p className="mt-6 max-w-2xl text-base md:text-lg">
-            Three decades of seva, sangat and devotion to
-            Shyam Baba.
+          {/* <p className="mt-6 max-w-2xl text-base md:text-lg">
+            तीन दशकों से भी अधिक की सेवा, संगत और श्याम बाबा के प्रति अटूट
+            भक्ति — भजन, भण्डारा और यात्रा के माध्यम से भारत भर के परिवारों
+            को एक सूत्र में जोड़ते हुए।
+          </p> */}
+
+          <p className="mt-3 text-sm text-yellow-200 md:text-base">
+            कार्यालय : — B-2/22, सेक्टर-17, रोहिणी, दिल्ली
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -99,17 +142,17 @@ function HomePage() {
               to="/events"
               className="rounded-full border border-white px-7 py-3"
             >
-              Upcoming Events
+             Upcoming Events
             </Link>
           </div>
         </div>
       </section>
             {/* <section className="mx-auto grid max-w-7xl gap-14 px-5 py-24 md:grid-cols-2 md:items-center">
         <div>
-          <img
+          <ImageWithFallback
             src={deity}
             alt="Shri Khatu Shyam Ji"
-            className="h-[560px] w-full rounded-3xl object-cover"
+            className="h-140 w-full rounded-3xl object-cover"
           />
         </div>
 
@@ -153,12 +196,12 @@ function HomePage() {
         </div>
       </section> */}
 
-<section className="mx-auto grid max-w-7xl gap-14 px-5 py-24 md:grid-cols-2 md:items-center">
-  <div className="flex items-center justify-center">
-    <img
+<section className="mb-0 grid gap-14 px-5 py-7 pb-0 md:grid-cols-2 md:items-center">
+  <div className="flex h-160 items-stretch justify-center self-stretch mb-0">
+    <ImageWithFallback
       src={deity}
       alt="Shri Khatu Shyam Ji"
-      className="h-[460px] w-full rounded-3xl object-cover"
+      className="h-full min-h-170 w-full rounded-3xl object-cover"
     />
   </div>
 
@@ -168,26 +211,76 @@ function HomePage() {
     </p>
 
     <h2 className="text-4xl md:text-5xl">
-      The shelter of those who feel they have
-      nothing left.
+     श्याम वर्णन 
     </h2>
 
-    <p className="mt-5 text-gray-600 pt-0 pb-5 ">
-      For over thirty years, our samiti has
-      gathered devotees to sing the names of
-      Shyam Baba and walk together on the path
-      of bhakti.
-    </p>
+    <div className="mt-5 space-y-4 text-[15px] leading-8 text-gray-600 text-justify">
+      <p>
+        खाटू श्याम बाबा की कहानी महाभारत के वीर योद्धा
+        'बर्बरीक' से जुड़ी है। वे भीम के पौत्र थे। अपने महान
+        बलिदान से प्रसन्न होकर भगवान श्रीकृष्ण ने उन्हें
+        कलियुग में 'श्याम' नाम से पूजे जाने और हारे हुए का
+        सहारा बनने का वरदान दिया।
+      </p>
 
-    <div className="mt-9 grid grid-cols-3 gap-4">
+      <p>
+        <span className="font-semibold text-gray-800">
+          बर्बरीक का पराक्रम और तीन बाण —{" "}
+        </span>
+        बर्बरीक बचपन से ही अत्यंत वीर थे। उन्होंने माँ दुर्गा
+        की घोर तपस्या करके तीन अचूक बाण प्राप्त किए थे।
+        महाभारत का युद्ध शुरू होने पर वे अपनी माता को यह वचन
+        देकर युद्ध देखने गए कि वे हमेशा युद्ध में हारने वाले
+        पक्ष की ओर से लड़ेंगे।
+      </p>
+
+      <p>
+        <span className="font-semibold text-gray-800">
+          श्रीकृष्ण की परीक्षा और शीश दान —{" "}
+        </span>
+        बर्बरीक की अपार शक्ति को देखकर भगवान श्रीकृष्ण ने
+        ब्राह्मण का वेश धारण कर उनकी परीक्षा ली। उन्होंने
+        बर्बरीक से दान में उनका शीश (सिर) मांग लिया। एक वीर
+        और वचनबद्ध योद्धा होने के नाते, बर्बरीक ने सहर्ष अपना
+        शीश काटकर दान कर दिया।
+      </p>
+
+      <p>
+        <span className="font-semibold text-gray-800">
+          वरदान और कलियुग में अवतार —{" "}
+        </span>
+        बर्बरीक के इस अद्वितीय बलिदान से प्रसन्न होकर
+        श्रीकृष्ण ने उन्हें वरदान दिया कि कलियुग में तुम मेरे
+        (श्याम) रूप में पूजे जाओगे। तुम्हारा केवल नाम लेने से
+        ही भक्तों के सारे कष्ट दूर हो जाएंगे।
+      </p>
+
+      <p>
+        <span className="font-semibold text-gray-800">
+          खाटू गाँव में प्राकट्य —{" "}
+        </span>
+        कालांतर में, राजस्थान के सीकर जिले में स्थित खाटू
+        गाँव की धरती से उनका शीश प्रकट हुआ। एक बार एक गाय इस
+        स्थान पर आकर अपने थन से दूध गिराने लगी, जिसके बाद
+        खुदाई करने पर शीश मिला। बाद में खाटू के तत्कालीन राजा
+        रूप सिंह चौहान ने स्वप्नादेश के अनुसार विक्रम संवत
+        1027 में यहाँ मंदिर का निर्माण कराया और शीश को
+        स्थापित किया।
+      </p>
+    </div>
+  </div>
+</section>
+
+ <div className="mt-0 mb-4 p-5 grid grid-cols-4 gap-4">
       {[
         { n: "30+", l: "Years of Seva" },
         { n: "5000+", l: "Families" },
         { n: "120+", l: "Events" },
+        { n: "220+", l: "Members" },
       ].map((item) => (
         <div
           key={item.l}
-          className="rounded-2xl bg-gray-100 p-5 text-center"
+          className="rounded-2xl bg-gray-100 p-5 text-center bg-yellow-500"
         >
           <div className="text-3xl">
             {item.n}
@@ -199,60 +292,41 @@ function HomePage() {
         </div>
       ))}
     </div>
-  </div>
-</section>
-
-
-            <section className="bg-gray-50 py-24">
+            <section className="bg-gray-50 py-6">
         <div className="mx-auto max-w-7xl px-5">
           <h2 className="mb-14 text-center text-4xl">
-            Pillars of the Samiti
+           मुख्य कार्यकारिणी
           </h2>
 
 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {homeMembers.map((m) => (
-              <Link
-                key={m._id}
-                to={`/team/${m._id}`}
-                className="group overflow-hidden rounded-3xl bg-white shadow transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
+          {committeeMembers.map((m, index) => (
+              <div
+                key={`${m.role}-${index}`}
+                className="group overflow-hidden rounded-3xl bg-yellow-400 shadow transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="relative h-64 w-full overflow-hidden">
-                  <img
-                    src={m.profileImage || deity}
-                    alt={m.fullName}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                <div className="relative h-64 w-full   overflow-hidden object-fit">
+                  <ImageWithFallback
+                    src={m.image}
+                    alt={m.role}
+  className="absolute inset-0 h-full w-full object-fit transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
-                <div className="p-5">
-                  <span className="inline-block rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-semibold text-yellow-800">
-                    {formatTierLabel(m.tier)}
-                  </span>
-
-                  <h3 className="mt-2 text-lg font-semibold">
-                    {m.fullName}
-                  </h3>
-
-                  <p className="text-sm text-gray-500">{m.occupation || m.businessDetails?.businessType || "Samiti Pillar"}</p>
-
-                  <p className="mt-3 inline-flex items-center gap-1 text-sm text-orange-500">
-                    View Profile <ArrowRight size={14} />
+                <div className="p-5 text-center">
+                  <p className="text-sm font-semibold text-gray-800">
+                    {m.role}
                   </p>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
-          {homeMembers.length === 0 && (
-            <p className="text-center text-muted-foreground">
-              Samiti Pillars will appear here soon.
-            </p>
-          )}
         </div>
       </section>
-            <section className="mx-auto max-w-7xl px-5 py-24">
-        <h2 className="mb-12 text-4xl">
+            <section className="mx-auto max-w-7xl px-5 py-6">
+        <h2 className="mb-7 text-4xl align-items-center text-center">
           Upcoming Events
         </h2>
+        <h2 className="mb-7 text-3xl align-items-center text-center">भव्य श्री कृष्ण जन्माष्टमी महोत्सव, नन्द उत्सव 2026, दिनांक 29 सेप्टेंबर टू 4 अगस्त</h2>
 
         <div className="grid gap-8 md:grid-cols-3">
           {homeEvents.map((e) => (
@@ -260,7 +334,7 @@ function HomePage() {
               key={e._id}
               className="overflow-hidden rounded-2xl bg-white shadow"
             >
-              <img
+              <ImageWithFallback
                 src={e.image || event1}
                 alt={e.title}
                 className="aspect-[4/3] w-full object-cover"
@@ -292,8 +366,8 @@ function HomePage() {
       </section>
       
    
-          <section className="mx-auto mb-20 max-w-6xl rounded-3xl bg-yellow-500 p-16 text-center">
-        <img
+          <section className="mx-auto mb-20 max-w-6xl rounded-3xl bg-yellow-200 p-16 text-center">
+        <ImageWithFallback
           src={event1}
           alt=""
           className="hidden"

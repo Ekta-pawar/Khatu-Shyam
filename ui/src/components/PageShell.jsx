@@ -47,7 +47,7 @@ export function PageHeader({
           </p>
         )}
 
-        <div className="mx-auto mt-7 h-px w-32 bg-gradient-to-r from-transparent via-yellow-500 to-transparent" />
+        <div className="mx-auto mt-7 h-px w-32 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
 
       </div>
     </section>

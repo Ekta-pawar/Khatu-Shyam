@@ -15,6 +15,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import GuestRoute from "./GuestRoute";
 import SponsorManagementPage from "../pages/SponsorManagementPage";
 import EventsDataPage from "../pages/EventsDataPage";
+import GalleryManagementPage from "../pages/GalleryManagementPage";
 const AdminRoutes = () => (
   <Routes>
     <Route index element={<Navigate to="dashboard" replace />} />
@@ -37,6 +38,7 @@ const AdminRoutes = () => (
         <Route path="contacts" element={<ContactMessagesPage />} />
         <Route path="enquiries" element={<EnquiryManagementPage />} />
         <Route path="sponsors" element={<SponsorManagementPage />} />
+        <Route path="gallery" element={<GalleryManagementPage />} />
 <Route
   path="/admin/eventsdata"
   element={<EventsDataPage />}
