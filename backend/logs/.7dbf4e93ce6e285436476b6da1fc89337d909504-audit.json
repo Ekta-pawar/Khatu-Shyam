@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "C:\\Users\\user\\Desktop\\Khatu Shyam\\Khatu-Shyam-web\\backend\\logs\\.7dbf4e93ce6e285436476b6da1fc89337d909504-audit.json",
+    "files": [
+        {
+            "date": 1783592542141,
+            "name": "C:\\Users\\user\\Desktop\\Khatu Shyam\\Khatu-Shyam-web\\backend\\logs\\error-2026-07-09.log",
+            "hash": "1760e53baaa414a3f9bfbd0e3ac6b838e9d05932a46f30c591ee239d9e54d80b"
+        }
+    ],
+    "hashType": "sha256"
+}

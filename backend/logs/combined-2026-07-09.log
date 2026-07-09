@@ -211,3 +211,7 @@
 {"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 129.021 ms - -\u001b[0m","timestamp":"2026-07-09 10:00:36"}
 {"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 96.323 ms - -\u001b[0m","timestamp":"2026-07-09 10:09:20"}
 {"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 106.796 ms - -\u001b[0m","timestamp":"2026-07-09 10:09:20"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-07-09 15:52:22"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-07-09 15:52:22"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-07-09 16:14:18"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-07-09 16:14:18"}
