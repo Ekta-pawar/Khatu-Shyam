@@ -97,11 +97,11 @@ const messages = [
 function CommitteeMessagesPage() {
   return (
     <PageShell>
-      <PageHeader
+      {/* <PageHeader
         eyebrow="संदेश"
         title="पदाधिकारियों के संदेश"
         subtitle="हमारी समिति के वरिष्ठ पदाधिकारियों के शुभकामना संदेश एवं मार्गदर्शन"
-      />
+      /> */}
 
       {/* Header Section */}
       <section className="mx-auto max-w-7xl px-5 py-16">
@@ -109,7 +109,7 @@ function CommitteeMessagesPage() {
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-linear-to-br from-yellow-400 to-orange-500 shadow-lg">
             <Quote size={36} className="text-white" />
           </div>
-          <h2 className="font-display text-3xl text-maroon md:text-4xl">
+          <h2 className="font-display text-3xl text-yellow-500 md:text-4xl">
             आदरणीय पदाधिकारीगण
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-muted-foreground">
@@ -135,7 +135,7 @@ function CommitteeMessagesPage() {
       <section className="border-t border-border/60 bg-linear-to-b from-yellow-50 to-white py-20">
         <div className="mx-auto max-w-4xl px-5 text-center">
           <Star size={32} className="mx-auto mb-6 text-yellow-500" />
-          <p className="font-display text-2xl text-maroon md:text-3xl">
+          <p className="font-display text-2xl text-yellow-500 md:text-3xl">
             ॥ जय श्री श्याम ॥
           </p>
           <p className="mt-4 text-lg italic text-muted-foreground">
@@ -153,8 +153,17 @@ function CommitteeMessagesPage() {
   );
 }
 
+// Distinct color theme for each card, cycled by index
+const cardThemes = [
+  { gradient: "from-yellow-200 to-yellow-500", border: "border-yellow-500", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+  { gradient: "from-blue-600 to-purple-600", border: "border-purple-300", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+  { gradient: "from-yellow-200 to-yellow-500", border: "border-yellow-500", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+  { gradient: "from-emerald-500 to-teal-600", border: "border-emerald-300", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+  { gradient: "from-yellow-200 to-yellow-500", border: "border-yellow-500", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+];
+
 // Image Section Component
-function ImageSection({ message, isPresident, isChairman }) {
+function ImageSection({ message }) {
   return (
     <div className="relative overflow-hidden h-full min-h-100 lg:min-h-125">
       <img
@@ -163,7 +172,7 @@ function ImageSection({ message, isPresident, isChairman }) {
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
       {/* Gradient overlay */}
-      <div className={`absolute inset-0 bg-linear-to-t ${isPresident || isChairman ? 'from-black/60 via-transparent to-transparent' : 'from-black/40 via-transparent to-transparent'} opacity-60 group-hover:opacity-80 transition-opacity duration-300`} />
+      <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
       {/* Role badge overlay on image */}
       <div className="absolute bottom-6 left-6 right-6">
@@ -176,45 +185,38 @@ function ImageSection({ message, isPresident, isChairman }) {
 }
 
 // Content Section Component
-function ContentSection({ message, isPresident, isChairman, getGradientClass, getTextColorClass, getBorderClass }) {
+function ContentSection({ message, theme }) {
   return (
-    <div className={`p-8 lg:p-10 ${getTextColorClass()} flex flex-col justify-center`}>
+    <div className="p-8 lg:p-10 text-white flex flex-col justify-center">
       <div className="relative">
         {/* Decorative quote icon */}
         <div className="absolute -top-4 -left-4 opacity-10">
-          <Quote size={64} className={isPresident || isChairman ? "text-white" : "text-maroon"} />
+          <Quote size={64} className="text-white" />
         </div>
 
         <div className="relative z-10">
           {/* Profile info */}
           <div className="mb-6 flex items-center gap-4">
-            <div className={`h-14 w-14 shrink-0 rounded-full bg-linear-to-br ${getGradientClass()} flex items-center justify-center shadow-lg`}>
+            <div className={`h-14 w-14 shrink-0 rounded-full bg-linear-to-br ${theme.gradient} flex items-center justify-center shadow-lg ring-2 ring-white/40`}>
               <span className="text-xl font-bold text-white">
                 {message.name.charAt(0)}
               </span>
             </div>
             <div>
-              <h3 className={`text-xl font-bold ${isPresident || isChairman ? "text-white" : "text-maroon"}`}>
+              <h3 className="text-xl font-bold text-white">
                 {message.name}
               </h3>
-              <p className={`text-sm ${isPresident || isChairman ? "text-white/80" : "text-muted-foreground"}`}>
+              <p className="text-sm text-white/80">
                 {message.role}
               </p>
             </div>
           </div>
 
           {/* Message content */}
-          <div className={`space-y-4 max-h-100 overflow-y-auto pr-3 scrollbar-hide ${getBorderClass()}`}>
+          <div className="space-y-4 max-h-100 overflow-y-auto pr-3 scrollbar-hide">
             {message.message.split("\n").map((paragraph, i) => (
               paragraph.trim() && (
-                <p
-                  key={i}
-                  className={`text-sm leading-relaxed ${
-                    isPresident || isChairman
-                      ? "text-white/90"
-                      : "text-gray-700"
-                  }`}
-                >
+                <p key={i} className="text-sm leading-relaxed text-white/90">
                   {paragraph}
                 </p>
               )
@@ -223,21 +225,9 @@ function ContentSection({ message, isPresident, isChairman, getGradientClass, ge
 
           {/* Decorative bottom line */}
           <div className="mt-8 flex items-center gap-2 pt-4 border-t border-white/20">
-            <div
-              className={`h-1.5 w-12 rounded-full ${
-                isPresident ? "bg-white/60" : isChairman ? "bg-white/60" : "bg-yellow-400"
-              }`}
-            />
-            <div
-              className={`h-1.5 w-6 rounded-full ${
-                isPresident ? "bg-white/40" : isChairman ? "bg-white/40" : "bg-yellow-200"
-              }`}
-            />
-            <div
-              className={`h-1.5 w-3 rounded-full ${
-                isPresident ? "bg-white/20" : isChairman ? "bg-white/20" : "bg-yellow-100"
-              }`}
-            />
+            <div className={`h-1.5 w-12 rounded-full ${theme.bar[0]}`} />
+            <div className={`h-1.5 w-6 rounded-full ${theme.bar[1]}`} />
+            <div className={`h-1.5 w-3 rounded-full ${theme.bar[2]}`} />
           </div>
         </div>
       </div>
@@ -247,50 +237,26 @@ function ContentSection({ message, isPresident, isChairman, getGradientClass, ge
 
 // Component with Alternating Layout: Image Left/Right based on index
 function MessageCardWithAlternatingLayout({ message, index }) {
-  const isPresident = message.role.includes("प्रधान");
-  const isChairman = message.role.includes("चेयरमैन");
   const isEven = index % 2 === 0; // Even index: Image on Left, Odd index: Image on Right
-
-  const getGradientClass = () => {
-    if (isPresident) return "from-yellow-400 to-orange-500";
-    if (isChairman) return "from-blue-600 to-purple-600";
-    return "from-amber-50 to-white";
-  };
-
-  const getTextColorClass = () => {
-    if (isPresident || isChairman) return "text-white";
-    return "text-gray-800";
-  };
-
-  const getBorderClass = () => {
-    if (isPresident) return "border-yellow-300";
-    if (isChairman) return "border-purple-300";
-    return "border-gray-200";
-  };
-
-  const sectionProps = { message, isPresident, isChairman, getGradientClass, getTextColorClass, getBorderClass };
+  const theme = cardThemes[index % cardThemes.length];
 
   return (
     <div
-      className={`group rounded-3xl shadow-elegant transition-all duration-300 hover:shadow-2xl overflow-hidden border ${getBorderClass()} ${
-        isPresident || isChairman
-          ? `bg-linear-to-br ${getGradientClass()}`
-          : "bg-white"
-      }`}
+      className={`group rounded-3xl shadow-elegant transition-all duration-300 hover:shadow-2xl overflow-hidden border ${theme.border} bg-linear-to-br ${theme.gradient}`}
     >
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Alternating Layout based on index */}
         {isEven ? (
           <>
             {/* Even index (0, 2, 4...): Image Left, Content Right */}
-            <ImageSection message={message} isPresident={isPresident} isChairman={isChairman} />
-            <ContentSection {...sectionProps} />
+            <ImageSection message={message} />
+            <ContentSection message={message} theme={theme} />
           </>
         ) : (
           <>
             {/* Odd index (1, 3, 5...): Image Right, Content Left */}
-            <ContentSection {...sectionProps} />
-            <ImageSection message={message} isPresident={isPresident} isChairman={isChairman} />
+            <ContentSection message={message} theme={theme} />
+            <ImageSection message={message} />
           </>
         )}
       </div>

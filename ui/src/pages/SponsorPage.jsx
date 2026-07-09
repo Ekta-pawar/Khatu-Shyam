@@ -18,8 +18,18 @@ import {
   Send,
 } from "lucide-react";
 import { createEnquiry, createSponsor } from "../api/sponsor";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+
+import logo1 from "../assets/Shyam1.png";
+import logo2 from "../assets/bow-emblem.png";
+import logo3 from "../assets/midd Shyam.png";
+import logo4 from "../assets/ome.png";
 
 // ─── Static data ─────────────────────────────────────────────────────────────
+// TODO: replace these placeholder images with real sponsor logos.
+const sponsorLogos = [logo1, logo2, logo3, logo4, logo1, logo2];
 
 const sponsorTiers = [
   {
@@ -32,6 +42,9 @@ const sponsorTiers = [
       "Certificate of appreciation",
       "Prasad distribution credit",
       "Samiti newsletter mention",
+      "Social media mention",
+      "Samiti directory listing",
+      
     ],
     button: "Become a Prasad Sponsor",
     color: "from-orange-400 to-amber-500",
@@ -66,7 +79,7 @@ const sponsorTiers = [
       "Website logo placement",
     ],
     button: "Become a Mahotsav Sponsor",
-    color: "from-maroon to-maroon/80",
+    color: "from-yellow-300 to-yellow-500",
   },
   {
     name: "Mandir Patron",
@@ -82,7 +95,7 @@ const sponsorTiers = [
       "Dedicated puja seva slot",
     ],
     button: "Become a Mandir Patron",
-    color: "from-purple-700 to-purple-900",
+    color: "from-yellow-300 to-yellow-500",
   },
 ];
 
@@ -190,15 +203,43 @@ function SponsorPage() {
     <PageShell>
       <PageHeader
         eyebrow="Sahyog"
-        title="Sponsor Us"
-        subtitle="आपका सहयोग श्याम सेवा को और आगे ले जाएगा — बनें हमारे प्रायोजक"
+        title="Our Sponsor"
       />
+
+      {/* ── Sponsor Logo Slider (auto-slide, left → right) ── */}
+      <section className="mx-auto max-w-7xl px-5  bg-secondary/50">
+        <Swiper
+          modules={[Autoplay]}
+          slidesPerView={4}
+          breakpoints={{
+            640: { slidesPerView: 3 },
+            1024: { slidesPerView: 5 },
+          }}
+          spaceBetween={40}
+          loop={true}
+          speed={4000}
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            reverseDirection: true,
+          }}
+          allowTouchMove={false}
+        >
+          {sponsorLogos.map((logo, index) => (
+            <SwiperSlide key={index}>
+              <div className="flex h-90 bg-yellow-400 items-center justify-center">
+                <img src={logo} alt="Sponsor logo" className="w-40 object-contain" />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
 
       {/* ── Sponsor Tiers ── */}
       <section className="mx-auto max-w-7xl px-5 py-16">
         <div className="mb-10 text-center">
           <p className="mb-3 text-xs uppercase tracking-widest text-saffron">प्रायोजन स्तर</p>
-          <h2 className="font-display text-4xl text-maroon">Sponsorship Tiers</h2>
+          <h2 className="font-display text-6xl text-yellow-500 font-display text-3xl bg-linear-to-r from-yellow-200 to-yellow-500 bg-clip-text text-transparent sm:text-4xl md:text-6xl py-4">Become a Sponsor</h2>
           <div className="mx-auto mt-4 h-px w-24 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
         </div>
 
@@ -234,7 +275,7 @@ function SponsorPage() {
               </h3>
               <p
                 className={`mt-1 font-display text-3xl font-bold ${
-                  tier.featured ? "text-white" : "text-maroon"
+                  tier.featured ? "text-white" : "text-yellow-500"
                 }`}
               >
                 {tier.amount}
@@ -273,7 +314,7 @@ function SponsorPage() {
                 onClick={() => setShowSponsorForm(true)}
                 className={`mt-6 w-full rounded-2xl py-3 px-4 font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg ${
                   tier.featured
-                    ? "bg-white text-maroon hover:bg-gray-100"
+                    ? "bg-white text-yellow-500 hover:bg-gray-100"
                     : `bg-linear-to-r ${tier.color} text-white`
                 }`}
               >
@@ -286,29 +327,29 @@ function SponsorPage() {
 
       {/* ── Sponsor Form Modal ── */}
       {showSponsorForm ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm ">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm">
           <div className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl">
 
             {/* Header */}
             <div className="bg-linear-to-r from-orange-500 to-yellow-500 px-4 py-6 text-white">
               <button
                 onClick={() => setShowSponsorForm(false)}
-                className="absolute right-5 top-5 flex h-10 w-12 items-center justify-center rounded-full bg-white/20"
+                className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/20"
               >
                 <X size={20} />
               </button>
-              <h2 className="text-4xl font-bold">Become a Sponsor</h2>
+              <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">Become a Sponsor</h2>
               <p className="mt-2 text-sm text-white/90">
                 Complete the form below to submit your sponsorship request.
               </p>
             </div>
 
             {/* Scrollable form body */}
-            <div className="max-h-[75vh] overflow-y-auto p-6 scrollbar-hide">
-              <section className="mx-auto max-w-4xl px-5 pb-24">
+            <div className="max-h-[75vh] overflow-y-auto scrollbar-hide">
+              <section className="mx-auto max-w-15xl">
                 <div className="rounded-3xl bg-white p-8 shadow-xl md:p-12">
                   <div className="mb-8 border-b pb-6">
-                    <h2 className="font-display text-3xl text-maroon">Sponsor Application</h2>
+                    <h2 className="font-display text-3xl text-yellow-500">Sponsor Application</h2>
                     <p className="mt-2 text-sm text-gray-500">
                       नीचे दिया गया फॉर्म भरें। हमारी टीम 24–48 घंटों में आपसे संपर्क करेगी।
                     </p>
@@ -494,7 +535,7 @@ function SponsorPage() {
                     <div className="border-t pt-8">
                       <button
                         type="submit"
-                        className="w-full rounded-full bg-linear-to-r from-yellow-400 to-yellow-600 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-yellow-500 hover:to-yellow-700"
+                        className="w-full rounded-full bg-linear-to-r from-yellow-300 to-yellow-500 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-yellow-500 hover:to-yellow-700"
                       >
                         Submit Sponsorship Request
                       </button>
@@ -663,7 +704,7 @@ function SponsorPage() {
         <div className="mx-auto max-w-5xl px-5">
           <div className="mb-12 text-center">
             <p className="mb-3 text-xs uppercase tracking-widest text-saffron">क्यों सहयोग करें</p>
-            <h2 className="font-display text-4xl text-maroon">Why Sponsor?</h2>
+            <h2 className="font-display text-4xl text-yellow-500">Why Sponsor?</h2>
             <div className="mx-auto mt-4 h-px w-24 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
           </div>
           <div className="grid gap-6 md:grid-cols-3">
@@ -688,7 +729,7 @@ function SponsorPage() {
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100">
                   <Icon size={22} className="text-yellow-600" />
                 </div>
-                <h3 className="font-display text-xl text-maroon">{title}</h3>
+                <h3 className="font-display text-xl text-yellow-500">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
               </div>
             ))}
@@ -696,7 +737,7 @@ function SponsorPage() {
 
           <div className="mt-12 text-center">
             <Star size={28} className="mx-auto mb-4 text-yellow-500" />
-            <p className="font-display text-2xl text-maroon">॥ जय श्री श्याम ॥</p>
+            <p className="font-display text-2xl text-yellow-500">॥ जय श्री श्याम ॥</p>
             <p className="mt-2 text-sm text-muted-foreground">
               For queries: <Mail size={12} className="inline" /> seva@shyamsabhasamiti.org &nbsp;|&nbsp;
               <Phone size={12} className="inline" /> +91 98290 00000
@@ -717,7 +758,7 @@ function SectionCard({ icon, title, children }) {
   return (
     <div className="rounded-2xl border bg-gray-50/50 p-6">
       <div className="mb-5 flex items-center gap-2">
-        <span className="text-maroon">{icon}</span>
+        <span className="text-yellow-500">{icon}</span>
         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
       </div>
       {children}

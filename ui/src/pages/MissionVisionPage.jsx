@@ -69,8 +69,9 @@ const missionPoints = [
 const visionPoints = [
   "दिल्ली-NCR में श्री खाटूश्याम बाबा की भक्ति का सबसे प्रतिष्ठित केंद्र बनना।",
   "लाखों परिवारों को श्याम भक्ति से जोड़कर सामाजिक सौहार्द्र स्थापित करना।",
-  "युवा पीढ़ी को भारतीय संस्कृति, भक्ति और सेवा के मूल्यों से परिचित कराना।",
-  "देशभर में श्री खाटूश्याम सेवा समितियों का एक मजबूत नेटवर्क बनाना।",
+  "समाज सेवा हेतु समिति द्वारा निःशुल्क एम्बुलेंस सेवा प्रारंभ करना।",
+  "समाज कल्याण हेतु समिति द्वारा सस्ती दवाइयों की दुकान खुलवाना।",
+  "पिछड़े एवं आर्थिक रूप से कमजोर वर्ग के विद्यार्थियों को उनकी शिक्षा हेतु सहायता प्रदान करना।",
 ];
 
 function MissionVisionPage() {
@@ -86,7 +87,7 @@ function MissionVisionPage() {
       <section className="mx-auto max-w-7xl px-5 py-16">
         <div className="grid gap-8 md:grid-cols-2">
           {/* Mission */}
-          <div className="rounded-3xl bg-linear-to-br from-yellow-400 to-orange-500 p-8 text-white shadow-lg">
+          <div className="rounded-3xl bg-linear-to-br from-yellow-500 to-orange-500 p-8 text-white shadow-lg">
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20">
               <Target size={32} className="text-white" />
             </div>
@@ -109,7 +110,7 @@ function MissionVisionPage() {
           </div>
 
           {/* Vision */}
-          <div className="rounded-3xl bg-linear-to-br from-maroon to-maroon/80 p-8 text-white shadow-lg">
+          <div className="rounded-3xl bg-linear-to-br from-yellow-500 to-maroon/70 p-8 text-white shadow-lg bg-yellow-300">
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20">
               <Eye size={32} className="text-white" />
             </div>
@@ -122,7 +123,7 @@ function MissionVisionPage() {
             <ul className="space-y-4">
               {visionPoints.map((point, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <Star size={16} className="mt-1 shrink-0 text-yellow-400" />
+                  <Star size={16} className="mt-1 shrink-0 " />
                   <span className="text-sm leading-relaxed text-white/90">{point}</span>
                 </li>
               ))}
@@ -136,7 +137,7 @@ function MissionVisionPage() {
         <div className="mx-auto max-w-7xl px-5">
           <div className="mb-12 text-center">
             <p className="mb-3 text-xs uppercase tracking-widest text-saffron">हमारे मूल्य</p>
-            <h2 className="font-display text-4xl text-maroon">Core Values</h2>
+            <h2 className="font-display text-4xl text-yellow-500">Core Values</h2>
             <div className="mx-auto mt-4 h-px w-24 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -150,7 +151,7 @@ function MissionVisionPage() {
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-50">
                   <Icon size={22} className="text-yellow-600" />
                 </div>
-                <h3 className="font-display text-2xl text-maroon">{label}</h3>
+                <h3 className="font-display text-2xl text-yellow-500">{label}</h3>
                 <p className="mb-2 text-xs uppercase tracking-widest text-saffron">{sub}</p>
                 <p className="text-sm leading-relaxed text-muted-foreground">{desc}</p>
               </div>
@@ -163,7 +164,7 @@ function MissionVisionPage() {
       <section className="mx-auto max-w-4xl px-5 py-20">
         <div className="mb-12 text-center">
           <p className="mb-3 text-xs uppercase tracking-widest text-saffron">2011 से अब तक</p>
-          <h2 className="font-display text-4xl text-maroon">Our Journey</h2>
+          <h2 className="font-display text-4xl text-yellow-500">Our Journey</h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
             "श्री श्री समिति" द्वारा वर्ष 2011 से लगातार आयोजित किए जा रहे निशुल्क मासिक कीर्तन
           </p>
@@ -224,7 +225,7 @@ function MissionVisionPage() {
                         </span>
                       )}
                     </div>
-                    <h3 className="mt-2 font-display text-xl text-maroon">{milestone.title}</h3>
+                    <h3 className="mt-2 font-display text-xl text-yellow-500">{milestone.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {milestone.description}
                     </p>
@@ -240,7 +241,7 @@ function MissionVisionPage() {
       <section className="border-t border-border/60 bg-linear-to-b from-yellow-50 to-white py-20">
         <div className="mx-auto max-w-3xl px-5 text-center">
           <Star size={32} className="mx-auto mb-6 text-yellow-500" />
-          <h2 className="font-display text-3xl text-maroon md:text-4xl">
+          <h2 className="font-display text-3xl text-yellow-500 md:text-4xl">
             ॥ जय श्री श्याम ॥
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
@@ -249,13 +250,13 @@ function MissionVisionPage() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
               href="/become-member"
-              className="rounded-full bg-yellow-500 px-8 py-3 text-sm font-semibold text-black transition hover:bg-yellow-400"
+              className="rounded-full bg-linear-to-r from-yellow-200 to-yellow-500 px-8 py-3 text-sm font-semibold text-black transition hover:from-yellow-300 hover:to-yellow-600"
             >
               Join Our Family
             </a>
             <a
               href="/Sponsor"
-              className="rounded-full border border-maroon px-8 py-3 text-sm font-semibold text-maroon transition hover:bg-maroon hover:text-white"
+              className="rounded-full border border-maroon px-8 py-3 text-sm font-semibold text-yellow-500 transition hover:bg-maroon hover:text-white"
             >
               Become a Sponsor
             </a>

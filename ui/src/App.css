@@ -96,7 +96,7 @@
   --saffron: var(--brand);
   --gold: var(--brand-400);
   --gold-deep: var(--brand-700);
-  --maroon: oklch(0.42 0.16 25);
+  --maroon: oklch(0.852 0.199 91.936);
   --ink: oklch(0.22 0.04 40);
 
   --background: var(--cream);
@@ -125,7 +125,7 @@
 
   --gradient-sun: linear-gradient(135deg, var(--saffron) 0%, var(--gold) 50%, var(--maroon) 100%);
   --gradient-glow: radial-gradient(circle at 50% 30%, oklch(0.85 0.15 70 / 0.55), transparent 60%);
-  --shadow-elegant: 0 25px 60px -25px oklch(0.42 0.16 25 / 0.4);
+  --shadow-elegant: 0 25px 60px -25px oklch(0.852 0.199 91.936 / 0.4);
   --shadow-gold: 0 10px 40px -10px oklch(0.78 0.14 80 / 0.6);
 }
 
@@ -235,4 +235,19 @@
 .admin-content select,
 .admin-content textarea {
   min-height: 2.;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
 }

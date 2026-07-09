@@ -11,7 +11,6 @@ import TeamMemberPage from "./pages/TeamMemberPage";
 import GalleryPage from "./pages/GalleryPage";
 import VideosPage from "./pages/VideosPage";
 import AlbumPage from "./pages/AlbumPage";
-import GuestsPage from "./pages/GuestsPage";
 import MembersPage from "./pages/MembersPage";
 import EventsPage from "./pages/EventsPage";
 import ContactPage from "./pages/ContactPage";
@@ -58,7 +57,6 @@ function App() {
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/gallery/videos" element={<VideosPage />} />
           <Route path="/gallery/Photos" element={<AlbumPage />} />
-          <Route path="/gallery/guests" element={<GuestsPage />} />
 
           <Route path="/events" element={<EventsPage />} />
 

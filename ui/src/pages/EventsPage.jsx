@@ -34,7 +34,7 @@ function EventsPage() {
     return (
       <PageShell>
         <div className="py-20 text-center">
-          <h3 className="text-2xl font-semibold text-maroon">Could not load events</h3>
+          <h3 className="text-2xl font-semibold text-yellow-500">Could not load events</h3>
           <p className="mt-2 text-muted-foreground">Please refresh the page or try again shortly.</p>
         </div>
       </PageShell>
@@ -84,7 +84,7 @@ function EventsPage() {
                   Event {String(index + 1).padStart(2, "0")}
                 </p>
 
-                <h2 className="mt-3 text-3xl text-maroon md:text-4xl">{event.title}</h2>
+                <h2 className="mt-3 text-3xl text-yellow-500 md:text-4xl">{event.title}</h2>
 
                 <p className="mt-4 leading-relaxed text-muted-foreground">{event.shortDescription}</p>
 
@@ -118,7 +118,7 @@ function EventsPage() {
 
                 <Link
                   to="/contact"
-                  className="mt-7 inline-flex rounded-full bg-yellow-500 px-6 py-3 text-sm font-medium text-black shadow-lg transition hover:scale-105"
+                  className="mt-7 inline-flex rounded-full bg-linear-to-r from-yellow-200 to-yellow-500 px-6 py-3 text-sm font-medium text-black shadow-lg transition hover:scale-105"
                 >
                   Register For This Event
                 </Link>

@@ -119,8 +119,8 @@ function MembersPage() {
             onClick={() => setActiveFilter(key)}
             className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition ${
               activeFilter === key
-                ? "bg-maroon text-white"
-                : "bg-white border border-gray-300 hover:border-maroon"
+                ? "bg-linear-to-r from-yellow-200 to-yellow-500 text-white"
+                : "bg-white border border-gray-300 hover:border-yellow-500 hover:text-yellow-500"
             }`}
           >
             <Icon size={16} />
@@ -169,7 +169,7 @@ function MembersPage() {
 
                 {/* Content */}
                 <div className="p-5">
-                  <h3 className="text-lg font-bold text-maroon">
+                  <h3 className="text-lg font-bold text-yellow-500">
                     {member.fullName}
                   </h3>
 
@@ -194,7 +194,7 @@ function MembersPage() {
                     </div>
                   </div>
 
-                  <div className="mt-4 flex items-center gap-1 text-maroon font-medium text-sm">
+                  <div className="mt-4 flex items-center gap-1 text-yellow-500 font-medium text-sm">
                     View Profile
                     <ArrowRight size={14} />
                   </div>

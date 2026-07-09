@@ -86,7 +86,7 @@ function AlbumPage() {
             onClick={() => setActiveTab(key)}
             className={`flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-200 ${
               activeTab === key
-                ? "bg-yellow-500 text-black shadow-lg shadow-yellow-200"
+                ? "bg-linear-to-r from-yellow-200 to-yellow-500 text-black shadow-lg shadow-yellow-200"
                 : "border border-yellow-400 bg-white text-yellow-700 hover:bg-yellow-50"
             }`}
           >
@@ -104,7 +104,7 @@ function AlbumPage() {
             onClick={() => setActiveYear(year)}
             className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-200 ${
               activeYear === year
-                ? "bg-yellow-500 text-black shadow-lg shadow-yellow-200"
+                ? "bg-linear-to-r from-yellow-200 to-yellow-500 text-black shadow-lg shadow-yellow-200"
                 : "border border-yellow-400 bg-white text-yellow-700 hover:bg-yellow-50"
             }`}
           >

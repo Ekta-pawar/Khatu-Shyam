@@ -73,7 +73,7 @@ function VideosPage() {
             onClick={() => setActiveYear(year)}
             className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-200 ${
               activeYear === year
-                ? "bg-yellow-500 text-black shadow-lg shadow-yellow-200"
+                ? "bg-linear-to-r from-yellow-200 to-yellow-500 text-black shadow-lg shadow-yellow-200"
                 : "border border-yellow-400 bg-white text-yellow-700 hover:bg-yellow-50"
             }`}
           >
@@ -111,7 +111,7 @@ function VideosPage() {
 
                 {/* Play button */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="grid h-14 w-14 place-items-center rounded-full bg-yellow-500 text-black shadow-xl transition-transform duration-200 group-hover:scale-110">
+                  <div className="grid h-14 w-14 place-items-center rounded-full bg-linear-to-r from-yellow-200 to-yellow-500 text-black shadow-xl transition-transform duration-200 group-hover:scale-110">
                     <Play size={22} fill="currentColor" />
                   </div>
                 </div>
@@ -127,7 +127,7 @@ function VideosPage() {
 
               {/* Info */}
               <div className="p-5">
-                <h3 className="line-clamp-2 text-base font-semibold text-maroon">
+                <h3 className="line-clamp-2 text-base font-semibold text-yellow-500">
                   {video.title}
                 </h3>
                 {video.description && (

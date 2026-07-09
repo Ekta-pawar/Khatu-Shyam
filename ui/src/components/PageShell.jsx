@@ -1,6 +1,12 @@
 import React from "react";
+import { motion } from "framer-motion";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 export function PageShell({ children }) {
   return (
@@ -29,7 +35,12 @@ export function PageHeader({
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-5xl px-5 py-20 text-center">
+      <motion.div
+        className="relative mx-auto max-w-5xl px-5 py-20 text-center"
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+      >
 
         {eyebrow && (
           <p className="mb-4 text-xs uppercase tracking-[0.35em] text-saffron">
@@ -37,7 +48,7 @@ export function PageHeader({
           </p>
         )}
 
-        <h1 className="font-display text-5xl text-maroon md:text-6xl">
+        <h1 className="font-display text-3xl bg-linear-to-r from-yellow-200 to-yellow-500 bg-clip-text text-transparent sm:text-4xl md:text-6xl py-4">
           {title}
         </h1>
 
@@ -49,7 +60,7 @@ export function PageHeader({
 
         <div className="mx-auto mt-7 h-px w-32 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
 
-      </div>
+      </motion.div>
     </section>
   );
 }

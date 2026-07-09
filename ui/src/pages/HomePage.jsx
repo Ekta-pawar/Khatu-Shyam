@@ -1,14 +1,16 @@
 import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
 import { PageShell } from "../components/PageShell";
 import { ImageWithFallback } from "../components/ImageWithFallback";
+import EventCardSkeleton from "../components/EventCardSkeleton";
 
 import heroTemple from "../assets/KHATU.jpeg";
 import deity from "../assets/midd Shyam.png";
 import event1 from "../assets/event-1.jpg";
-import bowEmblem from "../assets/bow-emblem.png";
-import bowEmblem1 from "../assets/bow-emblem.png";
+import bowEmblem from "../assets/ome.png";
+import bowEmblem1 from "../assets/ome.png";
 
 import cofounder1 from "../assets/hari sarma.JPG";
 import cofounder2 from "../assets/cofounder2.jpg";
@@ -37,6 +39,16 @@ const formatDate = (value) => {
   });
 };
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
 const committeeMembers = [
   { image: cofounder1, role: "जय किशन बंसल" },
    { image: member2, role: "संजय कुमार गुप्ता" },
@@ -56,6 +68,7 @@ const committeeMembers = [
 
 function HomePage() {
   const [homeEvents, setHomeEvents] = useState([]);
+  const [eventsLoading, setEventsLoading] = useState(true);
 
   useEffect(() => {
     const fetchHomeData = async () => {
@@ -64,6 +77,8 @@ function HomePage() {
         setHomeEvents((eventsRes.data.data || []).slice(0, 3));
       } catch (error) {
         console.error("Error loading home page data:", error);
+      } finally {
+        setEventsLoading(false);
       }
     };
 
@@ -72,7 +87,7 @@ function HomePage() {
 
   return (
     <PageShell>
-            <section className="relative min-h-[92vh] overflow-hidden">
+            <section className="relative min-h-[72vh] overflow-hidden">
         <ImageWithFallback
           src={heroTemple}
           alt="Khatu Shyam Ji temple"
@@ -81,15 +96,26 @@ function HomePage() {
 
         <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/80" />
 
-        <div className="relative mx-auto flex min-h-[100vh] max-w-9xl flex-col items-center justify-center px-5 py-20 pt-0 text-center text-white mt-6">
-          <div className="mb-3 mt-0 flex w-full items-start justify-between text-lg text-wight-300 md:text-base font-display text-2xl md:text-3xl lg:text-1xl">
+        <motion.div
+          className="relative mx-auto flex min-h-[100vh] max-w-9xl flex-col items-center justify-center px-5 py-20 pt-0 text-center text-white mt-6"
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
+          <motion.div
+            className="mb-3 mt-0 flex w-full flex-col items-center justify-between gap-1 text-center font-display text-base text-wight-300 sm:flex-row sm:text-xl md:text-2xl"
+            variants={fadeUp}
+          >
             <p>॥ श्री श्याम देवाय नमः ॥</p>
                     <span className="">|| श्री श्याम शरणम् ममः ||</span>
 
             <p>॥ श्री श्याम देवाय नमः ॥</p>
-          </div>
+          </motion.div>
 
-          <div className="mb-5 flex flex-wrap items-center justify-center gap-6 md:gap-12">
+          <motion.div
+            className="mb-5 flex flex-wrap items-center justify-center gap-6 md:gap-12"
+            variants={fadeUp}
+          >
             <ImageWithFallback
               src={bowEmblem}
               alt="हारे का सहारा बाबा श्याम हमारा"
@@ -107,18 +133,21 @@ function HomePage() {
               alt="हारे का सहारा बाबा श्याम हमारा"
               className="h-25 w-auto -scale-x-100 md:h-35"
             />
-          </div>
+          </motion.div>
 
-          <p className="mb-4 text-lg text-wight-500 md:text-xl">
+          <motion.p className="mb-4 text-lg text-wight-500 md:text-xl" variants={fadeUp}>
             हारे का सहारा · बाबा श्याम हमारा
-          </p>
+          </motion.p>
 
-          <h1 className="font-display text-6xl md:text-8xl lg:text-5xl">
-            श्री श्री खाटू श्याम सभा समिति (Reg.)
+          <motion.h1
+            className="font-display text-3xl py-4 bg-linear-to-r from-yellow-200 to-yellow-500 bg-clip-text text-transparent sm:text-4xl md:text-5xl lg:text-6xl"
+            variants={fadeUp}
+          >
+            श्री श्री खाटू श्याम सेवा समिति (रजि.)
             {/* <span className="block text-yellow-300">
               सभा समिति (रजी)
             </span> */}
-          </h1>
+          </motion.h1>
 
           {/* <p className="mt-6 max-w-2xl text-base md:text-lg">
             तीन दशकों से भी अधिक की सेवा, संगत और श्याम बाबा के प्रति अटूट
@@ -126,14 +155,14 @@ function HomePage() {
             को एक सूत्र में जोड़ते हुए।
           </p> */}
 
-          <p className="mt-3 text-sm text-yellow-200 md:text-base">
+          <motion.p className="mt-3 text-sm text-yellow-200 md:text-base" variants={fadeUp}>
             कार्यालय : — B-2/22, सेक्टर-17, रोहिणी, दिल्ली
-          </p>
+          </motion.p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <motion.div className="mt-8 flex flex-wrap justify-center gap-4" variants={fadeUp}>
             <Link
               to="/become-member"
-              className="rounded-full bg-yellow-500 px-7 py-3 text-black"
+              className="rounded-full bg-linear-to-r from-yellow-200 to-yellow-500 px-7 py-3 text-black"
             >
               Become a Member
             </Link>
@@ -144,77 +173,35 @@ function HomePage() {
             >
              Upcoming Events
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
-            {/* <section className="mx-auto grid max-w-7xl gap-14 px-5 py-24 md:grid-cols-2 md:items-center">
-        <div>
-          <ImageWithFallback
-            src={deity}
-            alt="Shri Khatu Shyam Ji"
-            className="h-140 w-full rounded-3xl object-cover"
-          />
-        </div>
-
-        <div>
-          <p className="mb-4 text-xs uppercase tracking-[0.35em] text-orange-500">
-            हारे का सहारा
-          </p>
-
-          <h2 className="text-4xl md:text-5xl">
-            The shelter of those who feel they have
-            nothing left.
-          </h2>
-
-          <p className="mt-5 text-gray-600">
-            For over thirty years, our samiti has
-            gathered devotees to sing the names of
-            Shyam Baba and walk together on the path
-            of bhakti.
-          </p>
-
-          <div className="mt-8 grid grid-cols-3 gap-4">
-            {[
-              { n: "30+", l: "Years of Seva" },
-              { n: "5000+", l: "Families" },
-              { n: "120+", l: "Events" },
-            ].map((item) => (
-              <div
-                key={item.l}
-                className="rounded-2xl bg-gray-100 p-5 text-center"
-              >
-                <div className="text-3xl">
-                  {item.n}
-                </div>
-
-                <div className="text-xs">
-                  {item.l}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-<section className="mb-0 grid gap-14 px-5 py-7 pb-0 md:grid-cols-2 md:items-center">
-  <div className="flex h-160 items-stretch justify-center self-stretch mb-0">
+        
+<section className="mb-0 grid gap-5 px-5 py-2 pt-15 pb-0 md:grid-cols-2 md:items-center md:gap-10">
+  <div className="flex h-60 items-stretch justify-center self-stretch mb-0 sm:h-80 md:h-140">
     <ImageWithFallback
       src={deity}
       alt="Shri Khatu Shyam Ji"
-      className="h-full min-h-170 w-full rounded-3xl object-cover"
+      className="h-full w-full rounded-3xl object-cover"
     />
   </div>
 
-  <div className="mb-28 flex flex-col ">
-    <p className="mb-5 text-xs uppercase tracking-[0.35em] text-orange-500">
+  <motion.div
+    className="mb-5 flex flex-col md:mb-8"
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, amount: 0.3 }}
+    variants={fadeUp}
+  >
+    <p className="mb-2 text-xs uppercase tracking-[0.35em] text-orange-500">
       हारे का सहारा
     </p>
 
-    <h2 className="text-4xl md:text-5xl">
-     श्याम वर्णन 
+    <h2 className="text-3xl md:text-3xl">
+     श्याम वर्णन
     </h2>
 
-    <div className="mt-5 space-y-4 text-[15px] leading-8 text-gray-600 text-justify">
+    <div className=" space-y-3 text-[13px] leading-8 text-gray-500 text-justify">
       <p>
         खाटू श्याम बाबा की कहानी महाभारत के वीर योद्धा
         'बर्बरीक' से जुड़ी है। वे भीम के पौत्र थे। अपने महान
@@ -268,19 +255,26 @@ function HomePage() {
         स्थापित किया।
       </p>
     </div>
-  </div>
+  </motion.div>
 </section>
 
- <div className="mt-0 mb-4 p-5 grid grid-cols-4 gap-4">
+ <motion.div
+   className="mt-2 mb-6 p-5 grid grid-cols-2 gap-4 sm:grid-cols-4"
+   initial="hidden"
+   whileInView="visible"
+   viewport={{ once: true, amount: 0.3 }}
+   variants={staggerContainer}
+ >
       {[
         { n: "30+", l: "Years of Seva" },
         { n: "5000+", l: "Families" },
         { n: "120+", l: "Events" },
         { n: "220+", l: "Members" },
       ].map((item) => (
-        <div
+        <motion.div
           key={item.l}
-          className="rounded-2xl bg-gray-100 p-5 text-center bg-yellow-500"
+          className="rounded-2xl bg-gray-100 p-5 text-center bg-yellow-400"
+          variants={fadeUp}
         >
           <div className="text-3xl">
             {item.n}
@@ -289,20 +283,33 @@ function HomePage() {
           <div className="text-xs">
             {item.l}
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
-            <section className="bg-gray-50 py-6">
+    </motion.div>
+            <section className="py-6 bg-yellow-200 font-bold ">
         <div className="mx-auto max-w-7xl px-5">
-          <h2 className="mb-14 text-center text-4xl">
+          <motion.h2
+            className="mb-14 text-center text-4xl text-yellow-500 "
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeUp}
+          >
            मुख्य कार्यकारिणी
-          </h2>
+          </motion.h2>
 
-<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+<motion.div
+  className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.2 }}
+  variants={staggerContainer}
+>
           {committeeMembers.map((m, index) => (
-              <div
+              <motion.div
                 key={`${m.role}-${index}`}
-                className="group overflow-hidden rounded-3xl bg-yellow-400 shadow transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
+                className="group overflow-hidden rounded-3xl bg-yellow-500 shadow transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
+                variants={fadeUp}
               >
                 <div className="relative h-64 w-full   overflow-hidden object-fit">
                   <ImageWithFallback
@@ -312,61 +319,84 @@ function HomePage() {
                   />
                 </div>
 
-                <div className="p-5 text-center">
+                <div className="p-5 text-center  bg-linear-to-r from-yellow-200 to-yellow-500">
                   <p className="text-sm font-semibold text-gray-800">
                     {m.role}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
-            <section className="mx-auto max-w-7xl px-5 py-6">
-        <h2 className="mb-7 text-4xl align-items-center text-center">
+            <section className="mx-auto max-w-7xl px-5 py-6 ">
+        <motion.h2
+          className="mb-7 text-5xl align-items-center text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+        >
           Upcoming Events
-        </h2>
-        <h2 className="mb-7 text-3xl align-items-center text-center">भव्य श्री कृष्ण जन्माष्टमी महोत्सव, नन्द उत्सव 2026, दिनांक 29 सेप्टेंबर टू 4 अगस्त</h2>
+        </motion.h2>
+        <motion.h2
+          className="mb-7 text-2xl align-items-center text-center text-yellow-400"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+        >भव्य श्री कृष्ण जन्माष्टमी महोत्सव, नन्द उत्सव 2026, दिनांक 29 सेप्टेंबर टू 4 अगस्त</motion.h2>
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {homeEvents.map((e) => (
-            <article
-              key={e._id}
-              className="overflow-hidden rounded-2xl bg-white shadow"
-            >
-              <ImageWithFallback
-                src={e.image || event1}
-                alt={e.title}
-                className="aspect-[4/3] w-full object-cover"
-              />
+        <motion.div
+          className="grid gap-8 md:grid-cols-3"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={staggerContainer}
+        >
+          {eventsLoading ? (
+            [...Array(3)].map((_, i) => <EventCardSkeleton key={i} />)
+          ) : (
+            homeEvents.map((e) => (
+              <motion.article
+                key={e._id}
+                className="overflow-hidden rounded-2xl bg-yellow-500 shadow"
+                variants={fadeUp}
+              >
+                <ImageWithFallback
+                  src={e.image || event1}
+                  alt={e.title}
+                  className="aspect-[4/3] w-full object-cover"
+                />
 
-              <div className="p-6">
-                <h3 className="text-xl">
-                  {e.title}
-                </h3>
+                <div className="p-6  bg-linear-to-r from-yellow-200 to-yellow-500">
+                  <h3 className="text-xl">
+                    {e.title}
+                  </h3>
 
-                <p className="mt-3 flex items-center gap-2">
-                  <CalendarDays size={14} />
-                  {formatDate(e.eventDate)}
-                </p>
+                  <p className="mt-3 flex items-center gap-2">
+                    <CalendarDays size={14} />
+                    {formatDate(e.eventDate)}
+                  </p>
 
-                <p className="mt-2 flex items-center gap-2">
-                  <MapPin size={14} />
-                  {e.location}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-        {homeEvents.length === 0 && (
-          <p className="mt-6 text-muted-foreground">
+                  <p className="mt-2 flex items-center gap-2">
+                    <MapPin size={14} />
+                    {e.location}
+                  </p>
+                </div>
+              </motion.article>
+            ))
+          )}
+        </motion.div>
+        {!eventsLoading && homeEvents.length === 0 && (
+          <p className="mt-6 text-muted-foreground  border-yellow-400 rounded-lg p-4 text-center">
             Upcoming events will appear here soon.
           </p>
         )}
       </section>
       
    
-          <section className="mx-auto mb-20 max-w-6xl rounded-3xl bg-yellow-200 p-16 text-center">
+          {/* <section className="mx-auto  max-w-6xl rounded-3xl bg-yellow-400 p-4 text-center sm:p-12 md:p-10 mt-10">
         <ImageWithFallback
           src={event1}
           alt=""
@@ -384,11 +414,11 @@ function HomePage() {
 
         <Link
           to="/become-member"
-          className="mt-8 inline-block rounded-full bg-red-900 px-7 py-3 text-white"
+          className="mt-8 inline-block rounded-full bg-yellow-500 px-7 py-3 text-white"
         >
           Become a Member
         </Link>
-      </section>
+      </section> */}
     </PageShell>
   );
 }

@@ -20,7 +20,7 @@ import { useLogoutMutation } from "../api/adminApi";
 
 const navItems = [
   { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/admin/members", label: "Members", icon: Users },
+  { to: "/admin/members", label: "Guest Members", icon: Users },
   { to: "/admin/events", label: "Events", icon: Calendar },
   { to: "/admin/payments", label: "Payments", icon: CreditCard },
   { to: "/admin/contacts", label: "Contact Messages", icon: Mail },
@@ -53,21 +53,21 @@ const AdminLayout = () => {
       <div className="flex h-full min-w-0">
         <aside className="hidden h-screen w-72 shrink-0 flex-col border-r border-slate-200/80 bg-white/88 px-5 py-5 shadow-[8px_0_30px_rgba(15,23,42,0.06)] backdrop-blur-xl md:flex">
         <div className="mb-10 flex items-center gap-3">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-yellow-500 text-black text-xl font-bold shadow-lg">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-linear-to-r bg-yellow-500 text-black text-xl font-bold shadow-lg">
             ॐ
           </span>
 
           <span className="flex flex-col leading-tight">
-            <span className="text-lg font-semibold text-maroon">
+            <span className="text-lg font-semibold bg-yellow-500 bg-clip-text text-transparent">
               Shri Shri Khatu Shyam
             </span>
-            <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground text-yellow-500">
               Sewa Samiti (Reg.)
             </span>
           </span>
         </div>
 
-        <nav className="admin-scrollbar flex flex-1 flex-col gap-1.5 overflow-y-auto pr-1">
+        <nav className="scrollbar-hide flex flex-1 flex-col gap-1.5 overflow-y-auto pr-1">
           {navItems
             .filter((item) => !item.superAdminOnly || admin?.role === "super_admin")
             .map(({ to, label, icon: Icon }) => (
@@ -77,7 +77,7 @@ const AdminLayout = () => {
                 className={({ isActive }) =>
                   `flex min-h-11 items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition ${
                     isActive
-                      ? "bg-orange-100 text-orange-800 shadow-sm ring-1 ring-orange-200/70"
+                      ? "bg-linear-to-r from-yellow-200 to-yellow-500 text-black shadow-sm ring-1 ring-yellow-300/70"
                       : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                   }`
                 }
@@ -91,7 +91,7 @@ const AdminLayout = () => {
         <button
           onClick={handleLogout}
           disabled={isLoading}
-          className="mt-5 flex min-h-11 items-center gap-3 rounded-xl bg-orange-50 px-4 py-3 text-sm font-semibold text-orange-700 transition hover:bg-orange-100 disabled:opacity-60"
+          className="mt-5 flex min-h-11 items-center gap-3 rounded-xl bg-linear-to-r from-yellow-100 to-yellow-200 px-4 py-3 text-sm font-semibold text-yellow-800 transition hover:from-yellow-200 hover:to-yellow-300 disabled:opacity-60"
         >
           <LogOut size={18} />
           Logout
@@ -138,7 +138,7 @@ const AdminLayout = () => {
                       className={({ isActive }) =>
                         `inline-flex h-10 shrink-0 items-center gap-2 rounded-full px-3 text-sm font-semibold transition ${
                           isActive
-                            ? "bg-orange-600 text-white shadow-sm"
+                            ? "bg-linear-to-r from-yellow-200 to-yellow-500 text-black shadow-sm"
                             : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                         }`
                       }

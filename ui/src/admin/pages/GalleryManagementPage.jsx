@@ -3,7 +3,6 @@ import {
   Images,
   Image as ImageIcon,
   Video,
-  Users,
   Plus,
   X,
   Loader2,
@@ -23,14 +22,12 @@ const TYPE_TABS = [
   { key: "all", label: "All", icon: Images },
   { key: "photo", label: "Photos", icon: ImageIcon },
   { key: "video", label: "Videos", icon: Video },
-  { key: "guest", label: "Guests", icon: Users },
 ];
 
 const EMPTY_FORM = {
   type: "photo",
   category: "album",
   title: "",
-  guestName: "",
   eventDate: "",
   file: null,
   preview: "",
@@ -41,7 +38,6 @@ const EMPTY_FORM = {
 // message rather than letting the upload run and error out partway through.
 const MAX_FILE_SIZE_BYTES = {
   photo: 10 * 1024 * 1024,
-  guest: 10 * 1024 * 1024,
   video: 100 * 1024 * 1024,
 };
 
@@ -130,7 +126,6 @@ const UploadForm = ({ onClose, onCreated }) => {
       await createGalleryItem({
         type: formData.type,
         title: formData.title,
-        guestName: formData.guestName,
         eventDate: formData.eventDate,
         category: formData.type === "photo" ? formData.category : undefined,
         mediaUrl: cloudResult.secure_url,
@@ -158,7 +153,7 @@ const UploadForm = ({ onClose, onCreated }) => {
         <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
           <div>
             <h2 className="text-base font-semibold text-slate-900">Upload to gallery</h2>
-            <p className="mt-0.5 text-xs text-slate-500">Add a photo, video, or guest photo.</p>
+            <p className="mt-0.5 text-xs text-slate-500">Add a photo or video.</p>
           </div>
           <button
             type="button"
@@ -176,7 +171,6 @@ const UploadForm = ({ onClose, onCreated }) => {
               {[
                 { value: "photo", label: "Photo" },
                 { value: "video", label: "Video" },
-                { value: "guest", label: "Guest photo" },
               ].map((opt) => (
                 <button
                   key={opt.value}
@@ -184,7 +178,7 @@ const UploadForm = ({ onClose, onCreated }) => {
                   onClick={() => setFormData((prev) => ({ ...prev, type: opt.value }))}
                   className={`flex-1 rounded-lg border px-3 py-2 text-sm font-semibold transition-colors ${
                     formData.type === opt.value
-                      ? "border-slate-900 bg-slate-900 text-white"
+                      ? "border-transparent bg-linear-to-r from-yellow-200 to-yellow-500 text-black"
                       : "border-slate-200 text-slate-600 hover:bg-slate-50"
                   }`}
                 >
@@ -210,7 +204,7 @@ const UploadForm = ({ onClose, onCreated }) => {
                     onClick={() => setFormData((prev) => ({ ...prev, category: opt.value }))}
                     className={`flex-1 rounded-lg border px-3 py-2 text-sm font-semibold transition-colors ${
                       formData.category === opt.value
-                        ? "border-slate-900 bg-slate-900 text-white"
+                        ? "border-transparent bg-linear-to-r from-yellow-200 to-yellow-500 text-black"
                         : "border-slate-200 text-slate-600 hover:bg-slate-50"
                     }`}
                   >
@@ -226,7 +220,7 @@ const UploadForm = ({ onClose, onCreated }) => {
 
           <div>
             <label className="mb-1.5 block text-sm font-medium text-slate-700">
-              Title {formData.type === "guest" ? "/ Event name" : ""}
+              Title
             </label>
             <input
               type="text"
@@ -240,22 +234,6 @@ const UploadForm = ({ onClose, onCreated }) => {
               maxLength={120}
             />
           </div>
-
-          {formData.type === "guest" && (
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-slate-700">
-                Guest name
-              </label>
-              <input
-                type="text"
-                name="guestName"
-                placeholder="Shri Ram Sharma Ji"
-                className={inputClass}
-                value={formData.guestName}
-                onChange={handleChange}
-              />
-            </div>
-          )}
 
           <div>
             <label className="mb-1.5 block text-sm font-medium text-slate-700">Event date</label>
@@ -329,7 +307,7 @@ const UploadForm = ({ onClose, onCreated }) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex items-center gap-2 rounded-lg bg-linear-to-r from-yellow-200 to-yellow-500 px-4 py-2 text-sm font-semibold text-black transition-colors hover:from-yellow-300 hover:to-yellow-600 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {stage === "uploading" ? (
               <>
@@ -369,7 +347,6 @@ const GalleryManagementPage = () => {
       all: items.length,
       photo: items.filter((i) => i.type === "photo").length,
       video: items.filter((i) => i.type === "video").length,
-      guest: items.filter((i) => i.type === "guest").length,
     }),
     [items]
   );
@@ -401,14 +378,14 @@ const GalleryManagementPage = () => {
             </h1>
           </div>
           <p className="mt-2 text-sm text-slate-500">
-            Upload photos, videos, and guest photos for the public gallery pages.
+            Upload photos and videos for the public gallery pages.
           </p>
         </div>
 
         <button
           type="button"
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+          className="flex items-center gap-2 rounded-lg bg-linear-to-r from-yellow-200 to-yellow-500 px-4 py-2.5 text-sm font-semibold text-black shadow-sm transition-colors hover:from-yellow-300 hover:to-yellow-600"
         >
           <Plus size={15} />
           Upload to gallery
@@ -425,7 +402,7 @@ const GalleryManagementPage = () => {
               onClick={() => setActiveTab(tab.key)}
               className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
                 activeTab === tab.key
-                  ? "border-slate-900 bg-slate-900 text-white"
+                  ? "border-transparent bg-linear-to-r from-yellow-200 to-yellow-500 text-black"
                   : "border-slate-200 text-slate-600 hover:bg-slate-50"
               }`}
             >
@@ -461,7 +438,7 @@ const GalleryManagementPage = () => {
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="mt-4 flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-800"
+            className="mt-4 flex items-center gap-2 rounded-lg bg-linear-to-r from-yellow-200 to-yellow-500 px-3.5 py-2 text-sm font-semibold text-black transition-colors hover:from-yellow-300 hover:to-yellow-600"
           >
             <Plus size={14} /> Upload your first item
           </button>
@@ -497,15 +474,12 @@ const GalleryManagementPage = () => {
                 <div className="p-3.5">
                   <div className="flex items-start justify-between gap-2">
                     <p className="truncate text-sm font-semibold text-slate-900">
-                      {item.title || item.guestName || "Untitled"}
+                      {item.title || "Untitled"}
                     </p>
                     <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold uppercase text-slate-500">
                       {item.type === "photo" && item.category ? `photo · ${item.category}` : item.type}
                     </span>
                   </div>
-                  {item.type === "guest" && item.guestName && (
-                    <p className="mt-0.5 truncate text-xs text-slate-500">{item.guestName}</p>
-                  )}
                   <p className="mt-1.5 flex items-center gap-1 text-xs text-slate-400">
                     <CalendarDays size={11} /> {formatDate(item.eventDate)}
                   </p>

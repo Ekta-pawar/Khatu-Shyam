@@ -10,14 +10,15 @@ function GalleryPage() {
   useEffect(() => {
     let isMounted = true;
 
-    getGalleryItems("photo")
-      .then((res) => {
-        const items = res.data?.data || [];
+    Promise.all([getGalleryItems("photo"), getGalleryItems("video")])
+      .then(([photoRes, videoRes]) => {
+        const items = [...(photoRes.data?.data || []), ...(videoRes.data?.data || [])];
         if (isMounted && items.length > 0) {
           setGalleryItems(
             items.map((item) => ({
               src: item.mediaUrl,
               title: item.title,
+              isVideo: item.type === "video",
               year: item.eventDate
                 ? new Date(item.eventDate).getFullYear()
                 : new Date(item.createdAt).getFullYear(),
@@ -43,26 +44,30 @@ function GalleryPage() {
       />
 
       <section className="mx-auto max-w-7xl px-5 py-16">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
           {galleryItems.map((item, i) => (
             <figure
               key={i}
-              className={`group relative overflow-hidden rounded-3xl bg-card shadow-elegant ${
-                i % 5 === 0 ? "lg:row-span-2" : ""
-              }`}
+              className="group relative aspect-square overflow-hidden rounded-3xl bg-card shadow-elegant"
             >
-              <img
-                src={item.src}
-                alt={item.title}
-                className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-                  i % 5 === 0 ? "h-140" : "h-72"
-                }`}
-              />
+              {item.isVideo ? (
+                <video
+                  src={item.src}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  muted
+                />
+              ) : (
+                <img
+                  src={item.src}
+                  alt={item.title}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              )}
 
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
 
-              {i % 3 === 0 && (
-                <div className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-yellow-500 text-black shadow-lg">
+              {item.isVideo && (
+                <div className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-linear-to-r from-yellow-200 to-yellow-500 text-black shadow-lg">
                   <Play size={16} fill="currentColor" />
                 </div>
               )}
@@ -72,7 +77,7 @@ function GalleryPage() {
                   {item.year}
                 </p>
 
-                <p className="mt-1 text-xl font-semibold">
+                <p className="mt-1 line-clamp-1 text-xl font-semibold">
                   {item.title}
                 </p>
               </figcaption>

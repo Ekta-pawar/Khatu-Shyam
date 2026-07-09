@@ -17,12 +17,11 @@ const nav = [
     dropdown: [
       { to: "/gallery/videos", label: "Videos" },
       { to: "/gallery/Photos", label: "Photos" },
-      { to: "/gallery/guests", label: "Samiti Guest" },
     ],
   },
   
   { to: "/events", label: "UpComming Events" },
-  { to: "/members", label: "Members" },
+  { to: "/members", label: "Guest Members" },
   { to: "/Sponsor", label: "Sponsor" },
   { to: "/contact", label: "Contact Us" },
 ];
@@ -46,7 +45,7 @@ function DesktopDropdown({ item }) {
       onMouseEnter={show}
       onMouseLeave={hide}
     >
-      <button className="flex items-center gap-1 text-sm font-medium text-foreground/70 transition hover:text-maroon">
+      <button className="flex items-center gap-1 text-sm font-medium text-foreground/70 transition hover:text-yellow-500">
         {item.label}
         <ChevronDown
           size={14}
@@ -63,7 +62,7 @@ function DesktopDropdown({ item }) {
               onMouseEnter={show}
               onMouseLeave={hide}
               onClick={() => setOpen(false)}
-              className="block px-4 py-2.5 text-sm text-foreground/70 transition first:rounded-t-xl last:rounded-b-xl hover:bg-yellow-50 hover:text-maroon"
+              className="block px-4 py-2.5 text-sm text-foreground/70 transition first:rounded-t-xl last:rounded-b-xl hover:bg-yellow-50 hover:text-yellow-500"
             >
               {sub.label}
             </Link>
@@ -100,7 +99,7 @@ function MobileDropdown({ item, closeMenu }) {
                 setOpen(false);
                 closeMenu();
               }}
-              className="py-1.5 text-sm text-foreground/70 hover:text-maroon"
+              className="py-1.5 text-sm text-foreground/70 hover:text-yellow-500"
             >
               {sub.label}
             </Link>
@@ -127,11 +126,11 @@ function SiteHeader() {
           </span>
 
           <span className="flex flex-col leading-tight">
-            <span className="text-lg font-semibold text-maroon">
+            <span className="text-lg font-semibold text-yellow-500">
              Shri Shri Khatu Shyam
             </span>
 
-            <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-yellow-500">
               Sewa Samiti (Reg.)
             </span>
           </span>
@@ -146,7 +145,7 @@ function SiteHeader() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="text-sm font-medium text-foreground/70 transition hover:text-maroon"
+                className="text-sm font-medium text-foreground/70 transition hover:text-yellow-500"
               >
                 {item.label}
               </Link>

@@ -143,7 +143,7 @@ function ContactPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full rounded-full bg-yellow-500 py-2.5 text-sm font-medium text-black transition hover:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="w-full rounded-full bg-linear-to-r from-yellow-200 to-yellow-500 py-2.5 text-sm font-medium text-black transition hover:from-yellow-300 hover:to-yellow-600 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isLoading ? "Sending…" : "Send Message"}
                 </button>

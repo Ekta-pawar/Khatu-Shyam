@@ -75,7 +75,7 @@ function TeamMemberPage() {
     return (
       <PageShell>
         <div className="mx-auto max-w-7xl px-5 py-20 text-center">
-          <h1 className="text-3xl text-maroon">Loading member...</h1>
+          <h1 className="text-3xl text-yellow-500">Loading member...</h1>
         </div>
       </PageShell>
     );
@@ -123,7 +123,7 @@ function TeamMemberPage() {
               {tier}
             </span>
 
-            <h1 className="mt-4 text-4xl text-maroon sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 text-4xl text-yellow-500 sm:text-5xl lg:text-6xl">
               {member.fullName}
             </h1>
 
@@ -155,7 +155,7 @@ function TeamMemberPage() {
             </p>
           </div>
 
-          <h2 className="text-4xl text-maroon">{professionTitle}</h2>
+          <h2 className="text-4xl text-yellow-500">{professionTitle}</h2>
 
           {professionSubtitle && (
             <p className="mt-2 text-lg text-muted-foreground">
@@ -174,7 +174,7 @@ function TeamMemberPage() {
 
           {(business.businessDescription || job.otherDetails) && (
             <div className="mt-8 rounded-3xl border bg-card p-8">
-              <h3 className="text-xl text-maroon">About The Profession</h3>
+              <h3 className="text-xl text-yellow-500">About The Profession</h3>
               <p className="mt-3 text-muted-foreground">
                 {business.businessDescription || job.otherDetails}
               </p>

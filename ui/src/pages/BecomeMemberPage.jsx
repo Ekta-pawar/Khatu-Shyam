@@ -11,20 +11,20 @@ import {
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
 
 const tiers = [
+  // {
+  //   name: "Diamond Members",
+  //   price: "₹11,00,000 / year",
+  //   buttonText: "Become Diamond Member",
+  //   perks: [
+  //     "Member ID & welcome kit",
+  //     "Event invitations",
+  //     "Monthly bhajan satsang",
+  //   ],
+  // },
   {
-    name: "Diamond Members",
-    price: "₹11,00,000 / year",
-    buttonText: "Become Diamond Member",
-    perks: [
-      "Member ID & welcome kit",
-      "Event invitations",
-      "Monthly bhajan satsang",
-    ],
-  },
-  {
-    name: "Golden Members",
+    name: "मुख्य कार्यकारिणी",
     price: "₹5,00,000 / year",
-    buttonText: "Become Golden Member",
+    buttonText: "मुख्य कार्यकारिणी बनें",
     featured: true,
     perks: [
       "All Diamond benefits",
@@ -34,9 +34,9 @@ const tiers = [
     ],
   },
   {
-    name: "Silver Members",
+    name: "प्रेरणा स्रोत",
     price: "₹3,00,000 / Year",
-    buttonText: "Become Silver Member",
+    buttonText: "प्रेरणा स्रोत बनें",
     perks: [
       "All Golden benefits",
       "Patron recognition",
@@ -45,9 +45,9 @@ const tiers = [
     ],
   },
   {
-  name: "Karyakarani Members",
+  name: "कार्यकारिणी",
   price: "₹1,00,000 / Year",
-  buttonText: "Become Karyakarani Member",
+  buttonText: "कार्यकारिणी बनें",
   perks: [
     "Member ID & welcome kit",
     "Event invitations",
@@ -56,9 +56,9 @@ const tiers = [
   ],
 },
 {
-  name: "Shrakshak",
+  name: "संरक्षक",
   price: "₹51,000 / Year",
-  buttonText: "Join Prernasrot",
+  buttonText: "संरक्षक बनें",
   perks: [
     "Special recognition certificate",
     "Priority event registration",
@@ -67,9 +67,9 @@ const tiers = [
   ],
 },
 {
-  name: "Mambers",
+  name: "सदस्य",
   price: "₹21,000 / Year",
-  buttonText: "Become Member",
+  buttonText: "सदस्य बनें",
   perks: [
     "Member ID card",
     "Regular event updates",
@@ -365,7 +365,7 @@ function BecomeMemberPage() {
               <h3 className={`text-2xl font-bold ${tier.featured ? "text-white" : "text-gray-800"}`}>
                 {tier.name}
               </h3>
-              <p className={`mt-2 text-3xl font-bold ${tier.featured ? "text-white" : "text-maroon"}`}>
+              <p className={`mt-2 text-3xl font-bold ${tier.featured ? "text-white" : "text-yellow-500"}`}>
                 {tier.price}
               </p>
 
@@ -385,10 +385,10 @@ function BecomeMemberPage() {
                   selectedTier === tier.name
                     ? tier.featured
                       ? "bg-white/90 text-yellow-700 ring-2 ring-white"
-                      : "bg-maroon text-white ring-2 ring-maroon/40"
+                      : "bg-yellow-500 text-white ring-2 ring-maroon/40"
                     : tier.featured
                     ? "bg-white text-yellow-600 hover:bg-gray-100"
-                    : "bg-maroon text-white hover:bg-red-800"
+                    : "bg-yellow-200 text-yellow-500 hover:bg-yellow-300"
                 }`}
               >
                 {selectedTier === tier.name ? "✓ Selected" : tier.buttonText}
@@ -403,7 +403,7 @@ function BecomeMemberPage() {
         <section id="application-form" className="mx-auto max-w-4xl px-5 pb-24">
           <div className="rounded-3xl bg-white p-8 shadow-xl md:p-12">
             <div className="mb-8 border-b pb-6">
-              <h2 className="text-3xl font-bold text-maroon">
+              <h2 className="text-3xl font-bold text-yellow-500">
                 Membership Application — {selectedTier}
               </h2>
               <p className="mt-2 text-gray-500">
@@ -728,7 +728,7 @@ function BecomeMemberPage() {
                 )}
 
                 <button type="button" onClick={addFamilyMember}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-maroon/40 px-4 py-3 text-sm text-maroon hover:border-maroon hover:bg-maroon/5">
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-maroon/40 px-4 py-3 text-sm text-yellow-500 hover:border-maroon hover:bg-maroon/5">
                   <Plus size={18} /> Add Family Member
                 </button>
               </SectionCard>
@@ -764,7 +764,7 @@ function BecomeMemberPage() {
                 )}
 
                 <button type="button" onClick={addAnniversary}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-maroon/40 px-4 py-3 text-sm text-maroon hover:border-maroon hover:bg-maroon/5">
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-maroon/40 px-4 py-3 text-sm text-yellow-500 hover:border-maroon hover:bg-maroon/5">
                   <Plus size={18} /> Add Anniversary Date
                 </button>
               </SectionCard>
@@ -802,7 +802,7 @@ function BecomeMemberPage() {
                 )}
 
                 <button type="button" onClick={addCustomDate}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-maroon/40 px-4 py-3 text-sm text-maroon hover:border-maroon hover:bg-maroon/5">
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-maroon/40 px-4 py-3 text-sm text-yellow-500 hover:border-maroon hover:bg-maroon/5">
                   <Plus size={18} /> Add Special Date
                 </button>
               </SectionCard>
@@ -835,7 +835,7 @@ function SectionCard({ icon, title, children }) {
   return (
     <div className="rounded-2xl border bg-gray-50/60 p-6">
       <div className="mb-5 flex items-center gap-2">
-        <span className="text-maroon">{icon}</span>
+        <span className="text-yellow-500">{icon}</span>
         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
       </div>
       {children}

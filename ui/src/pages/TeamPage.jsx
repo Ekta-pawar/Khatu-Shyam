@@ -3,18 +3,43 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { PageShell, PageHeader } from "../components/PageShell";
 import { tierLabel } from "../data/members";
-import { ArrowRight, Users, Star, Crown } from "lucide-react";
+import { ArrowRight, Users, Star, Crown, MapPin, CalendarDays } from "lucide-react";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
 
 const tierOrder = [
-  { id: "all", label: "All Members", icon: Users },
-  { id: "golden", label: "Golden Members", icon: Crown },
-  { id: "Diamond", label: "Diamond Members", icon: Star },
-  { id: "KaryaKarani", label: "Karyakarani Members", icon: Users },
+  
+
+  {
+    id: "मुख्य कार्यकारिणी",
+    label: "मुख्य कार्यकारिणी",
+    icon: Crown,
+  },
+  {
+    id: "प्रेरणा स्रोत",
+    label: "प्रेरणा स्रोत",
+    icon: Star,
+  },
+  {
+    id: "कार्यकारिणी",
+    label: "कार्यकारिणी सदस्य",
+    icon: Users,
+  },
+  {
+    id: "संरक्षक",
+    label: "संरक्षक",
+    icon: Crown,
+  },
+  {
+    id: "सदस्य",
+    label: "सदस्य",
+    icon: Star,
+  },
+
+
 ];
 
-function TeamPage() {
+function TeamPage(){ 
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -55,7 +80,7 @@ function TeamPage() {
     return (
       <PageShell>
         <div className="py-20 text-center">
-          <h3 className="text-2xl font-semibold text-maroon">Could not load team members</h3>
+          <h3 className="text-2xl font-semibold text-yellow-500">Could not load team members</h3>
           <p className="mt-2 text-muted-foreground">Please refresh the page or try again shortly.</p>
         </div>
       </PageShell>
@@ -67,7 +92,7 @@ function TeamPage() {
       <PageHeader
         eyebrow="हमारी टीम"
         title="Our Team & Patrons"
-        subtitle="तीन श्रेणियों के सदस्य हमारी समिति को आकार देते हैं — गोल्डन सदस्य जिनकी आजीवन सेवा ने इस संगत का निर्माण किया, और डायमंड एवं कार्यकारणी सदस्य जो हर दिन कार्य को आगे बढ़ाते हैं।"
+        subtitle=""
       />
 
       <section className="mx-auto max-w-7xl px-5 py-12">
@@ -85,8 +110,8 @@ function TeamPage() {
                     ? "bg-linear-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-blue-200"
                     : id === "KaryaKarani"
                     ? "bg-linear-to-r from-orange-400 to-red-500 text-white shadow-lg shadow-orange-200"
-                    : "bg-linear-to-r from-maroon to-maroon/80 text-white shadow-lg"
-                  : "border-2 border-gray-300 bg-white text-gray-600 hover:border-maroon hover:text-maroon"
+                    : "bg-linear-to-r from-yellow-200 to-yellow-500 text-white shadow-lg"
+                  : "border-2 border-gray-300 bg-white text-gray-600 hover:border-yellow-400 hover:text-yellow-500"
               }`}
             >
               <Icon size={16} />
@@ -96,67 +121,61 @@ function TeamPage() {
         </div>
 
         {/* Member Count */}
-        <div className="mb-8 text-center">
+        {/* <div className="mb-8 text-center">
           <p className="text-sm text-muted-foreground">
-            Showing <span className="font-semibold text-maroon">{filteredMembers.length}</span> members
+            Showing <span className="font-semibold text-yellow-500">{filteredMembers.length}</span> members
           </p>
-        </div>
+        </div> */}
 
         {/* Members Grid - Responsive: 2 columns on large, 1 on medium and small */}
-        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
+        <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
           {filteredMembers.map((member) => (
             <Link
               key={member._id}
               to={`/team/${member._id}`}
-              className="group grid gap-6 rounded-3xl bg-card p-6 shadow-elegant transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl sm:grid-cols-[140px_1fr]"
+              className="group overflow-visible rounded-3xl bg-card shadow-elegant transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
-              <div className="overflow-hidden rounded-2xl">
+              <div className="relative overflow-hidden rounded-3xl">
                 <img
                   src={member.photo}
                   alt={member.name}
-                  className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="aspect-4/3 w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+
+                {/* Tier Badge */}
+                <span
+                  className={`absolute -bottom-4 left-5 inline-block rounded-full px-4 py-1.5 text-xs font-semibold shadow-md ${
+                    member.tier === "golden"
+                      ? "bg-linear-to-r from-yellow-400 to-amber-500 text-black"
+                      : member.tier === "Diamond"
+                      ? "bg-linear-to-r from-sky-500 to-blue-600 text-white"
+                      : "border border-yellow-400 bg-white text-yellow-700"
+                  }`}
+                >
+                  {tierLabel[member.tier] || member.tier}
+                </span>
               </div>
 
-              <div className="flex flex-col justify-center">
-                {/* Tier Badge */}
-                <div className="mb-2">
-                  <span
-                    className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${
-                      member.tier === "golden"
-                        ? "bg-linear-to-r from-yellow-400 to-amber-500 text-black"
-                        : member.tier === "Diamond"
-                        ? "bg-linear-to-r from-sky-500 to-blue-600 text-white"
-                        : "bg-linear-to-r from-orange-400 to-red-500 text-white"
-                    }`}
-                  >
-                    {tierLabel[member.tier]}
-                  </span>
-                </div>
-
-                <p className="text-xs uppercase tracking-[0.3em] text-saffron">
-                  {member.title}
-                </p>
-
-                <h3 className="mt-2 text-2xl text-maroon md:text-3xl">
+              <div className="flex flex-col px-6 pb-6 pt-8">
+                <h3 className="text-xl font-bold text-yellow-600 md:text-2xl">
                   {member.name}
                 </h3>
 
-                <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                  {member.bio}
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {member.title || "Member"}
                 </p>
 
-                <div className="mt-4 flex flex-wrap gap-3">
-                  <p className="text-xs text-muted-foreground">
-                    📍 {member.city}
+                <div className="mt-4 flex flex-col gap-2">
+                  <p className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <MapPin size={13} /> {member.city}
                   </p>
-                  <p className="text-xs text-muted-foreground">
-                    📅 Joined {member.joinedYear}
+                  <p className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <CalendarDays size={13} /> Joined {member.joinedYear}
                   </p>
                 </div>
 
-                <p className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-maroon transition-all group-hover:gap-2 group-hover:text-saffron">
-                  View Full Profile
+                <p className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-yellow-600 transition-all group-hover:gap-2 group-hover:text-yellow-500">
+                  View Profile
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </p>
               </div>

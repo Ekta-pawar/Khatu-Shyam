@@ -1,5 +1,5 @@
 const variants = {
-  primary: "bg-orange-600 text-white shadow-sm shadow-orange-200 hover:bg-orange-700 hover:shadow-md disabled:bg-orange-300",
+  primary: "bg-linear-to-r from-yellow-200 to-yellow-500 text-black shadow-sm shadow-orange-200 hover:from-yellow-300 hover:to-yellow-600 hover:shadow-md disabled:from-yellow-100 disabled:to-yellow-300",
   secondary: "bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:text-slate-400",
   danger: "bg-red-600 text-white shadow-sm shadow-red-200 hover:bg-red-700 disabled:bg-red-300",
   outline: "border border-slate-300 bg-white text-slate-700 hover:border-orange-200 hover:bg-orange-50 hover:text-orange-700 disabled:text-slate-400",

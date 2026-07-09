@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border/60 bg-[oklch(0.22_0.04_40)] text-white">
-      <div className="mx-auto grid max-w-8xl gap-10 px-16 py-14 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-8xl gap-10 px-5 py-14 sm:px-10 md:grid-cols-[1.5fr_1fr_1fr_1fr] lg:px-16">
 
         {/* Logo & About */}
         <div>
@@ -28,7 +28,7 @@ Seva Samiti (Reg.)
 
         {/* Navigation */}
         <div>
-          <h4 className="mb-3 text-base font-semibold text-yellow-400">
+          <h4 className="mb-3 text-base font-semibold text-yellow-500">
             Navigate
           </h4>
 
@@ -53,7 +53,7 @@ Seva Samiti (Reg.)
 
         {/* Get Involved */}
         <div>
-          <h4 className="mb-3 text-base font-semibold text-yellow-400">
+          <h4 className="mb-3 text-base font-semibold text-yellow-500">
             Get Involved
           </h4>
 
@@ -80,7 +80,7 @@ Seva Samiti (Reg.)
 
         {/* Contact */}
         <div>
-          <h4 className="mb-3 text-base font-semibold text-yellow-400">
+          <h4 className="mb-3 text-base font-semibold text-yellow-500">
             Sampark
           </h4>
 
