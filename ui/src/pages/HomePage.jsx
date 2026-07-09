@@ -59,7 +59,11 @@ const committeeMembers = [
   { image: cofounder1, role: "अमित गोयल" },
     { image: member1, role: "अरविंद गोयल" },
         { image: cofounder4, role: " नतेश गोयल" },
-            { image: cofounder4, role: "अमित गुप्ता" }
+            { image: cofounder4, role: "अमित गुप्ता" },
+            { image: cofounder4, role: " नतेश गोयल" },
+            { image: cofounder4, role: "अमित गुप्ता" },
+             { image: cofounder4, role: "अमित गुप्ता" },
+            
 
 
 
@@ -71,6 +75,8 @@ function HomePage() {
   const [eventsLoading, setEventsLoading] = useState(true);
 
   useEffect(() => {
+    const minDelay = new Promise((resolve) => setTimeout(resolve, 400));
+
     const fetchHomeData = async () => {
       try {
         const eventsRes = await axios.get(`${API_BASE}/events`);
@@ -78,6 +84,7 @@ function HomePage() {
       } catch (error) {
         console.error("Error loading home page data:", error);
       } finally {
+        await minDelay;
         setEventsLoading(false);
       }
     };
@@ -329,7 +336,7 @@ function HomePage() {
           </motion.div>
         </div>
       </section>
-            <section className="mx-auto max-w-7xl px-5 py-6 ">
+            <section className="mx-auto max-w-7xl px-5 py-6 pt-14">
         <motion.h2
           className="mb-7 text-5xl align-items-center text-center"
           initial="hidden"

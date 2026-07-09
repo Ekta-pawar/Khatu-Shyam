@@ -119,16 +119,12 @@ function AlbumPage() {
           {filtered.map((item, i) => (
             <figure
               key={i}
-              className={`group relative overflow-hidden rounded-3xl bg-card shadow-elegant ${
-                i % 5 === 0 ? "lg:row-span-2" : ""
-              }`}
+              className="group relative overflow-hidden rounded-3xl bg-card shadow-elegant"
             >
               <img
                 src={item.src}
                 alt={item.title}
-                className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-                  i % 5 === 0 ? "h-140" : "h-72"
-                }`}
+                className="h-72 w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/75 via-transparent to-transparent" />
               <figcaption className="absolute bottom-0 left-0 right-0 p-5 text-white">

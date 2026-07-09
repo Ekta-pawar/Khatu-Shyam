@@ -39,12 +39,12 @@ function GalleryPage() {
     <PageShell>
       <PageHeader
         eyebrow="Drishya · Moments"
-        title="Gallery of Seva"
+        title="Gallery"
         subtitle="Snapshots and recordings from our bhajan sandhyas, bhandaras, yatras and mahotsavs across the years."
       />
 
       <section className="mx-auto max-w-7xl px-5 py-16">
-        <div className="grid gap-5 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid gap-5 grid-cols-2 md:grid-cols-4">
           {galleryItems.map((item, i) => (
             <figure
               key={i}
