@@ -20,7 +20,8 @@ import { useLogoutMutation } from "../api/adminApi";
 
 const navItems = [
   { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/admin/members", label: "Guest Members", icon: Users },
+  { to: "/admin/members", label: "Our Guest", icon: Users },
+  { to: "/admin/team", label: "Our Team", icon: Users },
   { to: "/admin/events", label: "Events", icon: Calendar },
   { to: "/admin/payments", label: "Payments", icon: CreditCard },
   { to: "/admin/contacts", label: "Contact Messages", icon: Mail },

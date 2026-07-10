@@ -25,7 +25,8 @@ const createEvent = async (req, res) => {
       shortDescription: req.body.shortDescription,
       fullDescription: req.body.fullDescription,
       image,
-      eventDate: req.body.eventDate,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
       startTime: req.body.startTime,
       endTime: req.body.endTime,
       location: req.body.location,
@@ -50,7 +51,7 @@ const createEvent = async (req, res) => {
 
 const getAllEvents = async (req, res) => {
   try {
-    const events = await Event.find().sort({ eventDate: 1 });
+    const events = await Event.find().sort({ startDate: 1 });
 
     res.status(200).json({
       success: true,
@@ -73,8 +74,8 @@ const getUpcomingEvents = async (req, res) => {
     today.setHours(0, 0, 0, 0);
 
     const events = await Event.find({
-      eventDate: { $gte: today },
-    });
+      endDate: { $gte: today },
+    }).sort({ startDate: 1 });
 
     res.status(200).json({
       success: true,
@@ -93,8 +94,8 @@ const getUpcomingEvents = async (req, res) => {
 const getPastEvents = async (req, res) => {
   try {
     const events = await Event.find({
-      eventDate: { $lt: new Date() },
-    });
+      endDate: { $lt: new Date() },
+    }).sort({ startDate: -1 });
 
     res.status(200).json({
       success: true,

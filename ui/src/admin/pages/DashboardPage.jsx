@@ -92,9 +92,9 @@ const DashboardPage = () => {
   const stats = [
     {
       icon: Users,
-      label: "Members",
+      label: "Guests",
       value: loadingMembers ? "..." : getTotal(membersData),
-      detail: "Registered samiti members",
+      detail: "Registered samiti guests",
       accent: "bg-orange-50 text-orange-600",
     },
     {
@@ -124,8 +124,8 @@ const DashboardPage = () => {
     {
       to: "/admin/members",
       icon: Users,
-      title: "Manage Members",
-      description: "Add, edit, search, and review members",
+      title: "Manage Guests",
+      description: "Add, edit, search, and review guests",
       accent: "bg-orange-50 text-orange-600",
     },
     {
@@ -183,20 +183,13 @@ const DashboardPage = () => {
             <p className="text-sm font-semibold uppercase tracking-wide text-orange-600">
               Admin Dashboard
             </p>
-            <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+            <h1 className="mt-3 text-2xl font-bold tracking-tight text-yellow-500">
               Welcome back, {admin?.firstName || "Admin"}
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
               Keep members, events, payments, messages, enquiries, sponsors, and admin access organized from one polished control center.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {/* <Link
-                to="/admin/members/new"
-                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-orange-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:bg-orange-700"
-              >
-                Add Member
-                <ArrowRight size={15} />
-              </Link> */}
               <Link
                 to="/admin/events"
                 className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-700"
@@ -205,26 +198,6 @@ const DashboardPage = () => {
               </Link>
             </div>
           </div>
-
-          {/* <div className="rounded-2xl border border-orange-200 bg-sun p-5 text-white shadow-gold">
-            <p className="text-xs font-semibold uppercase tracking-wide text-white/80">
-              Today Focus
-            </p>
-            <div className="mt-5 space-y-4 text-sm">
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-white/85">Open messages</span>
-                <strong>{loadingContacts ? "..." : contactsData?.pagination?.total ?? 0}</strong>
-              </div>
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-white/85">Member records</span>
-                <strong>{loadingMembers ? "..." : getTotal(membersData)}</strong>
-              </div>
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-white/85">Payment total</span>
-                <strong>{loadingPayments ? "..." : totalPayments}</strong>
-              </div>
-            </div>
-          </div> */}
         </div>
       </section>
 
@@ -248,24 +221,6 @@ const DashboardPage = () => {
             ))}
           </div>
         </div>
-{/* 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Workspace Tips</h2>
-          <div className="mt-5 space-y-4">
-            {[
-              "Review new members before payment follow-up.",
-              "Keep event details updated before publishing.",
-              "Resolve contact messages regularly.",
-            ].map((tip, index) => (
-              <div key={tip} className="flex gap-3 rounded-xl bg-slate-50 p-3">
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white text-xs font-bold text-orange-600 shadow-sm">
-                  {index + 1}
-                </span>
-                <p className="text-sm leading-6 text-slate-600">{tip}</p>
-              </div>
-            ))}
-          </div>
-        </div> */}
       </section>
     </div>
   );

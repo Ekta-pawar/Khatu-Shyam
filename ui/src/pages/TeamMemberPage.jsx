@@ -4,6 +4,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { Briefcase, Gift, MapPin } from "lucide-react";
 
 import { PageShell } from "../components/PageShell";
+import Shimmer from "../components/Shimmer";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
 const FALLBACK_IMAGE =
@@ -32,8 +33,7 @@ function formatDate(value) {
 }
 
 function TeamMemberPage() {
-  const { memberId, id } = useParams();
-  const activeMemberId = memberId || id;
+  const { id: activeMemberId } = useParams();
   const [member, setMember] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -74,9 +74,23 @@ function TeamMemberPage() {
   if (loading) {
     return (
       <PageShell>
-        <div className="mx-auto max-w-7xl px-5 py-20 text-center">
-          <h1 className="text-3xl text-yellow-500">Loading member...</h1>
-        </div>
+        <section className="relative overflow-hidden border-b border-border/60 bg-secondary/40">
+          <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-10 md:grid-cols-[0.9fr_1.25fr] md:items-center lg:py-14">
+            <Shimmer className="mx-auto h-105 w-full max-w-sm rounded-3xl sm:h-120 lg:h-130 md:max-w-none" />
+
+            <div className="space-y-4 pb-2">
+              <Shimmer className="h-6 w-28 rounded-full" />
+              <Shimmer className="h-12 w-3/4" />
+              <Shimmer className="h-5 w-1/2" />
+              <Shimmer className="h-4 w-full" />
+              <Shimmer className="h-4 w-5/6" />
+              <div className="grid grid-cols-2 gap-4 pt-4">
+                <Shimmer className="h-20 w-full" />
+                <Shimmer className="h-20 w-full" />
+              </div>
+            </div>
+          </div>
+        </section>
       </PageShell>
     );
   }

@@ -131,7 +131,7 @@ const PaymentManagementPage = () => {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800">Payments</h1>
+          <h1 className="text-2xl font-bold text-yellow-500">Payments</h1>
           <p className="text-sm text-slate-500">Track membership contributions and payments</p>
         </div>
         <Button onClick={() => setShowModal(true)}>

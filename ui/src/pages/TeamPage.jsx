@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { PageShell, PageHeader } from "../components/PageShell";
+import TeamCardSkeleton from "../components/TeamCardSkeleton";
 import { tierLabel } from "../data/members";
 import { ArrowRight, Users, Star, Crown, MapPin, CalendarDays } from "lucide-react";
 
@@ -69,9 +70,14 @@ function TeamPage(){
   if (loading) {
     return (
       <PageShell>
-        <div className="py-20 text-center">
-          <h2 className="text-2xl font-semibold">Loading Team...</h2>
-        </div>
+        <PageHeader eyebrow="हमारी टीम" title="Our Team & Patrons" subtitle="" />
+        <section className="mx-auto max-w-7xl px-5 py-12">
+          <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+            {[...Array(8)].map((_, i) => (
+              <TeamCardSkeleton key={i} />
+            ))}
+          </div>
+        </section>
       </PageShell>
     );
   }

@@ -11,3 +11,7 @@ export const createSponsor = (data) => {
     headers: { "Content-Type": "multipart/form-data" },
   });
 };
+
+export const getSponsors = () => {
+  return axios.get(`${API_BASE}/sponsor`);
+};

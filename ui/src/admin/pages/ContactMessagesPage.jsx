@@ -96,7 +96,7 @@ const ContactMessagesPage = () => {
     <div className="flex flex-col gap-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-slate-800">Contact Messages</h1>
+        <h1 className="text-2xl font-bold text-yellow-500">Contact Messages</h1>
         <p className="text-sm text-slate-500">Messages submitted through the public contact form</p>
       </div>
 

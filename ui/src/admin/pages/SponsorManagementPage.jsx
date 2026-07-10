@@ -19,7 +19,7 @@ import {
   List,
   Search,
 } from "lucide-react";
-import { useGetSponsorsQuery } from "../api/sponsorApi";
+import { useGetSponsorsQuery, useUpdateSponsorStatusMutation } from "../api/sponsorApi";
 
 /* ---------- tier system ---------- */
 
@@ -184,6 +184,12 @@ const SponsorCard = ({ sponsor, statusKey, onStatusChange, expanded, onToggleExp
             <p className="rounded-lg bg-slate-50 p-2 leading-relaxed text-slate-600">{sponsor.message}</p>
           )}
         </div>
+      )}
+
+      {statusKey === "rejected" && (
+        <p className="mt-3 rounded-lg bg-rose-50 px-2.5 py-1.5 text-[11px] text-rose-600">
+          Will be permanently deleted ~2 min after rejection unless you approve or reset it.
+        </p>
       )}
 
       <div className="mt-3 flex gap-1.5 border-t border-slate-100 pt-3">
@@ -404,7 +410,12 @@ const SponsorKanbanView = ({ sponsors, effectiveStatus, expandedId, onToggleExpa
 /* ---------- page ---------- */
 
 const SponsorManagementPage = () => {
-  const { data: sponsors = [], isLoading, error } = useGetSponsorsQuery();
+  // Poll so a sponsor that gets auto-deleted after the rejection grace
+  // period disappears from the board without needing a manual refresh.
+  const { data: sponsors = [], isLoading, error } = useGetSponsorsQuery(undefined, {
+    pollingInterval: 30000,
+  });
+  const [updateSponsorStatus] = useUpdateSponsorStatusMutation();
   const [view, setView] = useState("kanban");
   const [expandedId, setExpandedId] = useState(null);
   const [localStatus, setLocalStatus] = useState({});
@@ -413,9 +424,19 @@ const SponsorManagementPage = () => {
 
   const handleToggleExpand = (id) => setExpandedId((prev) => (prev === id ? null : id));
 
-  const handleStatusChange = (id, newStatus) => {
+  const handleStatusChange = async (id, newStatus) => {
     setLocalStatus((prev) => ({ ...prev, [id]: newStatus }));
-    // TODO: wire to an actual update-sponsor-status mutation here
+    try {
+      await updateSponsorStatus({ id, status: newStatus }).unwrap();
+    } catch (error) {
+      console.error("Failed to update sponsor status:", error);
+      alert("Failed to update sponsor status. Please try again.");
+      setLocalStatus((prev) => {
+        const next = { ...prev };
+        delete next[id];
+        return next;
+      });
+    }
   };
 
   const effectiveStatus = (sponsor) => localStatus[sponsor._id] || getStatusKey(sponsor);
@@ -473,7 +494,7 @@ const SponsorManagementPage = () => {
         <div>
           <div className="flex items-center gap-2.5">
             <Handshake size={20} className="text-slate-900" />
-            <h1 className="text-xl font-medium tracking-tight text-slate-900 sm:text-2xl">Sponsor management</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-yellow-500">Sponsor management</h1>
           </div>
           <p className="mt-1 text-sm text-slate-500">Review sponsor requests and move them through approval.</p>
         </div>

@@ -17,11 +17,11 @@ import ContactPage from "./pages/ContactPage";
 import BecomeMemberPage from "./pages/BecomeMemberPage";
 import MissionVisionPage from "./pages/MissionVisionPage";
 import SponsorPage from "./pages/SponsorPage";
+import SponsorsListPage from "./pages/SponsorsListPage";
 
 import { store } from "./admin/app/store";
 import AuthInitializer from "./admin/components/AuthInitializer";
 import AdminRoutes from "./admin/routes/AdminRoutes";
-import MemberDetailsPage from "./pages/TeamMemberPage";
 
 
 function App() {
@@ -48,11 +48,7 @@ function App() {
 
           <Route path="/team" element={<TeamPage />} />
 
-          <Route
-            path="/team/:memberId"
-            element={<TeamMemberPage />}
-          />
-<Route path="/team/:id" element={<MemberDetailsPage />} />
+          <Route path="/team/:id" element={<TeamMemberPage />} />
           <Route path="/members" element={<MembersPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/gallery/videos" element={<VideosPage />} />
@@ -70,6 +66,7 @@ function App() {
           <Route path="/mission-vision" element={<MissionVisionPage />} />
 
           <Route path="/Sponsor" element={<SponsorPage />} />
+          <Route path="/sponsors" element={<SponsorsListPage />} />
 
           {/* Admin Routes */}
           <Route
