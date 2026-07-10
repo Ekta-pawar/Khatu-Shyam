@@ -213,11 +213,11 @@ function SponsorPage() {
           slidesPerView={4}
           breakpoints={{
             640: { slidesPerView: 3 },
-            1024: { slidesPerView: 5 },
+            1024: { slidesPerView: 4 },
           }}
           spaceBetween={40}
           loop={true}
-          speed={4000}
+          speed={3000}
           autoplay={{
             delay: 0,
             disableOnInteraction: false,
@@ -243,7 +243,7 @@ function SponsorPage() {
           <div className="mx-auto mt-4 h-px w-24 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-4 xl:grid-cols-4">
           {sponsorTiers.map((tier) => (
             <div
               key={tier.name}
