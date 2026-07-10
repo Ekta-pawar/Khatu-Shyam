@@ -373,7 +373,7 @@ const GalleryManagementPage = () => {
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-white">
               <Images size={16} />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+            <h1 className="text-2xl font-bold tracking-tight text-yellow-500">
               Gallery
             </h1>
           </div>

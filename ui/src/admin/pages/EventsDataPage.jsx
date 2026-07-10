@@ -24,11 +24,26 @@ const EMPTY_FORM = {
   fullDescription: "",
   image: null,
   imagePreview: "",
-  eventDate: "",
+  startDate: "",
+  endDate: "",
   startTime: "",
   endTime: "",
   location: "",
-  category: "upcoming",
+};
+
+// An event is "past" once its end date has fully elapsed; there is no
+// manual status field — this is always derived from the stored dates.
+const getEventStatus = (event) => {
+  const end = new Date(event.endDate || event.startDate);
+  end.setHours(23, 59, 59, 999);
+  return end < new Date() ? "past" : "upcoming";
+};
+
+const formatDateRange = (startDate, endDate) => {
+  const start = formatDate(startDate);
+  const end = formatDate(endDate);
+  if (!endDate || start === end) return start;
+  return `${start} – ${end}`;
 };
 
 const STEPS = [
@@ -135,7 +150,8 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
       ["title", "Event title"],
       ["shortDescription", "Short description"],
       ["fullDescription", "Full description"],
-      ["eventDate", "Event date"],
+      ["startDate", "Start date"],
+      ["endDate", "End date"],
       ["startTime", "Start time"],
       ["endTime", "End time"],
       ["location", "Location"],
@@ -146,17 +162,22 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
       return;
     }
 
+    if (formData.endDate < formData.startDate) {
+      alert("End date can't be before the start date.");
+      return;
+    }
+
     try {
       const data = new FormData();
 
       data.append("title", formData.title);
       data.append("shortDescription", formData.shortDescription);
       data.append("fullDescription", formData.fullDescription);
-      data.append("eventDate", formData.eventDate);
+      data.append("startDate", formData.startDate);
+      data.append("endDate", formData.endDate);
       data.append("startTime", formData.startTime);
       data.append("endTime", formData.endTime);
       data.append("location", formData.location);
-      data.append("category", formData.category);
 
       if (formData.image) {
         data.append("image", formData.image);
@@ -245,28 +266,36 @@ const NewEventModal = ({ onClose, onCreated, createEvent, isLoading }) => {
               {activeStep === "schedule" && (
                 <div className="space-y-4">
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <Field label="Event date" required>
+                    <Field label="Start date" required>
                       <input
                         type="date"
-                        name="eventDate"
+                        name="startDate"
                         className={inputClass}
-                        value={formData.eventDate}
+                        value={formData.startDate}
                         onChange={handleChange}
                         required
                       />
                     </Field>
-                    <Field label="Status">
-                      <select
-                        name="category"
+                    <Field label="End date" required>
+                      <input
+                        type="date"
+                        name="endDate"
                         className={inputClass}
-                        value={formData.category}
+                        value={formData.endDate}
                         onChange={handleChange}
-                      >
-                        <option value="upcoming">Upcoming</option>
-                        <option value="past">Past</option>
-                      </select>
+                        required
+                      />
                     </Field>
                   </div>
+
+                  {formData.startDate &&
+                    formData.endDate &&
+                    formData.endDate < formData.startDate && (
+                      <p className="flex items-center gap-1.5 text-xs text-amber-600">
+                        <AlertCircle size={13} /> End date is before the start date — double
+                        check this.
+                      </p>
+                    )}
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <Field label="Start time" required>
@@ -427,11 +456,11 @@ const EventsDataPage = () => {
 
   const filteredEvents = useMemo(() => {
     if (statusFilter === "all") return events;
-    return events.filter((e) => e.category === statusFilter);
+    return events.filter((e) => getEventStatus(e) === statusFilter);
   }, [events, statusFilter]);
 
-  const upcomingCount = events.filter((e) => e.category === "upcoming").length;
-  const pastCount = events.filter((e) => e.category === "past").length;
+  const upcomingCount = events.filter((e) => getEventStatus(e) === "upcoming").length;
+  const pastCount = events.filter((e) => getEventStatus(e) === "past").length;
 
   const handleCreated = () => {
     setIsModalOpen(false);
@@ -456,10 +485,10 @@ const EventsDataPage = () => {
       <div className="flex flex-col gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-white">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-yellow-500 text-white">
               <CalendarDays size={16} />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+            <h1 className="text-2xl font-bold tracking-tight text-yellow-500">
               Events Management
             </h1>
           </div>
@@ -471,17 +500,17 @@ const EventsDataPage = () => {
         <div className="flex items-end gap-5">
           <div className="flex gap-5">
             <div>
-              <p className="text-2xl font-bold tabular-nums text-slate-900">{events.length}</p>
+              <p className="text-2xl font-bold tabular-nums text-yellow-500">{events.length}</p>
               <p className="text-xs font-medium text-slate-400">Total</p>
             </div>
             <div className="w-px bg-slate-200" />
             <div>
-              <p className="text-2xl font-bold tabular-nums text-slate-900">{upcomingCount}</p>
+              <p className="text-2xl font-bold tabular-nums text-yellow-500">{upcomingCount}</p>
               <p className="text-xs font-medium text-slate-400">Upcoming</p>
             </div>
             <div className="w-px bg-slate-200" />
             <div>
-              <p className="text-2xl font-bold tabular-nums text-slate-900">{pastCount}</p>
+              <p className="text-2xl font-bold tabular-nums text-yellow-500">{pastCount}</p>
               <p className="text-xs font-medium text-slate-400">Past</p>
             </div>
           </div>
@@ -489,7 +518,7 @@ const EventsDataPage = () => {
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+            className="flex items-center gap-2 rounded-lg bg-yellow-400 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-yellow-500"
           >
             <Plus size={15} />
             New event
@@ -500,7 +529,7 @@ const EventsDataPage = () => {
       {/* ---------- Events list (now full width) ---------- */}
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-base font-semibold text-slate-900">All events</h2>
+          <h2 className="text-base font-semibold text-yellow-500">All events</h2>
           <div className="flex items-center gap-2">
             {isFetching && <Loader2 size={14} className="animate-spin text-slate-400" />}
             <div className="flex rounded-lg border border-slate-200 p-0.5">
@@ -514,7 +543,7 @@ const EventsDataPage = () => {
                   onClick={() => setStatusFilter(f.key)}
                   className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-colors duration-150 ${
                     statusFilter === f.key
-                      ? "bg-slate-900 text-white"
+                      ? "bg-yellow-500 text-white"
                       : "text-slate-500 hover:bg-slate-50"
                   }`}
                 >
@@ -556,6 +585,7 @@ const EventsDataPage = () => {
                 .join(" – ");
               const isConfirming = confirmingId === event._id;
               const isDeleting = deletingId === event._id;
+              const status = getEventStatus(event);
 
               return (
                 <div
@@ -582,18 +612,18 @@ const EventsDataPage = () => {
                       <p className="truncate font-semibold text-slate-900">{event.title}</p>
                       <span
                         className={`shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
-                          event.category === "upcoming"
+                          status === "upcoming"
                             ? "bg-emerald-50 text-emerald-700"
                             : "bg-slate-100 text-slate-500"
                         }`}
                       >
-                        {event.category}
+                        {status}
                       </span>
                     </div>
 
                     <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
                       <span className="inline-flex items-center gap-1">
-                        <CalendarDays size={12} /> {formatDate(event.eventDate)}
+                        <CalendarDays size={12} /> {formatDateRange(event.startDate, event.endDate)}
                       </span>
                       {timeRange && (
                         <span className="inline-flex items-center gap-1">

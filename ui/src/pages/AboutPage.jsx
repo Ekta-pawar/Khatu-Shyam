@@ -5,17 +5,19 @@
 import { PageShell, PageHeader } from "../components/PageShell";
 import { Quote, Heart, Star } from "lucide-react";
 
-import cofounder1 from "../assets/cofounder 1.jpg";
-import cofounder2 from "../assets/cofounder2.jpg";
-import cofounder3 from "../assets/cofounder3.JPG";
-import cofounder4 from "../assets/cofounder4.JPG";
+import cofounder1 from "../assets/Founder/home111.png";
+import cofounder2 from "../assets/Founder/Founder1.png";
+import cofounder3 from "../assets/Founder/Founder33.png";
+import cofounder4 from "../assets/Founder/Founder4.png";
+import cofounder5 from "../assets/Founder/Founder5.png";
+
 
 const messages = [
   {
     id: 1,
     role: "प्रधान",
     name: "सुरेश गोयल",
-    image: cofounder4,
+    image: cofounder1,
     message: `श्यामप्रेमी श्री श्री सुरेश गोयल जी,
   श्यामप्रेमी श्री श्री सुरेश गोयल जी हरियाणा नारनौल के पास गांव चेलोड़ा बिनागपुर में जन्म हुआ और नांगलोई सेक्टर 17 दिल्ली में 1994 में आकर अपना व्यापार शुरू किया।
 
@@ -33,7 +35,7 @@ const messages = [
     id: 2,
     role: "चेयरमैन कंट्रोल बोर्ड/चेयरमैन",
     name: "जय किशन बंसल/हरीश शर्मा",
-    image: cofounder1,
+    image: cofounder2,
     message: `आदरणीय श्याम प्रेमियों
 श्याम प्यारे की जय, खाटू वाले की जय, हारे के सहारे तीन बाण धारी की जय,
 
@@ -49,7 +51,7 @@ const messages = [
     id: 3,
     role: "बाहरी चेयरमैन कंट्रोल बोर्ड/सीनियर बाहरी चेयरमैन",
     name: "संजय कुमार गुप्ता/मनोज मित्तल",
-    image: cofounder2,
+    image: cofounder3,
     message: `आदरणीय श्याम प्रेमियों
 
 अपार हर्ष का विषय है कि विगत 19 वर्षों से श्री श्याम सेवा समिति, रोहिणी, दिल्ली द्वारा अनेकों सामाजिक कार्यक्रमों का आयोजन सफलतापूर्वक करते आ रही है। वर्ष 2018 से बहुत बड़े स्तर पर आयोजित श्री कृष्ण जन्माष्टमी महोत्सव का सफल आयोजन भी किया गया। समिति के प्रत्येक पदाधिकारी, सदस्य व जुड़े हुए हर संस्था तथा व्यक्ति का निरंतर योगदान सराहनीय है...
@@ -62,7 +64,7 @@ const messages = [
     id: 4,
     role: "राजेश जैन/अध्यक्ष कंट्रोल बोर्ड",
     name: "अमित गोयल/प्रधान",
-    image: cofounder3,
+    image: cofounder4,
     message: `आदरणीय श्याम प्रेमियों
 
 आप सभी को सूचित करते हुए बड़ा हर्ष हो रहा है कि श्री श्री खाटू श्याम सेवा समिति (पंजी.) द्वारा पिछले 8 वर्षों से श्री कृष्ण जन्माष्टमी महोत्सव के सफल आयोजन पर आप सभी का दिल की गहराइयों से आभार प्रकट करता हूँ।
@@ -79,7 +81,7 @@ const messages = [
     id: 5,
     role: "महामंत्री/कोषाध्यक्ष",
     name: "अरविन्द गोयल/CA विवेक गोयल",
-    image: cofounder3,
+    image: cofounder5,
     message: `प्रिय श्रद्धालुजनों,
 
 श्री श्री खाटू श्याम सेवा समिति, सेक्टर-17, रोहिणी की ओर से आप सभी को हार्दिक शुभकामनाएं एवं प्रेमपूर्ण अभिनन्दन। यह हमारे लिए परम सौभाग्य और आनन्द का विषय है कि इस वर्ष हम अपने आठवें वार्षिक श्रीकृष्ण जन्माष्टमी महोत्सव का आयोजन कर रहे हैं। भगवान श्रीकृष्ण, जो प्रेम, करुणा और सदाचार के प्रतीक हैं, तथा श्याम बाबा, जो अटूट विश्वास और निस्वार्थ सेवा की प्रेरणा स्रोत हैं। इन दोनों दिव्य स्वरूपों की कृपा से हमारी समिति ने सेवा और भक्ति के इस पावन मार्ग पर निरंतर प्रगति की है।

@@ -80,7 +80,7 @@ const AdminManagementPage = () => {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800">Admins</h1>
+          <h1 className="text-2xl font-bold text-yellow-500">Admins</h1>
           <p className="text-sm text-slate-500">Manage administrator accounts</p>
         </div>
         <Button onClick={() => setShowModal(true)}>

@@ -21,7 +21,7 @@ const nav = [
   },
   
   { to: "/events", label: "UpComming Events" },
-  { to: "/members", label: "Guest Members" },
+  { to: "/members", label: "Our Guest" },
   { to: "/Sponsor", label: "Sponsor" },
   { to: "/contact", label: "Contact Us" },
 ];

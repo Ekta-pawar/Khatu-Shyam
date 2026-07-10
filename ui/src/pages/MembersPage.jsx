@@ -1,59 +1,27 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { PageShell, PageHeader } from "../components/PageShell";
-import {
-  MapPin,
-  CalendarDays,
-  Star,
-  Diamond,
-  Users,
-  ArrowRight,
-} from "lucide-react";
+import MemberCardSkeleton from "../components/MemberCardSkeleton";
+import { CalendarDays, Users } from "lucide-react";
 
 const API_BASE =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
 
-const FILTERS = [
-  {
-    key: "all",
-    label: "All Members",
-    icon: Users,
-  },
-  {
-    key: "Golden Members",
-    label: "Golden",
-    icon: Star,
-  },
-  {
-    key: "Diamond Members",
-    label: "Diamond",
-    icon: Diamond,
-  },
-  {
-    key: "Karyakarani Members",
-    label: "Karyakarani",
-    icon: Users,
-  },
-];
-
-const tierStyle = {
-  "Golden Members": {
-    badge: "bg-yellow-100 text-yellow-700 border border-yellow-300",
-  },
-  "Diamond Members": {
-    badge: "bg-blue-100 text-blue-700 border border-blue-300",
-  },
-  "Karyakarani Members": {
-    badge: "bg-red-100 text-red-700 border border-red-300",
-  },
+const formatDate = (value) => {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 };
 
 function MembersPage() {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [activeFilter, setActiveFilter] = useState("all");
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -74,19 +42,21 @@ function MembersPage() {
     fetchMembers();
   }, []);
 
-  const filtered =
-    activeFilter === "all"
-      ? members
-      : members.filter((member) => member.tier === activeFilter);
-
   if (loading) {
     return (
       <PageShell>
-        <div className="py-20 text-center">
-          <h2 className="text-2xl font-semibold">
-            Loading Members...
-          </h2>
-        </div>
+        <PageHeader
+          eyebrow="Hamare Sadasya"
+          title="Our Guest"
+          subtitle="Meet the devotees who have graced our events."
+        />
+        <section className="mx-auto max-w-7xl px-5 pb-10 pt-6">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {[...Array(8)].map((_, i) => (
+              <MemberCardSkeleton key={i} />
+            ))}
+          </div>
+        </section>
       </PageShell>
     );
   }
@@ -96,7 +66,7 @@ function MembersPage() {
       <PageShell>
         <div className="py-20 text-center">
           <h2 className="text-2xl font-semibold text-red-600">
-            Failed to load members
+            Failed to load guests
           </h2>
         </div>
       </PageShell>
@@ -107,111 +77,60 @@ function MembersPage() {
     <PageShell>
       <PageHeader
         eyebrow="Hamare Sadasya"
-        title="Our Members"
-        subtitle="Meet the dedicated devotees who support our samiti."
+        title="Our Guest"
+        subtitle="Meet the devotees who have graced our events."
       />
 
-      {/* Filters */}
-      <div className="flex flex-wrap justify-center gap-3 px-5 py-4">
-        {FILTERS.map(({ key, label, icon: Icon }) => (
-          <button
-            key={key}
-            onClick={() => setActiveFilter(key)}
-            className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition ${
-              activeFilter === key
-                ? "bg-linear-to-r from-yellow-200 to-yellow-500 text-white"
-                : "bg-white border border-gray-300 hover:border-yellow-500 hover:text-yellow-500"
-            }`}
-          >
-            <Icon size={16} />
-            {label}
-          </button>
-        ))}
-      </div>
-
-      {/* Count */}
-      <p className="text-center text-sm text-gray-500 mb-6">
-        Showing {filtered.length} member
-        {filtered.length !== 1 ? "s" : ""}
-      </p>
-
-      {/* Members Grid */}
-      <section className="mx-auto max-w-7xl px-5 pb-10">
+      <section className="mx-auto max-w-7xl px-5 pb-10 mt-10">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filtered.map((member) => {
-            const style =
-              tierStyle[member.tier] ||
-              tierStyle["Golden Members"];
+          {members.map((guest) => (
+            <div
+              key={guest._id}
+              className="overflow-hidden rounded-2xl bg-white shadow-lg"
+            >
+              <img
+                src={
+                  guest.profileImage ||
+                  "https://via.placeholder.com/400x400?text=Guest"
+                }
+                alt={guest.fullName}
+                className="h-60 w-full object-cover"
+              />
 
-            return (
-              <Link
-                key={member._id}
-                to={`/team/${member._id}`}
-                className="group overflow-hidden rounded-2xl bg-white shadow-lg hover:-translate-y-1 transition"
-              >
-                {/* Image */}
-                <div className="relative">
-                  <img
-                    src={
-                      member.profileImage ||
-                      "https://via.placeholder.com/400x400?text=Member"
-                    }
-                    alt={member.fullName}
-                    className="h-60 w-full object-cover"
-                  />
+              <div className="p-5">
+                <h3 className="text-lg font-bold text-yellow-500">
+                  {guest.fullName}
+                </h3>
 
-                  <span
-                    className={`absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}
-                  >
-                    {member.tier}
-                  </span>
-                </div>
+                {guest.eventName && (
+                  <p className="mt-1 text-sm text-gray-500">{guest.eventName}</p>
+                )}
 
-                {/* Content */}
-                <div className="p-5">
-                  <h3 className="text-lg font-bold text-yellow-500">
-                    {member.fullName}
-                  </h3>
+                {formatDate(guest.eventDate) && (
+                  <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
+                    <CalendarDays size={14} />
+                    {formatDate(guest.eventDate)}
+                  </div>
+                )}
 
-                  <p className="mt-1 text-sm text-gray-500">
-                    {member.fatherName
-                      ? `S/O ${member.fatherName}`
-                      : "Member"}
+                {guest.additionalInfo && (
+                  <p className="mt-3 text-sm leading-relaxed text-gray-600">
+                    {guest.additionalInfo}
                   </p>
-
-                  <div className="mt-4 space-y-2 text-sm text-gray-600">
-                    <div className="flex items-center gap-2">
-                      <MapPin size={14} />
-                      {member.city}, {member.state}
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <CalendarDays size={14} />
-                      Joined{" "}
-                      {new Date(
-                        member.createdAt
-                      ).getFullYear()}
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex items-center gap-1 text-yellow-500 font-medium text-sm">
-                    View Profile
-                    <ArrowRight size={14} />
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+                )}
+              </div>
+            </div>
+          ))}
         </div>
 
-        {filtered.length === 0 && (
+        {members.length === 0 && (
           <div className="py-20 text-center">
             <Users
               size={50}
               className="mx-auto text-gray-400 mb-4"
             />
             <h3 className="text-lg text-gray-500">
-              No members found
+              No guests found
             </h3>
           </div>
         )}

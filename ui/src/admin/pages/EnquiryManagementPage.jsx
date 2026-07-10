@@ -61,7 +61,7 @@ const EnquiryManagementPage = () => {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-800">Enquiries</h1>
+        <h1 className="text-2xl font-bold text-yellow-500">Enquiries</h1>
         <p className="text-sm text-slate-500">
           Review sponsorship enquiry submissions from the website.
         </p>

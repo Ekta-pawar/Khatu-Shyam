@@ -41,7 +41,7 @@ const MemberDetailsPage = () => {
             <ArrowLeft size={16} /> Back
           </button>
           <div>
-            <h1 className="text-3xl font-semibold text-slate-900">{member.fullName}</h1>
+            <h1 className="text-2xl font-bold text-yellow-500">{member.fullName}</h1>
             <p className="text-sm text-slate-500">Member profile details and family history</p>
           </div>
         </div>

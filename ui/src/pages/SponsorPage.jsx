@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { PageShell, PageHeader } from "../components/PageShell";
 import { toast } from "react-toastify";
 import {
@@ -16,20 +17,11 @@ import {
   Upload,
   X,
   Send,
+  Users,
 } from "lucide-react";
 import { createEnquiry, createSponsor } from "../api/sponsor";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-
-import logo1 from "../assets/Shyam1.png";
-import logo2 from "../assets/bow-emblem.png";
-import logo3 from "../assets/midd Shyam.png";
-import logo4 from "../assets/ome.png";
 
 // ─── Static data ─────────────────────────────────────────────────────────────
-// TODO: replace these placeholder images with real sponsor logos.
-const sponsorLogos = [logo1, logo2, logo3, logo4, logo1, logo2];
 
 const sponsorTiers = [
   {
@@ -99,13 +91,6 @@ const sponsorTiers = [
   },
 ];
 
-const SPONSOR_TYPES = [
-  "Individual",
-  "Business / Corporate",
-  "Trust / NGO",
-  "Other",
-];
-
 // ─── Initial state helpers ────────────────────────────────────────────────────
 
 const initialSponsorData = {
@@ -166,6 +151,12 @@ function SponsorPage() {
     if (file) setLogoFile(file);
   };
 
+  // ── Open the sponsor form pre-filled with the tier the user picked ──
+  const handleSelectTier = (tierName) => {
+    setFormData((prev) => ({ ...prev, sponsorTier: tierName }));
+    setShowSponsorForm(true);
+  };
+
   // ✅ Enquiry submit — uses enquiryData state, not formData
   const handleEnquirySubmit = async (e) => {
     e.preventDefault();
@@ -195,7 +186,11 @@ function SponsorPage() {
       setTimeout(() => setSubmitted(false), 6000);
     } catch (error) {
       console.error(error);
-      toast.error("Please fill all required fields");
+      const validationErrors = error?.response?.data?.errors;
+      const detail = Array.isArray(validationErrors)
+        ? validationErrors.map((e) => e.message || e).join(" | ")
+        : error?.response?.data?.message;
+      toast.error(detail || "Please fill all required fields");
     }
   };
 
@@ -206,40 +201,37 @@ function SponsorPage() {
         title="Our Sponsor"
       />
 
-      {/* ── Sponsor Logo Slider (auto-slide, left → right) ── */}
-      <section className="mx-auto max-w-7xl px-5  bg-secondary/50">
-        <Swiper
-          modules={[Autoplay]}
-          slidesPerView={4}
-          breakpoints={{
-            640: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
-          }}
-          spaceBetween={40}
-          loop={true}
-          speed={3000}
-          autoplay={{
-            delay: 0,
-            disableOnInteraction: false,
-            reverseDirection: true,
-          }}
-          allowTouchMove={false}
-        >
-          {sponsorLogos.map((logo, index) => (
-            <SwiperSlide key={index}>
-              <div className="flex h-90 bg-yellow-400 items-center justify-center">
-                <img src={logo} alt="Sponsor logo" className="w-40 object-contain" />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      {/* ── Our Sponsors + Become a Sponsor ── */}
+      <section className="mx-auto max-w-7xl px-5 pt-5 mt-5 pb-0 mb-0 text-center">
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link
+            to="/sponsors"
+            className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-yellow-400 to-yellow-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105"
+          >
+            <Users size={16} />
+            Our Sponsors
+          </Link>
+
+          <button
+            type="button"
+            onClick={() =>
+              document
+                .getElementById("sponsor-tiers")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+            className="inline-flex items-center gap-2 rounded-full border-2 border-yellow-500 px-6 py-3 text-sm font-semibold text-yellow-600 transition-all duration-300 hover:scale-105 hover:bg-yellow-500 hover:text-white"
+          >
+            <Star size={16} />
+            Become a Sponsor
+          </button>
+        </div>
       </section>
 
       {/* ── Sponsor Tiers ── */}
-      <section className="mx-auto max-w-7xl px-5 py-16">
+      <section id="sponsor-tiers" className="mx-auto max-w-7xl scroll-mt-5 px-5 py-5">
         <div className="mb-10 text-center">
-          <p className="mb-3 text-xs uppercase tracking-widest text-saffron">प्रायोजन स्तर</p>
-          <h2 className="font-display text-6xl text-yellow-500 font-display text-3xl bg-linear-to-r from-yellow-200 to-yellow-500 bg-clip-text text-transparent sm:text-4xl md:text-6xl py-4">Become a Sponsor</h2>
+          {/* <p className="mb-3 text-xs uppercase tracking-widest text-saffron">प्रायोजन स्तर</p> */}
+          <h2 className="font-display text-3xl bg-linear-to-r from-yellow-200 to-yellow-500 bg-clip-text text-transparent sm:text-4xl md:text-6xl mt-3 pt-0 py-4">Become a Sponsor</h2>
           <div className="mx-auto mt-4 h-px w-24 bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
         </div>
 
@@ -311,7 +303,7 @@ function SponsorPage() {
               </ul>
               <button
                 type="button"
-                onClick={() => setShowSponsorForm(true)}
+                onClick={() => handleSelectTier(tier.name)}
                 className={`mt-6 w-full rounded-2xl py-3 px-4 font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg ${
                   tier.featured
                     ? "bg-white text-yellow-500 hover:bg-gray-100"
@@ -346,10 +338,15 @@ function SponsorPage() {
 
             {/* Scrollable form body */}
             <div className="max-h-[75vh] overflow-y-auto scrollbar-hide">
-              <section className="mx-auto max-w-15xl">
+              <section className="mx-auto">
                 <div className="rounded-3xl bg-white p-8 shadow-xl md:p-12">
                   <div className="mb-8 border-b pb-6">
                     <h2 className="font-display text-3xl text-yellow-500">Sponsor Application</h2>
+                    {formData.sponsorTier && (
+                      <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold text-yellow-700">
+                        <Star size={12} /> {formData.sponsorTier}
+                      </p>
+                    )}
                     <p className="mt-2 text-sm text-gray-500">
                       नीचे दिया गया फॉर्म भरें। हमारी टीम 24–48 घंटों में आपसे संपर्क करेगी।
                     </p>
@@ -365,48 +362,7 @@ function SponsorPage() {
                   )}
 
                   <form onSubmit={handleSponsorSubmit} className="space-y-8">
-                    {/* Sponsor Identity */}
-                    <SectionCard icon={<Building2 size={20} />} title="Sponsor Details">
-                      <div className="grid gap-5 md:grid-cols-2">
-                        <div className="md:col-span-2">
-                          <Label required>Sponsor / Organization Name</Label>
-                          <input
-                            name="sponsorName"
-                            value={formData.sponsorName}
-                            onChange={handleChange}
-                            required
-                            placeholder="Your name or organization name"
-                            className={inputCls}
-                          />
-                        </div>
-                        <div>
-                          <Label required>Sponsor Type</Label>
-                          <select
-                            name="sponsorType"
-                            value={formData.sponsorType}
-                            onChange={handleChange}
-                            required
-                            className={inputCls}
-                          >
-                            <option value="">Select type</option>
-                            {SPONSOR_TYPES.map((t) => (
-                              <option key={t} value={t}>{t}</option>
-                            ))}
-                          </select>
-                        </div>
-                        <div>
-                          <Label required>Contact Person Name</Label>
-                          <input
-                            name="contactPerson"
-                            value={formData.contactPerson}
-                            onChange={handleChange}
-                            required
-                            placeholder="Name of contact person"
-                            className={inputCls}
-                          />
-                        </div>
-
-                        {/* Logo Upload */}
+                     {/* Logo Upload */}
                         <div className="md:col-span-2">
                           <Label>Logo / Profile Image</Label>
                           <div className="mt-2 flex items-center gap-4">
@@ -442,6 +398,36 @@ function SponsorPage() {
                             </label>
                           </div>
                         </div>
+                    {/* Sponsor Identity */}
+                    <SectionCard icon={<Building2 size={20} />} title="Sponsor Details">
+                      <div className="grid gap-5 md:grid-cols-2">
+                        <div className="md:col-span-2">
+                          <Label required>Sponsor / Organization Name</Label>
+                          <input
+                            name="sponsorName"
+                            value={formData.sponsorName}
+                            onChange={handleChange}
+                            required
+                            placeholder="Your name or organization name"
+                            className={inputCls}
+                          />
+                        </div>
+                        <div>
+                         
+                        </div>
+                        {/* <div>
+                          <Label required>Contact Person Name</Label>
+                          <input
+                            name="contactPerson"
+                            value={formData.contactPerson}
+                            onChange={handleChange}
+                            required
+                            placeholder="Name of contact person"
+                            className={inputCls}
+                          />
+                        </div> */}
+
+                       
                       </div>
                     </SectionCard>
 
@@ -449,13 +435,12 @@ function SponsorPage() {
                     <SectionCard icon={<Phone size={20} />} title="Contact Information">
                       <div className="grid gap-5 md:grid-cols-2">
                         <div>
-                          <Label required>Mobile Number</Label>
+                          <Label>Mobile Number</Label>
                           <input
                             name="phone"
                             type="tel"
                             value={formData.phone}
                             onChange={handleChange}
-                            required
                             placeholder="+91 00000 00000"
                             className={inputCls}
                           />

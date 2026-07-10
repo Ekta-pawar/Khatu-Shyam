@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 
 import { PageShell, PageHeader } from "../components/PageShell";
 import { useGetEventsQuery } from "../admin/api/eventApi";
+import EventArticleSkeleton from "../components/EventArticleSkeleton";
 
-import { CalendarDays, Clock, MapPin, ImageOff, Loader2 } from "lucide-react";
+import { CalendarDays, Clock, MapPin, ImageOff } from "lucide-react";
 
 function formatTime(time) {
   if (!time) return null;
@@ -15,6 +16,31 @@ function formatTime(time) {
   return `${displayHour}:${m} ${suffix}`;
 }
 
+function formatFullDate(value) {
+  if (!value) return null;
+  return new Date(value).toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function formatDateRange(startDate, endDate) {
+  const start = formatFullDate(startDate);
+  const end = formatFullDate(endDate);
+  if (!start) return "—";
+  if (!end || start === end) return start;
+  return `${start} – ${end}`;
+}
+
+// An event is "past" once its end date has fully elapsed — this is always
+// derived from the stored dates, there is no manual status field.
+function getEventStatus(event) {
+  const end = new Date(event.endDate || event.startDate);
+  end.setHours(23, 59, 59, 999);
+  return end < new Date() ? "past" : "upcoming";
+}
+
 function EventsPage() {
   const { data, isLoading, isError } = useGetEventsQuery();
   const events = data?.data || [];
@@ -22,10 +48,16 @@ function EventsPage() {
   if (isLoading) {
     return (
       <PageShell>
-        <div className="flex items-center justify-center gap-2 py-20">
-          <Loader2 className="animate-spin text-muted-foreground" size={24} />
-          <h2 className="text-2xl font-semibold">Loading Events...</h2>
-        </div>
+        <PageHeader
+          eyebrow="Aagami Karyakram"
+          title="Upcoming Events"
+          subtitle="Join us in seva and sangat. Every devotee is welcome — bring your family and your voice."
+        />
+        <section className="mx-auto max-w-7xl space-y-8 px-5 py-16">
+          {[...Array(3)].map((_, i) => (
+            <EventArticleSkeleton key={i} />
+          ))}
+        </section>
       </PageShell>
     );
   }
@@ -80,9 +112,20 @@ function EventsPage() {
               </div>
 
               <div className="p-8 md:p-12">
-                <p className="text-xs uppercase tracking-[0.3em] text-saffron">
-                  Event {String(index + 1).padStart(2, "0")}
-                </p>
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="text-xs uppercase tracking-[0.3em] text-saffron">
+                    Event {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <span
+                    className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${
+                      getEventStatus(event) === "upcoming"
+                        ? "bg-emerald-100 text-emerald-700"
+                        : "bg-slate-100 text-slate-500"
+                    }`}
+                  >
+                    {getEventStatus(event)}
+                  </span>
+                </div>
 
                 <h2 className="mt-3 text-3xl text-yellow-500 md:text-4xl">{event.title}</h2>
 
@@ -92,15 +135,7 @@ function EventsPage() {
                   <EventRow
                     icon={CalendarDays}
                     label="Date"
-                    value={
-                      event.eventDate
-                        ? new Date(event.eventDate).toLocaleDateString("en-IN", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                          })
-                        : "—"
-                    }
+                    value={formatDateRange(event.startDate, event.endDate)}
                   />
 
                   <EventRow

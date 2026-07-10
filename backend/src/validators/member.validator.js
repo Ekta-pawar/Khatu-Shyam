@@ -29,12 +29,15 @@ const createMemberValidator = [
       return true;
     }),
   body("lastName").optional({ checkFalsy: true }).trim().isLength({ max: 50 }),
-  body("phone").trim().notEmpty().withMessage("Phone number is required").isLength({ min: 10, max: 15 }),
+  body("phone").optional({ checkFalsy: true }).trim().isLength({ min: 10, max: 15 }),
   body("alternatePhone").optional({ checkFalsy: true }).trim().isLength({ min: 10, max: 15 }),
   body("email").optional({ checkFalsy: true }).trim().isEmail().withMessage("Provide a valid email"),
   body("gender").optional({ checkFalsy: true }).isIn(GENDERS).withMessage(`Gender must be one of: ${GENDERS.join(", ")}`),
   body("bloodGroup").optional({ checkFalsy: true }).isIn(BLOOD_GROUPS).withMessage(`Blood group must be one of: ${BLOOD_GROUPS.join(", ")}`),
   body("pincode").optional({ checkFalsy: true }).trim().isLength({ min: 4, max: 10 }),
+  body("eventName").optional({ checkFalsy: true }).trim().isLength({ max: 150 }),
+  body("eventDate").optional({ checkFalsy: true }).isISO8601().withMessage("Provide a valid event date"),
+  body("additionalInfo").optional({ checkFalsy: true }).trim().isLength({ max: 2000 }),
 
   body("specialDates").optional().isObject().withMessage("specialDates must be an object"),
   body("specialDates.birthdays").optional().isArray().withMessage("birthdays must be an array"),
@@ -55,6 +58,9 @@ const updateMemberValidator = [
   body("gender").optional({ checkFalsy: true }).isIn(GENDERS).withMessage(`Gender must be one of: ${GENDERS.join(", ")}`),
   body("bloodGroup").optional({ checkFalsy: true }).isIn(BLOOD_GROUPS).withMessage(`Blood group must be one of: ${BLOOD_GROUPS.join(", ")}`),
   body("pincode").optional({ checkFalsy: true }).trim().isLength({ min: 4, max: 10 }),
+  body("eventName").optional({ checkFalsy: true }).trim().isLength({ max: 150 }),
+  body("eventDate").optional({ checkFalsy: true }).isISO8601().withMessage("Provide a valid event date"),
+  body("additionalInfo").optional({ checkFalsy: true }).trim().isLength({ max: 2000 }),
 
   body("specialDates").optional().isObject().withMessage("specialDates must be an object"),
   body("specialDates.birthdays").optional().isArray().withMessage("birthdays must be an array"),

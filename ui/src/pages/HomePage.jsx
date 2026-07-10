@@ -12,10 +12,17 @@ import event1 from "../assets/event-1.jpg";
 import bowEmblem from "../assets/ome.png";
 import bowEmblem1 from "../assets/ome.png";
 
-import cofounder1 from "../assets/hari sarma.JPG";
-import cofounder2 from "../assets/cofounder2.jpg";
-import cofounder3 from "../assets/cofounder3.JPG";
-import cofounder4 from "../assets/cofounder4.JPG";
+import cofounder1 from "../assets/homephot11.jpeg";
+import cofounder2 from "../assets/homephoto11.jpg";
+import cofounder3 from "../assets/homephoto33.JPG";
+import cofounder4 from "../assets/homephoto3.jpeg";
+import cofounder5 from "../assets/homephoto5.jpeg";
+import cofounder6 from "../assets/homephoto6.JPG";
+import cofounder7 from "../assets/homephoto7.jpg";
+import cofounder8 from "../assets/homephot8.JPG";
+import cofounder9 from "../assets/homephoto9.jpg";
+import cofounder10 from "../assets/homephoto10.jpeg";
+
 import member1 from "../assets/shyam-deity.jpg";
 import member2 from "../assets/side.jpeg";
 import member3 from "../assets/hero-temple.jpg";
@@ -23,6 +30,7 @@ import member3 from "../assets/hero-temple.jpg";
 import {
   CalendarDays,
   MapPin,
+  Clock,
 } from "lucide-react";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
@@ -39,6 +47,24 @@ const formatDate = (value) => {
   });
 };
 
+const formatDateRange = (startDate, endDate) => {
+  const start = formatDate(startDate);
+  const end = formatDate(endDate);
+  if (start === "-") return "-";
+  if (!endDate || start === end) return start;
+  return `${start} – ${end}`;
+};
+
+const formatTime = (time) => {
+  if (!time) return null;
+  const [h, m] = time.split(":");
+  const hour = parseInt(h, 10);
+  if (Number.isNaN(hour)) return time;
+  const suffix = hour >= 12 ? "PM" : "AM";
+  const displayHour = hour % 12 || 12;
+  return `${displayHour}:${m} ${suffix}`;
+};
+
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
@@ -50,19 +76,22 @@ const staggerContainer = {
 };
 
 const committeeMembers = [
-  { image: cofounder1, role: "जय किशन बंसल" },
-   { image: member2, role: "संजय कुमार गुप्ता" },
-     { image: cofounder3, role: "राजेश जैन" },
-  { image: cofounder2, role: "हरी शर्मा" },
-    { image: member3, role: "संजय मित्तल" },
+       { image: cofounder1, role: "सुरेश गोयल" },
 
-  { image: cofounder1, role: "अमित गोयल" },
-    { image: member1, role: "अरविंद गोयल" },
-        { image: cofounder4, role: " नतेश गोयल" },
-            { image: cofounder4, role: "अमित गुप्ता" },
-            { image: cofounder4, role: " नतेश गोयल" },
-            { image: cofounder4, role: "अमित गुप्ता" },
-             { image: cofounder4, role: "अमित गुप्ता" },
+  { image: cofounder2, role: "जय किशन बंसल" },
+   { image: cofounder3, role: "हरीश शर्मा" },
+   { image: cofounder4, role: "संजय कुमार गुप्ता" },
+ 
+    { image: cofounder5, role: "संजय मित्तल" },
+
+  { image: cofounder6, role: "राजेश जैन " },
+        { image: cofounder7, role: " अमित गोयल" },
+            { image: cofounder8, role: "अरविंद गोयल" },
+
+            { image: cofounder9, role: "नतेश गोयल (CA)" },
+            { image: cofounder10, role: "अमित गुप्ता" },
+             { image: cofounder7, role: "अमित गुप्ता" },
+                   { image: cofounder7, role: "अमित गुप्ता" },
             
 
 
@@ -79,7 +108,7 @@ function HomePage() {
 
     const fetchHomeData = async () => {
       try {
-        const eventsRes = await axios.get(`${API_BASE}/events`);
+        const eventsRes = await axios.get(`${API_BASE}/events/upcoming`);
         setHomeEvents((eventsRes.data.data || []).slice(0, 3));
       } catch (error) {
         console.error("Error loading home page data:", error);
@@ -383,8 +412,17 @@ function HomePage() {
 
                   <p className="mt-3 flex items-center gap-2">
                     <CalendarDays size={14} />
-                    {formatDate(e.eventDate)}
+                    {formatDateRange(e.startDate, e.endDate)}
                   </p>
+
+                  {(e.startTime || e.endTime) && (
+                    <p className="mt-2 flex items-center gap-2">
+                      <Clock size={14} />
+                      {[formatTime(e.startTime), formatTime(e.endTime)]
+                        .filter(Boolean)
+                        .join(" – ")}
+                    </p>
+                  )}
 
                   <p className="mt-2 flex items-center gap-2">
                     <MapPin size={14} />
