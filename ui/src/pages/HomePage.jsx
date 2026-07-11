@@ -231,7 +231,7 @@ function HomePage() {
      श्याम वर्णन
     </h2>
 
-    <div className=" space-y-3 text-[13px] leading-8 text-gray-500 text-justify">
+    <div className=" space-y-3 text-[14px] leading-8 text-gray-500 text-justify">
       <p>
         खाटू श्याम बाबा की कहानी महाभारत के वीर योद्धा
         'बर्बरीक' से जुड़ी है। वे भीम के पौत्र थे। अपने महान
