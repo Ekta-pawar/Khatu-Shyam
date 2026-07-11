@@ -84,3 +84,6 @@
 {"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 70.763 ms - -\u001b[0m","timestamp":"2026-07-11 10:59:35"}
 {"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 133.794 ms - -\u001b[0m","timestamp":"2026-07-11 11:05:32"}
 {"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 40.724 ms - -\u001b[0m","timestamp":"2026-07-11 11:05:32"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 998.114 ms - -\u001b[0m","timestamp":"2026-07-11 11:29:04"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 29.860 ms - -\u001b[0m","timestamp":"2026-07-11 11:29:05"}
+{"level":"info","message":"\u001b[0mGET / \u001b[32m200\u001b[0m 26.748 ms - 124\u001b[0m","timestamp":"2026-07-11 11:34:55"}
