@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import { CheckCircle2, XCircle, Search, Eye } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { CheckCircle2, XCircle, Search, Eye, UserPlus } from "lucide-react";
 import { toast } from "react-toastify";
 import {
   useGetEnquiriesQuery,
@@ -20,6 +21,7 @@ const STATUS_OPTIONS = [
 ];
 
 const EnquiryManagementPage = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
@@ -56,6 +58,27 @@ const EnquiryManagementPage = () => {
     } catch (err) {
       toast.error(getErrorMessage(err, "Could not update enquiry"));
     }
+  };
+
+  // organisationName is built as "<tier> Membership Application" by
+  // BecomeMemberPage.jsx — parse the tier back out to prefill the team form.
+  // Only enquiries submitted from that form carry this suffix; sponsorship
+  // enquiries etc. don't apply here.
+  const isMembershipApplication = (enquiry) =>
+    (enquiry.organisationName || "").endsWith("Membership Application");
+
+  const handleConvertToTeamMember = (enquiry) => {
+    const tier = enquiry.organisationName.replace(" Membership Application", "").trim();
+    navigate("/admin/team/new", {
+      state: {
+        prefill: {
+          fullName: enquiry.contactPerson || "",
+          phone: enquiry.phone || "",
+          email: enquiry.email || "",
+          tier,
+        },
+      },
+    });
   };
 
   return (
@@ -218,6 +241,15 @@ const EnquiryManagementPage = () => {
                         onClick={() => handleStatusChange(enquiry._id, "rejected")}
                       >
                         <XCircle size={16} /> Reject
+                      </Button>
+                    )}
+                    {isMembershipApplication(enquiry) && (
+                      <Button
+                        variant="primary"
+                        className="flex items-center gap-2"
+                        onClick={() => handleConvertToTeamMember(enquiry)}
+                      >
+                        <UserPlus size={16} /> Convert to Team Member
                       </Button>
                     )}
                     <Button

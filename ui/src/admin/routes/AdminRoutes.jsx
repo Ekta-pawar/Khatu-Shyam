@@ -4,6 +4,8 @@ import SignupPage from "../pages/SignupPage";
 import DashboardPage from "../pages/DashboardPage";
 import OureGuestPage from "../pages/OureGuestPage";
 import OureTeamPage from "../pages/OureTeamPage";
+import TeamFormPage from "../pages/TeamFormPage";
+import TeamDetailsPage from "../pages/TeamDetailsPage";
 import MemberFormPage from "../pages/MemberFormPage";
 import MemberDetailsPage from "../pages/MemberDetailsPage";
 import PaymentManagementPage from "../pages/PaymentManagementPage";
@@ -31,10 +33,13 @@ const AdminRoutes = () => (
         <Route path="dashboard" element={<DashboardPage />} />
 
         <Route path="members" element={<OureGuestPage />} />
-        <Route path="team" element={<OureTeamPage />} />
         <Route path="members/new" element={<MemberFormPage />} />
         <Route path="members/:id" element={<MemberDetailsPage />} />
         <Route path="members/:id/edit" element={<MemberFormPage />} />
+        <Route path="team" element={<OureTeamPage />} />
+        <Route path="team/new" element={<TeamFormPage />} />
+        <Route path="team/:id" element={<TeamDetailsPage />} />
+        <Route path="team/:id/edit" element={<TeamFormPage />} />
         <Route path="events" element={<EventsDataPage />} />
         <Route path="payments" element={<PaymentManagementPage />} />
         <Route path="contacts" element={<ContactMessagesPage />} />

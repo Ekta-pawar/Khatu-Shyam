@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 const Sponsor = require("../models/Sponsor");
 const cloudinary = require("../config/cloudinary");
 
@@ -180,4 +178,3 @@ exports.getSponsorById = async (req, res) => {
     });
   }
 };
->>>>>>> e181cc62ce01e56433f0816174555d63ed7fbbe6

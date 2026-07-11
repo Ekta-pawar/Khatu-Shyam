@@ -3,10 +3,19 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { PageShell, PageHeader } from "../components/PageShell";
 import TeamCardSkeleton from "../components/TeamCardSkeleton";
-import { tierLabel } from "../data/members";
+import { ImageWithFallback } from "../components/ImageWithFallback";
 import { ArrowRight, Users, Star, Crown, MapPin, CalendarDays } from "lucide-react";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
+
+// Keyed by the real Member.tier values (see BecomeMemberPage.jsx's tiers list).
+const TIER_STYLES = {
+  "मुख्य कार्यकारिणी": "bg-linear-to-r from-yellow-400 to-amber-500 text-black",
+  "प्रेरणा स्रोत": "bg-linear-to-r from-sky-500 to-blue-600 text-white",
+  "कार्यकारिणी": "bg-linear-to-r from-orange-400 to-red-500 text-white",
+  "संरक्षक": "bg-linear-to-r from-purple-400 to-purple-600 text-white",
+  "सदस्य": "bg-linear-to-r from-yellow-200 to-yellow-500 text-white",
+};
 
 const tierOrder = [
   
@@ -47,21 +56,21 @@ function TeamPage(){
   const [activeTier, setActiveTier] = useState("all");
 
   useEffect(() => {
-    const fetchMembers = async () => {
+    const fetchTeamMembers = async () => {
       setLoading(true);
       setError(false);
       try {
-        const response = await axios.get(`${API_BASE}/members`);
+        const response = await axios.get(`${API_BASE}/team`);
         setMembers(response.data.data || []);
       } catch (err) {
-        console.error("Error fetching members:", err);
+        console.error("Error fetching team members:", err);
         setError(true);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchMembers();
+    fetchTeamMembers();
   }, []);
 
   const filteredMembers =
@@ -110,13 +119,7 @@ function TeamPage(){
               onClick={() => setActiveTier(id)}
               className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                 activeTier === id
-                  ? id === "golden"
-                    ? "bg-linear-to-r from-yellow-400 to-amber-500 text-black shadow-lg shadow-yellow-200"
-                    : id === "Diamond"
-                    ? "bg-linear-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-blue-200"
-                    : id === "KaryaKarani"
-                    ? "bg-linear-to-r from-orange-400 to-red-500 text-white shadow-lg shadow-orange-200"
-                    : "bg-linear-to-r from-yellow-200 to-yellow-500 text-white shadow-lg"
+                  ? `shadow-lg ${TIER_STYLES[id] || "bg-linear-to-r from-yellow-200 to-yellow-500 text-white"}`
                   : "border-2 border-gray-300 bg-white text-gray-600 hover:border-yellow-400 hover:text-yellow-500"
               }`}
             >
@@ -142,42 +145,42 @@ function TeamPage(){
               className="group overflow-visible rounded-3xl bg-card shadow-elegant transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
               <div className="relative overflow-hidden rounded-3xl">
-                <img
-                  src={member.photo}
-                  alt={member.name}
-                  className="aspect-4/3 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                <ImageWithFallback
+                  src={member.profileImage}
+                  alt={member.fullName}
+                  className="aspect-4/3 w-full object-contain transition-transform duration-700 group-hover:scale-110"
                 />
 
                 {/* Tier Badge */}
-                <span
+                {/* <span
                   className={`absolute -bottom-4 left-5 inline-block rounded-full px-4 py-1.5 text-xs font-semibold shadow-md ${
-                    member.tier === "golden"
-                      ? "bg-linear-to-r from-yellow-400 to-amber-500 text-black"
-                      : member.tier === "Diamond"
-                      ? "bg-linear-to-r from-sky-500 to-blue-600 text-white"
-                      : "border border-yellow-400 bg-white text-yellow-700"
+                    TIER_STYLES[member.tier] || "border border-yellow-400 bg-white text-yellow-700"
                   }`}
                 >
-                  {tierLabel[member.tier] || member.tier}
-                </span>
+                  {member.tier || "Member"}
+                </span> */}
               </div>
 
-              <div className="flex flex-col px-6 pb-6 pt-8">
+              <div className="flex flex-col px-6 pb-6 pt-8 bg-gray-100">
                 <h3 className="text-xl font-bold text-yellow-600 md:text-2xl">
-                  {member.name}
+                  {member.fullName}
                 </h3>
 
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {member.title || "Member"}
+                  {member.occupation || "Member"}
                 </p>
 
                 <div className="mt-4 flex flex-col gap-2">
-                  <p className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <MapPin size={13} /> {member.city}
-                  </p>
-                  <p className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <CalendarDays size={13} /> Joined {member.joinedYear}
-                  </p>
+                  {(member.city || member.country) && (
+                    <p className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <MapPin size={13} /> {[member.city, member.country].filter(Boolean).join(", ")}
+                    </p>
+                  )}
+                  {member.createdAt && (
+                    <p className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <CalendarDays size={13} /> Joined {new Date(member.createdAt).getFullYear()}
+                    </p>
+                  )}
                 </div>
 
                 <p className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-yellow-600 transition-all group-hover:gap-2 group-hover:text-yellow-500">

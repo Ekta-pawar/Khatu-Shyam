@@ -1,6 +1,7 @@
 
 
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { PageShell, PageHeader } from "../components/PageShell";
 import {
   Check, Crown, Plus, X, Upload, User, Building2,
@@ -105,22 +106,22 @@ function calcAge(dob) {
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 
-function BecomeMemberPage() {
-  const [submitted,    setSubmitted]    = useState(false);
-  const [selectedTier, setSelectedTier] = useState(null);
+const emptyFormData = {
+  fullName: "", fatherName: "", gender: "", phone: "", email: "",
+  birthday: "", occupation: "", bloodGroup: "", profileImage: null,
+  address: "", city: "", state: "", country: "India", pincode: "",
+  hasBusiness: false, hasJob: false,
+  jobDetails: { jobType: "", companyName: "", designation: "", jobLocation: "", salary: "", experience: "" },
+  businessDetails: { businessName: "", businessType: "", businessAddress: "", businessPhone: "", businessEmail: "", businessWebsite: "", businessDescription: "", businessImages: [] },
+  tier: "",
+  familyMembers: [],
+  anniversaries: [],
+  customDates: [],
+};
 
-  const [formData, setFormData] = useState({
-    fullName: "", fatherName: "", gender: "", phone: "", email: "",
-    birthday: "", occupation: "", bloodGroup: "", profileImage: null,
-    address: "", city: "", state: "", country: "India", pincode: "",
-    hasBusiness: false, hasJob: false,
-    jobDetails: { jobType: "", companyName: "", designation: "", jobLocation: "", salary: "", experience: "" },
-    businessDetails: { businessName: "", businessType: "", businessAddress: "", businessPhone: "", businessEmail: "", businessWebsite: "", businessDescription: "", businessImages: [] },
-    tier: "",
-    familyMembers: [],
-    anniversaries: [],
-    customDates: [],
-  });
+function BecomeMemberPage() {
+  const [selectedTier, setSelectedTier] = useState(null);
+  const [formData, setFormData] = useState(emptyFormData);
 
   // ─── generic helpers ───────────────────────────────────────────────────────
 
@@ -214,11 +215,11 @@ function BecomeMemberPage() {
     setFormData(f => ({ ...f, customDates: f.customDates.filter((_, i) => i !== idx) }));
 
   // ─── SUBMIT ────────────────────────────────────────────────────────────────
-  // New members are no longer created directly from the public site — this
-  // submits a membership application as an Enquiry for an admin to review and
-  // create the real member record from. The Enquiry schema only has a handful
-  // of simple fields, so everything beyond contact info is folded into a
-  // readable summary in `message` so admins have full context.
+  // Creates the Team member directly (POST /team/apply, no admin review) —
+  // it shows up on /team and /admin/team as soon as this succeeds. The Team
+  // schema only has a handful of fields, so everything beyond contact info
+  // is folded into a readable summary in `additionalInfo` so admins still
+  // have full context.
 
   const buildApplicationSummary = () => {
     const lines = [`Membership application — ${selectedTier}`, ""];
@@ -275,7 +276,9 @@ function BecomeMemberPage() {
       });
     }
 
-    lines.push("", "Note: profile/business photos were not attached — collect these during verification.");
+    if (formData.businessDetails.businessImages.length) {
+      lines.push("", "Note: business photos were not attached — collect these during verification.");
+    }
 
     return lines.join("\n");
   };
@@ -284,34 +287,36 @@ function BecomeMemberPage() {
     e.preventDefault();
 
     try {
-      const payload = {
-        contactPerson: formData.fullName,
-        organisationName: `${selectedTier} Membership Application`,
-        phone: formData.phone,
-        email: formData.email,
-        amount: 0,
-        address: formData.address || "-",
-        message: buildApplicationSummary(),
-      };
+      const payload = new FormData();
+      payload.append("fullName", formData.fullName);
+      payload.append("tier", selectedTier);
+      if (formData.phone) payload.append("phone", formData.phone);
+      if (formData.email) payload.append("email", formData.email);
+      if (formData.occupation) payload.append("occupation", formData.occupation);
+      if (formData.city) payload.append("city", formData.city);
+      if (formData.state) payload.append("state", formData.state);
+      if (formData.country) payload.append("country", formData.country);
+      payload.append("additionalInfo", buildApplicationSummary());
+      if (formData.profileImage) payload.append("profileImage", formData.profileImage);
 
       const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
-      const response = await fetch(`${API_BASE}/enquiry/create`, {
+      const response = await fetch(`${API_BASE}/team/apply`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: payload,
       });
 
       const data = await response.json();
 
       if (data.success) {
-        setSubmitted(true);
-        alert("Application received! Our team will review it and contact you soon.");
+        toast.success("Jai Shree Shyam! Welcome to the samiti — you've been added to our team.");
+        setFormData(emptyFormData);
+        setSelectedTier(null);
       } else {
-        alert(data.message || "Submission failed");
+        toast.error(data.errors?.[0]?.message || data.message || "Submission failed. Please try again.");
       }
     } catch (error) {
       console.error(error);
-      alert("Something went wrong");
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
@@ -411,13 +416,6 @@ function BecomeMemberPage() {
               </p>
             </div>
 
-            {submitted && (
-              <div className="mb-8 flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-green-700">
-                <Check size={20} className="text-green-500" />
-                <span className="font-medium">Jai Shree Shyam! Your application has been received. We will contact you soon.</span>
-              </div>
-            )}
-
             <form onSubmit={handleSubmit} className="space-y-10">
 
               {/* ── Personal Information ── */}
@@ -453,7 +451,7 @@ function BecomeMemberPage() {
                   <Field label="Birthday" type="date" name="birthday" value={formData.birthday} onChange={handleInput} />
                   <SelectField label="Blood Group" name="bloodGroup" value={formData.bloodGroup} onChange={handleInput} options={BLOOD_GROUPS} placeholder="Select Blood Group" />
                   <Field label="Phone Number" name="phone" type="tel" value={formData.phone} onChange={handleInput} required />
-                  <Field label="Email" name="email" type="email" value={formData.email} onChange={handleInput} />
+                  <Field label="Email" name="email" type="email" value={formData.email} onChange={handleInput} required />
                 </div>
               </SectionCard>
 
@@ -856,7 +854,7 @@ function Field({ label, required, ...props }) {
   return (
     <div>
       <Label required={required}>{label}</Label>
-      <input {...props} className={INPUT} />
+      <input {...props} required={required} className={INPUT} />
     </div>
   );
 }
@@ -865,7 +863,7 @@ function SelectField({ label, required, options, placeholder, ...props }) {
   return (
     <div>
       <Label required={required}>{label}</Label>
-      <select {...props} className={INPUT}>
+      <select {...props} required={required} className={INPUT}>
         {placeholder && <option value="">{placeholder}</option>}
         {options.map(o => <option key={o} value={o}>{o}</option>)}
       </select>

@@ -57,6 +57,7 @@ export const apiSlice = createApi({
   tagTypes: [
     "Admin",
     "Member",
+    "Team",
     "Payment",
     "Contact",
     "Enquiry",

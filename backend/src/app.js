@@ -19,6 +19,7 @@ const { notFound, globalErrorHandler } = require("./middleware/error.middleware"
 const { apiLimiter } = require("./middleware/rateLimiter.middleware");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const enquiryRoutes = require("./routes/enquiry.routes");
+const teamRoutes = require("./routes/team.routes");
 
 
 const app = express();
@@ -39,9 +40,20 @@ app.use(
     crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" },
   })
 );
+// Vite dev servers grab whichever port is free (5173, 5174, ...) depending on
+// what else is running locally, so in development we allow any localhost/
+// 127.0.0.1 origin rather than hardcoding one port. Production stays locked
+// to FRONTEND_URL.
+const isLocalDevOrigin = (origin) => /^https?:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin);
+
 app.use(
   cors({
-    origin: env.FRONTEND_URL,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (origin === env.FRONTEND_URL) return callback(null, true);
+      if (env.isDevelopment && isLocalDevOrigin(origin)) return callback(null, true);
+      return callback(new Error(`Not allowed by CORS: ${origin}`));
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "Accept", "Cookie"],
@@ -104,6 +116,7 @@ app.use("/api/v1/enquiry", enquiryRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/v1/sponsor", sponsorRoutes);
 app.use("/api/v1/gallery", galleryRoutes);
+app.use("/api/v1/team", teamRoutes);
 
 /* ------------------------------------------------------------------ */
 /* Error handling                                                      */

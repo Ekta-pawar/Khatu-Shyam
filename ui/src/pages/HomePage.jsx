@@ -116,7 +116,7 @@ function HomePage() {
 
   return (
     <PageShell>
-            <section className="relative min-h-[72vh] overflow-hidden">
+            <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden sm:min-h-[75vh] md:min-h-[72vh]">
         <ImageWithFallback
           src={heroTemple}
           alt="Khatu Shyam Ji temple"
@@ -126,7 +126,7 @@ function HomePage() {
         <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/80" />
 
         <motion.div
-          className="relative mx-auto flex min-h-[100vh] max-w-9xl flex-col items-center justify-center px-5 py-20 pt-0 text-center text-white mt-6"
+          className="relative mx-auto flex w-full max-w-9xl flex-col items-center justify-center px-5 py-12 text-center text-white sm:py-16 md:py-20"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
@@ -142,25 +142,25 @@ function HomePage() {
           </motion.div>
 
           <motion.div
-            className="mb-5 flex flex-wrap items-center justify-center gap-6 md:gap-12"
+            className="mb-5 flex flex-nowrap items-center justify-center gap-2 sm:gap-6 md:gap-12"
             variants={fadeUp}
           >
             <ImageWithFallback
               src={bowEmblem}
               alt="हारे का सहारा बाबा श्याम हमारा"
-              className="h-25 w-auto md:h-35"
+              className="h-10 w-auto shrink-0 sm:h-16 md:h-25 lg:h-35"
             />
 
             <ImageWithFallback
               src={deity}
               alt="Shyam Baba"
-              className="h-40 w-40 rounded-full border-2 border-yellow-300 object-cover md:h-65 md:w-65"
+              className="h-20 w-20 shrink-0 rounded-full border-2 border-yellow-300 object-cover sm:h-32 sm:w-32 md:h-40 md:w-40 lg:h-65 lg:w-65"
             />
 
             <ImageWithFallback
               src={bowEmblem1}
               alt="हारे का सहारा बाबा श्याम हमारा"
-              className="h-25 w-auto md:h-35"
+              className="h-10 w-auto shrink-0 sm:h-16 md:h-25 lg:h-35"
             />
           </motion.div>
 

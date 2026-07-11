@@ -44,12 +44,12 @@ function TeamMemberPage() {
       setError(false);
 
       try {
-        const res = await axios.get(`${API_BASE}/members/${activeMemberId}`);
-        setMember(res.data.member || res.data.data || null);
+        const res = await axios.get(`${API_BASE}/team/${activeMemberId}`);
+        setMember(res.data.teamMember || res.data.data || null);
       } catch {
         try {
-          const listRes = await axios.get(`${API_BASE}/members`);
-          const members = listRes.data.members || listRes.data.data || [];
+          const listRes = await axios.get(`${API_BASE}/team`);
+          const members = listRes.data.teamMembers || listRes.data.data || [];
           const foundMember = members.find((item) => item._id === activeMemberId);
 
           if (foundMember) {

@@ -23,6 +23,16 @@ const PAYMENT_MODES = Object.freeze(["cash", "cheque", "bank_transfer", "upi", "
 
 const COOKIE_NAME = "token";
 
+// Committee/office-bearer tiers for the Team collection — kept in sync with
+// the tier names offered on the public Become a Member page.
+const TEAM_TIERS = Object.freeze([
+  "मुख्य कार्यकारिणी",
+  "प्रेरणा स्रोत",
+  "कार्यकारिणी",
+  "संरक्षक",
+  "सदस्य",
+]);
+
 module.exports = {
   ADMIN_ROLES,
   GENDERS,
@@ -31,4 +41,5 @@ module.exports = {
   PAYMENT_STATUS,
   PAYMENT_MODES,
   COOKIE_NAME,
+  TEAM_TIERS,
 };
