@@ -95,7 +95,7 @@ const EnquiryManagementPage = () => {
           Search
         </Button>
 
-        {/* <select
+        <select
           value={status}
           onChange={(e) => {
             setStatus(e.target.value);
@@ -108,7 +108,7 @@ const EnquiryManagementPage = () => {
               {option.label}
             </option>
           ))}
-        </select> */}
+        </select>
       </div>
 
       {!isFetching && data?.pagination && (

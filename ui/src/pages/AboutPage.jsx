@@ -2,7 +2,7 @@
 
 
 
-import { PageShell, PageHeader } from "../components/PageShell";
+import { PageShell } from "../components/PageShell";
 import { Quote, Heart, Star } from "lucide-react";
 
 import cofounder1 from "../assets/Founder/home111.png";
@@ -99,12 +99,6 @@ const messages = [
 function CommitteeMessagesPage() {
   return (
     <PageShell>
-      {/* <PageHeader
-        eyebrow="संदेश"
-        title="पदाधिकारियों के संदेश"
-        subtitle="हमारी समिति के वरिष्ठ पदाधिकारियों के शुभकामना संदेश एवं मार्गदर्शन"
-      /> */}
-
       {/* Header Section */}
       <section className="mx-auto max-w-7xl px-5 py-16">
         <div className="text-center">

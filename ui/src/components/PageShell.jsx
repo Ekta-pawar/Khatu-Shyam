@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";

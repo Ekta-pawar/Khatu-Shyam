@@ -6,11 +6,11 @@ import { PageShell } from "../components/PageShell";
 import { ImageWithFallback } from "../components/ImageWithFallback";
 import EventCardSkeleton from "../components/EventCardSkeleton";
 
-import heroTemple from "../assets/KHATU.jpeg";
-import deity from "../assets/midd Shyam.png";
-import event1 from "../assets/event-1.jpg";
-import bowEmblem from "../assets/ome.png";
-import bowEmblem1 from "../assets/ome.png";
+import heroTemple from "../assets/KHATU-optimized.webp";
+import deity from "../assets/midd-Shyam-optimized.webp";
+import event1 from "../assets/event-1-optimized.webp";
+import bowEmblem from "../assets/Untitled-2-optimized.webp";
+import bowEmblem1 from "../assets/ome-optimized.webp";
 
 import cofounder1 from "../assets/homephot11.jpeg";
 import cofounder2 from "../assets/homephoto11.jpg";
@@ -22,10 +22,6 @@ import cofounder7 from "../assets/homephoto7.jpg";
 import cofounder8 from "../assets/homephot8.JPG";
 import cofounder9 from "../assets/homephoto9.jpg";
 import cofounder10 from "../assets/homephoto10.jpeg";
-
-import member1 from "../assets/shyam-deity.jpg";
-import member2 from "../assets/side.jpeg";
-import member3 from "../assets/hero-temple.jpg";
 
 import {
   CalendarDays,
@@ -104,8 +100,6 @@ function HomePage() {
   const [eventsLoading, setEventsLoading] = useState(true);
 
   useEffect(() => {
-    const minDelay = new Promise((resolve) => setTimeout(resolve, 400));
-
     const fetchHomeData = async () => {
       try {
         const eventsRes = await axios.get(`${API_BASE}/events/upcoming`);
@@ -113,7 +107,6 @@ function HomePage() {
       } catch (error) {
         console.error("Error loading home page data:", error);
       } finally {
-        await minDelay;
         setEventsLoading(false);
       }
     };
@@ -139,7 +132,7 @@ function HomePage() {
           variants={staggerContainer}
         >
           <motion.div
-            className="mb-3 mt-0 flex w-full flex-col items-center justify-between gap-1 text-center font-display text-base text-wight-300 sm:flex-row sm:text-xl md:text-2xl"
+            className="mb-3 mt-0 flex w-full flex-col items-center justify-between gap-1 text-center font-display text-base text-wight-200 sm:flex-row sm:text-xl md:text-2xl"
             variants={fadeUp}
           >
             <p>॥ श्री श्याम देवाय नमः ॥</p>
@@ -155,7 +148,7 @@ function HomePage() {
             <ImageWithFallback
               src={bowEmblem}
               alt="हारे का सहारा बाबा श्याम हमारा"
-              className="h-25 w-auto md:h-35 -scale-x-100"
+              className="h-25 w-auto md:h-35"
             />
 
             <ImageWithFallback
@@ -167,7 +160,7 @@ function HomePage() {
             <ImageWithFallback
               src={bowEmblem1}
               alt="हारे का सहारा बाबा श्याम हमारा"
-              className="h-25 w-auto -scale-x-100 md:h-35"
+              className="h-25 w-auto md:h-35"
             />
           </motion.div>
 
@@ -219,6 +212,7 @@ function HomePage() {
       src={deity}
       alt="Shri Khatu Shyam Ji"
       className="h-full w-full rounded-3xl object-cover"
+      loading="lazy"
     />
   </div>
 
@@ -309,7 +303,7 @@ function HomePage() {
       ].map((item) => (
         <motion.div
           key={item.l}
-          className="rounded-2xl bg-gray-100 p-5 text-center bg-yellow-400"
+          className="rounded-2xl bg-yellow-400 p-5 text-center"
           variants={fadeUp}
         >
           <div className="text-3xl">
@@ -352,6 +346,7 @@ function HomePage() {
                     src={m.image}
                     alt={m.role}
   className="absolute inset-0 h-full w-full object-fit transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
                   />
                 </div>
 
@@ -403,6 +398,7 @@ function HomePage() {
                   src={e.image || event1}
                   alt={e.title}
                   className="aspect-[4/3] w-full object-cover"
+                  loading="lazy"
                 />
 
                 <div className="p-6  bg-linear-to-r from-yellow-200 to-yellow-500">
@@ -439,31 +435,6 @@ function HomePage() {
           </p>
         )}
       </section>
-      
-   
-          {/* <section className="mx-auto  max-w-6xl rounded-3xl bg-yellow-400 p-4 text-center sm:p-12 md:p-10 mt-10">
-        <ImageWithFallback
-          src={event1}
-          alt=""
-          className="hidden"
-        />
-
-        <h2 className="text-4xl">
-          Walk with us on the path of bhakti.
-        </h2>
-
-        <p className="mx-auto mt-4 max-w-xl">
-          Join thousands of families who call this
-          samiti home.
-        </p>
-
-        <Link
-          to="/become-member"
-          className="mt-8 inline-block rounded-full bg-yellow-500 px-7 py-3 text-white"
-        >
-          Become a Member
-        </Link>
-      </section> */}
     </PageShell>
   );
 }

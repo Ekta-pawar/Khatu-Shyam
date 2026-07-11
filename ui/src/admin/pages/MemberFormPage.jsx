@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { toast } from "react-toastify";
@@ -36,9 +36,12 @@ const MemberFormPage = () => {
   const [guestInfo, setGuestInfo] = useState(initialGuestInfo);
   const [profileImage, setProfileImage] = useState(null);
 
-  // Pre-fill the form when editing
-  useEffect(() => {
-    if (!existingMember) return;
+  // Pre-fill the form once the existing guest loads. Adjusting state during
+  // render (guarded so it only fires once per record) avoids the extra
+  // render-then-effect flash of an empty form before the fetch resolves.
+  const [prefilledId, setPrefilledId] = useState(null);
+  if (existingMember && existingMember._id !== prefilledId) {
+    setPrefilledId(existingMember._id);
 
     const toDateInput = (value) => (value ? new Date(value).toISOString().slice(0, 10) : "");
 
@@ -48,7 +51,7 @@ const MemberFormPage = () => {
       eventDate: toDateInput(existingMember.eventDate),
       additionalInfo: existingMember.additionalInfo || "",
     });
-  }, [existingMember]);
+  }
 
   const handleGuestInfoChange = (event) => {
     const { name, value } = event.target;

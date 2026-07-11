@@ -452,7 +452,7 @@ const EventsDataPage = () => {
   const [createEvent, { isLoading }] = useCreateEventMutation();
   const [deleteEvent] = useDeleteEventMutation();
 
-  const events = data?.data || [];
+  const events = useMemo(() => data?.data || [], [data]);
 
   const filteredEvents = useMemo(() => {
     if (statusFilter === "all") return events;

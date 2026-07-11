@@ -62,7 +62,7 @@ const AdminLayout = () => {
             <span className="text-lg font-semibold bg-yellow-500 bg-clip-text text-transparent">
               Shri Shri Khatu Shyam
             </span>
-            <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground text-yellow-500">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-yellow-500">
               Sewa Samiti (Reg.)
             </span>
           </span>
