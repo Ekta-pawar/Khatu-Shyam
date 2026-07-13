@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { PageShell, PageHeader } from "../components/PageShell";
-import { galleryItems as fallbackGalleryItems } from "../data/events";
 import { getGalleryItems } from "../api/gallery";
 import { Play } from "lucide-react";
 
 function GalleryPage() {
-  const [galleryItems, setGalleryItems] = useState(fallbackGalleryItems);
+  const [galleryItems, setGalleryItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -13,7 +14,7 @@ function GalleryPage() {
     Promise.all([getGalleryItems("photo"), getGalleryItems("video")])
       .then(([photoRes, videoRes]) => {
         const items = [...(photoRes.data?.data || []), ...(videoRes.data?.data || [])];
-        if (isMounted && items.length > 0) {
+        if (isMounted) {
           setGalleryItems(
             items.map((item) => ({
               src: item.mediaUrl,
@@ -27,7 +28,10 @@ function GalleryPage() {
         }
       })
       .catch(() => {
-        // keep the fallback static items if the request fails
+        if (isMounted) setError(true);
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
       });
 
     return () => {
@@ -44,6 +48,13 @@ function GalleryPage() {
       />
 
       <section className="mx-auto max-w-7xl px-5 py-10">
+        {loading ? (
+          <p className="py-20 text-center text-muted-foreground">Loading gallery…</p>
+        ) : error ? (
+          <p className="py-20 text-center text-red-600">Failed to load gallery.</p>
+        ) : galleryItems.length === 0 ? (
+          <p className="py-20 text-center text-muted-foreground">No gallery items found.</p>
+        ) : (
         <div className="grid gap-5 grid-cols-3 md:grid-cols-5">
           {galleryItems.map((item, i) => (
             <figure
@@ -84,6 +95,7 @@ function GalleryPage() {
             </figure>
           ))}
         </div>
+        )}
       </section>
     </PageShell>
   );

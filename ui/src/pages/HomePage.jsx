@@ -14,12 +14,12 @@ import bowEmblem1 from "../assets/ome-optimized.webp";
 
 import cofounder1 from "../assets/homephot11.jpeg";
 import cofounder2 from "../assets/homephoto11.jpg";
-import cofounder3 from "../assets/homephoto33.JPG";
+import cofounder3 from "../assets/homephoto33.jpg";
 import cofounder4 from "../assets/homephoto3.jpeg";
 import cofounder5 from "../assets/homephoto5.jpeg";
-import cofounder6 from "../assets/homephoto6.JPG";
+import cofounder6 from "../assets/homephoto6.jpg";
 import cofounder7 from "../assets/homephoto7.jpg";
-import cofounder8 from "../assets/homephot8.JPG";
+import cofounder8 from "../assets/homephot8.jpg";
 import cofounder9 from "../assets/homephoto9.jpg";
 import cofounder10 from "../assets/homephoto10.jpeg";
 

@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { PageShell, PageHeader } from "../components/PageShell";
-import { galleryImages } from "../data/events";
 import { getGalleryItems } from "../api/gallery";
 import { Sparkles, Images } from "lucide-react";
 
@@ -41,7 +40,7 @@ function AlbumPage() {
         }
       })
       .catch(() => {
-        // no admin-uploaded photos yet / request failed — static album still renders
+        // request failed — page just shows no photos
       });
 
     return () => {
@@ -52,23 +51,15 @@ function AlbumPage() {
   const years = useMemo(() => {
     const uniqueYears = new Set([
       ...EXTRA_YEARS,
-      ...galleryImages.map((img) => img.year),
       ...uploadedPhotos.map((img) => img.year),
     ]);
     return ["ALL", ...Array.from(uniqueYears).sort((a, b) => b - a)];
   }, [uploadedPhotos]);
 
-  const filtered = [
-    ...uploadedPhotos.filter(
-      (img) =>
-        img.category === activeTab && (activeYear === "ALL" || img.year === activeYear)
-    ),
-    ...galleryImages.filter(
-      (img) =>
-        img.category === activeTab &&
-        (activeYear === "ALL" || img.year === activeYear)
-    ),
-  ];
+  const filtered = uploadedPhotos.filter(
+    (img) =>
+      img.category === activeTab && (activeYear === "ALL" || img.year === activeYear)
+  );
 
   return (
     <PageShell>
