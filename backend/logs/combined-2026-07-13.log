@@ -239,3 +239,5 @@
 {"level":"info","message":"\u001b[0mGET /api/v1/gallery?type=photo \u001b[32m200\u001b[0m 50.862 ms - -\u001b[0m","timestamp":"2026-07-13 17:08:53"}
 {"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 89.328 ms - -\u001b[0m","timestamp":"2026-07-13 17:09:10"}
 {"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 91.344 ms - -\u001b[0m","timestamp":"2026-07-13 17:09:10"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 132.222 ms - -\u001b[0m","timestamp":"2026-07-13 17:40:09"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 46.250 ms - -\u001b[0m","timestamp":"2026-07-13 17:40:09"}
