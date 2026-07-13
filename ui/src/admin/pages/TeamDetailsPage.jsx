@@ -1,9 +1,8 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Pencil } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { useGetTeamMemberByIdQuery } from "../api/teamApi";
 import Loader from "../components/Loader";
 import EmptyState from "../components/EmptyState";
-import Button from "../components/Button";
 import Badge from "../components/Badge";
 import { getErrorMessage } from "../utils/errorMessage";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus, Search, Eye, Pencil, Trash2, Phone, X } from "lucide-react";
+import { Search, Eye, Pencil, Trash2, Phone, X } from "lucide-react";
 import { toast } from "react-toastify";
 import { useGetTeamMembersQuery, useDeleteTeamMemberMutation } from "../api/teamApi";
 import Loader from "../components/Loader";

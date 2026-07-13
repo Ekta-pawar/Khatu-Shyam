@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Plus,
   Search,
   Eye,
   Pencil,
@@ -16,7 +15,6 @@ import Loader from "../components/Loader";
 import EmptyState from "../components/EmptyState";
 import Button from "../components/Button";
 import FormField from "../components/FormField";
-import Pagination from "../components/Pagination";
 import { getErrorMessage } from "../utils/errorMessage";
 
 const initials = (name = "") =>

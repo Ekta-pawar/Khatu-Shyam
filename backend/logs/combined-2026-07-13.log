@@ -229,3 +229,13 @@
 {"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 38.126 ms - -\u001b[0m","timestamp":"2026-07-13 16:54:09"}
 {"level":"info","message":"\u001b[0mGET /api/v1/team \u001b[32m200\u001b[0m 53.246 ms - -\u001b[0m","timestamp":"2026-07-13 16:54:15"}
 {"level":"info","message":"\u001b[0mGET /api/v1/team \u001b[32m200\u001b[0m 29.733 ms - -\u001b[0m","timestamp":"2026-07-13 16:54:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-07-13 17:07:30"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-07-13 17:07:30"}
+{"level":"info","message":"\u001b[0mGET /api/v1/team \u001b[32m200\u001b[0m 143.221 ms - -\u001b[0m","timestamp":"2026-07-13 17:08:29"}
+{"level":"info","message":"\u001b[0mGET /api/v1/team \u001b[32m200\u001b[0m 50.443 ms - -\u001b[0m","timestamp":"2026-07-13 17:08:29"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 42.904 ms - -\u001b[0m","timestamp":"2026-07-13 17:08:31"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events/upcoming \u001b[32m200\u001b[0m 54.806 ms - -\u001b[0m","timestamp":"2026-07-13 17:08:31"}
+{"level":"info","message":"\u001b[0mGET /api/v1/gallery?type=photo \u001b[32m200\u001b[0m 38.851 ms - -\u001b[0m","timestamp":"2026-07-13 17:08:53"}
+{"level":"info","message":"\u001b[0mGET /api/v1/gallery?type=photo \u001b[32m200\u001b[0m 50.862 ms - -\u001b[0m","timestamp":"2026-07-13 17:08:53"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 89.328 ms - -\u001b[0m","timestamp":"2026-07-13 17:09:10"}
+{"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 91.344 ms - -\u001b[0m","timestamp":"2026-07-13 17:09:10"}
