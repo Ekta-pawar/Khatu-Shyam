@@ -492,9 +492,9 @@ const EventsDataPage = () => {
               Events Management
             </h1>
           </div>
-          <p className="mt-2 text-sm text-slate-500">
+          {/* <p className="mt-2 text-sm text-slate-500">
             Create new events and manage what's currently listed.
-          </p>
+          </p> */}
         </div>
 
         <div className="flex items-end gap-5">

@@ -444,7 +444,7 @@ const GalleryManagementPage = () => {
           </button>
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-4 lg:grid-cols-4">
           {items.map((item) => {
             const isConfirming = confirmingId === item._id;
             const isDeleting = deletingId === item._id;
@@ -456,12 +456,12 @@ const GalleryManagementPage = () => {
               >
                 <div className="relative h-44 w-full bg-slate-100">
                   {item.mediaType === "video" ? (
-                    <video src={item.mediaUrl} className="h-full w-full object-cover" muted />
+                    <video src={item.mediaUrl} className="h-full w-full object-contain" muted />
                   ) : (
                     <img
                       src={item.mediaUrl}
                       alt={item.title || "Gallery item"}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-contain"
                     />
                   )}
                   {item.mediaType === "video" && (

@@ -115,7 +115,7 @@ function AlbumPage() {
 
       {/* Grid */}
       <section className="mx-auto max-w-7xl px-5 py-10">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-4 lg:grid-cols-5">
           {filtered.map((item, i) => (
             <figure
               key={i}
@@ -124,7 +124,7 @@ function AlbumPage() {
               <img
                 src={item.src}
                 alt={item.title}
-                className="h-72 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="h-72 w-full object-contain transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/75 via-transparent to-transparent" />
               <figcaption className="absolute bottom-0 left-0 right-0 p-5 text-white">

@@ -81,12 +81,12 @@ function EventsPage() {
         subtitle="Join us in seva and sangat. Every devotee is welcome — bring your family and your voice."
       />
 
-      <section className="mx-auto max-w-7xl space-y-8 px-5 py-16">
+      <section className="mx-auto max-w-7xl space-y-5 px-5 py-10">
         {events.length > 0 ? (
           events.map((event, index) => (
             <article
               key={event._id}
-              className={`grid overflow-hidden rounded-3xl bg-card shadow-elegant md:grid-cols-2 md:items-center ${
+              className={`grid overflow-hidden rounded-3xl min-h-[200px] bg-card shadow-elegant md:grid-cols-2 md:items-center ${
                 index % 2 === 1 ? "md:[&>div:first-child]:order-2" : ""
               }`}
             >
@@ -95,7 +95,7 @@ function EventsPage() {
                   <img
                     src={event.image}
                     alt={event.title}
-                    className="h-full min-h-[260px] w-full object-cover"
+                    className="h-full min-h-[200px] w-full object-cover"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.style.display = "none";
@@ -104,14 +104,14 @@ function EventsPage() {
                   />
                 ) : null}
                 <div
-                  className="h-full min-h-[260px] w-full items-center justify-center bg-secondary text-muted-foreground"
+                  className="h-full min-h-[200px] w-full items-center justify-center bg-secondary text-muted-foreground"
                   style={{ display: event.image ? "none" : "flex" }}
                 >
                   <ImageOff size={32} aria-hidden="true" />
                 </div>
               </div>
 
-              <div className="p-8 md:p-12">
+              <div className="p-5 md:p-5 min-h-[200px]">
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="text-xs uppercase tracking-[0.3em] text-saffron">
                     Event {String(index + 1).padStart(2, "0")}
@@ -127,11 +127,11 @@ function EventsPage() {
                   </span>
                 </div>
 
-                <h2 className="mt-3 text-3xl text-yellow-500 md:text-4xl">{event.title}</h2>
+                <h2 className="mt-2 text-3xl text-yellow-500 md:text-4xl">{event.title}</h2>
 
-                <p className="mt-4 leading-relaxed text-muted-foreground">{event.shortDescription}</p>
+                <p className="mt-2 leading-relaxed text-muted-foreground">{event.shortDescription}</p>
 
-                <div className="mt-6 space-y-3">
+                <div className="mt-3 space-y-3">
                   <EventRow
                     icon={CalendarDays}
                     label="Date"

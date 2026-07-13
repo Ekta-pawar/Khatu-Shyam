@@ -116,7 +116,7 @@ const TeamFormPage = () => {
     }
   };
 
-  const heading = useMemo(() => (isEditMode ? "Edit team member" : "Add team member"), [isEditMode]);
+  const heading = useMemo(() => (isEditMode ? "Edit team member" : "member"), [isEditMode]);
 
   if (isEditMode && loadingTeamMember) return <Loader label="Loading team member..." />;
 

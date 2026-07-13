@@ -85,9 +85,9 @@ const EnquiryManagementPage = () => {
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-yellow-500">Enquiries</h1>
-        <p className="text-sm text-slate-500">
+        {/* <p className="text-sm text-slate-500">
           Review sponsorship enquiry submissions from the website.
-        </p>
+        </p> */}
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -243,7 +243,7 @@ const EnquiryManagementPage = () => {
                         <XCircle size={16} /> Reject
                       </Button>
                     )}
-                    {isMembershipApplication(enquiry) && (
+                    {/* {isMembershipApplication(enquiry) && (
                       <Button
                         variant="primary"
                         className="flex items-center gap-2"
@@ -251,7 +251,7 @@ const EnquiryManagementPage = () => {
                       >
                         <UserPlus size={16} /> Convert to Team Member
                       </Button>
-                    )}
+                    )} */}
                     <Button
                       variant="secondary"
                       className="flex items-center gap-2"

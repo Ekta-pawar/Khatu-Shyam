@@ -43,12 +43,12 @@ const TeamDetailsPage = () => {
             <p className="text-sm text-slate-500">Team member profile shown on the public /team page</p>
           </div>
         </div>
-
+{/* 
         <Link to={`/admin/team/${id}/edit`}>
           <Button variant="primary">
             <Pencil size={16} /> Edit team member
           </Button>
-        </Link>
+        </Link> */}
       </div>
 
       <div className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">

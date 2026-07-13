@@ -151,17 +151,17 @@ function CommitteeMessagesPage() {
 
 // Distinct color theme for each card, cycled by index
 const cardThemes = [
-  { gradient: "from-yellow-200 to-yellow-500", border: "border-yellow-500", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
-  { gradient: "from-blue-600 to-purple-600", border: "border-purple-300", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
-  { gradient: "from-yellow-200 to-yellow-500", border: "border-yellow-500", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
-  { gradient: "from-emerald-500 to-teal-600", border: "border-emerald-300", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
-  { gradient: "from-yellow-200 to-yellow-500", border: "border-yellow-500", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+  { gradient: "from-yellow-400 to-yellow-500", border: "border-yellow-500", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+  { gradient: "from-yellow-400 to-yellow-600", border: "border-red-600", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+  { gradient: "from-yellow-400 to-yellow-500", border: "border-yellow-500", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+  { gradient: "from-yellow-400 to-yellow-600", border: "border-emerald-300", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
+  { gradient: "from-yellow-400 to-yellow-500", border: "border-yellow-500", bar: ["bg-white/60", "bg-white/40", "bg-white/20"] },
 ];
 
 // Image Section Component
 function ImageSection({ message }) {
   return (
-    <div className="relative overflow-hidden h-full min-h-100 lg:min-h-125">
+    <div className="relative overflow-hidden h-full min-h-100 lg:min-h-105">
       <img
         src={message.image}
         alt={message.name}

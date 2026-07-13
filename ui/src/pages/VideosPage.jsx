@@ -97,14 +97,14 @@ function VideosPage() {
                 {video.videoUrl ? (
                   <video
                     src={video.videoUrl}
-                    className="h-52 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="h-52 w-full object-contain transition-transform duration-700 group-hover:scale-105"
                     muted
                   />
                 ) : (
                   <img
                     src={video.thumbnail}
                     alt={video.title}
-                    className="h-52 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="h-52 w-full object-contain transition-transform duration-700 group-hover:scale-105"
                   />
                 )}
                 <div className="absolute inset-0 bg-black/30 transition-opacity group-hover:bg-black/40" />

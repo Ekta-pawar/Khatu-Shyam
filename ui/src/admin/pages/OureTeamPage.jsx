@@ -117,18 +117,18 @@ const OureTeamPage = () => {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-yellow-500">Our Team</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          {/* <p className="mt-1 text-sm text-slate-500">
             {teamMembers.length} member{teamMembers.length !== 1 ? "s" : ""} shown on the public /team page.
-          </p>
+          </p> */}
         </div>
-        <Link to="/admin/team/new" className="shrink-0">
+        {/* <Link to="/admin/team/new" className="shrink-0">
           <Button className="w-full justify-center gap-2 sm:w-auto">
             <Plus size={16} /> Add team member
           </Button>
-        </Link>
+        </Link> */}
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
         <form onSubmit={handleSearchSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="relative flex-1">
             <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />

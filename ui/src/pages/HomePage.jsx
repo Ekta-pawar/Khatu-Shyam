@@ -116,7 +116,7 @@ function HomePage() {
 
   return (
     <PageShell>
-            <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden sm:min-h-[75vh] md:min-h-[72vh]">
+            <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden sm:min-h-[70vh] md:min-h-[72vh]">
         <ImageWithFallback
           src={heroTemple}
           alt="Khatu Shyam Ji temple"
@@ -126,13 +126,13 @@ function HomePage() {
         <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/80" />
 
         <motion.div
-          className="relative mx-auto flex w-full max-w-9xl flex-col items-center justify-center px-5 py-12 text-center text-white sm:py-16 md:py-20"
+          className="relative mx-auto flex w-full max-w-9xl flex-col items-center justify-center px-5 py-6 pt-0 text-center text-white sm:py-10 md:py-10"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
         >
           <motion.div
-            className="mb-3 mt-0 flex w-full flex-col items-center justify-between gap-1 text-center font-display text-base text-wight-200 sm:flex-row sm:text-xl md:text-2xl"
+            className="mb-2 mt-0 flex w-full flex-col pt-0 mt-0 items-center justify-between gap-1 text-center font-display text-base text-wight-200 sm:flex-row sm:text-xl md:text-2xl"
             variants={fadeUp}
           >
             <p>॥ श्री श्याम देवाय नमः ॥</p>
@@ -231,7 +231,7 @@ function HomePage() {
      श्याम वर्णन
     </h2>
 
-    <div className=" space-y-3 text-[14px] leading-8 text-gray-500 text-justify">
+    <div className=" space-y-2 text-[13px] leading-8 text-gray-800 text-justify">
       <p>
         खाटू श्याम बाबा की कहानी महाभारत के वीर योद्धा
         'बर्बरीक' से जुड़ी है। वे भीम के पौत्र थे। अपने महान
@@ -296,7 +296,7 @@ function HomePage() {
    variants={staggerContainer}
  >
       {[
-        { n: "30+", l: "Years of Seva" },
+        { n: "30+", l: "Years of Sewa" },
         { n: "5000+", l: "Families" },
         { n: "120+", l: "Events" },
         { n: "220+", l: "Members" },

@@ -146,14 +146,14 @@ const OureGuestPage = () => {
             {totalGuests} guest{totalGuests !== 1 ? "s" : ""} on record.
           </p>
         </div>
-        <Link to="/admin/members/new" className="shrink-0">
+        {/* <Link to="/admin/members/new" className="shrink-0">
           <Button className="w-full justify-center gap-2 sm:w-auto">
             <Plus size={16} /> Add guest
           </Button>
-        </Link>
+        </Link> */}
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
         <form onSubmit={handleSearchSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="relative flex-1">
             <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -199,13 +199,13 @@ const OureGuestPage = () => {
         <EmptyState
           title="No guests found"
           description="Try adjusting your search or add a new guest to get started."
-          action={
-            <Link to="/admin/members/new" className="mt-2">
-              <Button className="gap-2">
-                <Plus size={16} /> Add guest
-              </Button>
-            </Link>
-          }
+          // action={
+          //   <Link to="/admin/members/new" className="mt-2">
+          //     <Button className="gap-2">
+          //       <Plus size={16} /> Add guest
+          //     </Button>
+          //   </Link>
+          // }
         />
       )}
 
@@ -217,9 +217,9 @@ const OureGuestPage = () => {
             ))}
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm">
+          {/* <div className="rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm">
             <Pagination page={page} totalPages={data?.pagination?.totalPages} onPageChange={setPage} />
-          </div>
+          </div> */}
         </>
       )}
     </div>

@@ -15,14 +15,14 @@ function SiteFooter() {
 
             <span className="text-lg font-semibold">
              Shri Shri Khatu Shyam
-Seva Samiti (Reg.)
+Sewa Samiti (Reg.)
             </span>
           </div>
 
           <p className="mt-4 text-sm leading-relaxed text-white/70">
-            A devotional community dedicated to the seva of
+            A devotional community dedicated to the sewa of
             Khatu Shyam Ji — uniting devotees through bhajan,
-            bhandara and seva since 1995.
+            bhandara and sewa since 1995.
           </p>
         </div>
 

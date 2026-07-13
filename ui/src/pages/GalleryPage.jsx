@@ -43,8 +43,8 @@ function GalleryPage() {
         subtitle="Snapshots and recordings from our bhajan sandhyas, bhandaras, yatras and mahotsavs across the years."
       />
 
-      <section className="mx-auto max-w-7xl px-5 py-16">
-        <div className="grid gap-5 grid-cols-2 md:grid-cols-4">
+      <section className="mx-auto max-w-7xl px-5 py-10">
+        <div className="grid gap-5 grid-cols-3 md:grid-cols-5">
           {galleryItems.map((item, i) => (
             <figure
               key={i}
@@ -53,14 +53,14 @@ function GalleryPage() {
               {item.isVideo ? (
                 <video
                   src={item.src}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
                   muted
                 />
               ) : (
                 <img
                   src={item.src}
                   alt={item.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
                 />
               )}
 
