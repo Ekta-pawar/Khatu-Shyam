@@ -15,3 +15,8 @@
 {"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 37.131 ms - -\u001b[0m","timestamp":"2026-07-14 10:46:17"}
 {"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 68.018 ms - -\u001b[0m","timestamp":"2026-07-14 10:46:20"}
 {"level":"info","message":"\u001b[0mGET /api/v1/members \u001b[32m200\u001b[0m 37.136 ms - -\u001b[0m","timestamp":"2026-07-14 10:46:20"}
+{"level":"info","message":"\u001b[0mGET /api/v1/events \u001b[32m200\u001b[0m 40.909 ms - -\u001b[0m","timestamp":"2026-07-14 10:48:06"}
+{"level":"info","message":"\u001b[0mGET /api/v1/gallery?type=video \u001b[32m200\u001b[0m 116.026 ms - 444\u001b[0m","timestamp":"2026-07-14 10:48:11"}
+{"level":"info","message":"\u001b[0mGET /api/v1/gallery?type=photo \u001b[32m200\u001b[0m 69.103 ms - -\u001b[0m","timestamp":"2026-07-14 10:48:11"}
+{"level":"info","message":"\u001b[0mGET /api/v1/gallery?type=video \u001b[32m200\u001b[0m 96.825 ms - 444\u001b[0m","timestamp":"2026-07-14 10:48:11"}
+{"level":"info","message":"\u001b[0mGET /api/v1/gallery?type=photo \u001b[32m200\u001b[0m 80.741 ms - -\u001b[0m","timestamp":"2026-07-14 10:48:11"}
