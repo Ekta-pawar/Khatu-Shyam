@@ -332,7 +332,7 @@ function HomePage() {
   className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
   initial="hidden"
   whileInView="visible"
-  viewport={{ once: true, amount: 0.2 }}
+  viewport={{ once: true, amount: 0.05 }}
   variants={staggerContainer}
 >
           {committeeMembers.map((m, index) => (
@@ -341,11 +341,11 @@ function HomePage() {
                 className="group overflow-hidden rounded-3xl bg-yellow-500 shadow transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
                 variants={fadeUp}
               >
-                <div className="relative h-64 w-full   overflow-hidden object-fit">
+                <div className="relative h-64 w-full overflow-hidden">
                   <ImageWithFallback
                     src={m.image}
                     alt={m.role}
-  className="absolute inset-0 h-full w-full object-fit transition-transform duration-300 group-hover:scale-105"
+  className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>

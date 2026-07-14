@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export function ImageWithFallback({ src, alt, className, ...props }) {
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   if (failed && alt) {
     return (
@@ -18,7 +19,8 @@ export function ImageWithFallback({ src, alt, className, ...props }) {
     <img
       src={src}
       alt={alt}
-      className={className}
+      className={`${className || ""} transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`}
+      onLoad={() => setLoaded(true)}
       onError={() => setFailed(true)}
       {...props}
     />

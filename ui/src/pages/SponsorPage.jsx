@@ -537,7 +537,7 @@ function SponsorPage() {
       ) : (
         /* ── Enquiry Form ── */
         <section>
-          <div className="mx-auto max-w-2xl rounded-3xl bg-white p-6 shadow-xl">
+          <div className="mx-auto max-w-2xl rounded-3xl bg-white p-6 pb-5 mb-5 shadow-xl">
             <h2 className="mb-5 flex items-center gap-2 text-2xl font-bold text-slate-800">
               <Send size={20} className="text-yellow-600" />
               Enquiry Form
