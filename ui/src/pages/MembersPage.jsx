@@ -46,7 +46,7 @@ function MembersPage() {
     return (
       <PageShell>
         <PageHeader
-          eyebrow="Hamare Sadasya"
+          eyebrow="Hamare Guest"
           title="Our Guest"
           subtitle="Meet the devotees who have graced our events."
         />
@@ -76,7 +76,7 @@ function MembersPage() {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="Hamare Sadasya"
+        eyebrow="Hamare Guest"
         title="Our Guest"
         subtitle="Meet the devotees who have graced our events."
       />

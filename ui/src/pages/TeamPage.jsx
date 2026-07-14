@@ -11,10 +11,10 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api
 // Keyed by the real Member.tier values (see BecomeMemberPage.jsx's tiers list).
 const TIER_STYLES = {
   "मुख्य कार्यकारिणी": "bg-linear-to-r from-yellow-400 to-amber-500 text-black",
-  "प्रेरणा स्रोत": "bg-linear-to-r from-sky-500 to-blue-600 text-white",
-  "कार्यकारिणी": "bg-linear-to-r from-orange-400 to-red-500 text-white",
-  "संरक्षक": "bg-linear-to-r from-purple-400 to-purple-600 text-white",
-  "सदस्य": "bg-linear-to-r from-yellow-200 to-yellow-500 text-white",
+  "प्रेरणा स्रोत": "bg-linear-to-r from-yellow-400 to-amber-500 text-black",
+  "कार्यकारिणी": "bg-linear-to-r from-yellow-400 to-amber-500 text-black",
+  "संरक्षक": "bg-linear-to-r from-yellow-400 to-amber-500 text-black",
+  "सदस्य": "bg-linear-to-r from-yellow-400 to-amber-500 text-black",
 };
 
 const tierOrder = [

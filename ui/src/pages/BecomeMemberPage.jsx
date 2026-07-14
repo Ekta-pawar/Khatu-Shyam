@@ -308,7 +308,7 @@ function BecomeMemberPage() {
       const data = await response.json();
 
       if (data.success) {
-        toast.success("Jai Shree Shyam! Welcome to the samiti — you've been added to our team.");
+        toast.success("Jai Shri Shyam! Welcome to the samiti — you've been added to our team.");
         setFormData(emptyFormData);
         setSelectedTier(null);
       } else {

@@ -90,7 +90,7 @@ function MobileDropdown({ item, closeMenu }) {
       </button>
 
       {open && (
-        <div className="mb-2 ml-3 flex flex-col gap-1 border-l-2 border-yellow-400 pl-3">
+        <div className="scrollbar-hide mb-2 ml-3 flex max-h-48 flex-col gap-1 overflow-y-auto border-l-2 border-yellow-400 pl-3">
           {item.dropdown.map((sub) => (
             <Link
               key={sub.to}
@@ -171,7 +171,7 @@ function SiteHeader() {
 
       {/* Mobile Menu */}
       {open && (
-        <nav className="border-t border-border/60 bg-background lg:hidden">
+        <nav className="scrollbar-hide max-h-[75vh] overflow-y-auto border-t border-border/60 bg-background lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col px-5 py-3">
             {nav.map((item) =>
               item.dropdown ? (

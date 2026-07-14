@@ -72,7 +72,7 @@ function ContactPage() {
             {submitted && (
               <div className="mb-4 flex items-center gap-2 rounded-lg border border-green-300 bg-green-50 p-3 text-sm text-green-700">
                 <Check size={16} />
-                <span>Jai Shree Shyam! Your message has been sent. We will get back to you soon.</span>
+                <span>Jai Shri Shyam! Your message has been sent. We will get back to you soon.</span>
               </div>
             )}
 

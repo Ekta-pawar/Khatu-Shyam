@@ -15,6 +15,7 @@ import Loader from "../components/Loader";
 import EmptyState from "../components/EmptyState";
 import Button from "../components/Button";
 import FormField from "../components/FormField";
+import ConfirmDialog from "../components/ConfirmDialog";
 import { getErrorMessage } from "../utils/errorMessage";
 
 const initials = (name = "") =>
@@ -106,6 +107,7 @@ const OureGuestPage = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [appliedSearch, setAppliedSearch] = useState("");
+  const [pendingDelete, setPendingDelete] = useState(null);
 
   const { data, isFetching, isError, error } = useGetMembersQuery({ page, limit: 12, search: appliedSearch });
   const [deleteMember, { isLoading: isDeleting }] = useDeleteMemberMutation();
@@ -125,13 +127,19 @@ const OureGuestPage = () => {
     setPage(1);
   };
 
-  const handleDelete = async (id, name) => {
-    if (!window.confirm(`Remove guest "${name}"? This will also remove their uploaded images.`)) return;
+  const handleDelete = (id, name) => {
+    setPendingDelete({ id, name });
+  };
+
+  const confirmDelete = async () => {
+    if (!pendingDelete) return;
     try {
-      await deleteMember(id).unwrap();
+      await deleteMember(pendingDelete.id).unwrap();
       toast.success("Guest removed successfully");
     } catch (err) {
       toast.error(getErrorMessage(err, "Failed to remove guest"));
+    } finally {
+      setPendingDelete(null);
     }
   };
 
@@ -220,6 +228,16 @@ const OureGuestPage = () => {
           </div> */}
         </>
       )}
+
+      <ConfirmDialog
+        open={!!pendingDelete}
+        title="Remove guest"
+        message={pendingDelete ? `Remove guest "${pendingDelete.name}"? This will also remove their uploaded images.` : ""}
+        confirmLabel="Remove"
+        onConfirm={confirmDelete}
+        onCancel={() => setPendingDelete(null)}
+        isLoading={isDeleting}
+      />
     </div>
   );
 };

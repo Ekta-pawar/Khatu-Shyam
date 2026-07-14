@@ -98,8 +98,8 @@ Sewa Samiti (Reg.)
       </div>
 
       <div className="border-t border-white/10 px-5 py-5 text-center text-xs text-white/50">
-        जय श्री श्याम · © {new Date().getFullYear()} Sri Sri
-        Khattu Shyam Sabha Samiti
+        जय श्री श्याम · © {new Date().getFullYear()} Shri Shri
+        Khatu Shyam Sewa Sumiti
       </div>
     </footer>
   );

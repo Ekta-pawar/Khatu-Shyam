@@ -316,30 +316,18 @@ function HomePage() {
         </motion.div>
       ))}
     </motion.div>
-            <section className="py-6 bg-yellow-200 font-bold ">
-        <div className="mx-auto max-w-7xl px-5">
-          <motion.h2
-            className="mb-14 text-center text-4xl text-yellow-500 "
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeUp}
-          >
-           मुख्य कार्यकारिणी
-          </motion.h2>
 
-<motion.div
-  className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true, amount: 0.05 }}
-  variants={staggerContainer}
->
+      <section className="py-6 bg-yellow-200 font-bold ">
+        <div className="mx-auto max-w-7xl px-5">
+          <h2 className="mb-14 text-center text-4xl text-yellow-500 ">
+           मुख्य कार्यकारिणी
+          </h2>
+
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {committeeMembers.map((m, index) => (
-              <motion.div
+              <div
                 key={`${m.role}-${index}`}
                 className="group overflow-hidden rounded-3xl bg-yellow-500 shadow transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
-                variants={fadeUp}
               >
                 <div className="relative h-64 w-full overflow-hidden">
                   <ImageWithFallback
@@ -355,44 +343,25 @@ function HomePage() {
                     {m.role}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
             <section className="mx-auto max-w-7xl px-5 py-6 pt-14">
-        <motion.h2
-          className="mb-7 text-5xl align-items-center text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeUp}
-        >
+        <h2 className="mb-7 text-5xl align-items-center text-center">
           Upcoming Events
-        </motion.h2>
-        <motion.h2
-          className="mb-7 text-2xl align-items-center text-center text-yellow-400"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeUp}
-        >भव्य श्री कृष्ण जन्माष्टमी महोत्सव, नन्द उत्सव 2026, दिनांक 29 सेप्टेंबर टू 4 अगस्त</motion.h2>
+        </h2>
+        <h2 className="mb-7 text-2xl align-items-center text-center text-yellow-400">भव्य श्री कृष्ण जन्माष्टमी महोत्सव, नन्द उत्सव 2026, दिनांक 29 सेप्टेंबर टू 4 अगस्त</h2>
 
-        <motion.div
-          className="grid gap-8 md:grid-cols-3"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={staggerContainer}
-        >
+        <div className="grid gap-8 md:grid-cols-3">
           {eventsLoading ? (
             [...Array(3)].map((_, i) => <EventCardSkeleton key={i} />)
           ) : (
             homeEvents.map((e) => (
-              <motion.article
+              <article
                 key={e._id}
                 className="overflow-hidden rounded-2xl bg-yellow-500 shadow"
-                variants={fadeUp}
               >
                 <ImageWithFallback
                   src={e.image || event1}
@@ -425,10 +394,10 @@ function HomePage() {
                     {e.location}
                   </p>
                 </div>
-              </motion.article>
+              </article>
             ))
           )}
-        </motion.div>
+        </div>
         {!eventsLoading && homeEvents.length === 0 && (
           <p className="mt-6 text-muted-foreground  border-yellow-400 rounded-lg p-4 text-center">
             Upcoming events will appear here soon.

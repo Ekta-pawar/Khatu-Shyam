@@ -8,6 +8,7 @@ import EmptyState from "../components/EmptyState";
 import Button from "../components/Button";
 import FormField from "../components/FormField";
 import Badge from "../components/Badge";
+import ConfirmDialog from "../components/ConfirmDialog";
 import { getErrorMessage } from "../utils/errorMessage";
 
 const initials = (name = "") =>
@@ -79,6 +80,7 @@ const TeamMemberCard = ({ member, onDelete, isDeleting }) => (
 const OureTeamPage = () => {
   const [search, setSearch] = useState("");
   const [appliedSearch, setAppliedSearch] = useState("");
+  const [pendingDelete, setPendingDelete] = useState(null);
 
   const { data, isFetching, isError, error } = useGetTeamMembersQuery({});
   const [deleteTeamMember, { isLoading: isDeleting }] = useDeleteTeamMemberMutation();
@@ -102,13 +104,19 @@ const OureTeamPage = () => {
     setAppliedSearch("");
   };
 
-  const handleDelete = async (id, name) => {
-    if (!window.confirm(`Remove team member "${name}"? This will also remove their uploaded photo.`)) return;
+  const handleDelete = (id, name) => {
+    setPendingDelete({ id, name });
+  };
+
+  const confirmDelete = async () => {
+    if (!pendingDelete) return;
     try {
-      await deleteTeamMember(id).unwrap();
+      await deleteTeamMember(pendingDelete.id).unwrap();
       toast.success("Team member removed successfully");
     } catch (err) {
       toast.error(getErrorMessage(err, "Failed to remove team member"));
+    } finally {
+      setPendingDelete(null);
     }
   };
 
@@ -191,6 +199,16 @@ const OureTeamPage = () => {
           ))}
         </div>
       )}
+
+      <ConfirmDialog
+        open={!!pendingDelete}
+        title="Remove team member"
+        message={pendingDelete ? `Remove team member "${pendingDelete.name}"? This will also remove their uploaded photo.` : ""}
+        confirmLabel="Remove"
+        onConfirm={confirmDelete}
+        onCancel={() => setPendingDelete(null)}
+        isLoading={isDeleting}
+      />
     </div>
   );
 };

@@ -12,6 +12,7 @@ import EmptyState from "../components/EmptyState";
 import Badge from "../components/Badge";
 import Button from "../components/Button";
 import Pagination from "../components/Pagination";
+import ConfirmDialog from "../components/ConfirmDialog";
 import { getErrorMessage } from "../utils/errorMessage";
 
 const LIMIT = 10;
@@ -35,6 +36,8 @@ const ContactMessagesPage = () => {
   const [isRead, setIsRead] = useState("");
   const [isResolved, setIsResolved] = useState("");
   const [activeId, setActiveId] = useState(null);
+  const [pendingDeleteId, setPendingDeleteId] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const queryParams = { page, limit: LIMIT };
   if (search) queryParams.search = search;
@@ -81,14 +84,22 @@ const ContactMessagesPage = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Delete this message permanently?")) return;
+  const handleDelete = (id) => {
+    setPendingDeleteId(id);
+  };
+
+  const confirmDelete = async () => {
+    if (!pendingDeleteId) return;
+    setIsDeleting(true);
     try {
-      await deleteMessage(id).unwrap();
+      await deleteMessage(pendingDeleteId).unwrap();
       toast.success("Message deleted");
-      if (activeId === id) setActiveId(null);
+      if (activeId === pendingDeleteId) setActiveId(null);
     } catch (err) {
       toast.error(getErrorMessage(err, "Failed to delete message"));
+    } finally {
+      setIsDeleting(false);
+      setPendingDeleteId(null);
     }
   };
 
@@ -225,6 +236,16 @@ const ContactMessagesPage = () => {
       </div>
 
       <Pagination page={page} totalPages={data?.pagination?.totalPages} onPageChange={setPage} />
+
+      <ConfirmDialog
+        open={!!pendingDeleteId}
+        title="Delete message"
+        message="Delete this message permanently?"
+        confirmLabel="Delete"
+        onConfirm={confirmDelete}
+        onCancel={() => setPendingDeleteId(null)}
+        isLoading={isDeleting}
+      />
     </div>
   );
 };

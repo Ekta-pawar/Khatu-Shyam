@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -14,6 +15,7 @@ import {
   MessageSquare,
   Images,
   Menu,
+  X,
 } from "lucide-react";
 import { selectCurrentAdmin, clearCredentials } from "../features/auth/authSlice";
 import { useLogoutMutation } from "../api/adminApi";
@@ -36,6 +38,7 @@ const AdminLayout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [logout, { isLoading }] = useLogoutMutation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -108,48 +111,38 @@ const AdminLayout = () => {
                   {admin?.firstName} {admin?.lastName}
                 </p>
               </div>
-              <div className="flex shrink-0 items-center gap-2">
-                <span className="hidden items-center rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-orange-700 ring-1 ring-orange-100 sm:inline-flex">
-                  {admin?.role?.replace("_", " ")}
-                </span>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  disabled={isLoading}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-orange-50 hover:text-orange-700 disabled:opacity-60 md:hidden"
-                  title="Logout"
-                >
-                  <LogOut size={18} />
-                </button>
-              </div>
+
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-slate-200 md:hidden"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
             </div>
 
-            <div className="border-t border-slate-100 px-3 py-2 md:hidden">
-              <div className="mb-2 flex items-center gap-2 px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">
-                <Menu size={14} />
-                Menu
-              </div>
-              <nav className="admin-scrollbar flex gap-2 overflow-x-auto pb-1">
+            {mobileMenuOpen && (
+              <nav className="border-t border-slate-100 px-4 py-2 md:hidden">
                 {navItems
                   .filter((item) => !item.superAdminOnly || admin?.role === "super_admin")
                   .map(({ to, label, icon: Icon }) => (
                     <NavLink
                       key={to}
                       to={to}
+                      onClick={() => setMobileMenuOpen(false)}
                       className={({ isActive }) =>
-                        `inline-flex h-10 shrink-0 items-center gap-2 rounded-full px-3 text-sm font-semibold transition ${
-                          isActive
-                            ? "bg-linear-to-r from-yellow-200 to-yellow-500 text-black shadow-sm"
-                            : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                        `flex items-center gap-3 border-b border-slate-100 py-3 text-sm font-semibold last:border-0 ${
+                          isActive ? "text-yellow-600" : "text-slate-700 hover:text-yellow-600"
                         }`
                       }
                     >
-                      <Icon size={16} />
+                      <Icon size={18} className="shrink-0" />
                       {label}
                     </NavLink>
                   ))}
               </nav>
-            </div>
+            )}
           </header>
 
           <main className="admin-content admin-scrollbar min-w-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-5 sm:px-6 md:px-7 lg:px-8">
